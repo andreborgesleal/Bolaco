@@ -1,0 +1,86 @@
+﻿@using App_Dominio.Security;
+@using App_Dominio.Entidades;
+@using App_Dominio.Repositories;
+@using DWM.Models.Persistence;
+@using DWM.Models.Repositories;
+@{
+    EmpresaSecurity<App_DominioContext> security = new EmpresaSecurity<App_DominioContext>();
+    Usuario usuario = security.getUsuario();
+    Sessao sessaoCorrente = security.getSessaoCorrente();
+    
+    IEnumerable<AlertaRepository> alertas = security.getLast6Alertas(); 
+
+    string background_colorNoRead = "#efeeee";
+    string background_colorRead = "#fff";
+    string background_color = "";
+
+    int qteAlertas = alertas.Where(info => info.dt_leitura == null).Count();
+    string redCircle = qteAlertas > 0 ? "<span class=\"badge\">" + qteAlertas.ToString() + "</span>" : "";
+
+    if (usuario != null)
+    {
+        string url = sessaoCorrente.value1 == "0" ? "../Atendimento/Browse" : "../Chamado/Browse";
+        //string url = usuario.isAdmin == "S" ? "/Atendimento/Browse" : "/Chamado/Browse";
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            <div id="read-alert"></div>
+            <ul class="nav navbar-nav navbar-right">
+                @*<li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+                @if (alertas.Count() > 0)
+                {
+                    <li class="dropdown alerts-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alertas @Html.DisplayTextFor(m => redCircle) <b class="caret"></b></a>
+                        <ul class="dropdown-menu" style="width: 420px">
+                            @foreach (AlertaRepository alerta in alertas)
+                            {
+                                background_color = alerta.dt_leitura.HasValue ? background_colorRead : background_colorNoRead;
+                                @*<li class="dropdown-header"></li>*@
+                                <li class="message-preview" style="width: 100%; background-color: @background_color">
+                                    @if(!alerta.dt_leitura.HasValue)
+                                    {
+                                        <a href="@alerta.url" onclick="ReadAlert('@alerta.alertaId.ToString()')">
+                                            @Html.DisplayTextFor(m => alerta.linkText)
+                                            @Html.DisplayTextFor(m => alerta.mensagemAlerta)
+                                        </a>                                        
+                                    }
+                                    else
+                                    {
+                                        <a href="@alerta.url">
+                                            @Html.DisplayTextFor(m => alerta.linkText)
+                                            @Html.DisplayTextFor(m => alerta.mensagemAlerta)
+                                        </a>                                        
+                                    }
+                                </li>
+                            }
+                            @*<li><a href="#">Default <span class="label label-default">Default</span></a></li>
+                                <li><a href="#">Primary <span class="label label-primary">Primary</span></a></li>
+                                <li><a href="#">Success <span class="label label-success">Success</span></a></li>
+                                <li><a href="#">Info <span class="label label-info">Info</span></a></li>
+                                <li><a href="#">Warning <span class="label label-warning">Warning</span></a></li>
+                                <li><a href="#">Danger <span class="label label-danger">Danger</span></a></li>*@
+                            <li class="divider"></li>
+                            <li><a href="@url">Ver Todas...</a></li>
+                        </ul>
+                    </li>
+                }
+                <li class="dropdown user-dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @usuario.nome <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="width: 195px">
+                        @if (sessaoCorrente.value1 != "0")
+                        {
+                            <li><a href="/Cliente/edit"><i class="fa fa-user"></i> Cadastro</a></li>
+                            @*<li><a href="/AssociadoDocumento/Browse?associadoId=@sessaoCorrente.value1"><i class="fa fa-gear"></i> Documentos</a></li>*@
+                        }
+                        <li><a href="../AlterarSenha/Edit"><i class="fa fa-gear"></i> Alterar senha</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            @Html.ActionLink("Sair", "LogOff", "Account", routeValues: null, htmlAttributes: new { @class = "fa fa-power-off" })
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+        }
+    }
+
+}

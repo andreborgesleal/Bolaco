@@ -1,0 +1,15 @@
+﻿@model Nullable<System.Decimal>
+<div class="row-fluid">
+    <div class="span12">
+        @Html.Label(ViewData.ModelMetadata.DisplayName)
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        @Html.TextBox(String.Empty + "1", ViewData.TemplateInfo.FormattedModelValue, "{0:###,###,##0.00}", ViewData["htmlAttributes"])
+        @Html.Hidden(String.Empty, ViewData.TemplateInfo.FormattedModelValue)
+    </div>
+</div>
+
+
+

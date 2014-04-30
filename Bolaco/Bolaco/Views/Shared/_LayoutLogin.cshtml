@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolaço da Norte Refrigeração</title>
+    <link rel="SHORTCUT ICON" href="/favicon1.png" />
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <link href="@Styles.Url("~/content/css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/scripts/css")" rel="stylesheet" />
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery-{version}.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery-migrate-{version}.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/scripts/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate-fix.js"></script>
+    <script type="text/javascript" src="~/scripts/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="~/scripts/inputs-jquery-ui.js"></script>
+
+    <link href="@Styles.Url("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/body.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap-responsive.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/scripts/css/datepicker.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" />
+</head>
+<body style="background-color: #b0cfb5">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })*@
+                <a class="navbar-brand" href="../">BOLAÇO</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @Html.Partial("_alerts")
+        <div class="alert alert-dismissable alert-warning" id="alerta" style="visibility: hidden">
+            <a class="close" href="#" aria-hidden="true" onclick="$('#alerta').hide()">x</a>
+            <h4 class="alert-heading" id="alerta-heading">Atenção!</h4>
+            <div id="MsgAlert"></div>
+        </div>
+        @RenderBody()
+        @*<hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - DWM Sistemas - andreborgesleal@live.com</p>
+        </footer>*@
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)*@
+
+    @Scripts.Render("~/scripts")
+    @Scripts.Render("~/js")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $("#alerta").hide();
+        $("#alerta").css("visibility", "visible");
+
+        $('#carregando').css("visibility", "hidden");
+        $('#carregando').css("height", "0px");
+        $('#carregando').css("margin-top", "0%");
+        $('#carregando').css("margin-left", "0%");
+    </script>
+
+</body>
+</html>
+

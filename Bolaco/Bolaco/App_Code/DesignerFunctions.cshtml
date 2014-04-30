@@ -1,0 +1,6 @@
+﻿@using System.Web.Mvc
+@helper TextWidth(string text, int width)
+{
+    string print = text.Length <= width ? text : text.Substring(0,width);
+    <span>@print</span>
+}

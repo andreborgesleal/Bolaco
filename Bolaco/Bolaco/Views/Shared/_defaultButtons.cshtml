@@ -1,0 +1,24 @@
+﻿@model string[]
+
+@{
+    
+    // Model [0] => Nome do Botão principal. Exemplo: "Salvar"
+    // Model [1] => "1" informa se vai ter o botão salvar ou "0" não vai ter o botão salvar
+    // Model [2] => linkText
+    // Model [3] => Action Name
+    // Model [4] => Controller Name
+    
+        
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="form-actions">
+            @if (Model [1] == "1") 
+            {
+                <button type="submit" class="btn btn-success">@Model[0]</button>    
+            }
+            @Html.ActionLink(Model [2], Model [3], Model [4], new { @class = "btn " })
+        </div>
+    </div>
+</div>

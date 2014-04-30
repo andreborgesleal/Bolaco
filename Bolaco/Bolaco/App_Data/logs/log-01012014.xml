@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="201095775" Data="01/01/2014 22:57:49">
+    <Sessao>j3gawy1j4ommvoid3s1ni0oq</Sessao>
+    <IP>::1</IP>
+    <HostName>INSPIRON-ANDRE\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato incorreto.</Mensagem>
+    <NameSpace>TimMaia.Models.Persistence.ListViewChamadoAssociado =&gt; chamado/list</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em System.Int32.Parse(String s)
+   em TimMaia.Models.Persistence.ListViewChamadoAssociado.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\TIMMAIA\TimMaia\Models\Persistence\ChamadoModel.cs:linha 143
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\App_Dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 59
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\App_Dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="1160050650" Data="01/01/2014 23:00:56">
+    <Sessao>j3gawy1j4ommvoid3s1ni0oq</Sessao>
+    <IP>::1</IP>
+    <HostName>INSPIRON-ANDRE\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato incorreto.</Mensagem>
+    <NameSpace>TimMaia.Models.Persistence.ListViewChamadoAssociado =&gt; chamado/list</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em System.Int32.Parse(String s)
+   em TimMaia.Models.Persistence.ListViewChamadoAssociado.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\TIMMAIA\TimMaia\Models\Persistence\ChamadoModel.cs:linha 143
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\App_Dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 59
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\App_Dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+  <LOG ID="763195478" Data="01/01/2014 23:01:41">
+    <Sessao>j3gawy1j4ommvoid3s1ni0oq</Sessao>
+    <IP>::1</IP>
+    <HostName>INSPIRON-ANDRE\André</HostName>
+    <Mensagem>A cadeia de caracteres de entrada não estava em um formato incorreto.</Mensagem>
+    <NameSpace>TimMaia.Models.Persistence.ListViewChamadoAssociado =&gt; chamado/list</NameSpace>
+    <Context />
+    <StackTrace>   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer&amp; number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em System.Int32.Parse(String s)
+   em TimMaia.Models.Persistence.ListViewChamadoAssociado.Bind(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\TIMMAIA\TimMaia\Models\Persistence\ChamadoModel.cs:linha 143
+   em App_Dominio.Component.ListViewRepository`2.ListRepository(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\App_Dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 59
+   em App_Dominio.Component.ListViewRepository`2.getPagedList(Nullable`1 index, Int32 pageSize, Object[] param) na c:\Users\André\Source\Repos\App_Dominio\App_Dominio\App_Dominio\Component\ListViewRepository.cs:linha 30</StackTrace>
+  </LOG>
+</LOG>

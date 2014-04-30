@@ -1,0 +1,111 @@
+﻿@using App_Dominio.Repositories
+@model EsqueciMinhaSenhaRepository
+@{
+    ViewBag.Title = "Esqueci minha senha";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <p></p>
+        <blockquote>
+            <p>Dados de Identificação</p> 
+            <small>Preencha o e-mail e o código de segurança (clique no botão "Receber Código" para receber o código em seu e-mail).</small>
+            <small>Depois clique no botão "Enviar". Uma nova senha será encaminhada para o seu e-mail</small>
+        </blockquote>
+        @using (Html.BeginForm("Forgot", "EsqueciMinhaSenha", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.ValidationSummary(false)
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.login, "Login *", new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    <div class="input-group col-md-9">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.login, new { @class = "form-control", @placeholder = "E-mail" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.keyword, "Código de Segurança *", new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    <div class="input-group col-md-5">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+                        @Html.TextBoxFor(m => m.keyword, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary" onclick="Code()">Receber Código</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="input-group col-md-3">
+                        <input type="submit" value="Enviar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="input-group col-md-8">
+                        ( * ) - Campo de preenchimento obrigatório
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script type="text/javascript">
+    function Code() {
+        var link = "CodigoSeguranca";
+        var _login = $("#login").val();
+
+        if (_login == '' || _login == null) {
+            ShowMessageAlert("O Campo \"Login\" deve ser informado para enviar o código", "warning");
+            return;
+        }
+
+        link = encodeURI(link + '?login=' + _login);
+        link = encodeURI(link + '&noCahce=' + new Date());
+
+        CarregandoIn();
+
+        $.ajax({
+            type: "POST",
+            url: link,
+            contentType: "application/json; charset=utf-8",
+            global: false,
+            async: false,
+            dataType: "json",
+            //data: { _grupoId: grupoId, _transacaoId: transacaoId, _situacao: _situacao, operacao: _autorizar},
+            success: function (jsonObj) {
+                if (jsonObj[0].Key == 0)
+                    ShowMessageAlert(jsonObj[0].Value, "success");
+                else
+                    ShowMessageAlert(jsonObj[0].Value, "danger");
+                $('#carregando').css("visibility", "hidden");
+                $('#carregando').css("height", "0px");
+                $('#carregando').css("margin-top", "0%");
+                $('#carregando').css("margin-left", "0%");
+            },
+            error: function (jqXHR, textStatus) {
+                ShowMessageAlert("Não foi possível executar a operação", "danger");
+                $('#carregando').css("visibility", "hidden");
+                $('#carregando').css("height", "0px");
+                $('#carregando').css("margin-top", "0%");
+                $('#carregando').css("margin-left", "0%");
+            }
+        });
+
+    }
+
+</script>

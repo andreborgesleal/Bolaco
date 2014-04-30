@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="SHORTCUT ICON" href="/favicon.png" />
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <link href="@Styles.Url("~/content/css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/scripts/css")" rel="stylesheet" />
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery-{version}.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery-migrate-{version}.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/scripts/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate-fix.js"></script>
+    <script type="text/javascript" src="~/scripts/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="~/scripts/inputs-jquery-ui.js"></script>
+
+    <link href="@Styles.Url("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/body.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap-responsive.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/scripts/css/datepicker.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" />
+
+
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })*@
+                <a class="navbar-brand" href="/Home/index">@ViewBag.Title.ToUpper()</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                @*@Html.Partial("_Menu")*@
+                @Html.Partial("_LayoutPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div id="carregando" style="visibility: hidden; height: 0px; background-repeat: no-repeat; z-index: 5; background-image: url(../Content/images/loader.gif); background-position-x: 50%; background-position-y: 30%">
+            @*<img src="../Content/images/carregando.gif" /><br />*@
+            <label>Carregando...</label>
+        </div>
+
+        @Html.Partial("_alerts")
+        @BreadCrumbPage.Trace((App_Dominio.Component.BreadCrumb)ViewBag.BreadCrumb)
+        <div class="alert alert-dismissable alert-warning" id="alerta" style="visibility: hidden">
+            <a class="close" href="#" aria-hidden="true" onclick="$('#alerta').hide()">x</a>
+            <h4 class="alert-heading" id="alerta-heading">Atenção!</h4>
+            <div id="MsgAlert"></div>
+        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - DWM Sistemas - andreborgesleal@live.com - version: <i>@System.Configuration.ConfigurationManager.AppSettings["version"]</i></p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
+
+    @Scripts.Render("~/scripts")
+    @Scripts.Render("~/js")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $("#alerta").hide();
+        $("#alerta").css("visibility", "visible");
+    </script>
+    <script src="//c.icq.com/siteim/icqbar/js/partners/initbar_pt.js" language="javascript" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

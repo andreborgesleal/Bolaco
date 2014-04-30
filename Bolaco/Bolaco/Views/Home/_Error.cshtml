@@ -1,0 +1,17 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">Erro na tentativa de acessar a página solicitada. Favor entrar em contato com o administrador do sistema.</h2>*@
+
+<div class="alert alert-dismissable alert-danger">
+    <h4 class="alert-heading">Atenção!</h4>
+    <div><h4 class="text-danger">O acesso à requisição solicitada não foi autorizado. Favor entrar em contato com o administrador do sistema.</h4></div>
+</div>
+
+<button class="btn btn-small btn-primary" type="button" onclick="javascript:history.go(-1)">Voltar</button>
+

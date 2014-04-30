@@ -1,0 +1,55 @@
+﻿@using App_Dominio.Security;
+@using App_Dominio.Entidades;
+@using App_Dominio.Repositories;
+@{
+    EmpresaSecurity<App_DominioContext> security = new EmpresaSecurity<App_DominioContext>();
+    IEnumerable<TransacaoRepository> menuList = security.getUsuarioTransacao();
+}
+
+
+@if (menuList != null)
+{
+    <ul class="nav navbar-nav navbar-left">
+        @foreach (TransacaoRepository t in menuList.Where(info => info.transacaoId_pai == null && info.referencia == "Barra de Menu"))
+        {
+            <li class="dropdown messages-dropdown">
+                <a href="@t.url" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> @t.nomeCurto <b class="caret"></b></a>
+                <ul class="dropdown-menu" style="width: 370px">
+                    @foreach (TransacaoRepository t1 in menuList.Where(info => info.transacaoId_pai == t.transacaoId && info.exibir == "S"))
+                    {
+                        if (t1.glyph != null)
+                        {
+                            <li class="dropdown-header">@t1.nomeCurto</li>
+                            <li class="message-preview">
+                                <a href="../@t1.url">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <span class="avatar"><img src="/content/images/@t1.glyph"></span>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-12"><span class="name">@t1.nome</span></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12"><span class="message">@t1.descricao</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a href="../@t1.url">@t1.nome </a></li>
+                        }
+                        if (!t1.Equals(menuList.Where(info => info.transacaoId_pai == t.transacaoId && info.exibir == "S").Last()))
+                        {
+                            <li class="divider"></li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
+

@@ -1,0 +1,43 @@
+﻿@using System.Web.Mvc
+
+
+@helper InputLn(string label, string id, string text, string lovModal, System.Web.Mvc.SelectListItem values = null, bool disableButtons = false)
+{
+    
+    string _value = "";
+    string _text = "";
+    if (values != null)
+    {
+        if (values.Value != null)
+        {
+            _value = values.Value;
+        }
+        if (values.Text != null)
+        {
+            _text = values.Text;
+        } 
+    }
+    <input type="hidden" id="@id" name="@id" value="@_value" />
+    <div class="row-fluid">
+        <div class="span12">
+            <span style="text-align: left">@label</span>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="input-append">
+                <input type="text" id="@text" name="@text" value="@_text" class="input-xlarge uneditable-input" readonly="true" >
+                @if (!disableButtons)
+                {
+                    <button class="btn btn-medium" type="button" onclick="showLookup('@lovModal');"><i class="icon-search"></i></button>
+                    <button class="btn btn-medium" type="button" onclick="clean('@id','@text');"><i class="icon-remove"></i></button>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <div id="div-lov"></div>
+
+   
+}
+

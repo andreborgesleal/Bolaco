@@ -1,0 +1,68 @@
+﻿@using App_Dominio.Repositories
+@using App_Dominio.Enumeracoes
+@helper Input(string id, DateTime? data, bool readOnly = false)
+{
+    string d = data.HasValue ? data.Value.ToString("dd/MM/yyyy") : "";
+    
+    <div class="input-group date" data-date-format="dd/mm/yyyy">
+        <input class="form-control input-sm" style="width: 90px" id="@id" name="@id" type="text" readonly="@readOnly" onfocus="datepickerShow(this)" value="@d"><button class="btn btn-sm" type="button" onclick="datepickerShow('#@id')"><i class="glyphicon glyphicon-th"></i></button>
+</div>
+}
+
+@helper Periodo(string label, string periodoId, IEnumerable<FiltroRepository> filtros)
+{
+    string per = filtros.Where(info => info.atributo == "Periodo").Select(info => info.valor).First();
+    string visibility = per == "Personalizado" ? "visible" : "hidden";
+
+    DateTime? d1 = null;
+    DateTime? d2 = null;
+    
+    d1 = filtros.Where(info => info.atributo == "data1").Select(info => info.valor).First() != "" ? DateTime.Parse(filtros.Where(info => info.atributo == "data1").Select(info => info.valor).First()) : d1;
+    d2 = filtros.Where(info => info.atributo == "data2").Select(info => info.valor).First() != "" ? DateTime.Parse(filtros.Where(info => info.atributo == "data2").Select(info => info.valor).First()) : d2;
+    
+    <div class="row-fluid">
+        <div class="span12">@label</div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <select id="@periodoId" name="@periodoId" style="width: 150px" onchange="DisplayData(this);">
+                @foreach(System.Web.Mvc.SelectListItem l in DropDownListEnum.Periodo())
+                {
+                    if (l.Value == per)
+                    {
+                        <option selected="selected" value="@l.Value">@l.Text</option>      
+                    }
+                    else
+                    {
+                        <option value="@l.Value">@l.Text</option>         
+                    }
+                }
+            </select>
+        </div>
+        <div class="span8" id="datas" style="visibility: @visibility">
+            @TextBoxDatePicker.Input("data1", d1)&nbsp;&nbsp;à&nbsp;&nbsp;@TextBoxDatePicker.Input("data2", d2)
+        </div>
+    </div>
+
+     <script>
+
+         function DisplayData(obj) {
+             var data = '@DateTime.Today.ToString("dd/MM/yyyy")';
+
+             if ($(obj).val() == "Personalizado") {
+                 $("#data1").val(data);
+                 $("#data2").val(data);
+                 $("#datas").css("visibility", "visible");
+             }
+             else {
+                 $("#datas").css("visibility", "hidden");
+                 $("#data1").val("");
+                 $("#data2").val("");
+             }
+         }
+
+     </script>
+    
+}
+
+

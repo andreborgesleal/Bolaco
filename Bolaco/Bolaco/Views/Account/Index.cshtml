@@ -1,0 +1,228 @@
+﻿@using App_Dominio.Entidades
+@using DWM.Models.Repositories
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Bolaço da Norte Refrigeração";
+    //ViewBag.Title = new App_Dominio.Security.EmpresaSecurity<SecurityContext>().getEmpresa().nome;
+}
+
+@*<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>*@
+
+<!-- --------------------------------------Começo do carrossel------------------------------------>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/images/bolaco1.jpg" />
+            <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+            <img src="~/Content/images/bolaco2.jpg" />
+            <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+            <img src="~/Content/images/bolaco3.jpg" />
+            <div class="carousel-caption"></div>
+        </div>
+        <div class="item">
+            <img src="~/Content/images/bolaco4.jpg" />
+            <div class="carousel-caption"></div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<!-- --------------------------------------FIM do carrossel----------------------------------------->
+
+<div class="bs-example bs-example-tabs" style="margin-top: 15px">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Prêmios</a></li>
+        <li class=""><a href="#regulamento" data-toggle="tab">Regulamento</a></li>
+        <li class=""><a href="#estatistica" data-toggle="tab">Estatísticas</a></li>
+        <li class=""><a href="#tabelaco" data-toggle="tab">Tabelaço</a></li>
+        <li class=""><a href="#vencedor" data-toggle="tab">Vencedores</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="home" style="margin-top: 15px">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <img alt="300x200" src="~/../Content/images/caneca.png" />
+                                <div class="caption" style="margin-top: -63px">
+                                    <h3 style="text-align: center">
+                                        1º Prêmio
+                                    </h3>
+                                    <p>
+                                        Serão entregues prêmios individuais para aqueles que acertarem o placar de qualquer um dos 3 jogos do Brasil na 1ª fase e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-primary" href="#modal-container-964987c" data-toggle="modal">leia mais...</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @***********Formulário Modal Botão 3**************@
+                        <div class="modal fade" id="modal-container-964987c" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            1º PRÊMIO
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body Scroll">
+                                        CANECA C/ GEL FROZEN MUG REF.12259
+                                        • Capacidade: 400 ML
+                                        • Cores: GELO
+                                        • Dimensões: A15,5 X 8,5 D. BOCA X 10,0 D. FUNDO
+                                        • Peso: 610 G
+                                        • Usado em: CONSERVANDO A TEMPERATURA IDEAL DE SUA
+                                        BEBIDA. DOTADA DE ICE GEL TERMICO CAPAZ
+                                        DE ALCANCAR -4°C APOS O CONGELAMENTO
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <img alt="300x200" src="~/../Content/images/ventilador2.png" />
+                                <div class="caption" style="margin-top: -28px">
+                                    <h3 style="text-align: center">
+                                        2º Prêmio
+                                    </h3>
+                                    <p>
+                                        Será entregue um único prêmio para aquele que acertar o placar dos 3 jogos do Brasil na 1ª fase e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-primary" href="#modal-container-964987b" data-toggle="modal">Leia mais...</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @***********Formulário Modal Botão 1**************@
+                        <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            2º PRÊMIO
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body Scroll">
+                                        EXAUSTOR AXIAL 30CM LOREN-SID C/REV. 1/8HP 220V VAZ.1.200M3/H P.E. 5MM.CA 1771
+                                        • Capacidade: 20 M³ / MIN.
+                                        • Cores: CINZA / ACO ZINCADO (GRADE)
+                                        • Dimensões: D30 X P19 CM
+                                        • Peso: 6 KG
+                                        • Tipo de equipamento: Equipamento elétrico de 220V volts
+                                        • Consumo Elétrico: 0,09 KWH
+                                        • Usado em: EXAUSTAO E VENTILACAO DE AMBIENTES
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="thumbnail">
+                                <img alt="300x200" src="~/../Content/images/Churrasqueira2.png" />
+                                <div class="caption" style="margin-top: -40px">
+                                    <h2 style="text-align: center">
+                                        3º Prêmio
+                                    </h2>
+                                    <p>
+                                        Será entregue um único prêmio para aquele que acertar as duas seleções que farão a final da copa e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
+                                    </p>
+                                    <p>
+                                        <a class="btn btn-primary" href="#modal-container-964987a" data-toggle="modal">Leia mais...</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @***********Formulário Modal Botão 1**************@
+                        <div class="modal fade" id="modal-container-964987a" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            3º PRÊMIO
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body Scroll">
+                                        CHURRASQUEIRA A CARVAO ESMALTADA APOLO SEM KIT GAS MOD. APOLO 11
+                                        • Capacidade: 25 KG DE CARNE
+                                        • Cores: PRETO ESMALTADO
+                                        • Dimensões: A 123 X L 95 X P 67 CM
+                                        • Peso: 36 KG
+                                        • Tipo de equipamento: Equipamento a gás
+                                        • Usado em: ASSAR CHURRASCO. 5KG DE CARVAO,
+                                        ASSA 25 KG DE COSTELA, CUPIM OU QUALQUER
+                                        TIPO DE CARNE E OUTROS ASSADOS.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="regulamento">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>1º PRÊMIO</h2>
+                    <p>
+                        Resumo dos prêmios ofertados
+                    </p>
+                    <p><a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Leia mais &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>2º PRÊMIO</h2>
+                    <p>Resumo do 2º Prêmio</p>
+                    <p><a class="btn btn-default" href="#modal-container-964987b" data-toggle="modal">Leia mais &raquo;</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h2>3º PRÊMIO</h2>
+                    <p>Resumo do 3º Prêmio</p>
+                    <p><a class="btn btn-default" href="#modal-container-964987c" data-toggle="modal">Leia mais &raquo;</a></p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="tab-pane fade" id="estatistica" style="margin-top: 15px">
+        </div>
+        <div class="tab-pane fade" id="tabelaco" style="margin-top: 15px">
+        </div>
+        <div class="tab-pane fade" id="vencedores" style="margin-top: 15px">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿@using App_Dominio.Repositories
+@using DWM.Models.Enumeracoes
+@model App_Dominio.Repositories.UsuarioRepository
+@{
+    ViewBag.Title = "Segurança";
+
+}
+@using (Html.BeginForm("Edit", "AlterarSenha", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(m => m.usuarioId)
+    @Html.HiddenFor(m => m.empresaId)
+    @Html.HiddenFor(m => m.login)
+    @Html.HiddenFor(m => m.nome)
+    @Html.HiddenFor(m => m.dt_cadastro)
+    @Html.HiddenFor(m => m.situacao)
+    @Html.HiddenFor(m => m.isAdmin)
+
+    <div class="panel panel-default" style="margin-top: 10px">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                Alterar Senha <small>@Model.nome</small>
+            </h2>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <blockquote>
+                        <p>
+                            Alteração de senha
+                        </p> <small>Alteração da senha do usuário que está conectado atualmente no sistema. Preencher os dados da senha e depois clicar no botão "Salvar"</small>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" style="margin-top: 20px">
+                        @Html.ValidationSummary(false)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.login, "Login*", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-8">
+                            <div class="input-group col-md-4">
+                                @Html.TextBoxFor(m => m.login, new { @class = "form-control input-sm", @disabled = "disable" })<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(m => ((AlterarSenhaRepository)m).senhaAtual, "Senha Atual*", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-8">
+                            <div class="input-group col-md-4">
+                                @Html.PasswordFor(m => ((AlterarSenhaRepository)m).senhaAtual, new { @class = "form-control input-sm" })<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.senha, "Nova Senha*", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-8">
+                            <div class="input-group col-md-4">
+                                @Html.PasswordFor(m => m.senha, new { @class = "form-control input-sm" })<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.confirmacaoSenha, "Confirmação de Senha*", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-8">
+                            <div class="input-group col-md-4">
+                                @Html.PasswordFor(m => m.confirmacaoSenha, new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.Partial("_defaultListButtons",
+                        new List<ButtonRepository>
+                        {
+                            new ButtonRepository() {    linkText = "Salvar",
+                                                        actionName = "",
+                                                        controllerName = "",
+                                                        buttonType = "submit"
+                                                    } ,
+                            new ButtonRepository() {    linkText = "Cancelar",
+                                                        actionName = "Index",
+                                                        controllerName = "Home",
+                                                        buttonType = "link"
+                                                    }
+                        })
+                </div>
+                <div class="col-md-offset-4">
+                    ( * ) - Campo de preenchimento obrigatório
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
