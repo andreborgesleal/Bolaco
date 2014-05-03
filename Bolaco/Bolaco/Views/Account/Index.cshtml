@@ -1,8 +1,8 @@
-﻿@using App_Dominio.Entidades
+﻿@model DWM.Models.RegisterViewModel
 @using DWM.Models.Repositories
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
-    ViewBag.Title = "Bolaço da Norte Refrigeração";
+    ViewBag.Title = "Bolaaaaço da Norte Refrigeração";
     //ViewBag.Title = new App_Dominio.Security.EmpresaSecurity<SecurityContext>().getEmpresa().nome;
 }
 
@@ -12,46 +12,92 @@
     <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>*@
 
-<!-- --------------------------------------Começo do carrossel------------------------------------>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="~/Content/images/bolaco1.jpg" />
-            <div class="carousel-caption"></div>
+<div class="row clearfix" style="margin-top: 130px">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="~/Content/images/Bolaaaaco_identidade_visual2.jpg" />
+            </div>
         </div>
-        <div class="item">
-            <img src="~/Content/images/bolaco2.jpg" />
-            <div class="carousel-caption"></div>
+        <div class="row" style="margin-top: 15px; margin-bottom: -8px">
+            <div class="col-md-12">
+                <div class="jumbotron" style="color: #faf7f7; padding: 20px">
+                    <div style="line-height: 23px">
+                        <span style="font-family: Verdana">Cadastre-se e dê seu palpite nos jogos e resultados do mundial de futebol! Mostre o quanto você é bom em dar palpites. Passe na Norte Refrigeração para aproveitar os produtos com preço campeão. Quanto mais você comprar mais chances tem de ganham prêmios!</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="item">
-            <img src="~/Content/images/bolaco3.jpg" />
-            <div class="carousel-caption"></div>
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="alert alert-dismissable alert-warning" style="padding: 12px; margin-top: -5px">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <a class="label" href="#modal-container-964987b" data-toggle="modal"><span style="font-size: large; color: #3c3c3c">Entenda melhor o regulamento</span></a>
+                        </div>
+                    </div>
+                    @***********Formulário Modal REGULAMENTO **************@
+                    <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Regulamento da promoção
+                                    </h4>
+                                </div>
+                                <div class="modal-body Scroll">
+                                    <p>O preenchimento é composto de 2 etapas: </p>
+                                    <blockquote>
+                                        <p>1. Identificação</p>
+                                        <small>Para participar do "Bolaaaaço da Norte Refrigeração" é preciso fazer o cadastro na promoção.</small>
+                                        <small>Todos os campos abaixo são de preenchimento obrigatório. Informar o nome completo sem abreviações.</small>
+                                        <small>Informar o e-mail do cliente que será utilizado tanto para realizar o login de acesso quanto para receber as notificações e cadastrar os palpites.</small>
+                                        <small>O e-mail do cliente deve ser um e-mail válido, de uso constante e deve ser único, ou seja, não pode haver e-mails repetidos no cadastro do @ViewBag.Title</small>
+                                        <small>Informar o telefone residencial, comercial ou celular (com DDD).</small>
+                                        <p></p>
+                                        <p>2. Endereço</p>
+                                        <small>Para complementar o seu cadastro o cliente deve informar o endereço.</small>
+                                        <small>O preenchimento desses campos servirão como uma recurso adicional para localização do vencedor em caso da Norte Refrigeração não conseguir encontrar o cliente por e-mail e (ou) telefone.</small>
+                                        <small>Estas informações não são de preenchimento obritatório.</small>
+                                        <small>Ao final do preenchimento, clique no botão Salvar.</small>
+                                    </blockquote>
+                                    <p><b>COMPROVAÇÃO DO CADASTRO:</b></p>
+                                    <p>O cliente receberá em seu e-mail uma mensagem de notificação confirmando seu cadastro.</p>
+                                    <p>Clicando no botão "Salvar" o cliente concorda em ter seu nome divulgado pela Norte Refrigeração para exibição dos palpiteiros, vencedores e receber em seu e-mail outras promoções que a empresa vier a publicar.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="item">
-            <img src="~/Content/images/bolaco4.jpg" />
-            <div class="carousel-caption"></div>
+        <div class="row" style="margin-top: -20px;">
+            <div class="col-md-12">
+                <div class="jumbotron" style="color: #faf7f7; padding: 13px">
+                    <div style="line-height: 15px; text-align: center">
+                        <a class="label" href="#modal-container-964987c" data-toggle="modal"><span style="font-size: large; color: #faf7f7">Confira os prêmios</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
+                    <span style="font-size: large; color: #3c3c3c">Total de palpites</span><span id="total-active-users" class="badge pull-right" style="display: block; margin-top: -20px">43.705</span>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
+    <div class="col-md-6">
+        @Html.Partial("_Register", Model)
+    </div>
 </div>
-<!-- --------------------------------------FIM do carrossel----------------------------------------->
 
+<!--
 <div class="bs-example bs-example-tabs" style="margin-top: 15px">
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#home" data-toggle="tab">Prêmios</a></li>
@@ -61,13 +107,14 @@
         <li class=""><a href="#vencedor" data-toggle="tab">Vencedores</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
+        @********** Prêmios *********@
         <div class="tab-pane fade active in" id="home" style="margin-top: 15px">
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <img alt="300x200" src="~/../Content/images/caneca.png" />
+                                <img alt="300x200" src="../Content/images/caneca.png" />
                                 <div class="caption" style="margin-top: -63px">
                                     <h3 style="text-align: center">
                                         1º Prêmio
@@ -81,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        @***********Formulário Modal Botão 3**************@
+                        @***********Formulário Modal Botão 1**************@
                         <div class="modal fade" id="modal-container-964987c" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -92,24 +139,30 @@
                                         </h4>
                                     </div>
                                     <div class="modal-body Scroll">
-                                        CANECA C/ GEL FROZEN MUG REF.12259
-                                        • Capacidade: 400 ML
-                                        • Cores: GELO
-                                        • Dimensões: A15,5 X 8,5 D. BOCA X 10,0 D. FUNDO
-                                        • Peso: 610 G
-                                        • Usado em: CONSERVANDO A TEMPERATURA IDEAL DE SUA
-                                        BEBIDA. DOTADA DE ICE GEL TERMICO CAPAZ
-                                        DE ALCANCAR -4°C APOS O CONGELAMENTO
+                                        <blockquote>
+                                            <p>
+                                                CANECA C/ GEL FROZEN MUG REF.12259
+                                            </p>
+                                            <small>Capacidade: 400 ML</small>
+                                            <small>Cores: GELO</small>
+                                            <small>Dimensões: A15,5 X 8,5 D. BOCA X 10,0 D. FUNDO</small>
+                                            <small>Peso: 610 G</small>
+                                            <small>
+                                                Usado em: CONSERVANDO A TEMPERATURA IDEAL DE SUA
+                                                BEBIDA. DOTADA DE ICE GEL TERMICO CAPAZ
+                                                DE ALCANCAR -4°C APOS O CONGELAMENTO
+                                            </small>
+                                        </blockquote>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <img alt="300x200" src="~/../Content/images/ventilador2.png" />
+                                <img alt="300x200" src="../Content/images/ventilador2.png" />
                                 <div class="caption" style="margin-top: -28px">
                                     <h3 style="text-align: center">
                                         2º Prêmio
@@ -123,7 +176,7 @@
                                 </div>
                             </div>
                         </div>
-                        @***********Formulário Modal Botão 1**************@
+                        @***********Formulário Modal Botão 2**************@
                         <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -134,28 +187,32 @@
                                         </h4>
                                     </div>
                                     <div class="modal-body Scroll">
-                                        EXAUSTOR AXIAL 30CM LOREN-SID C/REV. 1/8HP 220V VAZ.1.200M3/H P.E. 5MM.CA 1771
-                                        • Capacidade: 20 M³ / MIN.
-                                        • Cores: CINZA / ACO ZINCADO (GRADE)
-                                        • Dimensões: D30 X P19 CM
-                                        • Peso: 6 KG
-                                        • Tipo de equipamento: Equipamento elétrico de 220V volts
-                                        • Consumo Elétrico: 0,09 KWH
-                                        • Usado em: EXAUSTAO E VENTILACAO DE AMBIENTES
+                                        <blockquote>
+                                            <p>
+                                                EXAUSTOR AXIAL 30CM LOREN-SID C/REV. 1/8HP 220V VAZ.1.200M3/H P.E. 5MM.CA 1771
+                                            </p>
+                                            <small>Capacidade: 20 M³ / MIN.</small>
+                                            <small>Cores: CINZA / ACO ZINCADO (GRADE)</small>
+                                            <small>Dimensões: D30 X P19 CM</small>
+                                            <small>Peso: 6 KG</small>
+                                            <small>Tipo de equipamento: Equipamento elétrico de 220V volts</small>
+                                            <small>Consumo Elétrico: 0,09 KWH</small>
+                                            <small>Usado em: EXAUSTAO E VENTILACAO DE AMBIENTES</small>
+                                        </blockquote>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="thumbnail">
-                                <img alt="300x200" src="~/../Content/images/Churrasqueira2.png" />
-                                <div class="caption" style="margin-top: -40px">
-                                    <h2 style="text-align: center">
+                                <img alt="300x200" src="../Content/images/Churrasqueira2.png" />
+                                <div class="caption" style="margin-top: -30px">
+                                    <h3 style="text-align: center">
                                         3º Prêmio
-                                    </h2>
+                                    </h3>
                                     <p>
                                         Será entregue um único prêmio para aquele que acertar as duas seleções que farão a final da copa e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
                                     </p>
@@ -165,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                        @***********Formulário Modal Botão 1**************@
+                        @***********Formulário Modal Botão 3**************@
                         <div class="modal fade" id="modal-container-964987a" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -176,18 +233,26 @@
                                         </h4>
                                     </div>
                                     <div class="modal-body Scroll">
-                                        CHURRASQUEIRA A CARVAO ESMALTADA APOLO SEM KIT GAS MOD. APOLO 11
-                                        • Capacidade: 25 KG DE CARNE
-                                        • Cores: PRETO ESMALTADO
-                                        • Dimensões: A 123 X L 95 X P 67 CM
-                                        • Peso: 36 KG
-                                        • Tipo de equipamento: Equipamento a gás
-                                        • Usado em: ASSAR CHURRASCO. 5KG DE CARVAO,
-                                        ASSA 25 KG DE COSTELA, CUPIM OU QUALQUER
-                                        TIPO DE CARNE E OUTROS ASSADOS.
+                                        <div class="row clearfix">
+                                            <div class="col-md-12 column">
+                                                <blockquote>
+                                                    <p>
+                                                        CHURRASQUEIRA A CARVAO ESMALTADA APOLO SEM KIT GAS MOD. APOLO 11
+                                                    </p> 
+                                                    <small>Capacidade: 25 KG DE CARNE</small>
+                                                    <small>Cores: PRETO ESMALTADO</small>
+                                                    <small>Dimensões: A 123 X L 95 X P 67 CM</small>
+                                                    <small>Peso: 36 KG</small>
+                                                    <small>Tipo de equipamento: Equipamento a gás</small>
+                                                    <small>Usado em: ASSAR CHURRASCO. 5KG DE CARVAO,
+                                                            ASSA 25 KG DE COSTELA, CUPIM OU QUALQUER
+                                                            TIPO DE CARNE E OUTROS ASSADOS.</small>
+                                                </blockquote>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
@@ -196,33 +261,228 @@
                 </div>
             </div>
         </div>
+        @********** Regulamento *********@
         <div class="tab-pane fade" id="regulamento">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>1º PRÊMIO</h2>
-                    <p>
-                        Resumo dos prêmios ofertados
-                    </p>
-                    <p><a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Leia mais &raquo;</a></p>
+            <div class="row" style="margin-top: 15px">
+                <div class="col-md-12" style="overflow-y: auto; height: 400px">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h6 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        Objetivo
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    A campanha tem como objetivo atribuir aos clientes da Norte Refrigeração que comprarem qualquer produto em uma de suas lojas durante o período da promoção o direito de participarem do “Bolaço da Norte Refrigeração”, concorrendo a 3 tipos de prêmios, conforme descritos abaixo.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        Período da promoção
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    08:00h do dia 06/05/2014 às 23:59h do dia 07/07/2014.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        Como participar
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    Para participar da promoção <b>“Bolaço da Norte Refrigeração”</b>, o cliente deverá fazer uma compra em qualquer uma das lojas da Norte Refrigeração durante o período da campanha. Cada compra dá direito ao cliente de receber um ticket com uma numeração única contendo a data da compra para se cadastrar na promoção.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                        Prêmios
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse4" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    <p>1º Prêmio:</p>
+                                    <p>
+                                        Serão entregues prêmios individuais para aqueles que acertarem o placar de qualquer um dos 3 jogos do Brasil na 1ª fase e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
+                                        Os prêmios é: <b>Caneca</b>
+                                    </p>
+                                    <p>
+                                        2º Prêmio:
+                                    </p>
+                                    <p>
+                                        Será entregue um único prêmio para aquele que acertar o placar dos 3 jogos do Brasil na 1ª fase e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
+                                        O prêmio é <b>Exaustor</b>
+                                    </p>
+                                    <p>
+                                        3º Prêmio:
+                                    </p>
+                                    <p>
+                                        Será entregue um único prêmio para aquele que acertar as duas seleções que farão a final da copa e desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site.
+                                        O prêmio é <b>Churrasqueira Apolo</b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                                        Critérios de desempate
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse5" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    <p>
+                                        Haverá regras e critérios de desempate para o segundo e terceiro prêmios conforme descritos abaixo:
+                                    </p>
+                                    <p>
+                                        <b>
+                                            <u>Critério de desempate para o 2º prêmio:</u>
+                                        </b>
+                                    </p>
+                                    <p>
+                                        Se houver mais de um acertador no 2º prêmio, será considerado vencedor o cliente cujo ticket contemplado tenha sido incluído por primeiro no site, ou seja, àquele ticket em que a data e hora de inscrição no site for a mais antiga em relação à data final da promoção.
+                                    </p>
+                                    <p>
+                                        Observação: Não confundir “Data de inscrição no site” com a “Data da compra”. A compra pode ter sido realizada por exemplo no dia 10/05/2014, mas o cliente se inscreveu no site somente no dia 15/05/2014. Esta última data é que será considerada para critério de desempate.
+                                    </p>
+                                    <p>
+                                        <b>
+                                            <u>Critérios de desempate para o 3º prêmio:</u>
+                                        </b>
+                                    </p>
+                                    <p>
+                                        Se houver mais de um acertador no 3º prêmio, será considerado vencedor àquele que contemplar as seguintes regras, na ordem:
+                                    </p>
+                                    <p>
+                                        <b>Regra 1: Acertar o placar da final</b> – havendo um único acertador do placar final da copa, este será dado como vendedor. Havendo mais de um ou nenhum acertador será considerado vencedor àquele que atender a regra 2 abaixo.
+                                    </p>
+                                    <p>
+                                        <b>Regra 2: Inscrição mais antiga no site</b> – Se ninguém for contemplado na regra acima ou se houver mais de um acertador para a regra acima, será considerado vencedor o cliente cujo ticket premiado tenha sido incluído por primeiro no site, ou seja, àquele ticket em que a data e hora de inscrição no site for a mais antiga em relação à data final da promoção
+                                    </p>
+                                    <p>
+                                        <b>Observação:</b> Não confundir “Data de inscrição no site” com a “Data da compra”. A compra pode ter sido realizada por exemplo no dia 10/05/2014 mas o cliente se inscreveu no site somente no dia 15/05/2014. Esta última data é que será considerada para critério de desempate.
+                                    </p>
+                                    <p>
+                                        Todos os tickets com o nome do cliente, palpite dos jogos, data da compra, data e hora de inscrição serão divulgados no site para conferência.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+                                        Como se cadastrar
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse6" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    <p>
+                                        Para se cadastrar na promoção <b>“Bolaço da Norte Refrigeração”</b> e concorrer aos prêmios, o cliente fará o acesso ao site da empresa pela internet ou nas próprias máquinas disponíveis nas instalações da loja, através do link <a href="http://www.norterefrigeracao.com.br" target="_blank"><span style="color: #fff">www.norterefrigeracao.com.br</span></a> . 
+                                    </p>
+                                    <p>
+                                        O cliente preencherá uma ficha de inscrição que conterá obrigatoriamente: a numeração e data contidos no ticket fornecido durante a compra, nome do participante, CPF, telefone e e-mail. 
+                                    </p>
+                                    <p>
+                                        Opcionalmente também poder ser informado o endereço de contato.
+                                    </p>
+                                    <p>
+                                        A promoção não aceitará inscrições com numeração do ticket repetida.
+                                    </p>
+                                    <p>
+                                        Além dos dados da inscrição, o cliente deverá preencher os palpites dos jogos do Brasil na primeira fase, informar as seleções que jogarão o final da copa 2014 e o placar da final.
+                                    </p>
+                                    <p>
+                                        Ao final do cadastro, o cliente receberá um e-mail contendo o comprovante de inscrição, com todos os dados preenchidos por ele, inclusive a DATA E HORA da inscrição, que servirá de critério de desempate. 
+                                    </p>
+                                    <p>
+                                        <b>Observações:</b>
+                                    </p>
+                                    <p>
+                                        1.	Caso algum jogo do Brasil na primeira fase já tenha ocorrido no momento da inscrição, o cliente só poderá informar os demais jogos com o placar e não poderá mais concorrer ao 2º prêmio. Se todos os jogos da primeira fase já tiverem ocorridos, o cliente só poderá concorrer ao 3º prêmio.
+                                    </p>
+                                    <p>
+                                        2.	A qualquer momento o cliente poderá acessar o site para imprimir a 2ª via de sua inscrição.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+                                        Divulgação do resultado e contato com os vencedores
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse7" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    <p>
+                                        No final da campanha, a Norte Refrigeração irá divulgar no site a lista dos ganhadores com os prêmios e lhes encaminhará um e-mail notificando que foi contemplado pela promoção. No corpo do e-mail segue as instruções que ele deverá proceder para receber o prêmio.
+                                    </p>
+                                    <p>
+                                        A Norte Refrigeração também poderá entrar em contato por telefone ou por carta (caso o cliente tenha informado seu endereço durante a inscrição).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color: #555555; font-size: large">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+                                        Instruções para receber o prêmio
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse8" class="panel-collapse collapse" style="color: #bbbbbb">
+                                <div class="panel-body">
+                                    <p>
+                                        Para receber o prêmio, o cliente deverá comparecer à Norte Refrigeração e apresentar o seu comprovante de inscrição enviado por e-mail ou documento de identificação com CPF para que o funcionário da Norte Refrigeração possa consultar e autenticar no sistema interno da empresa os dados informados pelo cliente.
+                                    </p>
+                                    <p>
+                                        Só será considerado válido a numeração e data da compra cadastradas pelo cliente no site que corresponder ao mesmo número e data impressos no ticket (contemplado) que lhe foi entregue no dia da compra. Esses valores serão consultados e autenticados no sistema interno de vendas da empresa no dia da entrega do prêmio.
+                                    </p>
+                                    <p>
+                                        Se por algum motivo o cliente cadastrar um número e data que não coincidam com os valores existentes no banco de dados da Norte Refrigeração, o participante será desclassificado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h2>2º PRÊMIO</h2>
-                    <p>Resumo do 2º Prêmio</p>
-                    <p><a class="btn btn-default" href="#modal-container-964987b" data-toggle="modal">Leia mais &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                    <h2>3º PRÊMIO</h2>
-                    <p>Resumo do 3º Prêmio</p>
-                    <p><a class="btn btn-default" href="#modal-container-964987c" data-toggle="modal">Leia mais &raquo;</a></p>
-                </div>
-                
             </div>
         </div>
+        @********** Esstatísticas *********@
         <div class="tab-pane fade" id="estatistica" style="margin-top: 15px">
         </div>
+        @********** Tabelaço *********@
         <div class="tab-pane fade" id="tabelaco" style="margin-top: 15px">
         </div>
+        @********** Vencedores *********@
         <div class="tab-pane fade" id="vencedores" style="margin-top: 15px">
         </div>
     </div>
 </div>
+
+
+  -->

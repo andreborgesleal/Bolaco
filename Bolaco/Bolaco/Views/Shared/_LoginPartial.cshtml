@@ -73,10 +73,9 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registrar", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="nav navbar-nav navbar-right" style="color: #1D5800">
+        <li>
+            @Html.ActionLink("Dê o seu palpite", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "color: #1D5800; font-weight: bold; font-size: large" })
+        </li>
     </ul>
 }
-
-

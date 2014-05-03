@@ -2,8 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using App_Dominio.Component;
 using System;
-using DWM.Models.Entidades;
-using System.Collections.Generic;
 
 namespace DWM.Models.Repositories
 {
@@ -19,7 +17,7 @@ namespace DWM.Models.Repositories
 
         [DisplayName("CPF")]
         [Required(ErrorMessage = "O CPF do cliente deve ser informado")]
-        public string cpf_cnpj { get; set; }
+        public string cpf { get; set; }
 
         [DisplayName("E-mail")]
         [Required(ErrorMessage = "E-mail do cliente deve ser informado")]
@@ -48,7 +46,7 @@ namespace DWM.Models.Repositories
 
         [DisplayName("UF")]
         [StringLength(2, ErrorMessage = "A UF deve possuir 2 caracteres", MinimumLength = 2)]
-        public string ufCom { get; set; }
+        public string uf { get; set; }
 
         [DisplayName("Usuário")]
         public Nullable<int> usuarioId { get; set; }

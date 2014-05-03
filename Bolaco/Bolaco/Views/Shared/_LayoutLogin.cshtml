@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bolaço da Norte Refrigeração</title>
-    <link rel="SHORTCUT ICON" href="/favicon1.png" />
+    <link rel="SHORTCUT ICON" href="/favicon3.png" />
     @*@Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")*@
     <link href="@Styles.Url("~/content/css")" rel="stylesheet" />
@@ -30,7 +30,8 @@
     <link href="@Styles.Url("~/scripts/css/datepicker.css")" rel="stylesheet" />
     <link href="@Styles.Url("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" />
 </head>
-<body style="background-color: #b0cfb5">
+@*style="   background-color: #b0cfb5"*@
+<body style="background-image: url(../Content/images/fundo_duplo.jpg); background-repeat: no-repeat; background-position: center">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -40,12 +41,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 @*@Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })*@
-                <a class="navbar-brand" href="../">BOLAÇO</a>
+                <a class="navbar-brand" href="../" style="padding-top: 0px; margin-top: 0px"><img src="../Content/images/soccer.png" alt="0"> <img src="../Content/images/BOLAAAACO4.png" alt="0"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contato", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -60,14 +61,14 @@
         </div>
         @RenderBody()
         @*<hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - DWM Sistemas - andreborgesleal@live.com</p>
-        </footer>*@
+            <footer>
+                <p>&copy; @DateTime.Now.Year - DWM Sistemas - andreborgesleal@live.com</p>
+            </footer>*@
     </div>
 
     @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)*@
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
 
     @Scripts.Render("~/scripts")
     @Scripts.Render("~/js")

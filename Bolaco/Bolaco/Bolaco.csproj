@@ -179,6 +179,7 @@
     <Compile Include="Models\Entidades\Cliente.cs" />
     <Compile Include="Models\Entidades\Parametro.cs" />
     <Compile Include="Models\Entidades\Selecao.cs" />
+    <Compile Include="Models\Entidades\Ticket.cs" />
     <Compile Include="Models\Enumeracoes\BindDropDownList.cs" />
     <Compile Include="Models\Enumeracoes\Enumeradores.cs" />
     <Compile Include="Models\Enumeracoes\DWMEnum.cs" />
@@ -186,7 +187,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Persistence\AccountModel.cs" />
+    <Compile Include="Models\Persistence\ClienteModel.cs" />
     <Compile Include="Models\Repositories\ClienteViewModel.cs" />
+    <Compile Include="Models\Repositories\TicketViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -195,17 +198,25 @@
     <Content Include="App_Data\MensagemPadrao.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\BOLAAAACO4.png" />
+    <Content Include="Content\images\Bolaaaaco_identidade_visual2.jpg" />
     <Content Include="Content\images\bolaco1.jpg" />
     <Content Include="Content\images\bolaco2.jpg" />
     <Content Include="Content\images\bolaco3.jpg" />
     <Content Include="Content\images\bolaco4.jpg" />
+    <Content Include="Content\images\caneca.png" />
     <Content Include="Content\images\carregando.gif" />
+    <Content Include="Content\images\churrasqueira2.PNG" />
     <Content Include="Content\images\fundo2.jpg" />
+    <Content Include="Content\images\fundo5.png" />
+    <Content Include="Content\images\fundo_duplo.jpg" />
     <Content Include="Content\images\logo_norte.gif" />
+    <Content Include="Content\images\logo_norte_small.gif" />
+    <Content Include="Content\images\soccer.png" />
+    <Content Include="Content\images\ventilador2.png" />
     <Content Include="Content\Site-Full-Hd.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="favicon1.jpg" />
+    <Content Include="favicon3.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="App_Code\BreadCrumbPage.cshtml" />
     <Content Include="App_Code\DesignerFunctions.cshtml" />
@@ -214,7 +225,6 @@
     <Content Include="App_Code\TextBoxDatePicker.cshtml" />
     <Content Include="App_Code\Typeahead.cshtml" />
     <Content Include="Global.asax" />
-    <Content Include="MensagemModal.cshtml" />
     <Content Include="packages.config" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -271,7 +281,14 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SQL\bolaaaaco.sql" />
+    <Content Include="Views\Shared\MensagemModal.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
+    <None Include="Properties\PublishProfiles\bolaco - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\bolaco - Web Deploy.pubxml" />
+    <Content Include="Views\Account\_Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,7 +304,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\MensagemModal.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
