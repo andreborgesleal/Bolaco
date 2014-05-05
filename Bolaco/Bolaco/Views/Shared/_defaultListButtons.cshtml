@@ -31,7 +31,7 @@
     string name = "btn" + b.linkText;
     if (b.buttonType.Equals("submit") && b.javaScriptFunction != null && b.javaScriptFunction != "")
     {
-        <button id="@name" type="submit" class="btn btn-success" onclick="return @b.javaScriptFunction">@b.linkText</button><span>&nbsp;</span>
+        <button id="@name" type="submit" class="btn btn-warning" onmouseover="habilita()" onclick="return @b.javaScriptFunction">@b.linkText</button><span>&nbsp;</span>
     }
     else if (b.buttonType.Equals("submit"))
     {

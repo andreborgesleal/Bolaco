@@ -25,6 +25,12 @@ namespace DWM.Models.Repositories
         [EmailAddress(ErrorMessage = "Informe o E-mail com um formato válido")]
         public string email { get; set; }
 
+        [Required(ErrorMessage = "Confirmação de e-mail deve ser informado")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Informe um e-mail válido")]
+        [DisplayName("Confirmar E-mail")]
+        [Compare("email", ErrorMessage = "E-mail e Confirmar E-Mail não conferem.")]
+        public string confirmarEmail { get; set; }
+
         [DisplayName("Telefone")]
         [Required(ErrorMessage = "O telefone de contato deve ser informado")]
         public string telefone { get; set; }

@@ -2123,7 +2123,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: #ffffff;
-  background-color: #48ca3b;
+  background-color: #3e6344;
   border-color: #48ca3b;
 }
 .btn-success:hover,
@@ -4453,7 +4453,7 @@ a.thumbnail.active {
   color: inherit;
 }
 .alert-success {
-  background-color: #48ca3b;
+  background-color: #3e6344;
   border-color: #55b932;
   color: #ffffff;
 }
@@ -4464,7 +4464,7 @@ a.thumbnail.active {
   color: #e6e6e6;
 }
 .alert-info {
-  background-color: #4d3a7d;
+  background-color: #02192c;
   border-color: #352f65;
   color: #ffffff;
 }
@@ -4477,7 +4477,9 @@ a.thumbnail.active {
 .alert-warning {
   background-color: #FAEC37;
   border-color: #d59521;
-  color: #ffffff;
+  color: #406546;
+  font-size: medium;
+  font-weight: bold;
 }
 .alert-warning hr {
   border-top-color: #bf851d;
@@ -4486,7 +4488,7 @@ a.thumbnail.active {
   color: #e6e6e6;
 }
 .alert-danger {
-  background-color: #df6e1e;
+  background-color: #89001d;
   border-color: #d2491c;
   color: #ffffff;
 }
@@ -5117,7 +5119,7 @@ button.close {
 }
 .modal-content {
   position: relative;
-  background-color: #9ab69f;
+  background-color: #fff;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
@@ -5125,6 +5127,7 @@ button.close {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
   outline: none;
+  color: #444444;
 }
 .modal-backdrop {
   position: fixed;

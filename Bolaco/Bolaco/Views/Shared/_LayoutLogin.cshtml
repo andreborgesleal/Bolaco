@@ -31,7 +31,7 @@
     <link href="@Styles.Url("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" />
 </head>
 @*style="   background-color: #b0cfb5"*@
-<body style="background-image: url(../Content/images/fundo_duplo.jpg); background-repeat: no-repeat; background-position: center">
+ <body style="background-image: url(../Content/images/fundo-Small-Size.jpg); background-repeat: space; background-position: center; background-position-y: top"> 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -59,6 +59,7 @@
             <h4 class="alert-heading" id="alerta-heading">Atenção!</h4>
             <div id="MsgAlert"></div>
         </div>
+
         @RenderBody()
         @*<hr />
             <footer>
@@ -75,6 +76,7 @@
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
+
         $("#alerta").hide();
         $("#alerta").css("visibility", "visible");
 
