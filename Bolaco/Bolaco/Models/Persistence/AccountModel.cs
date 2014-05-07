@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using App_Dominio.Contratos;
 using App_Dominio.Entidades;
 using DWM.Models.Repositories;
@@ -7,13 +6,10 @@ using DWM.Models.Entidades;
 using App_Dominio.Enumeracoes;
 using App_Dominio.Security;
 using App_Dominio.Repositories;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity;
 using App_Dominio.Models;
 using App_Dominio.Component;
 using System.Net.Mail;
 using System.Collections.Generic;
-using App_Dominio.Negocio;
 
 namespace DWM.Models.Persistence
 {
@@ -124,48 +120,60 @@ namespace DWM.Models.Persistence
                 if (_email_admin != "")
                     norte.Add(_email_admin);
 
-                string Subject = "Confirmação de cadastro no " + empresa.nome;
+                string Subject = "Confirmação de cadastro na " + empresa.nome;
                 string Text = "<p>Confirmação de cadastro</p>";
-                string Html = "<p><span style=\"font-family: Verdana; font-size: larger; color: #656464\">" + sistema.descricao + "</span></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\">" + registerViewModel.nome.ToUpper() + "</span></p>" +
+                string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu cadastro. Seu cadastro na promoção <b>Bolaaaaço da Norte Refrigeração</b> foi realizado com sucesso.</span></p>" +
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seus dados:" +
+                              "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + registerViewModel.nome.ToUpper() + "</span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">CPF: <b>" + Funcoes.FormataCPF(registerViewModel.cpf) + "</b></span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">E-mail: <b>" + registerViewModel.email + "</b></span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Telefone: <b>" + Funcoes.FormataTelefone(registerViewModel.telefone) + "</b></span></p>" +
-                              "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu cadastro. Seu cadastro na promoção <b>Bolaaaaço da Norte Refrigeração</b> foi realizado com sucesso.</span></p>";
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Telefone: <b>" + Funcoes.FormataTelefone(registerViewModel.telefone) + "</b></span></p>";
 
-                string asterisco = "";
-                for (int i = 1; i <= registerViewModel.senha.Length - 1; i++)
-                    asterisco += "*";
+                if (registerViewModel.endereco != null && registerViewModel.endereco != "")
+                {
+                    Html += "<p></p>" +
+                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Endereço: <b>" + registerViewModel.endereco.ToUpper() + "</b></span></p>" +
+                            "<p></p>" +
+                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Complemento: <b>" + registerViewModel.complemento.ToUpper() + "</b></span></p>" +
+                            "<p></p>" +
+                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cidade: <b>" + registerViewModel.cidade.ToUpper() + "</b></span></p>" +
+                            "<p></p>" +
+                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">UF: <b>" + registerViewModel.uf.ToUpper() + "</b></span></p>" +
+                            "<p></p>" +
+                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">CEP: <b>" + Funcoes.FormataCep(registerViewModel.cep) + "</b></span></p>";
+
+                }
 
                 Html += "<p></p>" +
+                        "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seu Login de acesso para dar palpites é: </span></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\">" + registerViewModel.email + "</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + registerViewModel.email + "</b></span></p>" +
                         "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Sua senha informada no cadastro é: </span></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\">" + registerViewModel.senha.Substring(0, 1) + asterisco + "</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + registerViewModel.senha +  "</b></span></p>" +
                         "<hr />";
-
+            
 
                 Html += "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora que o seu cadastro foi realizado, já é possível dar o seu palpite no resultado dos jogos do Brasil da primeira fase da copa, dar o seu palpite de quais seleções disputarão a grande final e concorrer a prêmios.</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora que o seu cadastro foi realizado, já é possível dar os seus palpites no resultado dos jogos do Brasil da primeira fase da copa e de quais seleções disputarão a grande final.</span></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Acesse o site da Norte Refrigeração no endereço <a href=\"www.norterefrigeracao.com.br\">www.norterefrigeracao.com.br</a> e clique no banner da promoção. Na mesma página que você realizou este cadastro clique no link \"Dê o seu Palpite\". </span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora acesse <a href=\"http://bolaco.azurewebsites.net/Account/Login\">Bolaaaaço da Norte Refrigeração</a> e dê os seus palpites ou o endereço <a href=\"www.norterefrigeracao.com.br\">www.norterefrigeracao.com.br</a> e clique no banner da promoção. Na mesma página que você realizou este cadastro clique no link \"Já sou cadastrado\". </span></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Informe o seu login e senha para realizar o acesso na área de apostas e cadastrar o seu palpite. Nesta área você poderá:</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Informe o seu login e senha para realizar o acesso na área de apostas e cadastrar os seus palpite. Nesta área você poderá:</span></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Cadastrar o seu palpite para os jogos do Brasil na primeira fase.</span></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Cadastrar o seu palpite referente as seleções que farão a grande final da copa 2014 e o placar do jogo.</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Cadastrar os seus palpites para os jogos do Brasil na primeira fase.</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Cadastrar o seu palpite referente as seleções que farão a grande final da Copa 2014 e o placar do jogo.</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Consultar as estatíticas dos palpites dados por todos os participantes da promoção.</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Consultar todos os seus palpites. Quanto mais você comprar mais palpites poderá fazer e maiores as suas chances de ganhar prêmios.</span></p>" +
                         "<hr />" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\">BOA SORTE !</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\"><b>BOA SORTE !</b></span></p>" +
                         "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
                         "<p>&nbsp;</p>" +

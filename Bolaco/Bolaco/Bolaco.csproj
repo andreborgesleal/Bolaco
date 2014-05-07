@@ -188,7 +188,12 @@
     </Compile>
     <Compile Include="Models\Persistence\AccountModel.cs" />
     <Compile Include="Models\Persistence\ClienteModel.cs" />
+    <Compile Include="Models\Persistence\TicketModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\Repositories\ClienteViewModel.cs" />
+    <Compile Include="Models\Repositories\ParametroViewModel.cs" />
+    <Compile Include="Models\Repositories\SelecaoViewModel.cs" />
     <Compile Include="Models\Repositories\TicketViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -198,16 +203,54 @@
     <Content Include="App_Data\MensagemPadrao.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\Bandeira-Argentina.png" />
+    <Content Include="Content\images\bandeira-bosnia-herzegovina.gif" />
+    <Content Include="Content\images\Bandeira-da-Alemanha.png" />
+    <Content Include="Content\images\bandeira-da-argélia.png" />
+    <Content Include="Content\images\bandeira-da-australia.png" />
+    <Content Include="Content\images\Bandeira-da-bélgica.png" />
+    <Content Include="Content\images\bandeira-da-colombia.png" />
+    <Content Include="Content\images\bandeira-da-coreia-do-sul.jpg" />
+    <Content Include="Content\images\bandeira-da-croacia.jpg" />
+    <Content Include="Content\images\bandeira-da-frança.png" />
+    <Content Include="Content\images\bandeira-da-grecia.jpg" />
+    <Content Include="Content\images\bandeira-da-holanda.gif" />
+    <Content Include="Content\images\bandeira-da-inglaterra.jpg" />
+    <Content Include="Content\images\bandeira-da-nigeria.jpeg" />
+    <Content Include="Content\images\Bandeira-da-Russia.png" />
+    <Content Include="Content\images\bandeira-da-suíça.gif" />
+    <Content Include="Content\images\bandeira-de-camaroes.png" />
+    <Content Include="Content\images\bandeira-de-costa-rica.png" />
+    <Content Include="Content\images\bandeira-de-gana.jpg" />
+    <Content Include="Content\images\bandeira-de-honduras.gif" />
+    <Content Include="Content\images\bandeira-do-brasil.gif" />
+    <Content Include="Content\images\Bandeira-do-Chile.png" />
+    <Content Include="Content\images\bandeira-do-equador.png" />
+    <Content Include="Content\images\Bandeira-do-Ira.png" />
+    <Content Include="Content\images\bandeira-do-japao.png" />
+    <Content Include="Content\images\bandeira-do-méxivo.jpg" />
+    <Content Include="Content\images\bandeira-do-uruguai.png" />
+    <Content Include="Content\images\Bandeira-dos-Estados-Unidos-2000px.png" />
+    <Content Include="Content\images\bandeira-italia.png" />
+    <Content Include="Content\images\bandeira-portugal.jpg" />
+    <Content Include="Content\images\bandeira_espanha.jpg" />
     <Content Include="Content\images\BOLAAAACO4.png" />
     <Content Include="Content\images\Bolaaaaco_identidade_visual2.jpg" />
     <Content Include="Content\images\bolaco1.jpg" />
     <Content Include="Content\images\bolaco2.jpg" />
     <Content Include="Content\images\bolaco3.jpg" />
     <Content Include="Content\images\bolaco4.jpg" />
+    <Content Include="Content\images\bonecobarra.png" />
+    <Content Include="Content\images\bonecologin.png" />
     <Content Include="Content\images\bonecologin2.png" />
+    <Content Include="Content\images\bonecopalpite.png" />
+    <Content Include="Content\images\BonecoPalpite2.png" />
+    <Content Include="Content\images\BRkZIL.gif" />
     <Content Include="Content\images\caneca.png" />
     <Content Include="Content\images\carregando.gif" />
     <Content Include="Content\images\churrasqueira2.PNG" />
+    <Content Include="Content\images\costa_do_marfim.jpg" />
+    <Content Include="Content\images\equador.gif" />
     <Content Include="Content\images\fundo-Small-Size.jpg" />
     <Content Include="Content\images\fundo.png" />
     <Content Include="Content\images\fundo1.png" />
@@ -220,8 +263,11 @@
     <Content Include="Content\images\fundo_duplo.jpg" />
     <Content Include="Content\images\login2.png" />
     <Content Include="Content\images\login3.png" />
+    <Content Include="Content\images\logobarra.png" />
     <Content Include="Content\images\logo_norte.gif" />
     <Content Include="Content\images\logo_norte_small.gif" />
+    <Content Include="Content\images\selo.png" />
+    <Content Include="Content\images\selocircular.png" />
     <Content Include="Content\images\soccer.png" />
     <Content Include="Content\images\ventilador2.png" />
     <Content Include="Content\Site-Full-Hd.css" />
@@ -300,6 +346,7 @@
     <None Include="Properties\PublishProfiles\bolaco - Web Deploy.pubxml" />
     <Content Include="Views\Account\_Register.cshtml" />
     <Content Include="Views\Account\_Regras.cshtml" />
+    <Content Include="Views\Shared\_LayoutPalpite.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

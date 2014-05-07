@@ -107,8 +107,9 @@ namespace Bolaco.Controllers
                 EmpresaSecurity<App_DominioContext> security = new EmpresaSecurity<App_DominioContext>();
                 try
                 {
-                    //ClienteModel clienteModel = new ClienteModel();
-                    int? clienteId = null; // clienteModel.getClienteByLogin(model.UserName, security);
+                    // verifica se é cliente ou se é membro da administração
+                    ClienteModel clienteModel = new ClienteModel();
+                    int? clienteId = clienteModel.getClienteByLogin(model.UserName, security);
 
                     if (clienteId.HasValue && clienteId.Value < 0)
                         throw new DbEntityValidationException();

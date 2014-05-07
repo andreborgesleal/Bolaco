@@ -18,37 +18,37 @@ namespace DWM.Models.Enumeracoes
             string cabecalho = param[0].ToString();
             string selectedValue = param[1].ToString();
 
-            IList<SelectListItem> q = new List<SelectListItem>();
+            //IList<SelectListItem> q = new List<SelectListItem>();
 
-             if (cabecalho != "")
-                q.Add(new SelectListItem() { Value = "", Text = cabecalho });
+            // if (cabecalho != "")
+            //    q.Add(new SelectListItem() { Value = "", Text = cabecalho });
 
-             q.Add(new SelectListItem() { Value = "1", Text = "Brasil" });
-             q.Add(new SelectListItem() { Value = "2", Text = "Inglaterra" });
-             q.Add(new SelectListItem() { Value = "3", Text = "Alemanha" });
-             q.Add(new SelectListItem() { Value = "4", Text = "Espanha" });
-             q.Add(new SelectListItem() { Value = "5", Text = "Itália" });
+            //q.Add(new SelectListItem() { Value = "1", Text = "Brasil" });
+            //q.Add(new SelectListItem() { Value = "2", Text = "Inglaterra" });
+            //q.Add(new SelectListItem() { Value = "3", Text = "Alemanha" });
+            //q.Add(new SelectListItem() { Value = "4", Text = "Espanha" });
+            //q.Add(new SelectListItem() { Value = "5", Text = "Itália" });
 
-             return q;
+            //return q;
 
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    IList<SelectListItem> q = new List<SelectListItem>();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                IList<SelectListItem> q = new List<SelectListItem>();
 
-            //    if (cabecalho != "")
-            //        q.Add(new SelectListItem() { Value = "", Text = cabecalho });
+                if (cabecalho != "")
+                    q.Add(new SelectListItem() { Value = "", Text = cabecalho });
 
-            //    q = q.Union(from e in db.Selecaos.AsEnumerable()
-            //                orderby e.nome
-            //                select new SelectListItem()
-            //                {
-            //                    Value = e.selecaoId.ToString(),
-            //                    Text = e.nome,
-            //                    Selected = (selectedValue != "" ? e.nome.Equals(selectedValue) : false)
-            //                }).ToList();
+                q = q.Union(from e in db.Selecaos.AsEnumerable()
+                            orderby e.nome
+                            select new SelectListItem()
+                            {
+                                Value = e.selecaoId.ToString(),
+                                Text = e.nome,
+                                Selected = (selectedValue != "" ? e.nome.Equals(selectedValue) : false)
+                            }).ToList();
 
-            //    return q;
-            //}
+                return q;
+            }
         }
 
         #region DropDownList Horario

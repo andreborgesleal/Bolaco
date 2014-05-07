@@ -8,6 +8,8 @@ using DWM.Models.Repositories;
 using DWM.Models.Entidades;
 using App_Dominio.Enumeracoes;
 using App_Dominio.Models;
+using App_Dominio.Security;
+using App_Dominio.Repositories;
 
 namespace DWM.Models.Persistence
 {
@@ -150,6 +152,44 @@ namespace DWM.Models.Persistence
             #endregion
 
             return value.mensagem;
+        }
+
+        #endregion
+
+
+        #region Métodos customizados
+        public ClienteViewModel getClienteByUsuario(int usuarioId)
+        {
+            using (db = getContextInstance())
+            {
+                Cliente entity = db.Clientes.Where(info => info.usuarioId == usuarioId).FirstOrDefault();
+                if (entity != null)
+                    return MapToRepository(entity);
+                else
+                    return new ClienteViewModel();
+            }
+        }
+
+        public int? getClienteByLogin(string login, EmpresaSecurity<App_DominioContext> security)
+        {
+            int? clienteId = null;
+
+            #region retorna o usuário para verificar se o mesmo é um condômino
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                int empresaId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EMPRESA).valor);
+                UsuarioRepository usuarioRepository = security.getUsuarioByLogin(login, empresaId);
+
+                if (usuarioRepository != null)
+                    if (db.Clientes.Where(info => info.usuarioId == usuarioRepository.usuarioId).Count() > 0)
+                    {
+                        Cliente a = db.Clientes.Where(info => info.usuarioId == usuarioRepository.usuarioId).FirstOrDefault();
+                        clienteId = a.clienteId;
+                    }
+            }
+            #endregion
+
+            return clienteId;
         }
 
         #endregion

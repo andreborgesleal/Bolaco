@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Bolaco.Models.Entidades
+namespace DWM.Models.Entidades
 {
     [Table("Ticket")]
     public class Ticket

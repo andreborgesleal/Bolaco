@@ -1,180 +1,603 @@
-﻿@using App_Dominio.Entidades
-@using DWM.Models.Repositories
+﻿@model DWM.Models.Repositories.TicketViewModel
 @{
-    ViewBag.Title = "Bolaço da Norte Refrigeração";
-    //ViewBag.Title = new App_Dominio.Security.EmpresaSecurity<SecurityContext>().getEmpresa().nome;
+    Layout = "~/Views/Shared/_LayoutPalpite.cshtml";
+    ViewBag.Title = "Log in";
 }
 
-@*<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>*@
-
-<!-- --------------------------------------Começo do carrossel------------------------------------>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="~/Content/images/bolaco1.jpg" />
-            <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-            <img src="~/Content/images/bolaco2.jpg" />
-            <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-            <img src="~/Content/images/bolaco3.jpg" />
-            <div class="carousel-caption"></div>
-        </div>
-        <div class="item">
-            <img src="~/Content/images/bolaco4.jpg" />
-            <div class="carousel-caption"></div>
-        </div>
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-</div>
-<!-- --------------------------------------FIM do carrossel----------------------------------------->
-
-<div class="bs-example bs-example-tabs" style="margin-top: 15px">
-    <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#home" data-toggle="tab">Prêmios</a></li>
-        <li class=""><a href="#regulamento" data-toggle="tab">Regulamento</a></li>
-        <li class=""><a href="#estatistica" data-toggle="tab">Estatísticas</a></li>
-        <li class=""><a href="#tabelaco" data-toggle="tab">Tabelaço</a></li>
-        <li class=""><a href="#vencedor" data-toggle="tab">Vencedores</a></li>
-    </ul>
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="home">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>1º PRÊMIO</h2>
-                    <p>
-                        Resumo dos prêmios ofertados
-                    </p>
-                    <p><a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Leia mais &raquo;</a></p>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Index", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.Hidden("enter", "false")
+            <div class="panel panel-warning" style="margin-top: 20px">
+                <div class="panel-heading" style="height: 50px">
+                    <h2 class="panel-title col-md-12">
+                        Palpite
+                    </h2>
                 </div>
-                @***********Formulário Modal Botão 1**************@
-                <div class="modal fade" id="modal-container-964987a" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    1º PRÊMIO
-                                </h4>
+                <div class="panel-body" style="background-color: #fff">
+                    <div class="row">
+                        <div class="col-md-9">
+                            @*@Html.ValidationSummary(false)*@
+                            @Html.AntiForgeryToken()
+                            <div class="col-md-12">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs">
+                                    <li><a href="#palpite" data-toggle="tab" id="_palpite" onclick="showBotaoSalvar(this)"><span style="font-size: large">Palpite</span></a></li>
+                                    <li><a href="#list_palpite" data-toggle="tab" id="_listPalpite" onclick="showBotaoSalvar(this)"><span style="font-size: large; ">Todos os seus palpites</span></a></li>
+                                    <li><a href="#dados" data-toggle="tab" id="_dados" onclick="showBotaoSalvar(this)"><span style="font-size: large">Cadastro</span></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    @* ******************** *@
+                                    @* Palpite              *@
+                                    @* ******************** *@
+                                    <div class="tab-pane fade in active" id="palpite" style="height: 383px">
+                                        <div class="row" style="margin-top: 15px">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.ticketId, "Número da Sorte *", new { @class = "col-md-4 control-label" })
+                                                    <div class="col-md-2">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.ticketId, new { @class = "form-control input-sm", @style = "text-transform: uppercase;", @maxlength = "6" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.dt_compra, "Dt.Compra *", new { @class = "col-md-4 control-label" })
+                                                    <div class="col-md-6">
+                                                        <div class="input-group col-md-4">
+                                                            @*@Html.EditorFor(info => info.dt_compra, "DATE", new { identificador = "dt_compra", readOnly = "false" })*@
+                                                            <input type="date" class="form-control" id="dt_compra" name="dt_compra" value="@Model.dt_compra.ToString("dd/MM/yyyy")" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <small><b>PALPITES:</b></small>
+                                                <small>Informe abaixo os seus palpites e depois clique no botão "Salvar" para confirmar sua aposta.</small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 column">
+                                                <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+                                                    <caption></caption>
+                                                    <thead style="background-color: #FAEC37">
+                                                        <tr>
+                                                            <th style="text-align: left"></th>
+                                                            <th style="text-align: right">Seleção</th>
+                                                            <th style="text-align: center">Score</th>
+                                                            <th style="text-align: center">X</th>
+                                                            <th style="text-align: center">Score</th>
+                                                            <th style="text-align: left">Seleção</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tr>
+                                                        <td style="width: 20%; text-align: center">
+                                                            <b>Jogo da 1ª Fase</b>
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-6">
+                                                                    <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <b>Brasil</b>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td style="text-align: left; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) < DateTime.Parse("2014-06-12 14:00"))
+                                                            {
+                                                                @Html.TextBoxFor(m => m.score1Brasil, new { @class = "form-control input-sm" })    
+                                                            }
+                                                            else
+                                                            {
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>
+                                                            }
+                                                        </td>
+                                                        <td style="text-align: center; width: 5%">
+                                                            X
+                                                        </td>
+                                                        <td style="text-align: left; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) < DateTime.Parse("2014-06-12 14:00"))
+                                                            {
+                                                                @Html.TextBoxFor(m => m.score1Croacia, new { @class = "form-control input-sm" })
+                                                            }
+                                                            else
+                                                            {
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>
+                                                            }
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <b>Croácia</b>
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <img src="..\Content\images\bandeira-da-croacia.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">    
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 20%; text-align: center">
+                                                            <b>Jogo da 1ª Fase</b>
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-6">
+                                                                    <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <b>Brasil</b>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td style="text-align: left; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 14:00"))
+                                                            {
+                                                                @Html.TextBoxFor(m => m.score2Brasil, new { @class = "form-control input-sm" })
+                                                            }
+                                                            else
+                                                            {
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor</b>
+                                                            }
+                                                        </td>
+                                                        <td style="text-align: center; width: 5%">
+                                                            X
+                                                        </td>
+                                                        <td style="text-align: left; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 14:00"))
+                                                            {
+                                                                @Html.TextBoxFor(m => m.score2Mexico, new { @class = "form-control input-sm" })
+                                                            }
+                                                            else
+                                                            {
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor</b>
+                                                            }
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <b>México</b>
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <img src="..\Content\images\bandeira-do-méxivo.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 20%; text-align: center">
+                                                            <b>Jogo da 1ª Fase</b>
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-6">
+                                                                    <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <b>Brasil</b>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td style="text-align: left; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 14:00"))
+                                                            {
+                                                                @Html.TextBoxFor(m => m.score3Brasil, new { @class = "form-control input-sm" })
+                                                            }
+                                                            else
+                                                            {
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor</b>
+                                                            }                                                            
+                                                        </td>
+                                                        <td style="text-align: center; width: 5%">
+                                                            X
+                                                        </td>
+                                                        <td style="text-align: left; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 14:00"))
+                                                            {
+                                                                @Html.TextBoxFor(m => m.score3Camaroes, new { @class = "form-control input-sm" })
+                                                            }
+                                                            else
+                                                            {
+                                                              <b>@Model.Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor</b>
+                                                            }
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <b>Camarões</b>
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <img src="..\Content\images\bandeira-de-camaroes.png" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        @if (DateTime.Today <= DateTime.Parse("2014-07-07"))
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                <b>Final da Copa</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                @Html.DropDownList("selecao1Id_final", new DWM.Models.Enumeracoes.BindDropDownList().Selecao("Seleção...", ""), new { @class = "form-control input-sm", @style = "text-align: right" })
+                                                            </td>
+                                                            <td style="text-align: left; width: 5%">
+                                                                @Html.TextBoxFor(m => m.score1_final, new { @class = "form-control input-sm" })
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: left; width: 5%">
+                                                                @Html.TextBoxFor(m => m.score2_final, new { @class = "form-control input-sm" })
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                @Html.DropDownList("selecao2Id_final", new DWM.Models.Enumeracoes.BindDropDownList().Selecao("Seleção...", ""), new { @class = "form-control input-sm" })
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                Final da Copa
+                                                            </td>                                                            
+                                                            <td style="width: 21%; text-align: right">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 18).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="text-align: left; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 16).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: left; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 17).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 19).FirstOrDefault().valor</b>
+                                                            </td>
+                                                        }
+
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12" style="height: 30px;">
+                                                <h4>"Não fechamos no horário do almoço"</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* ******************** *@
+                                    @* Todos os palpites    *@
+                                    @* ******************** *@
+                                    <div class="tab-pane fade" id="list_palpite" style="height: 383px; margin-top: 15px; padding-right: 15px; overflow-x: auto">
+                                        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px">
+                                            <caption></caption>
+                                            <thead style="background-color: #FAEC37">
+                                                <tr>
+                                                    <th style="text-align: center">Número da Sorte</th>
+                                                    <th style="text-align: center">Data da Compra</th>
+                                                    <th style="text-align: center">Data do Palpite</th>
+                                                    <th style="text-align: right"></th>
+                                                    <th style="text-align: right">Seleção</th>
+                                                    <th style="text-align: center">Score</th>
+                                                    <th style="text-align: center"></th>
+                                                    <th style="text-align: center">Score</th>
+                                                    <th style="text-align: left">Seleção</th>
+                                                    <th style="text-align: left"></th>
+                                                    <th style="text-align: center"></th>
+                                                </tr>
+                                            </thead>
+                                            @if (Model != null && Model.Palpites != null)
+                                            { 
+                                                foreach (DWM.Models.Repositories.TicketViewModel t in Model.Palpites)
+                                                {
+                                                    <tr>
+                                                        <td style="text-align: center">@t.ticketId.ToUpper()</td>
+                                                        <td style="text-align: center">@t.dt_compra.ToString("dd/MM/yyyy")</td>
+                                                        <td style="text-align: left">@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</td>
+                                                        <td style="text-align: right"><img src="\Content\images\@t.bandeira_finalista1" style="height: 20px; width: 20px" alt="0" class="img-circle" /></td>                                                        
+                                                        <td style="text-align: right">@t.nome_selecao1Final</td>
+                                                        <td style="text-align: center">@t.score1_final</td>
+                                                        <td style="text-align: center">X</td>
+                                                        <td style="text-align: center">@t.score2_final</td>
+                                                        <td style="text-align: left">@(t.nome_selecao2Final)</td>
+                                                        <td style="text-align: left"><img src="\Content\images\@t.bandeira_finalista2" style="height: 20px; width: 20px" alt="0" class="img-circle" /></td>
+                                                        <td style="text-align: left">
+                                                            <a class="label" href="#modal-container-964987b" data-toggle="modal" style="text-decoration: none"><span class="label label-success" style="font-size: 12px; color: #000">Detalhar</span></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>"Compre de sua casa em nossa loja virtual www.norterefrigeracao.com.br"</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    @* Formulário Modal Detalhe do palpite *@
+                                    <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h2 class="modal-title" id="myModalLabel">
+                                                        Detalhe do Palpite
+                                                    </h2>
+                                                </div>
+                                                <div class="modal-body" style="overflow-y: auto; height: 450px">
+                                                    Teste
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* ******************** *@
+                                    @* Cadastro             *@
+                                    @* ******************** *@
+                                    <div class="tab-pane fade in active" id="dados" style="height: 383px">
+                                        <div class="row" style="margin-top: 15px">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.cpf, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-5">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.cpf, new { @class = "form-control input-sm", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.nome, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.nome, new { @class = "form-control input-sm", @Style = "width: 180%; text-transform: uppercase;", @maxlength = "50", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.telefone, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-5">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.telefone, new { @class = "form-control input-sm", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.email, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.email, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: lowercase;", @maxlength = "100", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.endereco, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.endereco, new { @class = "form-control input-sm", @placeholder = "Endereço", @Style = "width: 180%; text-transform: uppercase;", @maxlength = "60", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.complemento, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.complemento, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: uppercase;", @maxlength = "25", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.cidade, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-8">
+                                                        <div class="input-group">
+                                                            @Html.TextBoxFor(m => m.clienteViewModel.cidade, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: uppercase", @maxlength = "25", @disabled = "disable" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.uf, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-2">
+                                                        @Html.TextBoxFor(m => m.clienteViewModel.uf, new { @class = "form-control input-sm", @style = "text-transform: uppercase", @maxlength = "2", @disabled = "disable" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.clienteViewModel.cep, new { @class = "col-md-3 control-label" })
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(m => m.clienteViewModel.cep, new { @class = "form-control input-sm", @disabled = "disable" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12" style="height: 30px">
+                                                <h4>"Aproveite a nossa ampla variedade de produtos"</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-body Scroll">
-                                Detalhe do primeiro prêmios
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="../Content/images/bonecoPalpite.png" alt="0">
+                            <img src="../Content/images/selo.png" alt="0" style="margin-top: 10px">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <h2>2º PRÊMIO</h2>
-                    <p>Resumo do 2º Prêmio</p>
-                    <p><a class="btn btn-default" href="#modal-container-964987b" data-toggle="modal">Leia mais &raquo;</a></p>
-                </div>
-                @***********Formulário Modal Botão 2**************@
-                <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    2º PRÊMIO
-                                </h4>
-                            </div>
-                            <div class="modal-body Scroll">
-                                Detalhe do 2º Prêmio
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                            </div>
+                <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
+                    <div class="row">
+                        <div class="col-md-5" id="div-salvar">
+                            <input type="submit" value="Salvar" class="btn btn-warning" />
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h2>3º PRÊMIO</h2>
-                    <p>Resumo do 3º Prêmio</p>
-                    <p><a class="btn btn-default" href="#modal-container-964987c" data-toggle="modal">Leia mais &raquo;</a></p>
-                </div>
-                @***********Formulário Modal Botão 3**************@
-                <div class="modal fade" id="modal-container-964987c" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    3º PRÊMIO
-                                </h4>
-                            </div>
-                            <div class="modal-body Scroll">
-                                Detalhe do 3º Prêmio
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                            </div>
+                        <div class="col-md-offset-7">
+                            <a class="label" href="#modal-container-964987h" data-toggle="modal"><input type="button" id="btn1" value="Regulamento" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="left" title="Regulamento da promoção" /></a>
+                            <a class="label" href="#modal-container-964987e" data-toggle="modal"><input type="button" id="btn2" value="Prêmios" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="Consulte os prêmios ofertados" /></a>
+                            <a class="label" href="#modal-container-964987f" data-toggle="modal"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
+                            <a class="label" href="http://tabelaaaaco.herokuapp.com" target="_blank"><input type="button" id="btn4" value="Tabelaaaaço" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" /></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="regulamento" style="margin-top: 15px">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">
-                            <h4 class="list-group-item-heading">Principais documentos</h4>
-                            <p class="list-group-item-text">Relação de arquivos para downloads</p>
-                        </a>
-                        <a href="../Users_Data/Matricula - Convencao de Condominio.pdf" class="list-group-item" target="_blank">
-                            <h4 class="list-group-item-heading">Convenção Condomínio Parc Paradiso</h4>
-                            <p class="list-group-item-text">Documentos com todas as normas condominiais.</p>
-                        </a>
-                        <a href="../Users_Data/Regimento Interno_Para registro-1 Copy.pdf" class="list-group-item" target="_blank">
-                            <h4 class="list-group-item-heading">Regimento Interno</h4>
-                            <p class="list-group-item-text">Documento contendo as informações de nosso regimento interno.</p>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">
-                            Últimos documentos
-                        </a>
-                        <a href="../Users_Data/Ata Assembléia 27_03_2014 (1).pdf" class="list-group-item" target="_blank">Ata da Assembleia Condominial - 27/03/2014</a>
-                        <a href="../Users_Data/Carta Proposta Parque Paradiso (1).pdf" class="list-group-item" target="_blank">SKY - Carta Proposta</a>
-                        <a href="../Users_Data/Check List SKY (1).pdf" class="list-group-item" target="_blank">SKY - Checklist Documentos</a>
-                        <a href="../Users_Data/Minuta locação - CSSTG01072013 (protegido) (1).pdf" class="list-group-item" target="_blank">SKY - Minuta do contrato</a>
-                        <a href="../Users_Data/-CPRM-Poco-Parc-Paradiso.pdf" class="list-group-item" target="_blank">Poço - Avaliação Hidrogeológica do Subsolo</a>
-                    </div>
-                </div>
+        }
+    </div>
+</div>
+
+@****** Regulamento ******@
+<div class="modal fade" id="modal-container-964987h" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title" id="myModalLabel">
+                    Regulamento da promoção
+                </h2>
             </div>
-        </div>
-        <div class="tab-pane fade" id="estatistica" style="margin-top: 15px">
-        </div>
-        <div class="tab-pane fade" id="tabelaco" style="margin-top: 15px">
-        </div>
-        <div class="tab-pane fade" id="vencedores" style="margin-top: 15px">
+            <div class="modal-body" style="overflow-y: auto; height: 450px">
+                @Html.Partial("../Account/_Regras")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
     </div>
 </div>
+
+@****** Prêmios ******@
+<div class="modal fade" id="modal-container-964987e" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title" id="myModalLabel">
+                    Prêmios
+                </h2>
+            </div>
+            <div class="modal-body" style="overflow-y: auto; height: 450px">
+                Prêmios
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@****** Estatísticas ******@
+<div class="modal fade" id="modal-container-964987f" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2 class="modal-title" id="myModalLabel">
+                    Estatísticas
+                </h2>
+            </div>
+            <div class="modal-body" style="overflow-y: auto; height: 450px">
+                Estatísticas
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    document.getElementById("_palpite").click();
+
+    $('#btn1').tooltip('hide');
+    $('#btn2').tooltip('hide');
+    $('#btn3').tooltip('hide');
+    $('#btn4').tooltip('hide');
+
+    $('#score1Brasil').mask('9');
+    $('#score2Brasil').mask('9');
+    $('#score3Brasil').mask('9');
+    $('#score1Croacia').mask('9');
+    $('#score2Mexico').mask('9');
+    $('#score3Camaroes').mask('9');
+    $('#score1_final').mask('9');
+    $('#score2_final').mask('9');
+
+    $('#clienteViewModel_uf').mask('aa');
+    $("#clienteViewModel_cpf").mask("999.999.999-99");
+    $("#clienteViewModel_cep").mask("99999-999");
+    $("#clienteViewModel_telefone").mask("99 9999-9999");
+
+    $('.form-control').keypress(function (e) {
+        if (e.which == 13) {
+            campo = $('.form-control');
+            /* pega o indice do elemento*/
+            indice = campo.index(this);
+            /*soma mais um ao indice e verifica se não é null
+             *se não for é porque existe outro elemento
+            */
+            if (campo[indice + 1] != null) {
+                /* adiciona mais 1 no valor do indice */
+                proximo = campo[indice + 1];
+                /* passa o foco para o proximo elemento */
+                proximo.focus();
+            } else {
+                return true;
+            }
+        }
+        if (tecla == 13) {
+            /* impede o submit caso esteja dentro de um form */
+            e.preventDefault(e);
+            return false;
+        } else {
+            /* se não for tecla enter deixa escrever */
+            return true;
+        }
+    });
+
+    function showBotaoSalvar(obj) {
+        if ($(obj).attr('id') == "_palpite") {
+            $("#div-salvar").css("visibility", "visible");
+        }
+        else {
+            $("#div-salvar").css("visibility", "hidden");
+        }
+    }
+
+
+</script>

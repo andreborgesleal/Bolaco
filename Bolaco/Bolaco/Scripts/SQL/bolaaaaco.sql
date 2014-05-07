@@ -1,5 +1,56 @@
-﻿use seguranca
+﻿use bolaco
 go
+
+select * from selecao
+
+
+update parametro set valor = 'N' where paramId = 6
+
+select * from Parametro
+
+update Parametro set valor = '06/05/2014' where paramId = 8
+
+insert into Parametro values(8, 'Data Inicial da promoção', 'Data início da campanha', 'L', '12/05/2014')
+insert into Parametro values(9, 'Data final da promoção', 'Data final da campanha', 'L', '07/07/2014')
+insert into Parametro values(10, 'score1Brasil', 'Score do Brasil', 'L', '')
+insert into Parametro values(11, 'score1Croacia', 'Score Croacia', 'L', '')
+insert into Parametro values(12, 'score2Brasil', 'Score Brasil', 'L', '')
+insert into Parametro values(13, 'score2Mexico', 'Score México', 'L', '')
+insert into Parametro values(14, 'score3Brasil', 'Score Brasil', 'L', '')
+insert into Parametro values(15, 'score3Camaroes', 'Score Camaroes', 'L', '')
+insert into Parametro values(16, 'score1_final', 'Score da final seleção 1', 'L', '')
+insert into Parametro values(17, 'score2_fiinal', 'Score da final seleção 2', 'L', '')
+insert into Parametro values(18, 'selecao1_final', 'Seleção 1 Final', 'L', '')
+insert into Parametro values(19, 'selecao2_final', 'Seleção 2 Final', 'L', '')
+
+
+
+
+use seguranca
+go
+
+
+delete from seguranca..Sessao where sistemaId = 6
+delete from UsuarioGrupo where usuarioId >= 1100
+delete from Usuario where usuarioId >= 1100
+delete from bolaco..Ticket
+delete from bolaco..Cliente
+
+
+select * from seguranca..Sessao where sistemaId = 6
+select * from bolaco..Cliente
+select * from Usuario where empresaId = 4
+select * from UsuarioGrupo where usuarioId >= 1100
+
+
+
+
+
+
+
+
+
+
 
 select * from seguranca..Empresa
 select * from seguranca..Sistema
@@ -46,21 +97,6 @@ insert into Transacao values(@transacaoId, 6, null, 'Registro', 'Formulário de 
 
 select * from bolaco..Cliente
 
-delete from UsuarioGrupo where usuarioId >= 1094
-delete from Usuario where usuarioId >= 1094
-delete from bolaco..Cliente
-
-select * from bolaco..Cliente
-select * from Usuario where empresaId = 4
-select * from UsuarioGrupo where usuarioId = 1094
-
-
-
-
-
-
-
-
 
 commit
 -- rollback tran
@@ -68,6 +104,8 @@ commit
 
 
 update bolaco..Parametro set valor = 'S' where paramId = 6
+
+INSERT into bolaco..Parametro values(7, 'Fuso Horário', 'Tempo a ser adicionado ou dminuído na hora de gravar a data e hora do palpite', 'L', '-3')
 
 select * from bolaco..Parametro
 select * from parc_paradiso..Parametro
@@ -79,4 +117,57 @@ select * from seguranca..Usuario where empresaId = 4
 insert into seguranca..Empresa values (4, 'Norte Refrigeração', 'bolaaaaco@norterefrigeracao.com.br')
 
 
-select 'insert into 
+
+select * from ticket
+delete from ticket where score3Camaroes is null
+
+
+use bolaco
+go
+
+select * from selecao
+
+
+insert into selecao values('Brasil', '')
+insert into selecao values('Croácia', '')
+insert into selecao values('Camarões', '')
+insert into selecao values('México', '')
+insert into selecao values('Alemanha', '')
+insert into selecao values('Inglaterra', '')
+insert into selecao values('Itália', '')
+insert into selecao values('Espanha', '')
+insert into selecao values('Argentina', '')
+insert into selecao values('Uruaguai', '')
+insert into selecao values('Holanda', '')
+insert into selecao values('Chile', '')
+insert into selecao values('Austrália', '')
+insert into selecao values('Colômbia', '')
+insert into selecao values('Grécia', '')
+insert into selecao values('Costa do Marfim', '')
+insert into selecao values('Japão', '')
+insert into selecao values('Costa Rica', '')
+insert into selecao values('Bósnia Herzegovina', 'bandeira-bosnia-herzegovina')
+insert into selecao values('Iran', '')
+insert into selecao values('Nigéria', '')
+insert into selecao values('Suíca', '')
+insert into selecao values('Equador', '')
+insert into selecao values('França', '')
+insert into selecao values('Honduras', '')
+insert into selecao values('Portugal', '')
+insert into selecao values('Gana', '')
+insert into selecao values('Bélgica', '')
+insert into selecao values('Argêlia', '')
+insert into selecao values('Rússia', '')
+insert into selecao values('Coréia do Sul', '')
+insert into selecao values('Estados Unidos', '')
+
+
+
+
+
+
+
+
+
+
+
