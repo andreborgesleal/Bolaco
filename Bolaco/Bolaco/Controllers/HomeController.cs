@@ -92,6 +92,16 @@ namespace Bolaco.Controllers
             return View(value);
         }
 
+        public JsonResult AjaxEstatistica()
+        {
+            ListViewEstatistica ListEstatistica = new ListViewEstatistica();
+            var results = ListEstatistica.ListRepository(0, 100).ToList();
+            return new JsonResult()
+            {
+                Data = results,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
         public ActionResult About()
         {

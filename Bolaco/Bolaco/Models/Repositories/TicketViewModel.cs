@@ -19,9 +19,26 @@ namespace DWM.Models.Repositories
         [DisplayName("Dt.Compra")]
         [Required(ErrorMessage = "O campo Data da compra dever ser informado")]
         public DateTime dt_compra { get; set; }
+
+        public string getDt_compra 
+        {
+            get 
+            { 
+                return dt_compra.ToString("dd/MM/yyyy"); 
+            }
+        }
         
         [DisplayName("Dt_Inscricao")]
         public DateTime dt_inscricao { get; set; }
+
+        public string getDt_inscricao
+        {
+            get
+            {
+                return dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.";
+            }
+        }
+
 
         [DisplayName("Brasil")]
         public int score1Brasil { get; set; }

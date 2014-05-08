@@ -192,6 +192,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Repositories\ClienteViewModel.cs" />
+    <Compile Include="Models\Repositories\EstatisticaViewModel.cs" />
     <Compile Include="Models\Repositories\ParametroViewModel.cs" />
     <Compile Include="Models\Repositories\SelecaoViewModel.cs" />
     <Compile Include="Models\Repositories\TicketViewModel.cs" />

@@ -442,4 +442,37 @@ namespace DWM.Models.Persistence
 
         #endregion
     }
+
+    public class ListViewEstatistica : ListViewRepository<EstatisticaViewModel, ApplicationContext>
+    {
+        #region Métodos da classe ListViewRepository
+        public override IEnumerable<EstatisticaViewModel> Bind(int? index, int pageSize = 50, params object[] param)
+        {
+            string _descricao = param != null && param.Count() > 0 && param[0] != null ? param[0].ToString() : null;
+
+            var est = from t in db.Tickets
+                      where t.score1Brasil.HasValue
+                      group t by new { t.score1Brasil, t.score1Croacia } into T
+                      select new EstatisticaViewModel()
+                      {
+                          jogo = 1,
+                          bandeira_selecao1 = db.Selecaos.Find(1).bandeira,
+                          nome_selecao1 = "Brasil",
+                          score_selecao1 = T.Key.score1Brasil.Value,
+                          bandeira_selecao2 = db.Selecaos.Find(2).bandeira,
+                          nome_selecao2 = "Croácia",
+                          score_selecao2 = T.Key.score1Croacia.Value,
+                          percentual = Convert.ToInt32(Math.Floor((double)(T.Count() / db.Tickets.Where(info => info.score1Brasil.HasValue).Count()) * 100))
+                      };
+
+            return est.ToList();
+        }
+
+
+        public override Repository getRepository(Object id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
 }

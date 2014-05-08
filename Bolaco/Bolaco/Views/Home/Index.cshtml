@@ -300,7 +300,13 @@
                                                 </tr>
                                             </thead>
                                             @if (Model != null && Model.Palpites != null)
-                                            { 
+                                            {
+                                                int index = 0;
+
+                                                System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+                                                string output = jss.Serialize(Model.Palpites);
+
                                                 foreach (DWM.Models.Repositories.TicketViewModel t in Model.Palpites)
                                                 {
                                                     <tr>
@@ -315,9 +321,10 @@
                                                         <td style="text-align: left">@(t.nome_selecao2Final)</td>
                                                         <td style="text-align: left"><img src="\Content\images\@t.bandeira_finalista2" style="height: 20px; width: 20px" alt="0" class="img-circle" /></td>
                                                         <td style="text-align: left">
-                                                            <a class="label" href="#modal-container-964987b" data-toggle="modal" style="text-decoration: none"><span class="label label-success" style="font-size: 12px; color: #000">Detalhar</span></a>
+                                                            <a class="label" href="#modal-container-964987b" data-toggle="modal" style="text-decoration: none" onclick="Detail(@output, @index)"><span class="label label-success" style="font-size: 12px; color: #000">Detalhar</span></a>
                                                         </td>
                                                     </tr>
+                                                    index++; 
                                                 }
                                             }
                                         </table>
@@ -339,7 +346,184 @@
                                                     </h2>
                                                 </div>
                                                 <div class="modal-body" style="overflow-y: auto; height: 450px">
-                                                    Teste
+                                                    <div class="row clearfix">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group" style="padding-right: 60px; padding-left: 15px">
+                                                                <label>Número da Sorte</label>
+                                                                <input type="text" id="_ticketId" class="form-control input-sm col-md-2" style="text-transform: uppercase" disabled="disabled" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group" style="padding-right: 60px">
+                                                                <label>Data da Compra</label>
+                                                                <input type="text" id="_dt_compra" class="form-control input-sm" disabled="disabled" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group" style="padding-right: 60px">
+                                                                <label>Data do Palpite</label>
+                                                                <input type="text" id="_dt_inscricao" class="form-control input-sm" disabled="disabled" />
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <small><b>SEUS PALPITES:</b></small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 column">
+                                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+                                                                <caption></caption>
+                                                                <thead style="background-color: #FAEC37">
+                                                                    <tr>
+                                                                        <th style="text-align: left"></th>
+                                                                        <th style="text-align: right">Seleção</th>
+                                                                        <th style="text-align: center">Score</th>
+                                                                        <th style="text-align: center">X</th>
+                                                                        <th style="text-align: center">Score</th>
+                                                                        <th style="text-align: left">Seleção</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Jogo da 1ª Fase</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4" style="text-align: right; padding-right: 20px">
+                                                                                <b>Brasil</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score1Brasil" style="text-align: center;" class=" form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score1Croacia" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <b>Croácia</b>
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                <img src="..\Content\images\bandeira-da-croacia.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Jogo da 1ª Fase</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4" style="text-align: right; padding-right: 20px">
+                                                                                <b>Brasil</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score2Brasil" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score2Mexico" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <b>México</b>
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                <img src="..\Content\images\bandeira-do-méxivo.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Jogo da 1ª Fase</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4" style="text-align: right; padding-right: 20px">
+                                                                                <b>Brasil</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score3Brasil" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score3Camaroes" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <b>Camarões</b>
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                <img src="..\Content\images\bandeira-de-camaroes.png" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Final da Copa</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img id="_bandeira1_final" src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4">
+                                                                                <input type="text" id="_selecao1_final" class="form-control input-sm" style="width: 85px; text-align: right" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score1_final" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score2_final" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" id="_selecao2_final" class="form-control input-sm" disabled="disabled" />
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                <img id="_bandeira2_final" src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -480,6 +664,7 @@
     </div>
 </div>
 
+
 @****** Regulamento ******@
 <div class="modal fade" id="modal-container-964987h" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -531,7 +716,57 @@
                 </h2>
             </div>
             <div class="modal-body" style="overflow-y: auto; height: 450px">
-                Estatísticas
+                <div class="bs-example bs-example-tabs" style="margin-top: 15px">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#BrasilXCroacia" data-toggle="tab">Brasil X Croácia</a></li>
+                        <li><a href="#BrasilXMexico" data-toggle="tab">Brasil X México</a></li>
+                        <li><a href="#BrasilXCamaroes" data-toggle="tab">Brasil X Camarões</a></li>
+                        <li><a href="#Final" data-toggle="tab">Final</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="home">
+                            <div class="row clearfix" style="margin-top: 15px">
+                                <div class="col-md-8">
+                                    <div class="col-md-1"><img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                    <div class="col-md-2">Brasil</div>
+                                    <div class="col-md-1">3</div>
+                                    <div class="col-md-1">X</div>
+                                    <div class="col-md-1">2</div>
+                                    <div class="col-md-2">Croácia</div>
+                                    <div class="col-md-4"><img src="..\Content\images\bandeira-da-croacia.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                </div>
+                            </div>
+                            <div class="progress" style="margin-top: 8px">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                    30%
+                                </div>
+                            </div>
+                            <div class="row clearfix" style="margin-top: 15px">
+                                <div class="col-md-8">
+                                    <div class="col-md-1"><img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                    <div class="col-md-2">Brasil</div>
+                                    <div class="col-md-1">4</div>
+                                    <div class="col-md-1">X</div>
+                                    <div class="col-md-1">1</div>
+                                    <div class="col-md-2">Croácia</div>
+                                    <div class="col-md-4"><img src="..\Content\images\bandeira-da-croacia.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                </div>
+                            </div>
+                            <div class="progress progress-striped active" style="margin-top: 8px">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                    <span class="sr-only">45% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="BrasilXMexico">
+                        </div>
+                        <div class="tab-pane fade" id="BrasilXCamaroes">
+                        </div>
+                        <div class="tab-pane fade" id="Final">
+
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -599,5 +834,21 @@
         }
     }
 
-
+    function Detail(jsonObj, index) {
+        $("#_ticketId").val(jsonObj[index].ticketId);
+        $("#_dt_compra").val(jsonObj[index].getDt_compra);
+        $("#_dt_inscricao").val(jsonObj[index].getDt_inscricao);
+        $("#_score1Brasil").val(jsonObj[index].score1Brasil);
+        $("#_score2Brasil").val(jsonObj[index].score2Brasil);
+        $("#_score3Brasil").val(jsonObj[index].score3Brasil);
+        $("#_score1Croacia").val(jsonObj[index].score1Croacia);
+        $("#_score2Mexico").val(jsonObj[index].score2Mexico);
+        $("#_score3Camaroes").val(jsonObj[index].score3Camaroes);
+        $("#_selecao1_final").val(jsonObj[index].nome_selecao1Final);
+        $("#_selecao2_final").val(jsonObj[index].nome_selecao2Final);
+        $("#_score1_final").val(jsonObj[index].score1_final);
+        $("#_score2_final").val(jsonObj[index].score2_final);
+        $("#_bandeira1_final").attr("src", "..\\Content\\images\\" + jsonObj[index].bandeira_finalista1);
+        $("#_bandeira2_final").attr("src", "..\\Content\\images\\" + jsonObj[index].bandeira_finalista2);
+    }
 </script>
