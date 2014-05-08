@@ -1,6 +1,10 @@
 ﻿use bolaco
 go
 
+SELECT     1 AS [C1],     'Bandeira 1' AS [C2],     'Brasil' AS [C3],     [GroupBy1].[K1] AS [score1Brasil],     'Bandeira 2' AS [C4],     'Croácia' AS [C5],     [GroupBy1].[K2] AS [score1Croacia],     [GroupBy1].[A1] AS [C6],     9 AS [C7]    FROM ( SELECT         [Extent1].[score1Brasil] AS [K1],         [Extent1].[score1Croacia] AS [K2],         COUNT(1) AS [A1]        FROM [dbo].[Ticket] AS [Extent1]        WHERE [Extent1].[score1Brasil] IS NOT NULL        GROUP BY [Extent1].[score1Brasil], [Extent1].[score1Croacia]    )  AS [GroupBy1]
+
+
+
 select * from selecao
 
 

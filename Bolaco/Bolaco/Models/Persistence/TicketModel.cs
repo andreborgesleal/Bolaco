@@ -448,24 +448,75 @@ namespace DWM.Models.Persistence
         #region Métodos da classe ListViewRepository
         public override IEnumerable<EstatisticaViewModel> Bind(int? index, int pageSize = 50, params object[] param)
         {
-            string _descricao = param != null && param.Count() > 0 && param[0] != null ? param[0].ToString() : null;
+            int qte_tickets = db.Tickets.Where(info => info.score1Brasil.HasValue).Count();
+            
+            string _bandeira_brasil = db.Selecaos.Find(1).bandeira;
+            string _bandeira_croacia = db.Selecaos.Find(2).bandeira;
+            string _bandeira_mexico = db.Selecaos.Find(3).bandeira;
+            string _bandeira_camaroes = db.Selecaos.Find(4).bandeira;
 
-            var est = from t in db.Tickets
-                      where t.score1Brasil.HasValue
-                      group t by new { t.score1Brasil, t.score1Croacia } into T
-                      select new EstatisticaViewModel()
-                      {
-                          jogo = 1,
-                          bandeira_selecao1 = db.Selecaos.Find(1).bandeira,
-                          nome_selecao1 = "Brasil",
-                          score_selecao1 = T.Key.score1Brasil.Value,
-                          bandeira_selecao2 = db.Selecaos.Find(2).bandeira,
-                          nome_selecao2 = "Croácia",
-                          score_selecao2 = T.Key.score1Croacia.Value,
-                          percentual = Convert.ToInt32(Math.Floor((double)(T.Count() / db.Tickets.Where(info => info.score1Brasil.HasValue).Count()) * 100))
-                      };
+            IEnumerable<EstatisticaViewModel> est1 = from t in db.Tickets
+                                                     where t.score1Brasil.HasValue
+                                                     group t by new { t.score1Brasil, t.score1Croacia } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 1,
+                                                         bandeira_selecao1 = _bandeira_brasil,
+                                                         nome_selecao1 = "Brasil",
+                                                         score_selecao1 = T.Key.score1Brasil.Value,
+                                                         bandeira_selecao2 = _bandeira_croacia,
+                                                         nome_selecao2 = "Croácia",
+                                                         score_selecao2 = T.Key.score1Croacia.Value,
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
 
-            return est.ToList();
+            IEnumerable<EstatisticaViewModel> est2 = from t in db.Tickets
+                                                     where t.score2Brasil.HasValue
+                                                     group t by new { t.score2Brasil, t.score2Mexico } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 2,
+                                                         bandeira_selecao1 = _bandeira_brasil,
+                                                         nome_selecao1 = "Brasil",
+                                                         score_selecao1 = T.Key.score2Brasil.Value,
+                                                         bandeira_selecao2 = _bandeira_mexico,
+                                                         nome_selecao2 = "México",
+                                                         score_selecao2 = T.Key.score2Mexico.Value,
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
+
+            IEnumerable<EstatisticaViewModel> est3 = from t in db.Tickets
+                                                     where t.score1Brasil.HasValue
+                                                     group t by new { t.score3Brasil, t.score3Camaroes } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 3,
+                                                         bandeira_selecao1 = _bandeira_brasil,
+                                                         nome_selecao1 = "Brasil",
+                                                         score_selecao1 = T.Key.score3Brasil.Value,
+                                                         bandeira_selecao2 = _bandeira_camaroes,
+                                                         nome_selecao2 = "Camarões",
+                                                         score_selecao2 = T.Key.score3Camaroes.Value,
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
+
+            IEnumerable<EstatisticaViewModel> est4 = from t in db.Tickets
+                                                     group t by new { t.selecao1Id_Final, t.selecao2Id_Final } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 4,
+                                                         bandeira_selecao1 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao1Id_Final select s.bandeira).FirstOrDefault(),
+                                                         nome_selecao1 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao1Id_Final select s.nome).FirstOrDefault(),
+                                                         bandeira_selecao2 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao2Id_Final select s.bandeira).FirstOrDefault(),
+                                                         nome_selecao2 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao2Id_Final select s.nome).FirstOrDefault(),
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
+
+            return (est1.OrderByDescending(info => info.quantidade).ToList().Union(est2.OrderByDescending(info => info.quantidade).ToList()).Union(est3.OrderByDescending(info => info.quantidade).ToList()).Union(est4.OrderByDescending(info => info.quantidade).ToList())).ToList();
         }
 
 

@@ -149,24 +149,15 @@ namespace DWM.Models.Persistence
                 }
 
                 Html += "<p></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seu Login de acesso para dar palpites é: </span><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + registerViewModel.email + "</b></span></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seu Login de acesso para dar palpites é: </span></p>" +
-                        "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + registerViewModel.email + "</b></span></p>" +
-                        "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Sua senha informada no cadastro é: </span></p>" +
-                        "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + registerViewModel.senha +  "</b></span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Sua senha informada no cadastro é: </span><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + registerViewModel.senha + "</b></span></p>" +
                         "<hr />";
             
 
-                Html += "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora que o seu cadastro foi realizado, já é possível dar os seus palpites no resultado dos jogos do Brasil da primeira fase da copa e de quais seleções disputarão a grande final.</span></p>" +
-                        "<p></p>" +
+                Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora que o seu cadastro foi realizado, já é possível dar os seus palpites no resultado dos jogos do Brasil da primeira fase da copa e de quais seleções disputarão a grande final.</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora acesse <a href=\"http://bolaco.azurewebsites.net/Account/Login\">Bolaaaaço da Norte Refrigeração</a> e dê os seus palpites ou o endereço <a href=\"www.norterefrigeracao.com.br\">www.norterefrigeracao.com.br</a> e clique no banner da promoção. Na mesma página que você realizou este cadastro clique no link \"Já sou cadastrado\". </span></p>" +
-                        "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Informe o seu login e senha para realizar o acesso na área de apostas e cadastrar os seus palpite. Nesta área você poderá:</span></p>" +
-                        "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Cadastrar os seus palpites para os jogos do Brasil na primeira fase.</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Cadastrar o seu palpite referente as seleções que farão a grande final da Copa 2014 e o placar do jogo.</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">- Consultar as estatíticas dos palpites dados por todos os participantes da promoção.</span></p>" +

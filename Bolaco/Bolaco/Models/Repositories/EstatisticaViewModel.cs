@@ -22,6 +22,17 @@ namespace DWM.Models.Repositories
 
         public int score_selecao2 { get; set; }
 
-        public int percentual { get; set; }
+        public int quantidade { get; set; }
+
+        public int total { get; set; }
+
+        public double percentual {
+            get { 
+                if (total > 0)
+                    return (double)(quantidade / total) * 100; 
+                else
+                    return 0;
+            }
+        }
     }
 }

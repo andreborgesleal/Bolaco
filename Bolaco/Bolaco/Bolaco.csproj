@@ -348,6 +348,7 @@
     <Content Include="Views\Account\_Register.cshtml" />
     <Content Include="Views\Account\_Regras.cshtml" />
     <Content Include="Views\Shared\_LayoutPalpite.cshtml" />
+    <Content Include="Views\Home\_Estatistica.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

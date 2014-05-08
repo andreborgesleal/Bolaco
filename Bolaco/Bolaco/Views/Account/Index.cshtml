@@ -75,7 +75,7 @@
         <div class="row carousel-inner" style="margin-top: -15px">
             <div class="col-md-12 item active">
                 <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
-                    <a class="label" href="#modal-container-964987d" data-toggle="modal"><span style="font-size: large; color: #3c3c3c">Estatística dos palpites</span></a>
+                    <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><span style="font-size: large; color: #3c3c3c">Estatística dos palpites</span></a>
                 </div>
             </div>
         </div>
@@ -95,6 +95,7 @@
         @Html.Partial("_Register", Model)
     </div>
 </div>
+<div id="div-est"></div>
 
 <!--
 <div class="bs-example bs-example-tabs" style="margin-top: 15px">
@@ -485,3 +486,22 @@
 
 
   -->
+
+<script type="text/javascript">
+    function ShowEstatistica() {
+        var link = '../Home/_Estatistica';
+        link = encodeURI(link + '?noCache=' + new Date());
+
+        $.ajax({
+            type: "GET",
+            url: link,
+            data: {
+                hoje: new Date()
+            },
+            success: function (data) {
+                $('#div-est').html(data);
+                $('#msgs').html("");
+            }
+        });
+    }
+</script>
