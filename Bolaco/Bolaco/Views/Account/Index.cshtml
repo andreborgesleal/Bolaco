@@ -21,9 +21,9 @@
         </div>
         <div class="row carousel-inner" style="margin-top: 15px; margin-bottom: -8px">
             <div class="col-md-12 item active">
-                <div class="jumbotron" style="color: #faf7f7; padding: 20px">
+                <div class="jumbotron" style="color: #faf7f7; padding: 15px">
                     <div style="line-height: 23px">
-                        <span style="font-family: Verdana">Cadastre-se e dê seus palpites nos jogos do mundial da Copa Fifa 2014! Mostre o quanto você é bom em dar palpites. Passe na Norte Refrigeração para aproveitar os produtos com preço campeão. Quanto mais você comprar mais chances tem de ganhar prêmios!</span>
+                        <span style="font-family: Verdana">Cadastre-se e dê seus palpites nos jogos do mundial da Copa 2014! Mostre o quanto você é bom em dar palpites. Não esqueça, quanto mais você comprar mais chances tem de ganhar prêmios!</span>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     </div>
                     @***********Formulário Modal REGULAMENTO **************@
                     <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog" style="width: 80%">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -48,7 +48,13 @@
                                     </h2>
                                 </div>
                                 <div class="modal-body" style="overflow-y: auto; height: 450px">
-                                    @Html.Partial("_Regras")
+                                    <div class="carousel slide">
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                @Html.Partial("_Regras")
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -65,7 +71,33 @@
             <div class="col-md-12 item active">
                 <div class="jumbotron" style="color: #faf7f7; padding: 13px">
                     <div style="line-height: 15px; text-align: center">
-                        <a class="label" href="#modal-container-964987c" data-toggle="modal"><span style="font-size: large; color: #faf7f7">Confira os prêmios</span></a>
+                        <a class="label" href="#modal-container-964987K" data-toggle="modal"><span style="font-size: large; color: #faf7f7">Confira os prêmios</span></a>
+                        @***********Formulário Modal PRÊMIOS **************@
+                        <div class="modal fade" id="modal-container-964987K" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" style="width: 55%">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h2 class="modal-title" id="myModalLabel">
+                                            Prêmios
+                                        </h2>
+                                    </div>
+                                    <div class="modal-body" style="overflow-y: auto; height: 450px">
+                                        <div class="carousel slide">
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                    <img src="..\Content\images\produtos900.png">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -90,12 +122,58 @@
                 </div>
             </div>
         </div>
+
+        @*-------- Ganhadores -------*@
+        <div class="row carousel-inner" style="margin-top: -15px">
+            <div class="col-md-12 item active">
+                <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
+                    <a class="label" href="#modal-container-964987j" data-toggle="modal" onclick="ShowVencedores();"><span style="font-size: large; color: #3c3c3c">Ganhadores</span></a>
+                    @***********Formulário Modal VENCEDORES **************@
+                    <div class="modal fade" id="modal-container-964987j" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h2 class="modal-title" id="myModalLabel">
+                                        Ganhadores da promoção
+                                    </h2>
+                                </div>
+                                <div class="modal-body" style="overflow-y: auto; height: 450px">
+                                    <div class="col-md-12" style="background-position: center; background-repeat: no-repeat; background-image: url(../Content/images/MASCOTES_NORTE_Penta_20.png); height: 285px">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-12">
+                                        <span style="font-size: 18px; font-family: Verdana; font-weight: bold; line-height: 35px">Até o momento não há ganhadores. Continue comprando e dando palpites que você poderá se tornar um grande vencedor !</span>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-6 item active">
         @Html.Partial("_Register", Model)
     </div>
 </div>
 <div id="div-est"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--
 <div class="bs-example bs-example-tabs" style="margin-top: 15px">
@@ -492,16 +570,45 @@
         var link = '../Home/_Estatistica';
         link = encodeURI(link + '?noCache=' + new Date());
 
-        $.ajax({
-            type: "GET",
-            url: link,
-            data: {
-                hoje: new Date()
-            },
-            success: function (data) {
-                $('#div-est').html(data);
-                $('#msgs').html("");
-            }
-        });
+        $('#carregando').css("visibility", "visible");
+        $('#carregando').css("width", "100%");
+        $('#carregando').css("height", "100%");
+        $('#carregando').css("position", "absolute");
+        $('#carregando').css("background-color", "black");
+        $('#carregando').css("filter", "alpha(opacity=60)");
+        $('#carregando').css("opacity", "0.6");
+        $('#carregando').css("left", "0%");
+        $('#carregando').css("top", "0%");
+
+        $('#div-est').load(link);
+
+        $(document).ajaxSuccess(function (event, xhr, settings) {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        }).error(function () {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        })
+    }
+
+    function ShowVencedores() {
+        //var link = '../Home/_Vencedores';
+        //link = encodeURI(link + '?noCache=' + new Date());
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: link,
+        //    data: {
+        //        hoje: new Date()
+        //    },
+        //    success: function (data) {
+        //        $('#div-est').html(data);
+        //        $('#msgs').html("");
+        //    }
+        //});
     }
 </script>

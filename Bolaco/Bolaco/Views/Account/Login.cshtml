@@ -41,35 +41,40 @@
                     <p>
                         @Html.ActionLink("Registre-se", "Index", null, htmlAttributes: new { @style="font-weight: bold" }) caso não possua uma conta.
                     </p>
-                    <p>
+                    @*<p>
                         @Html.ActionLink("Esqueci minha Senha", "Forgot", "EsqueciMinhaSenha", null, htmlAttributes: new { @style = "font-weight: bold" })
-                    </p>
-                    <div class="col-md-12" style="height: 120px; padding-top: 50px">
+                    </p>*@
+                    <div class="col-md-12" style="height: 120px; padding-top: 50px; width: 120%">
                         <h4>"Seu cartão BNDES é aceito em todas as lojas da Norte Refrigeração"</h4>
                     </div>
                     <section id="loginForm"></section>
                 </div>
                 <div class="col-md-4">
-                    <img src="../Content/images/bonecologin2.png" alt="0">
+                    <img src="../../Content/images/bonecologin2.png" alt="0">
                 </div>
             </div>
         </div>
         <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
             <div class="row">
                 <div class="col-md-4" id="div-salvar">
-                    <input type="submit" value="Login" class="btn btn-default" />
+                    <input type="submit" value="Login" class="btn btn-default" onclick="validaLogin();" />
                 </div>
             </div>
         </div>
     </div>
 }
 
-
-
     </div>
 </div>
 
+<script type="text/javascript">
+    function validaLogin()
+    {
+        if ($("#Password").val().trim().length >= 6 && $("#UserName").val().trim() != "")
+            CarregandoIn();
+    }
 
+</script>
 
 
 

@@ -278,7 +278,7 @@ body {
   line-height: 1.42857143;
   color: #35513a;
   background-color: #35513a;
-  background: url(fundo2.jpg);
+  background: url(../Content/images/fundo-1920-Size2.jpg);
 }
 input,
 button,
@@ -4403,7 +4403,7 @@ a.list-group-item.active > .badge,
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #9ab69f;
+  background-color: #FAEC37;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;

@@ -11,9 +11,17 @@
             @Html.Hidden("enter", "false")
             <div class="panel panel-warning" style="margin-top: 20px">
                 <div class="panel-heading" style="height: 50px">
-                    <h2 class="panel-title col-md-12">
-                        Palpite
-                    </h2>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h2 class="panel-title col-md-12">
+                                Palpite
+                            </h2>
+                        </div>
+                        <div class="col-md-offset-9">
+                            <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
+                            <a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body" style="background-color: #fff">
                     <div class="row">
@@ -48,10 +56,14 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     @Html.LabelFor(m => m.dt_compra, "Dt.Compra *", new { @class = "col-md-4 control-label" })
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" id="navegador_chrome">
                                                         <div class="input-group col-md-4">
-                                                            @*@Html.EditorFor(info => info.dt_compra, "DATE", new { identificador = "dt_compra", readOnly = "false" })*@
                                                             <input type="date" class="form-control" id="dt_compra" name="dt_compra" value="@Model.dt_compra.ToString("dd/MM/yyyy")" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8" id="navegador_ie">
+                                                        <div class="input-group col-md-5">
+                                                            @Html.EditorFor(info => info.dt_compra, "DATE", new { identificador = "dt_compra", readOnly = "false" })
                                                         </div>
                                                     </div>
                                                 </div>
@@ -281,59 +293,48 @@
                                     @* ******************** *@
                                     @* Todos os palpites    *@
                                     @* ******************** *@
-                                    <div class="tab-pane fade" id="list_palpite" style="height: 383px; margin-top: 15px; padding-right: 15px; overflow-x: auto">
-                                        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px">
-                                            <caption></caption>
-                                            <thead style="background-color: #FAEC37">
-                                                <tr>
-                                                    <th style="text-align: center">Número da Sorte</th>
-                                                    <th style="text-align: center">Data da Compra</th>
-                                                    <th style="text-align: center">Data do Palpite</th>
-                                                    <th style="text-align: right"></th>
-                                                    <th style="text-align: right">Seleção</th>
-                                                    <th style="text-align: center">Score</th>
-                                                    <th style="text-align: center"></th>
-                                                    <th style="text-align: center">Score</th>
-                                                    <th style="text-align: left">Seleção</th>
-                                                    <th style="text-align: left"></th>
-                                                    <th style="text-align: center"></th>
-                                                </tr>
-                                            </thead>
-                                            @if (Model != null && Model.Palpites != null)
-                                            {
-                                                int index = 0;
+                                    <div class="tab-pane fade" id="list_palpite" style="height: 383px; margin-top: 15px; padding-right: 15px">
+                                        <div class="row">
+                                            <div class="col-md-12" style="overflow-x: auto; height: 343px">
+                                                <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                    <caption></caption>
+                                                    <thead style="background-color: #FAEC37">
+                                                        <tr>
+                                                            <th style="text-align: center">Número da Sorte</th>
+                                                            <th style="text-align: center">Data da Compra</th>
+                                                            <th style="text-align: center">Data do Palpite</th>
+                                                            <th style="text-align: center"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    @if (Model != null && Model.Palpites != null)
+                                                    {
+                                                        int index = 0;
 
-                                                System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+                                                        System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
 
-                                                string output = jss.Serialize(Model.Palpites);
+                                                        string output = jss.Serialize(Model.Palpites);
 
-                                                foreach (DWM.Models.Repositories.TicketViewModel t in Model.Palpites)
-                                                {
-                                                    <tr>
-                                                        <td style="text-align: center">@t.ticketId.ToUpper()</td>
-                                                        <td style="text-align: center">@t.dt_compra.ToString("dd/MM/yyyy")</td>
-                                                        <td style="text-align: left">@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</td>
-                                                        <td style="text-align: right"><img src="\Content\images\@t.bandeira_finalista1" style="height: 20px; width: 20px" alt="0" class="img-circle" /></td>                                                        
-                                                        <td style="text-align: right">@t.nome_selecao1Final</td>
-                                                        <td style="text-align: center">@t.score1_final</td>
-                                                        <td style="text-align: center">X</td>
-                                                        <td style="text-align: center">@t.score2_final</td>
-                                                        <td style="text-align: left">@(t.nome_selecao2Final)</td>
-                                                        <td style="text-align: left"><img src="\Content\images\@t.bandeira_finalista2" style="height: 20px; width: 20px" alt="0" class="img-circle" /></td>
-                                                        <td style="text-align: left">
-                                                            <a class="label" href="#modal-container-964987b" data-toggle="modal" style="text-decoration: none" onclick="Detail(@output, @index)"><span class="label label-success" style="font-size: 12px; color: #000">Detalhar</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    index++; 
-                                                }
-                                            }
-                                        </table>
+                                                        foreach (DWM.Models.Repositories.TicketViewModel t in Model.Palpites)
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: center">@t.ticketId.ToUpper()</td>
+                                                                <td style="text-align: center">@t.dt_compra.ToString("dd/MM/yyyy")</td>
+                                                                <td style="text-align: center">@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</td>
+                                                                <td style="text-align: center">
+                                                                    <a class="label" href="#modal-container-964987b" data-toggle="modal" style="text-decoration: none" onclick="Detail(@output, @index)"><span class="label label-success" style="font-size: 12px; color: #000">Detalhar</span></a>
+                                                                </td>
+                                                            </tr>
+                                                            index++;
+                                                        }
+                                                    }
+                                                </table>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h4>"Compre de sua casa em nossa loja virtual www.norterefrigeracao.com.br"</h4>
                                             </div>
                                         </div>
-
                                     </div>
                                     @* Formulário Modal Detalhe do palpite *@
                                     <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -536,7 +537,7 @@
                                     @* ******************** *@
                                     <div class="tab-pane fade in active" id="dados" style="height: 383px">
                                         <div class="row" style="margin-top: 15px">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="form-group">
                                                     @Html.LabelFor(m => m.clienteViewModel.cpf, new { @class = "col-md-3 control-label" })
                                                     <div class="col-md-5">
@@ -546,7 +547,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="form-group">
                                                     @Html.LabelFor(m => m.clienteViewModel.nome, new { @class = "col-md-3 control-label" })
                                                     <div class="col-md-8">
@@ -580,20 +581,20 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="form-group">
                                                     @Html.LabelFor(m => m.clienteViewModel.endereco, new { @class = "col-md-3 control-label" })
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-7">
                                                         <div class="input-group">
                                                             @Html.TextBoxFor(m => m.clienteViewModel.endereco, new { @class = "form-control input-sm", @placeholder = "Endereço", @Style = "width: 180%; text-transform: uppercase;", @maxlength = "60", @disabled = "disable" })
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 col-xs-6">
                                                 <div class="form-group">
                                                     @Html.LabelFor(m => m.clienteViewModel.complemento, new { @class = "col-md-3 control-label" })
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-8 col-xs-6">
                                                         <div class="input-group">
                                                             @Html.TextBoxFor(m => m.clienteViewModel.complemento, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: uppercase;", @maxlength = "25", @disabled = "disable" })
                                                         </div>
@@ -648,14 +649,8 @@
                 </div>
                 <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
                     <div class="row">
-                        <div class="col-md-5" id="div-salvar">
-                            <input type="submit" value="Salvar" class="btn btn-warning" />
-                        </div>
-                        <div class="col-md-offset-7">
-                            <a class="label" href="#modal-container-964987h" data-toggle="modal"><input type="button" id="btn1" value="Regulamento" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="left" title="Regulamento da promoção" /></a>
-                            <a class="label" href="#modal-container-964987e" data-toggle="modal"><input type="button" id="btn2" value="Prêmios" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="Consulte os prêmios ofertados" /></a>
-                            <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
-                            <a class="label" href="http://tabelaaaaco.herokuapp.com" target="_blank"><input type="button" id="btn4" value="Tabelaaaaço" class="btn btn-default" style="font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" /></a>
+                        <div class="col-md-offset-6" id="div-salvar">
+                            <input type="submit" value="Salvar" class="btn btn-warning" onclick="return Salvar()" />
                         </div>
                     </div>
                 </div>
@@ -663,70 +658,6 @@
         }
     </div>
 </div>
-
-
-@****** Regulamento ******@
-<div class="modal fade" id="modal-container-964987h" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h2 class="modal-title" id="myModalLabel">
-                    Regulamento da promoção
-                </h2>
-            </div>
-            <div class="modal-body" style="overflow-y: auto; height: 450px">
-                @Html.Partial("../Account/_Regras")
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@****** Prêmios ******@
-<div class="modal fade" id="modal-container-964987e" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h2 class="modal-title" id="myModalLabel">
-                    Prêmios
-                </h2>
-            </div>
-            <div class="modal-body" style="overflow-y: auto; height: 450px">
-                Prêmios
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@****** Estatísticas ******@
-@*<div class="modal fade" id="modal-container-964987f" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h2 class="modal-title" id="myModalLabel">
-                    Estatísticas
-                </h2>
-            </div>
-            <div class="modal-body" style="overflow-y: auto; height: 450px">
-                <div id="div-est">
-
-                </div>  
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>*@
-
 
 
 <script type="text/javascript">
@@ -751,31 +682,58 @@
     $("#clienteViewModel_cep").mask("99999-999");
     $("#clienteViewModel_telefone").mask("99 9999-9999");
 
-    $('.form-control').keypress(function (e) {
-        if (e.which == 13) {
-            campo = $('.form-control');
-            /* pega o indice do elemento*/
-            indice = campo.index(this);
-            /*soma mais um ao indice e verifica se não é null
-             *se não for é porque existe outro elemento
-            */
-            if (campo[indice + 1] != null) {
-                /* adiciona mais 1 no valor do indice */
-                proximo = campo[indice + 1];
-                /* passa o foco para o proximo elemento */
-                proximo.focus();
-            } else {
-                return true;
-            }
-        }
-        if (tecla == 13) {
-            /* impede o submit caso esteja dentro de um form */
-            e.preventDefault(e);
-            return false;
-        } else {
-            /* se não for tecla enter deixa escrever */
+    if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
+        $("#navegador_ie").css("height", "0px");
+        $("#navegador_ie").css("visibility", "hidden");
+        $("#navegador_chrome").css("visibility", "visible");
+    }
+    else
+    {
+        $("#navegador_ie").css("visibility", "visible");
+        $("#navegador_chrome").css("height", "0px");
+        $("#navegador_chrome").css("visibility", "hidden");
+    }
+
+    function Salvar()
+    {
+        if ($("#ticketId").val() != "" && $("#ticketId").val().length == 6 && $("#dt_compra").val() != "" && $("#selecao1Id_final").val() != "" && $("#selecao2Id_final").val() != "")
+        {
+            CarregandoIn();
             return true;
         }
+        else
+        {
+            ShowMessageAlert("Existem campos que precisam ser preenchidos antes de salvar o palpite","warning")
+            return false;
+        }
+            
+    }
+
+    $('.form-control').keypress(function (e) {
+        //if (e.which == 13) {
+        //    campo = $('.form-control');
+        //    /* pega o indice do elemento*/
+        //    indice = campo.index(this);
+        //    /*soma mais um ao indice e verifica se não é null
+        //     *se não for é porque existe outro elemento
+        //    */
+        //    if (campo[indice + 1] != null) {
+        //        /* adiciona mais 1 no valor do indice */
+        //        proximo = campo[indice + 1];
+        //        /* passa o foco para o proximo elemento */
+        //        proximo.focus();
+        //    } else {
+        //        return true;
+        //    }
+        //}
+        //if (tecla == 13) {
+        //    /* impede o submit caso esteja dentro de um form */
+        //    e.preventDefault(e);
+        //    return false;
+        //} else {
+        //    /* se não for tecla enter deixa escrever */
+        //    return true;
+        //}
     });
 
     function showBotaoSalvar(obj) {
@@ -808,19 +766,30 @@
     function ShowEstatistica() {
         var link = '../Home/_Estatistica';
         link = encodeURI(link + '?noCache=' + new Date());
-        //$('#div-coco').load(link);
 
-        $.ajax({
-            type: "GET",
-            url: link,
-            data: {
-                hoje: new Date()
-            },
-            success: function (data) {
-                $('#div-est').html(data);
-                $('#msgs').html("");
-            }
-        });
+        $('#carregando').css("visibility", "visible");
+        $('#carregando').css("width", "100%");
+        $('#carregando').css("height", "100%");
+        $('#carregando').css("position", "absolute");
+        $('#carregando').css("background-color", "black");
+        $('#carregando').css("filter", "alpha(opacity=60)");
+        $('#carregando').css("opacity", "0.6");
+        $('#carregando').css("left", "0%");
+        $('#carregando').css("top", "0%");
+
+        $('#div-est').load(link);
+
+        $(document).ajaxSuccess(function (event, xhr, settings) {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        }).error(function () {
+            $('#carregando').css("visibility", "hidden");
+            $('#carregando').css("height", "0px");
+            $('#carregando').css("margin-top", "0%");
+            $('#carregando').css("margin-left", "0%");
+        })
     }
 
 </script>

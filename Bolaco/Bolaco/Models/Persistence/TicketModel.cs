@@ -90,36 +90,43 @@ namespace DWM.Models.Persistence
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu palpite. Seu palpite na promoção <b>Bolaaaaço da Norte Refrigeração</b> foi realizado com sucesso.</span></p>" +
                               "<p></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + value.ticketId + "</b></span></p>" +
+                              "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + value.ticketId.ToUpper() + "</b></span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Data e hora do palpite: <b>" + value.dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.</b></span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Data da Compra: <b>" + value.dt_compra.ToString("dd/MM/yyyy") + "</b></span></p>" +
                               "<hr />" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seu palpite:" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Brasil <b>" + value.score1Brasil.ToString() + "</b> X <b>" + value.score1Croacia.ToString() + "</b> Croácia</span></p>" +
+                              "<div style=\"width: 95%\">" +
+                              "<div style=\"width: 55%\">" +
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seus palpites:" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: small; color: #000\">Brasil <b>" + value.score1Brasil.ToString() + "</b> X <b>" + value.score1Croacia.ToString() + "</b> Croácia</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Brasil <b>" + value.score2Brasil.ToString() + "</b> X <b>" + value.score2Mexico.ToString() + "</b> México</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: small; color: #000\">Brasil <b>" + value.score2Brasil.ToString() + "</b> X <b>" + value.score2Mexico.ToString() + "</b> México</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Brasil <b>" + value.score3Brasil.ToString() + "</b> X <b>" + value.score3Camaroes.ToString() + "</b> Camarões</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: small; color: #000\">Brasil <b>" + value.score3Brasil.ToString() + "</b> X <b>" + value.score3Camaroes.ToString() + "</b> Camarões</span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Final da Copa Fifa 2014:" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: large; color: #000\"><b>" + value.nome_selecao1Final + "  " + value.score1_final.ToString() + "</b> X <b>" + value.score2_final.ToString() + " " + value.nome_selecao2Final + "</b></span></p>";
+                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: large; color: #000\"><b>" + value.nome_selecao1Final + "  " + value.score1_final.ToString() + "</b> X <b>" + value.score2_final.ToString() + " " + value.nome_selecao2Final + "</b></span></p>" +
+                              "</div>" +
+                              "<div style=\"width: 40%; float: right; margin-top: -185px\"><img src=\"http://bolaco.azurewebsites.net/Content/images/selocircular.png\"></div>" +
+                              "</div>";
 
-                Html += "<p></p>" +
+                Html += "<div style=\"width: 100%\"><p></p>" +
                         "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\"><b>BOA SORTE !</b></span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
                         "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
-                        "<p>&nbsp;</p>" +
-                        "<p>&nbsp;</p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>";
+                        "</div>";
 
                 Validate result = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
                 if (result.Code > 0)
+                {
+                    result.MessageBase = "Seu palpite foi realizado com sucesso mas não foi possível enviar seu e-mail de confirmação. Vá em \"Todos os seus palpites\" para consultar sua aposta.";
                     throw new App_DominioException(result);
+                }
             }
             #endregion
 
@@ -398,9 +405,57 @@ namespace DWM.Models.Persistence
                                                  bandeira = sel.bandeira
                                              }).FirstOrDefault();
 
+                DateTime _dt_compra = DateTime.Today;
+                string _ticketId = "";
+                int _score1Brasil = 0;
+                int _score2Brasil = 0;
+                int _score3Brasil = 0;
+                int _score1Croacia = 0;
+                int _score2Mexico = 0;
+                int _score3Camaroes = 0;
+                string _nome_selecao1Final = "";
+                string _nome_selecao2Final = "";
+                int _score1_final = 0;
+                int _score2_final = 0;
+
+                if (Request != null)
+                {
+                    if (Request ["dt_compra"].ToString() != "")
+                        _dt_compra = DateTime.Parse(Request["dt_compra"].ToString().Substring(0,10));
+
+                    if (Request["ticketId"] != "")
+                        _ticketId = Request["ticketId"];
+
+                    if (Request["score1Brasil"] != "")
+                        _score1Brasil = int.Parse(Request["score1Brasil"]);
+
+                    if (Request["score2Brasil"] != "")
+                        _score2Brasil = int.Parse(Request["score2Brasil"]);
+
+                    if (Request["score3Brasil"] != "")
+                        _score3Brasil = int.Parse(Request["score3Brasil"]);
+
+                    if (Request["score1_final"] != "")
+                        _score1_final = int.Parse(Request["score1_final"]);
+
+                    if (Request["score2_final"] != "")
+                        _score2_final = int.Parse(Request["score2_final"]);
+                }
+
                 return new TicketViewModel()
                 {
-                    dt_compra = DateTime.Today,
+                    dt_compra = _dt_compra,
+                    ticketId = _ticketId,
+                    score1Brasil = _score1Brasil,
+                    score2Brasil = _score2Brasil,
+                    score3Brasil = _score3Brasil,
+                    score1Croacia = _score1Croacia,
+                    score2Mexico = _score2Mexico,
+                    score3Camaroes = _score3Camaroes,
+                    nome_selecao1Final = _nome_selecao1Final,
+                    nome_selecao2Final = _nome_selecao2Final,
+                    score1_final = _score1_final,
+                    score2_final = _score2_final,
                     clienteViewModel = clienteViewModel,
                     bandeira_brasil = brasil.bandeira,
                     bandeira_croacia = croacia.bandeira,

@@ -33,6 +33,10 @@ namespace Bolaco.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            EmpresaSecurity<App_DominioContext> login = new EmpresaSecurity<App_DominioContext>();
+            if (System.Web.HttpContext.Current != null)
+                login.EncerrarSessao(System.Web.HttpContext.Current.Session.SessionID);
+
             return View();
         }
 
@@ -51,6 +55,8 @@ namespace Bolaco.Controllers
                     #endregion
 
                     AccountModel model = new AccountModel();
+
+                    value.uri = "Account/Index"; // this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
 
                     value = model.SaveAll(value, Crud.INCLUIR);
                     if (value.mensagem.Code > 0)

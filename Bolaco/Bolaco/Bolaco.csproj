@@ -204,6 +204,7 @@
     <Content Include="App_Data\MensagemPadrao.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\614.1.11N.png" />
     <Content Include="Content\images\Bandeira-Argentina.png" />
     <Content Include="Content\images\bandeira-bosnia-herzegovina.gif" />
     <Content Include="Content\images\Bandeira-da-Alemanha.png" />
@@ -241,17 +242,20 @@
     <Content Include="Content\images\bolaco2.jpg" />
     <Content Include="Content\images\bolaco3.jpg" />
     <Content Include="Content\images\bolaco4.jpg" />
+    <Content Include="Content\images\bolaco_produtos-01.png" />
     <Content Include="Content\images\bonecobarra.png" />
     <Content Include="Content\images\bonecologin.png" />
     <Content Include="Content\images\bonecologin2.png" />
     <Content Include="Content\images\bonecopalpite.png" />
     <Content Include="Content\images\BonecoPalpite2.png" />
     <Content Include="Content\images\BRkZIL.gif" />
+    <Content Include="Content\images\Camisa-38-01.png" />
     <Content Include="Content\images\caneca.png" />
     <Content Include="Content\images\carregando.gif" />
     <Content Include="Content\images\churrasqueira2.PNG" />
     <Content Include="Content\images\costa_do_marfim.jpg" />
     <Content Include="Content\images\equador.gif" />
+    <Content Include="Content\images\fundo-1920-Size2.jpg" />
     <Content Include="Content\images\fundo-Small-Size.jpg" />
     <Content Include="Content\images\fundo.png" />
     <Content Include="Content\images\fundo1.png" />
@@ -262,11 +266,14 @@
     <Content Include="Content\images\fundo5.png" />
     <Content Include="Content\images\fundo_campo.png" />
     <Content Include="Content\images\fundo_duplo.jpg" />
+    <Content Include="Content\images\loader.gif" />
     <Content Include="Content\images\login2.png" />
     <Content Include="Content\images\login3.png" />
     <Content Include="Content\images\logobarra.png" />
     <Content Include="Content\images\logo_norte.gif" />
     <Content Include="Content\images\logo_norte_small.gif" />
+    <Content Include="Content\images\MASCOTES_NORTE_Penta_20.png" />
+    <Content Include="Content\images\produtos900.png" />
     <Content Include="Content\images\selo.png" />
     <Content Include="Content\images\selocircular.png" />
     <Content Include="Content\images\soccer.png" />
@@ -342,12 +349,14 @@
     <Content Include="Views\Shared\MensagemModal.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\_LayoutPalpite.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <None Include="Properties\PublishProfiles\bolaco - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bolaco - Web Deploy.pubxml" />
     <Content Include="Views\Account\_Register.cshtml" />
     <Content Include="Views\Account\_Regras.cshtml" />
-    <Content Include="Views\Shared\_LayoutPalpite.cshtml" />
     <Content Include="Views\Home\_Estatistica.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

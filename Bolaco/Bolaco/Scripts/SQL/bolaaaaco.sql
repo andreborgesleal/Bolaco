@@ -1,16 +1,16 @@
 ﻿use bolaco
 go
 
-SELECT     1 AS [C1],     'Bandeira 1' AS [C2],     'Brasil' AS [C3],     [GroupBy1].[K1] AS [score1Brasil],     'Bandeira 2' AS [C4],     'Croácia' AS [C5],     [GroupBy1].[K2] AS [score1Croacia],     [GroupBy1].[A1] AS [C6],     9 AS [C7]    FROM ( SELECT         [Extent1].[score1Brasil] AS [K1],         [Extent1].[score1Croacia] AS [K2],         COUNT(1) AS [A1]        FROM [dbo].[Ticket] AS [Extent1]        WHERE [Extent1].[score1Brasil] IS NOT NULL        GROUP BY [Extent1].[score1Brasil], [Extent1].[score1Croacia]    )  AS [GroupBy1]
-
+select * from bolaco..Ticket
+order by dt_inscricao desc
 
 
 select * from selecao
+select * from bolaco..Cliente order by dt_cadastro desc
 
+update bolaco..parametro set valor = 'N' where paramId = 6
 
-update parametro set valor = 'N' where paramId = 6
-
-select * from Parametro
+select * from bolaco..Parametro
 
 update Parametro set valor = '06/05/2014' where paramId = 8
 
@@ -28,6 +28,31 @@ insert into Parametro values(18, 'selecao1_final', 'Seleção 1 Final', 'L', '')
 insert into Parametro values(19, 'selecao2_final', 'Seleção 2 Final', 'L', '')
 
 
+update seguranca..Sessao set dt_desativacao = getdate() where empresaId = 4
+
+select * From seguranca..LogAuditoria where empresaId = 4
+select * from seguranca..Sessao where empresaId = 4 -- xmje30ncnq0ue2e2syaq4mha
+select * from seguranca..Sistema
+select * from seguranca..Empresa
+
+select * from seguranca..Usuario where usuarioId >= 1127
+select * from seguranca..UsuarioGrupo where grupoId in (select grupoId from seguranca..Grupo where seguranca..Grupo.sistemaId = 6)
+select * From seguranca..Grupo where grupoId in (1009, 1010)
+select * From seguranca..GrupoTransacao where grupoId = 1010
+select * From seguranca..Transacao where sistemaId = 6
+select * from seguranca..GrupoTransacao where transacaoId in ( 415, 416)
+
+
+update seguranca..Transacao set url = 'Home/index' , nome = 'Formulário de cadastro do palpite', descricao = 'Formulário de cadastro do palpite', nomeCurto = 'Palpite'
+where transacaoId = 415
+
+insert into seguranca..GrupoTransacao(grupoId, transacaoId, situacao) values(1010, 415, 'A')
+
+declare @transacaoId int
+select @transacaoId = max(transacaoId) + 1 from seguranca..Transacao
+
+insert into seguranca..Transacao(transacaoId, sistemaId, nomeCurto, nome, descricao, referencia, exibir, url) 
+values(@transacaoId, 6, 'Registre-se', 'Formulário de inscrição do cliente','Formulário de inscrição do cliente', 'Link', 'N', 'Account/Index')
 
 
 use seguranca
@@ -35,11 +60,15 @@ go
 
 
 delete from seguranca..Sessao where sistemaId = 6
-delete from UsuarioGrupo where usuarioId >= 1100
-delete from Usuario where usuarioId >= 1100
-delete from bolaco..Ticket
-delete from bolaco..Cliente
+delete from UsuarioGrupo where usuarioId >= 1109 
+delete from Usuario where usuarioId >= 1109 and empresaId = 4
+delete from bolaco..Ticket where clienteId >= 13 
+delete from bolaco..Cliente where clienteId >= 13
 
+select * from bolaco..Cliente where usuarioId = 1109 
+
+select * from Usuario where empresaId = 4
+select * from UsuarioGrupo where usuarioId >= 1109 
 
 select * from seguranca..Sessao where sistemaId = 6
 select * from bolaco..Cliente
