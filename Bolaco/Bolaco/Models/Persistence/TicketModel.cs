@@ -96,28 +96,30 @@ namespace DWM.Models.Persistence
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Data da Compra: <b>" + value.dt_compra.ToString("dd/MM/yyyy") + "</b></span></p>" +
                               "<hr />" +
-                              "<div style=\"width: 95%\">" +
-                              "<div style=\"width: 55%\">" +
+                              "<table style=\"width: 95%; border: 0px solid #fff\">" +
+                              "<tr>" +
+                              "<td style=\"width: 55%\">" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seus palpites:" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: small; color: #000\">Brasil <b>" + value.score1Brasil.ToString() + "</b> X <b>" + value.score1Croacia.ToString() + "</b> Croácia</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.score1Brasil.ToString() + "</b> X <b>" + value.score1Croacia.ToString() + "</b> Croácia</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: small; color: #000\">Brasil <b>" + value.score2Brasil.ToString() + "</b> X <b>" + value.score2Mexico.ToString() + "</b> México</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.score2Brasil.ToString() + "</b> X <b>" + value.score2Mexico.ToString() + "</b> México</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: small; color: #000\">Brasil <b>" + value.score3Brasil.ToString() + "</b> X <b>" + value.score3Camaroes.ToString() + "</b> Camarões</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.score3Brasil.ToString() + "</b> X <b>" + value.score3Camaroes.ToString() + "</b> Camarões</span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Final da Copa Fifa 2014:" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 15px; font-size: large; color: #000\"><b>" + value.nome_selecao1Final + "  " + value.score1_final.ToString() + "</b> X <b>" + value.score2_final.ToString() + " " + value.nome_selecao2Final + "</b></span></p>" +
-                              "</div>" +
-                              "<div style=\"width: 40%; float: right; margin-top: -185px\"><img src=\"http://bolaco.azurewebsites.net/Content/images/selocircular.png\"></div>" +
-                              "</div>";
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\"><b>" + value.nome_selecao1Final + "  " + value.score1_final.ToString() + "</b> X <b>" + value.score2_final.ToString() + " " + value.nome_selecao2Final + "</b></span></p>" +
+                              "</td>" +
+                              "<td style=\"width: 45%; vertical-align: top; float: right; padding-right: 27px\"><img src=\"http://bolaco.azurewebsites.net/Content/images/selocircular.png\"></td>" +
+                              "</tr>" +
+                              "</table>";
 
                 Html += "<div style=\"width: 100%\"><p></p>" +
                         "<p></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: xx-large; color: #3e5b33\"><b>BOA SORTE !</b></span></p>" +
+                        "<p></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\"><b>BOA SORTE !</b></span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
-                        "<p></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
                         "</div>";
 

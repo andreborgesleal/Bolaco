@@ -4,11 +4,12 @@ go
 select * from bolaco..Ticket
 order by dt_inscricao desc
 
-
+update bolaco..Selecao set nome = 'Bósnia' where selecaoId = 19
+select * from bolaco..Selecao
 select * from selecao
 select * from bolaco..Cliente order by dt_cadastro desc
 
-update bolaco..parametro set valor = 'N' where paramId = 6
+update bolaco..parametro set valor = 'S' where paramId = 6
 
 select * from bolaco..Parametro
 
@@ -60,15 +61,15 @@ go
 
 
 delete from seguranca..Sessao where sistemaId = 6
-delete from UsuarioGrupo where usuarioId >= 1109 
-delete from Usuario where usuarioId >= 1109 and empresaId = 4
+delete from seguranca..UsuarioGrupo where usuarioId = 1136
+delete from seguranca..Usuario where usuarioId = 1136 and empresaId = 4
 delete from bolaco..Ticket where clienteId >= 13 
-delete from bolaco..Cliente where clienteId >= 13
+delete from bolaco..Cliente where clienteId >= 32
 
 select * from bolaco..Cliente where usuarioId = 1109 
 
-select * from Usuario where empresaId = 4
-select * from UsuarioGrupo where usuarioId >= 1109 
+select * from seguranca..Usuario where empresaId = 4
+select * from seguranca..UsuarioGrupo where usuarioId = 1135
 
 select * from seguranca..Sessao where sistemaId = 6
 select * from bolaco..Cliente
