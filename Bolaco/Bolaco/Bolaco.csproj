@@ -356,6 +356,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Account\_Regras.cshtml" />
+    <Content Include="Views\Home\_Estatistica.cshtml" />
     <Content Include="Views\Shared\MensagemModal.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -365,7 +366,6 @@
     <Content Include="Web.config" />
     <None Include="Properties\PublishProfiles\bolaco - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bolaco - Web Deploy.pubxml" />
-    <Content Include="Views\Home\_Estatistica.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -298,7 +298,16 @@ namespace DWM.Models.Persistence
             {
                 value.mensagem.Code = 4;
                 value.mensagem.Message = MensagemPadrao.Message(4, "Número da Sorte", "O Número da sorte deve possuir 6 dígitos (número e letras)").ToString();
-                value.mensagem.MessageBase = "Número da Sorte já existe em nossa base de dados.";
+                value.mensagem.MessageBase = "Número da Sorte inválido.";
+                value.mensagem.MessageType = MsgType.WARNING;
+                return value.mensagem;
+            }
+
+            if (!"MT|CT|BR".Contains(value.ticketId.Trim().ToUpper().Substring(0,2)))
+            {
+                value.mensagem.Code = 4;
+                value.mensagem.Message = MensagemPadrao.Message(4, "Número da Sorte", "O Número da sorte deve começar com MT ou CT ou BR").ToString();
+                value.mensagem.MessageBase = "Número da Sorte inválido.";
                 value.mensagem.MessageType = MsgType.WARNING;
                 return value.mensagem;
             }

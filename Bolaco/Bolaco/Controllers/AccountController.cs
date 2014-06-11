@@ -62,7 +62,7 @@ namespace Bolaco.Controllers
                     if (value.mensagem.Code > 0)
                         throw new App_DominioException(value.mensagem);
 
-                    Success("Registro incluído com sucesso");
+                    Success("Cadastro incluído com sucesso. É preciso dar o seu palpite p/ concorrer à promoção. Só o cadastro não é suficiente. Informe seu e-mail e senha e dê o seu palpite.");
                     return RedirectToAction("Login", "Account");
                 }
                 catch (App_DominioException ex)

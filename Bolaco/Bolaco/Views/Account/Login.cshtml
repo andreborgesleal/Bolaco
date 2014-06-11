@@ -6,13 +6,14 @@
 }
 
 <div class="row">
+    <div class="col-md-2"></div>
     <div class="col-md-8">
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <div class="panel panel-warning" style="margin-top: 20px">
         <div class="panel-heading" style="height: 50px">
             <h2 class="panel-title col-md-12">
-                Log in
+                Palpite <small style="color: #000; font-family: Verdana; font-size: small">Informe seu e-mail e senha para dar o palpite.</small>
             </h2>
         </div>
         <div class="panel-body" style="background-color: #fff;">
@@ -21,7 +22,7 @@
                     @*@Html.ValidationSummary(false)*@
                     @Html.AntiForgeryToken()
                     <div class="form-group">
-                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                        @Html.LabelFor(m => m.UserName, "E-mail", new { @class = "col-md-2 control-label" })
                         <div class="col-md-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -57,7 +58,7 @@
         <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
             <div class="row">
                 <div class="col-md-4" id="div-salvar">
-                    <input type="submit" value="Login" class="btn btn-default" onclick="validaLogin();" />
+                    <input type="submit" value="Acessar" class="btn btn-default" onclick="validaLogin();" />
                 </div>
             </div>
         </div>

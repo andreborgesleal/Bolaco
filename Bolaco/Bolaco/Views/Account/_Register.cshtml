@@ -9,11 +9,18 @@
         <div class="item active">
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <h2 class="panel-title col-md-5 col-xs-8">
-                        Cadastre-se
-                    </h2>
-                    <div class="col-md-offset-7">
-                        @Html.ActionLink("Já sou cadastrado", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-success", @style = "font-weight: bold; font-size: large" })
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h2 class="panel-title col-md-12" style="padding-top: 8px">
+                                Cadastre-se
+                            </h2>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-7">@Html.ActionLink("Dê seu Palpite", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-success", @style = "font-weight: bold; font-size: large" })</div>
+                                <div class="col-md-5" style="padding-top: 4px"><a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Instruções</a>   </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-body" style="background-color: #fff; background-image: url(~../../Content/images/fundo5.png); background-repeat: no-repeat">
@@ -201,7 +208,7 @@
                 <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
                     <div class="row">
                         <div class="col-md-3">
-                            <a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Instruções</a>
+                            <a class="btn btn-default" onclick="nextButtom()"><span id="Next">Próximo</span></a>
                         </div>
                         <div class="col-md-7">
                             <small style="color: #fff">( * ) - Campo de preenchimento obrigatório</small>
@@ -286,6 +293,7 @@
                     $("#enter").val("false");
                     if (proximo.id == "endereco") {
                         document.getElementById("_endereco").click();
+                        $("#Next").text("Anterior");
                     }
                     proximo.focus();
                 } else {
@@ -310,10 +318,12 @@
     function showBotaoSalvar(obj) {
         if ($(obj).attr('id') == "_endereco") {
             $("#div-salvar").css("visibility", "visible");
+            $("#Next").text("Anterior");
         }
         else {
             $("#div-salvar").css("visibility", "hidden");
             $("#enter").val("false");
+            $("#Next").text("Próximo");
         }
 
     }
@@ -343,6 +353,18 @@
         $("#enter").val("true");
     }
 
+    function nextButtom() {
+        if ($("#Next").text() == "Próximo")
+        {
+            document.getElementById("_endereco").click();
+            $("#Next").text("Anterior");
+        }
+        else
+        {
+            document.getElementById("_identificacao").click();
+            $("#Next").text("Próximo");
+        }
+    }
 </script>
 
 

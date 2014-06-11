@@ -86,6 +86,12 @@ namespace DWM.Models.Repositories
         [DisplayName("Placar da Final")]
         public int score2_final { get; set; }
 
+        [DisplayName("Dt.Avaliação")]
+        public System.Nullable<DateTime> dt_avaliacao { get; set; }
+
+        [DisplayName("Ind.Avaliação")]
+        public string ind_avaliacao { get; set; }
+
         [DisplayName("Palpites do cliente")]
         public IEnumerable<TicketViewModel> Palpites { get; set; }
 

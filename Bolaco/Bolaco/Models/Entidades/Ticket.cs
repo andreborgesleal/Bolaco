@@ -51,5 +51,11 @@ namespace DWM.Models.Entidades
 
         [DisplayName("Score2_Final")]
         public System.Nullable<int> score2_final { get; set; }
+
+        [DisplayName("Dt_Avaliacao")]
+        public System.Nullable<DateTime> dt_avaliacao { get; set; }
+
+        [DisplayName("Ind_Avalacao")]
+        public string ind_avaliacao { get; set; }
     }
 }

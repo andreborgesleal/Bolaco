@@ -1,6 +1,12 @@
 ﻿use bolaco
 go
 
+alter table ticket
+add dt_avaliacao datetime null, ind_avaliacao char(1) null
+
+select * from Ticket
+
+
 select * from bolaco..Ticket
 order by dt_inscricao desc
 
@@ -9,7 +15,7 @@ select * from bolaco..Selecao
 select * from selecao
 select * from bolaco..Cliente order by dt_cadastro desc
 
-update bolaco..parametro set valor = 'S' where paramId = 6
+update bolaco..parametro set valor = 'N' where paramId = 6
 
 select * from bolaco..Parametro
 
