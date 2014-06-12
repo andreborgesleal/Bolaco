@@ -287,13 +287,16 @@
     <Content Include="Content\Site-Full-Hd.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon3.png" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="App_Code\BreadCrumbPage.cshtml" />
     <Content Include="App_Code\DesignerFunctions.cshtml" />
     <Content Include="App_Code\Header.cshtml" />
     <Content Include="App_Code\Lookup.cshtml" />
     <Content Include="App_Code\TextBoxDatePicker.cshtml" />
     <Content Include="App_Code\Typeahead.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Scripts\bootstrap.js" />
@@ -366,6 +369,7 @@
     <Content Include="Web.config" />
     <None Include="Properties\PublishProfiles\bolaco - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bolaco - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\bolaco.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -407,9 +411,6 @@
     <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
   </ItemGroup>

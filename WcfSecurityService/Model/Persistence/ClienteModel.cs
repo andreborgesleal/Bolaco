@@ -174,7 +174,7 @@ namespace DWM.Models.Persistence
         {
             int? clienteId = null;
 
-            #region retorna o usuário para verificar se o mesmo é um cliente
+            #region retorna o usuário para verificar se o mesmo é um condômino
             using (ApplicationContext db = new ApplicationContext())
             {
                 int empresaId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EMPRESA).valor);

@@ -2,13 +2,46 @@
 go
 
 alter table ticket
-add dt_avaliacao datetime null, ind_avaliacao char(1) null
+add dt_avaliacao datetime null
 
-select * from Ticket
+alter table ticket
+add remessaId nvarchar(12) null
 
+
+
+CREATE TABLE [dbo].[TicketExpurgo] (
+    [ticketId]         NVARCHAR (6)  NOT NULL,
+    [clienteId]        INT           NOT NULL,
+    [dt_compra]        SMALLDATETIME NOT NULL,
+    [dt_inscricao]     DATETIME      NOT NULL,
+    [score1Brasil]     INT           NULL,
+    [score1Croacia]    INT           NULL,
+    [score2Brasil]     INT           NULL,
+    [score2Mexico]     INT           NULL,
+    [score3Brasil]     INT           NULL,
+    [score3Camaroes]   INT           NULL,
+    [selecao1Id_Final] INT           NOT NULL,
+    [selecao2Id_Final] INT           NOT NULL,
+    [score1_final]     INT           NOT NULL,
+    [score2_final]     INT           NOT NULL,
+    [dt_avaliacao]     DATETIME      NULL,
+    [remessaId]        NVARCHAR (12) NULL,
+    CONSTRAINT [PK_TicketExpurgo] PRIMARY KEY CLUSTERED ([ticketId] ASC),
+    CONSTRAINT [FK_TicketExpurgo_Cliente] FOREIGN KEY ([clienteId]) REFERENCES [dbo].[Cliente] ([clienteId]),
+    CONSTRAINT [FK_TicketExpurgo_Selecao1] FOREIGN KEY ([selecao1Id_Final]) REFERENCES [dbo].[Selecao] ([selecaoId]),
+    CONSTRAINT [FK_TicketExpurgo_Selecao2] FOREIGN KEY ([selecao2Id_Final]) REFERENCES [dbo].[Selecao] ([selecaoId])
+);
+
+
+select * From Parametro
+
+select * from Ticket order by dt_inscricao desc
+delete from Ticket where score1Brasil is null
 
 select * from bolaco..Ticket
 order by dt_inscricao desc
+
+select * from Cliente where email = 'andreborgesleal@live.com'
 
 update bolaco..Selecao set nome = 'Bósnia' where selecaoId = 19
 select * from bolaco..Selecao

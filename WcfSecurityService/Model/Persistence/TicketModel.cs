@@ -100,11 +100,11 @@ namespace DWM.Models.Persistence
                               "<tr>" +
                               "<td style=\"width: 55%\">" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seus palpites:" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore1Brasil.ToString() + "</b> X <b>" + value.getScore1Croacia.ToString() + "</b> Croácia</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.score1Brasil.ToString() + "</b> X <b>" + value.score1Croacia.ToString() + "</b> Croácia</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore2Brasil.ToString() + "</b> X <b>" + value.getScore2Mexico.ToString() + "</b> México</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.score2Brasil.ToString() + "</b> X <b>" + value.score2Mexico.ToString() + "</b> México</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore3Brasil.ToString() + "</b> X <b>" + value.getScore3Camaroes.ToString() + "</b> Camarões</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.score3Brasil.ToString() + "</b> X <b>" + value.score3Camaroes.ToString() + "</b> Camarões</span></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Final da Copa Fifa 2014:" +
                               "<p></p>" +
@@ -137,8 +137,7 @@ namespace DWM.Models.Persistence
 
         public override Ticket MapToEntity(TicketViewModel value)
         {
-
-            Ticket t = new Ticket()
+            return new Ticket()
             {
                 ticketId = value.ticketId,
                 dt_compra = value.dt_compra,
@@ -155,30 +154,10 @@ namespace DWM.Models.Persistence
                 score1_final = value.score1_final,
                 score2_final = value.score2_final
             };
-
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2014-06-12 16:00"))
-            {
-                t.score1Brasil = -1;
-                t.score1Croacia = -1;
-            }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2014-06-17 15:00"))
-            {
-                t.score2Brasil = -1;
-                t.score2Mexico = -1;
-            }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2014-06-23 16:00"))
-            {
-                t.score3Brasil = -1;
-                t.score3Camaroes = -1;
-            }
-
-            return t;
         }
 
         public override TicketViewModel MapToRepository(Ticket entity)
         {
-            int _empresaId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EMPRESA).valor);
-
             ClienteViewModel clienteViewModel = (from cli in db.Clientes
                                                  where cli.clienteId == entity.clienteId 
                                                  select new ClienteViewModel() 
@@ -256,7 +235,6 @@ namespace DWM.Models.Persistence
                 dt_inscricao = entity.dt_inscricao,
                 dt_compra = entity.dt_compra,
                 clienteViewModel = clienteViewModel,
-                empresaId = _empresaId,
                 score1Brasil = entity.score1Brasil.Value,
                 bandeira_brasil = brasil.bandeira,
                 score1Croacia = entity.score1Croacia.Value,
@@ -544,7 +522,7 @@ namespace DWM.Models.Persistence
             string _bandeira_camaroes = db.Selecaos.Find(4).bandeira;
 
             IEnumerable<EstatisticaViewModel> est1 = from t in db.Tickets
-                                                     where t.score1Brasil >= 0 
+                                                     where t.score1Brasil.HasValue
                                                      group t by new { t.score1Brasil, t.score1Croacia } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -560,7 +538,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est2 = from t in db.Tickets
-                                                     where t.score2Brasil >= 0 
+                                                     where t.score2Brasil.HasValue
                                                      group t by new { t.score2Brasil, t.score2Mexico } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -576,7 +554,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est3 = from t in db.Tickets
-                                                     where t.score3Brasil >= 0 
+                                                     where t.score1Brasil.HasValue
                                                      group t by new { t.score3Brasil, t.score3Camaroes } into T
                                                      select new EstatisticaViewModel()
                                                      {

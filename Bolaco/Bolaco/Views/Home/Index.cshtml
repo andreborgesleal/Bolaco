@@ -105,7 +105,7 @@
                                                             </div>
                                                         </td>
                                                         <td style="text-align: left; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) < DateTime.Parse("2014-06-12 14:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-12 16:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score1Brasil, new { @class = "form-control input-sm" })    
                                                             }
@@ -118,7 +118,7 @@
                                                             X
                                                         </td>
                                                         <td style="text-align: left; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) < DateTime.Parse("2014-06-12 14:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-12 16:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score1Croacia, new { @class = "form-control input-sm" })
                                                             }
@@ -154,7 +154,7 @@
                                                             </div>
                                                         </td>
                                                         <td style="text-align: left; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 14:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 15:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score2Brasil, new { @class = "form-control input-sm" })
                                                             }
@@ -167,7 +167,7 @@
                                                             X
                                                         </td>
                                                         <td style="text-align: left; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 14:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 15:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score2Mexico, new { @class = "form-control input-sm" })
                                                             }
@@ -216,7 +216,7 @@
                                                             X
                                                         </td>
                                                         <td style="text-align: left; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 14:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 16:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score3Camaroes, new { @class = "form-control input-sm" })
                                                             }
@@ -237,7 +237,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        @if (DateTime.Today <= DateTime.Parse("2014-07-07"))
+                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-07-08 16:00"))
                                                         {
                                                             <td style="width: 20%; text-align: center">
                                                                 <b>Final da Copa</b>
@@ -650,7 +650,10 @@
                 <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
                     <div class="row">
                         <div class="col-md-offset-6" id="div-salvar">
-                            <input type="submit" value="Salvar" class="btn btn-warning" onclick="return Salvar()" />
+                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-07-08 16:00"))
+                            {
+                                <input type="submit" value="Salvar" class="btn btn-warning" onclick="return Salvar()" />
+                            }
                         </div>
                     </div>
                 </div>
@@ -749,12 +752,40 @@
         $("#_ticketId").val(jsonObj[index].ticketId);
         $("#_dt_compra").val(jsonObj[index].getDt_compra);
         $("#_dt_inscricao").val(jsonObj[index].getDt_inscricao);
-        $("#_score1Brasil").val(jsonObj[index].score1Brasil);
-        $("#_score2Brasil").val(jsonObj[index].score2Brasil);
-        $("#_score3Brasil").val(jsonObj[index].score3Brasil);
-        $("#_score1Croacia").val(jsonObj[index].score1Croacia);
-        $("#_score2Mexico").val(jsonObj[index].score2Mexico);
-        $("#_score3Camaroes").val(jsonObj[index].score3Camaroes);
+
+        if (jsonObj[index].score1Brasil != "-1")
+        {
+            $("#_score1Brasil").val(jsonObj[index].score1Brasil);
+            $("#_score1Croacia").val(jsonObj[index].score1Croacia);
+        }
+        else
+        {
+            $("#_score1Brasil").val("-");
+            $("#_score1Croacia").val("-");
+        }
+        
+        if (jsonObj[index].score2Brasil != "-1")
+        {
+            $("#_score2Brasil").val(jsonObj[index].score2Brasil);
+            $("#_score2Mexico").val(jsonObj[index].score2Mexico);
+        }
+        else
+        {
+            $("#_score2Brasil").val("-");
+            $("#_score2Mexico").val("-");
+        }
+
+        if (jsonObj[index].score3Brasil != "-1")
+        {
+            $("#_score3Brasil").val(jsonObj[index].score3Brasil);
+            $("#_score3Camaroes").val(jsonObj[index].score3Camaroes);
+        }
+        else
+        {
+            $("#_score3Brasil").val("-");
+            $("#_score3Camaroes").val("-");
+        }
+
         $("#_selecao1_final").val(jsonObj[index].nome_selecao1Final);
         $("#_selecao2_final").val(jsonObj[index].nome_selecao2Final);
         $("#_score1_final").val(jsonObj[index].score1_final);

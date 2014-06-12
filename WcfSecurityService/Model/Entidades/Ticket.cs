@@ -55,7 +55,7 @@ namespace DWM.Models.Entidades
         [DisplayName("Dt_Avaliacao")]
         public System.Nullable<DateTime> dt_avaliacao { get; set; }
 
-        [DisplayName("RemessaId")]
-        public string remessaId { get; set; }
+        [DisplayName("Ind_Avalacao")]
+        public string ind_avaliacao { get; set; }
     }
 }

@@ -43,74 +43,26 @@ namespace DWM.Models.Repositories
         [DisplayName("Brasil")]
         public int score1Brasil { get; set; }
 
-        public string getScore1Brasil 
-        { 
-            get
-            {
-                return score1Brasil == -1 ? "-" : score1Brasil.ToString();
-            } 
-        }
-
         public string bandeira_brasil { get; set; }
 
         [DisplayName("Croácia")]
         public int score1Croacia { get; set; }
-
-        public string getScore1Croacia
-        {
-            get
-            {
-                return score1Croacia == -1 ? "-" : score1Croacia.ToString();
-            }
-        }
 
         public string bandeira_croacia { get; set; }
 
         [DisplayName("Brasil")]
         public int score2Brasil { get; set; }
 
-        public string getScore2Brasil
-        {
-            get
-            {
-                return score2Brasil == -1 ? "-" : score2Brasil.ToString();
-            }
-        }
-
         [DisplayName("México")]
         public int score2Mexico { get; set; }
-
-        public string getScore2Mexico
-        {
-            get
-            {
-                return score2Mexico == -1 ? "-" : score2Mexico.ToString();
-            }
-        }
 
         public string bandeira_mexico { get; set; }
 
         [DisplayName("Brasil")]
         public int score3Brasil { get; set; }
 
-        public string getScore3Brasil
-        {
-            get
-            {
-                return score3Brasil == -1 ? "-" : score3Brasil.ToString();
-            }
-        }
-
         [DisplayName("Camarões")]
         public int score3Camaroes { get; set; }
-
-        public string getScore3Camaroes
-        {
-            get
-            {
-                return score3Camaroes == -1 ? "-" : score3Camaroes.ToString();
-            }
-        }
 
         public string bandeira_camaroes { get; set; }
 
@@ -137,8 +89,8 @@ namespace DWM.Models.Repositories
         [DisplayName("Dt.Avaliação")]
         public System.Nullable<DateTime> dt_avaliacao { get; set; }
 
-        [DisplayName("Remessa ID")]
-        public string remessaId { get; set; }
+        [DisplayName("Ind.Avaliação")]
+        public string ind_avaliacao { get; set; }
 
         [DisplayName("Palpites do cliente")]
         public IEnumerable<TicketViewModel> Palpites { get; set; }
