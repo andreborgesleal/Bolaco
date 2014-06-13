@@ -1,6 +1,10 @@
 ﻿use bolaco
 go
 
+select * from parametro
+update parametro set valor = 3 where paramId = 10
+update Parametro set valor = 1 where paramId = 11
+
 alter table ticket
 add dt_avaliacao datetime null
 

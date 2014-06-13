@@ -614,4 +614,31 @@ namespace DWM.Models.Persistence
         }
         #endregion
     }
+
+    public class ListViewGanhadoresBrasilxCroacia : ListViewRepository<TicketViewModel, ApplicationContext>
+    {
+        #region Métodos da classe ListViewRepository
+        public override IEnumerable<TicketViewModel> Bind(int? index, int pageSize = 50, params object[] param)
+        {
+            IEnumerable<TicketViewModel> result = (from t in db.Tickets
+                                                   join c in db.Clientes on t.clienteId equals c.clienteId
+                                                   where t.score1Brasil == 3 && t.score1Croacia == 1
+                                                   orderby c.nome
+                                                   select new TicketViewModel()
+                                                   {
+                                                       clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                       ticketId = t.ticketId,
+                                                       dt_inscricao = t.dt_inscricao
+                                                   }).ToList();
+
+            return result.ToList();
+        }
+
+        public override Repository getRepository(Object id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
+
 }

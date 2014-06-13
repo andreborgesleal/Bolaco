@@ -10,6 +10,8 @@ using App_Dominio.Contratos;
 using App_Dominio.Enumeracoes;
 using DWM.Models;
 using DWM.Models.Persistence;
+using System.Collections.Generic;
+using DWM.Models.Repositories;
 
 namespace Bolaco.Controllers
 {
@@ -36,6 +38,10 @@ namespace Bolaco.Controllers
             EmpresaSecurity<App_DominioContext> login = new EmpresaSecurity<App_DominioContext>();
             if (System.Web.HttpContext.Current != null)
                 login.EncerrarSessao(System.Web.HttpContext.Current.Session.SessionID);
+
+            ListViewGanhadoresBrasilxCroacia list = new ListViewGanhadoresBrasilxCroacia();
+            IPagedList pagedList = list.getPagedList(0, 200);
+            ViewBag.Ganhadores = pagedList;
 
             return View();
         }
