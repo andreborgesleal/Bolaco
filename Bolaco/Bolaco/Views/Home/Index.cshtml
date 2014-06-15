@@ -63,8 +63,11 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5" id="navegador_ie">
-                                                            <div class="input-group col-md-5">
-                                                                @Html.EditorFor(info => info.dt_compra, "DATE", new { identificador = "dt_compra", readOnly = "false" })
+                                                            <div class="input-group col-md-12">
+                                                                @Html.DropDownList("dia", DWM.Models.Enumeracoes.BindDropDownList.CalendarDay(""), new { @class = "col-md-4"})
+                                                                @Html.DropDownList("mes", DWM.Models.Enumeracoes.BindDropDownList.CalendarMonth(""), new { @class = "col-md-4" })
+                                                                @Html.DropDownList("ano", DWM.Models.Enumeracoes.BindDropDownList.CalendarYear(""), new { @class = "col-md-4" })
+                                                                @Html.HiddenFor(info => info.dt_compra)
                                                             </div>  
                                                         </div>
                                                     </div>
@@ -693,17 +696,48 @@
 
     function Salvar()
     {
-        if ($("#ticketId").val() != "" && $("#ticketId").val().length == 6 && $("#dt_compra").val() != "" && $("#selecao1Id_final").val() != "" && $("#selecao2Id_final").val() != "")
+        if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) // chrome
         {
-            CarregandoIn();
-            return true;
+            if ($("#ticketId").val() != "" && $("#ticketId").val().length == 6 && $("#dt_compra").val() != "" && $("#selecao1Id_final").val() != "" && $("#selecao2Id_final").val() != "")
+            {
+                if ($("#ticketId").val().substring(0,2).toUpperCase() != 'MT' && $("#ticketId").val().substring(0,2).toUpperCase() != 'CT' && $("#ticketId").val().substring(0,2).toUpperCase() != 'BR' )
+                {
+                    ShowMessageAlert("Número da Sorte inválido.","warning")
+                    return false;
+                }
+                CarregandoIn();
+                return true;
+            }
+            else
+            {
+                ShowMessageAlert("Existem campos que precisam ser preenchidos antes de salvar o palpite","warning")
+                return false;
+            }
         }
-        else
+        else // ie
         {
-            ShowMessageAlert("Existem campos que precisam ser preenchidos antes de salvar o palpite","warning")
-            return false;
+            if ($("#dia").val() == "" || $("#mes").val() == "" || $("#ano").val() == "")
+            {
+                ShowMessageAlert("Informe a data da compra para confirmar seu palpite","warning");
+                return false;
+            }
+            else if ($("#ticketId").val() != "" && $("#ticketId").val().length == 6 && $("#dt_compra").val() != "" && $("#selecao1Id_final").val() != "" && $("#selecao2Id_final").val() != "")
+            {
+                if ($("#ticketId").val().substring(0,2).toUpperCase() != 'MT' && $("#ticketId").val().substring(0,2).toUpperCase() != 'CT' && $("#ticketId").val().substring(0,2).toUpperCase() != 'BR' )
+                {
+                    ShowMessageAlert("Número da Sorte inválido.","warning")
+                    return false;
+                }                    
+                $("#dt_compra").val($("#ano").val() + "-" + $("#mes").val() + "-" + $("#dia").val());
+                CarregandoIn();
+                return true;
+            }
+            else
+            {
+                ShowMessageAlert("Existem campos que precisam ser preenchidos antes de salvar o palpite","warning")
+                return false;
+            }
         }
-            
     }
 
     $('.form-control').keypress(function (e) {

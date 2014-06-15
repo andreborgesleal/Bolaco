@@ -438,7 +438,7 @@ namespace DWM.Models.Persistence
                                                  bandeira = sel.bandeira
                                              }).FirstOrDefault();
 
-                DateTime _dt_compra = DateTime.Today;
+                DateTime _dt_compra = new DateTime();
                 string _ticketId = "";
                 int _score1Brasil = 0;
                 int _score2Brasil = 0;
@@ -453,31 +453,41 @@ namespace DWM.Models.Persistence
 
                 if (Request != null)
                 {
-                    if (Request ["dt_compra"].ToString() != "")
-                        _dt_compra = DateTime.Parse(Request["dt_compra"].ToString().Substring(0,10));
+                    if (Request ["dt_compra"] != null && Request ["dt_compra"].ToString() != "")
+                        try
+                        {
+                            _dt_compra = DateTime.Parse(Request["dt_compra"].Substring(0, 4) + "-" +
+                                                        Request["dt_compra"].Substring(5, 2) + "-" +
+                                                        Request["dt_compra"].Substring(8, 2));
 
-                    if (Request["ticketId"] != "")
+                        }
+                        catch
+                        {
+                            _dt_compra = new DateTime();
+                        }
+
+                    if (Request["ticketId"] != null && Request["ticketId"] != "")
                         _ticketId = Request["ticketId"];
 
-                    if (Request["score1Brasil"] != "")
+                    if (Request["score1Brasil"] != null && Request["score1Brasil"] != "")
                         _score1Brasil = int.Parse(Request["score1Brasil"]);
 
-                    if (Request["score2Brasil"] != "")
+                    if (Request["score2Brasil"] != null && Request["score2Brasil"] != "")
                         _score2Brasil = int.Parse(Request["score2Brasil"]);
 
-                    if (Request["score3Brasil"] != "")
+                    if (Request["score3Brasil"] != null && Request["score3Brasil"] != "")
                         _score3Brasil = int.Parse(Request["score3Brasil"]);
 
-                    if (Request["score1_final"] != "")
+                    if (Request["score1_final"] != null && Request["score1_final"] != "")
                         _score1_final = int.Parse(Request["score1_final"]);
 
-                    if (Request["score2_final"] != "")
+                    if (Request["score2_final"] != null && Request["score2_final"] != "")
                         _score2_final = int.Parse(Request["score2_final"]);
                 }
 
                 return new TicketViewModel()
                 {
-                    dt_compra = _dt_compra,
+                    dt_compra = _dt_compra ,
                     ticketId = _ticketId,
                     score1Brasil = _score1Brasil,
                     score2Brasil = _score2Brasil,
@@ -615,21 +625,114 @@ namespace DWM.Models.Persistence
         #endregion
     }
 
-    public class ListViewGanhadoresBrasilxCroacia : ListViewRepository<TicketViewModel, ApplicationContext>
+    public class ListViewGanhadores : ListViewRepository<TicketViewModel, ApplicationContext>
     {
         #region Métodos da classe ListViewRepository
         public override IEnumerable<TicketViewModel> Bind(int? index, int pageSize = 50, params object[] param)
         {
+            int _Score1Brasil = -2;
+            int _Score1Croacia = -2;
+            int _Score2Brasil = -2;
+            int _Score2Mexico = -2;
+            int _Score3Brasil = -2;
+            int _Score3Camaroes = -2;
+            int _Selecao1_final = -2;
+            int _Selecao2_final = -2;
+            int _Score1_final = -2;
+            int _Score2_final = -2;
+            
+            if (db.Parametros.Find(10).valor != "")
+                _Score1Brasil = int.Parse(db.Parametros.Find(10).valor);
+
+            if (db.Parametros.Find(11).valor != "")
+                _Score1Croacia = int.Parse(db.Parametros.Find(11).valor);
+
+            if (db.Parametros.Find(12).valor != "")
+                _Score2Brasil = int.Parse(db.Parametros.Find(12).valor);
+
+            if (db.Parametros.Find(13).valor != "")
+                _Score2Mexico = int.Parse(db.Parametros.Find(13).valor);
+
+            if (db.Parametros.Find(14).valor != "")
+                _Score3Brasil = int.Parse(db.Parametros.Find(14).valor);
+
+            if (db.Parametros.Find(15).valor != "")
+                _Score3Camaroes = int.Parse(db.Parametros.Find(15).valor);
+
+            if (db.Parametros.Find(16).valor != "")
+                _Score1_final = int.Parse(db.Parametros.Find(16).valor);
+
+            if (db.Parametros.Find(17).valor != "")
+                _Score2_final = int.Parse(db.Parametros.Find(17).valor);
+
+            if (db.Parametros.Find(18).valor != "")
+                _Selecao1_final = int.Parse(db.Parametros.Find(18).valor);
+
+            if (db.Parametros.Find(19).valor != "")
+                _Selecao2_final = int.Parse(db.Parametros.Find(19).valor);
+
             IEnumerable<TicketViewModel> result = (from t in db.Tickets
                                                    join c in db.Clientes on t.clienteId equals c.clienteId
-                                                   where t.score1Brasil == 3 && t.score1Croacia == 1
+                                                   where t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia
                                                    orderby c.nome
                                                    select new TicketViewModel()
                                                    {
                                                        clienteViewModel = new ClienteViewModel() { nome = c.nome },
                                                        ticketId = t.ticketId,
-                                                       dt_inscricao = t.dt_inscricao
-                                                   }).ToList();
+                                                       dt_inscricao = t.dt_inscricao,
+                                                       score1Brasil = -2
+                                                   }).ToList().Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico
+                                                     orderby c.nome
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -3
+                                                     }).ToList()
+                                                    ).Union(
+                                                   (from t in db.Tickets
+                                                    join c in db.Clientes on t.clienteId equals c.clienteId
+                                                    where t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes
+                                                    orderby c.nome
+                                                    select new TicketViewModel()
+                                                    {
+                                                        clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                        ticketId = t.ticketId,
+                                                        dt_inscricao = t.dt_inscricao,
+                                                        score1Brasil = -4
+                                                    }).ToList()
+                                                    ).Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
+                                                           t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico &&
+                                                           t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes
+                                                     orderby c.nome
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -5
+                                                     }).ToList()
+                                                    ).Union(
+                                                     (from t in db.Tickets
+                                                      join c in db.Clientes on t.clienteId equals c.clienteId
+                                                      where (t.selecao1Id_Final == _Selecao1_final  && t.selecao2Id_Final == _Selecao2_final) ||
+                                                            (t.selecao1Id_Final == _Selecao2_final && t.selecao2Id_Final == _Selecao1_final)
+                                                      orderby t.dt_inscricao
+                                                      select new TicketViewModel()
+                                                      {
+                                                          clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                          ticketId = t.ticketId,
+                                                          dt_inscricao = t.dt_inscricao,
+                                                          score1Brasil = -6
+                                                      }).ToList()
+                                                    ).ToList();
 
             return result.ToList();
         }
@@ -641,4 +744,28 @@ namespace DWM.Models.Persistence
         #endregion
     }
 
+    public class ListViewParametros : ListViewRepository<ParametroViewModel, ApplicationContext>
+    {
+        #region Métodos da classe ListViewRepository
+        public override IEnumerable<ParametroViewModel> Bind(int? index, int pageSize = 50, params object[] param)
+        {
+
+            IEnumerable<ParametroViewModel> Parametros = (from p in db.Parametros
+                                                          select new ParametroViewModel()
+                                                          {
+                                                              paramId = p.paramId,
+                                                              valor = p.valor
+                                                          }).ToList();
+
+
+            return Parametros;
+        }
+
+
+        public override Repository getRepository(Object id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
 }

@@ -58,7 +58,6 @@ namespace Bolaco.Controllers
                         //value.uri = this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
 
                         #region BeforeCreate
-
                         #endregion
 
                         TicketModel model = new TicketModel();
@@ -94,12 +93,19 @@ namespace Bolaco.Controllers
                     }
                 else
                 {
+                    TicketModel model = new TicketModel();
+                    value = model.CreateRepository(Request);
+
                     value.mensagem = new Validate()
                     {
                         Code = 999,
                         Message = MensagemPadrao.Message(999).ToString(),
                         MessageBase = ModelState.Values.Where(erro => erro.Errors.Count > 0).First().Errors[0].ErrorMessage
                     };
+
+                    if (value.mensagem.MessageBase.Contains("is not valid for Dt.Compra."))
+                        value.mensagem.MessageBase = "Data da compra inválida";
+
                     ModelState.AddModelError("", value.mensagem.Message); // mensagem amigável ao usuário
                     Attention(value.mensagem.MessageBase);
                 }

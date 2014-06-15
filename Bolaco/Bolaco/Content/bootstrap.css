@@ -3937,11 +3937,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #406546;
-  border-color: #911821;
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
 }
 .navbar-default .navbar-brand {
-  color: #ffffff;
+  color: #000;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
@@ -3952,18 +3953,18 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #bbbbbb;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #ffffff;
+  color: #000;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #ffffff;
-  background-color: #d92432;
+  color: #fff;
+  background-color: #406546;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #ffffff;
-  background-color: #d92432;
+  color: #fff;
+  background-color: #406546;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
@@ -3972,11 +3973,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-toggle {
-  border-color: #d92432;
+  border-color: #406546;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #d92432;
+  background-color: #406546;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ffffff;
@@ -3988,8 +3989,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #d92432;
-  color: #ffffff;
+  background-color: #406546;
+  color: #fff;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -3997,14 +3998,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ffffff;
-    background-color: #d92432;
+    color: #fff;
+    background-color: #406546;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ffffff;
-    background-color: #d92432;
+    color: #fff;
+    background-color: #406546;
   }
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,

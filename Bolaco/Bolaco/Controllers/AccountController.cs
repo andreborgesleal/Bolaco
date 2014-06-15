@@ -39,9 +39,13 @@ namespace Bolaco.Controllers
             if (System.Web.HttpContext.Current != null)
                 login.EncerrarSessao(System.Web.HttpContext.Current.Session.SessionID);
 
-            ListViewGanhadoresBrasilxCroacia list = new ListViewGanhadoresBrasilxCroacia();
-            IPagedList pagedList = list.getPagedList(0, 200);
-            ViewBag.Ganhadores = pagedList;
+            ListViewGanhadores list = new ListViewGanhadores();
+            IEnumerable<TicketViewModel> Ganhadores = (IEnumerable<TicketViewModel>)list.ListRepository(0, 200);
+            ViewBag.Ganhadores = Ganhadores;
+
+            ListViewParametros _parametros = new ListViewParametros();
+            IEnumerable<ParametroViewModel> Parametros = (IEnumerable<ParametroViewModel>)_parametros.ListRepository(0, 200);
+            ViewBag.Parametros = Parametros;
 
             return View();
         }

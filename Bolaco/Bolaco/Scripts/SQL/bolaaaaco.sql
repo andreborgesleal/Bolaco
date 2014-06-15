@@ -1,9 +1,18 @@
 ﻿use bolaco
 go
 
+select * from Ticket
+select * from selecao
 select * from parametro
 update parametro set valor = 3 where paramId = 10
 update Parametro set valor = 1 where paramId = 11
+
+update parametro set valor = 2 where paramId = 12
+update Parametro set valor = 0 where paramId = 13
+
+update parametro set valor = 2 where paramId = 14
+update Parametro set valor = 1 where paramId = 15
+
 
 alter table ticket
 add dt_avaliacao datetime null
