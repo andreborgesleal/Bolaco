@@ -150,7 +150,7 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="text-align: left; width: 5%">
+                                                        <td style="text-align: center; width: 5%">
                                                             @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 15:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score2Brasil, new { @class = "form-control input-sm" })
@@ -163,7 +163,7 @@
                                                         <td style="text-align: center; width: 5%">
                                                             X
                                                         </td>
-                                                        <td style="text-align: left; width: 5%">
+                                                        <td style="text-align: center; width: 5%">
                                                             @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 15:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score2Mexico, new { @class = "form-control input-sm" })
@@ -199,8 +199,8 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="text-align: left; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 14:00"))
+                                                        <td style="text-align: center; width: 5%">
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 16:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score3Brasil, new { @class = "form-control input-sm" })
                                                             }
@@ -212,7 +212,7 @@
                                                         <td style="text-align: center; width: 5%">
                                                             X
                                                         </td>
-                                                        <td style="text-align: left; width: 5%">
+                                                        <td style="text-align: center; width: 5%">
                                                             @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 16:00"))
                                                             {
                                                                 @Html.TextBoxFor(m => m.score3Camaroes, new { @class = "form-control input-sm" })
@@ -242,13 +242,13 @@
                                                             <td style="width: 21%; text-align: right">
                                                                 @Html.DropDownList("selecao1Id_final", new DWM.Models.Enumeracoes.BindDropDownList().Selecao("Seleção...", ""), new { @class = "form-control input-sm", @style = "text-align: right" })
                                                             </td>
-                                                            <td style="text-align: left; width: 5%">
+                                                            <td style="text-align: center; width: 5%">
                                                                 @Html.TextBoxFor(m => m.score1_final, new { @class = "form-control input-sm" })
                                                             </td>
                                                             <td style="text-align: center; width: 5%">
                                                                 X
                                                             </td>
-                                                            <td style="text-align: left; width: 5%">
+                                                            <td style="text-align: center; width: 5%">
                                                                 @Html.TextBoxFor(m => m.score2_final, new { @class = "form-control input-sm" })
                                                             </td>
                                                             <td style="width: 21%; text-align: left">
@@ -263,13 +263,13 @@
                                                             <td style="width: 21%; text-align: right">
                                                                 <b>@Model.Parametros.Where(info => info.paramId == 18).FirstOrDefault().valor</b>
                                                             </td>
-                                                            <td style="text-align: left; width: 5%">
+                                                            <td style="text-align: center; width: 5%">
                                                                 <b>@Model.Parametros.Where(info => info.paramId == 16).FirstOrDefault().valor</b>
                                                             </td>
                                                             <td style="text-align: center; width: 5%">
                                                                 X
                                                             </td>
-                                                            <td style="text-align: left; width: 5%">
+                                                            <td style="text-align: center; width: 5%">
                                                                 <b>@Model.Parametros.Where(info => info.paramId == 17).FirstOrDefault().valor</b>
                                                             </td>
                                                             <td style="width: 21%; text-align: left">

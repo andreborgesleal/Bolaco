@@ -204,19 +204,7 @@ namespace DWM.Models.Enumeracoes
         public static IEnumerable<SelectListItem> CalendarYear(string selectedValue = "", string header = "")
         {
             List<SelectListItem> drp = new List<SelectListItem>() { 
-                new SelectListItem() { Value = "", Text = "aaaa" }, 
                 new SelectListItem() { Value = "2014", Text = "2014" }, 
-                new SelectListItem() { Value = "2015", Text = "2015" }, 
-                new SelectListItem() { Value = "2016", Text = "2016" }, 
-                new SelectListItem() { Value = "2017", Text = "2017" },  
-                new SelectListItem() { Value = "2018", Text = "2018" },  
-                new SelectListItem() { Value = "2019", Text = "2019" },  
-                new SelectListItem() { Value = "2020", Text = "2020" },  
-                new SelectListItem() { Value = "2021", Text = "2021" },  
-                new SelectListItem() { Value = "2022", Text = "2022" },  
-                new SelectListItem() { Value = "2023", Text = "2023" },  
-                new SelectListItem() { Value = "2024", Text = "2024" },  
-                new SelectListItem() { Value = "2025", Text = "2025" },  
             };
 
             return Funcoes.SelectListEnum(drp, selectedValue, header);
