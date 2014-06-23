@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using App_Dominio.Component;
-using System;
-using System.Collections.Generic;
+﻿using App_Dominio.Component;
 
 namespace DWM.Models.Repositories
 {

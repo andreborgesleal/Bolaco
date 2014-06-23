@@ -1,5 +1,98 @@
-﻿use bolaco
+﻿use seguranca
 go
+
+select * From usuario where login = 'marcelo.pirlimpimpim@uol.com.br'
+
+select * from GrupoTransacao where grupoId = 15
+select * from Usuario where usuarioId = 90
+select * from UsuarioGrupo where grupoId = 15
+select * from UsuarioGrupo where usuarioId = 5185
+select * From UsuarioGrupo where usuarioId = 90
+select * From UsuarioGrupo where usuarioId = 1121
+
+select * from Grupo where empresaId = 4
+select * from Empresa where nome like '%Norte%'
+select * from Sistema
+select * from Transacao where sistemaId = (select sistemaId from Sistema where nome='Bolaaaaço da Norte Refrigeração')
+select * from Usuario where login = 'andreborgesleal@live.com' and empresaId = 4
+select * from Usuario where login = 'marcelo.pirlimpimpim@uol.com.br' and empresaId = 4
+select * From Bolaco..Cliente where nome like '%Borges Leal%'
+
+update Usuario set senha = '6ED5833CF35286EBF8662B7B5949F0D742BBEC3F' where usuarioId = 90 
+
+
+select * from cliente order by 1 desc
+
+begin tran
+declare @transacaoId int
+declare @sistemaId int 
+declare @grupoId int
+declare @grupoClienteId int
+declare @usuarioId int
+declare @empresaId int
+
+select @empresaId = empresaId from Empresa where nome like '%Nortte%'
+select @sistemaId = sistemaId from Sistema where nome='Bolaaaaço da Norte Refrigeração'
+select @grupoId = grupoId from Grupo where sistemaId = @sistemaId and descricao = 'Administração'
+select @grupoClienteId = grupoId from Grupo where sistemaId = @sistemaId and descricao = 'Cliente'
+select @transacaoId = Max(transacaoId) + 1 from Transacao
+select @usuarioId = usuarioId from Usuario where login = 'andreborgesleal@live.com' and empresaId = @empresaId
+
+insert into Transacao values(@transacaoId, @sistemaId, null, 'Resumo Gerencial', 'Resumo Gerencial', 'Resumo Gerencial', 'Link', 'N', null, 'Home/ResumoGerencial', null)
+insert into GrupoTransacao values(@grupoId, @transacaoId, 'A')
+
+select @usuarioId = usuarioId from Usuario where login = 'wilson@norterefrigeracao.com.br'
+insert into UsuarioGrupo values(@usuarioId, @grupoId, 'A')
+
+--select @usuarioId = usuarioId from Usuario where login = 'andreborgesleal@live.com' and empresaId = @empresaId
+--insert into UsuarioGrupo values(@usuarioId, @grupoClienteId, 'A')
+
+select * From Usuario where login = 'wilson@norterefrigeracao.com.br'
+select * from Transacao where sistemaId = (select sistemaId from Sistema where nome='Bolaaaaço da Norte Refrigeração')
+select * from GrupoTransacao where grupoId = @grupoId
+select * From UsuarioGrupo where grupoId = @grupoId
+
+rollback Tran
+
+commit
+
+select * From CLiente
+use bolaco
+go
+
+USE [bolaco]
+GO
+
+/****** Object:  Table [dbo].[Ticket_Expurgo]    Script Date: 22/06/2014 13:39:11 ******/
+CREATE TABLE [dbo].[Ticket_Expurgo](
+	[sequencial] [int] IDENTITY(1,1) NOT NULL,
+	[ticketId] [nvarchar](6) NOT NULL,
+	[clienteId] [int] NOT NULL,
+	[dt_compra] [smalldatetime] NOT NULL,
+	[dt_inscricao] [datetime] NOT NULL,
+	[score1Brasil] [int] NULL,
+	[score1Croacia] [int] NULL,
+	[score2Brasil] [int] NULL,
+	[score2Mexico] [int] NULL,
+	[score3Brasil] [int] NULL,
+	[score3Camaroes] [int] NULL,
+	[selecao1Id_Final] [int] NOT NULL,
+	[selecao2Id_Final] [int] NOT NULL,
+	[score1_final] [int] NOT NULL,
+	[score2_final] [int] NOT NULL,
+ CONSTRAINT [PK_Ticket_Expurgo] PRIMARY KEY CLUSTERED 
+(
+	[sequencial] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
+
+
+select Convert(varchar(10), dt_inscricao, 103) "Dt.Palpite", count(*) "Qte" from ticket 
+group by Convert(varchar(10), dt_inscricao, 103)
+order by Cast(Substring(Convert(varchar(10), dt_inscricao, 103),7,4) + Substring(Convert(varchar(10), dt_inscricao, 103),4,2) + Substring(Convert(varchar(10), dt_inscricao, 103), 1,2) as datetime) desc
+
 
 select * from Ticket order by dt_inscricao desc
 select * from selecao

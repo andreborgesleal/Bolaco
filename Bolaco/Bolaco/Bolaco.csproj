@@ -184,6 +184,7 @@
     <Compile Include="Models\Entidades\Parametro.cs" />
     <Compile Include="Models\Entidades\Selecao.cs" />
     <Compile Include="Models\Entidades\Ticket.cs" />
+    <Compile Include="Models\Entidades\Ticket_Expurgo.cs" />
     <Compile Include="Models\Enumeracoes\BindDropDownList.cs" />
     <Compile Include="Models\Enumeracoes\Enumeradores.cs" />
     <Compile Include="Models\Enumeracoes\DWMEnum.cs" />
@@ -198,6 +199,12 @@
     <Compile Include="Models\Repositories\ClienteViewModel.cs" />
     <Compile Include="Models\Repositories\EstatisticaViewModel.cs" />
     <Compile Include="Models\Repositories\ParametroViewModel.cs" />
+    <Compile Include="Models\Repositories\ResumoGerencial1ViewModel.cs" />
+    <Compile Include="Models\Repositories\ResumoGerencial2ViewModel.cs" />
+    <Compile Include="Models\Repositories\ResumoGerencial3ViewModel.cs" />
+    <Compile Include="Models\Repositories\ResumoGerencial4ViewModel.cs" />
+    <Compile Include="Models\Repositories\ResumoGerencial5ViewModel.cs" />
+    <Compile Include="Models\Repositories\ResumoGerencialViewModel.cs" />
     <Compile Include="Models\Repositories\SelecaoViewModel.cs" />
     <Compile Include="Models\Repositories\TicketViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -370,6 +377,7 @@
     <None Include="Properties\PublishProfiles\bolaco - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\bolaco - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\bolaco.pubxml" />
+    <Content Include="Views\Home\ResumoGerencial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

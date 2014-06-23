@@ -33,6 +33,7 @@ namespace DWM.Models.Entidades
         public string cep { get; set; }
         [DisplayName("Usuario")]
         public int usuarioId { get; set; }
-
+        [DisplayName("Dt_Cadastro")]
+        public DateTime dt_cadastro { get; set; }
     }
 }

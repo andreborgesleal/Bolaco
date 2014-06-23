@@ -11,6 +11,7 @@ using App_Dominio.Component;
 using System.Net.Mail;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity.SqlServer;
 
 namespace DWM.Models.Persistence
 {
@@ -735,6 +736,98 @@ namespace DWM.Models.Persistence
                                                     ).ToList();
 
             return result.ToList();
+        }
+
+        public override Repository getRepository(Object id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
+
+    public class ListViewResumoGerencial : ListViewRepository<ResumoGerencialViewModel, ApplicationContext>
+    {
+        #region Métodos da classe ListViewRepository
+        public override IEnumerable<ResumoGerencialViewModel> Bind(int? index, int pageSize = 50, params object[] param)
+        {
+            IEnumerable<ResumoGerencial1ViewModel> r1 = (from t in db.Tickets
+                                                        group t by t.ticketId.Substring(0, 2) into T
+                                                        orderby T.Count()
+                                                        select new ResumoGerencial1ViewModel()
+                                                        {
+                                                            loja = T.Key,
+                                                            qte_palpites = T.Count()
+                                                        }).ToList();
+
+            IEnumerable<ResumoGerencial2ViewModel> r2 = (from t in
+                                                            (from t1 in db.Tickets
+                                                             group t1 by new { loja = t1.ticketId.Substring(0, 2), clienteId = t1.clienteId } into T1
+                                                             select new
+                                                             {
+                                                                 loja = T1.Key.loja,
+                                                                 clienteId = T1.Key.clienteId
+                                                             })
+                                                        group t by t.loja into T
+                                                        orderby T.Count()
+                                                        select new ResumoGerencial2ViewModel()
+                                                        {
+                                                            loja = T.Key,
+                                                            qte_cadastros = T.Count()
+                                                        }).ToList();
+
+            IEnumerable<int> exp = db.Ticket_Expurgos.Select(info => info.clienteId).ToList();
+
+            IEnumerable<ResumoGerencial3ViewModel> r3 = (from c in db.Clientes
+                                                        join t in db.Tickets on c.clienteId equals t.clienteId into T
+                                                        from t in T.DefaultIfEmpty()
+                                                        where t.ticketId == null && !exp.Contains(c.clienteId)
+                                                        select new ResumoGerencial3ViewModel()
+                                                        {
+                                                            nome = c.nome,
+                                                            email = c.email,
+                                                            dt_cadastro = c.dt_cadastro
+                                                        }).ToList();
+
+            IEnumerable<ResumoGerencial4ViewModel> r4 = (from t in db.Tickets
+                                                         group t by new
+                                                         {
+                                                             ano = SqlFunctions.DatePart("year", t.dt_inscricao),
+                                                             mes = SqlFunctions.DatePart("month", t.dt_inscricao),
+                                                             dia = SqlFunctions.DatePart("day", t.dt_inscricao)
+                                                         } into T
+                                                         select new ResumoGerencial4ViewModel()
+                                                         {
+                                                             dia = T.Key.dia.Value,
+                                                             mes = T.Key.mes.Value,
+                                                             ano = T.Key.ano.Value,
+                                                             qte_palpites = T.Count()
+                                                         }).ToList();
+
+
+            ResumoGerencial5ViewModel r5 = new ResumoGerencial5ViewModel()
+            {
+                total_dias = r4.Count(), // (from t in db.Tickets group t by t.dt_inscricao into T select T.Key).Count(),
+                total_cadastros = db.Clientes.Count(),
+                total_palpites = db.Tickets.Count(),
+            };
+
+            r5.media_diaria_palpite = r5.total_palpites / r5.total_dias;
+
+
+            ResumoGerencialViewModel r = new ResumoGerencialViewModel()
+            {
+                resumo1 = r1.ToList(),
+                resumo2 = r2.ToList(),
+                resumo3 = r3.ToList(),
+                resumo4 = r4.ToList(),
+                resumo5 = r5
+            };
+
+            IList<ResumoGerencialViewModel> result = new List<ResumoGerencialViewModel>();
+
+            result.Add(r);
+
+            return result;
         }
 
         public override Repository getRepository(Object id)

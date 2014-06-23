@@ -142,6 +142,22 @@ namespace Bolaco.Controllers
             return View();
         }
 
+        [AuthorizeFilter]
+        public ActionResult ResumoGerencial()
+        {
+            if (ViewBag.ValidateRequest)
+            {
+                ListViewResumoGerencial resumo = new ListViewResumoGerencial();
+
+                ResumoGerencialViewModel repository = ((IEnumerable<ResumoGerencialViewModel>)resumo.ListRepository(null)).FirstOrDefault();
+
+                return View(repository);
+            }
+            else
+                return View();
+
+        }
+
         #region Alerta - segurança
         public ActionResult ReadAlert(int? alertaId)
         {

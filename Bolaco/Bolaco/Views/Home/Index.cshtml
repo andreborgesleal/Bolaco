@@ -1,7 +1,12 @@
-﻿@model DWM.Models.Repositories.TicketViewModel
+﻿@using App_Dominio.Security;
+@using App_Dominio.Entidades;
+@using App_Dominio.Repositories;
+@model DWM.Models.Repositories.TicketViewModel
 @{
     Layout = "~/Views/Shared/_LayoutPalpite.cshtml";
     ViewBag.Title = "Log in";
+    EmpresaSecurity<App_DominioContext> security = new EmpresaSecurity<App_DominioContext>();
+    IEnumerable<TransacaoRepository> menuList = security.getUsuarioTransacao();
 }
 <div id="div-est"></div>
 <div class="row">
@@ -12,15 +17,27 @@
             <div class="panel panel-warning" style="margin-top: 20px">
                 <div class="panel-heading" style="height: 50px">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                             <h2 class="panel-title col-md-12">
                                 Palpite
                             </h2>
                         </div>
-                        <div class="col-md-offset-9">
-                            <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
-                            <a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
-                        </div>
+                        @if (menuList.Where(info => info.nomeCurto == "Resumo Gerencial").Count() > 0)
+                        {
+                            <div class="col-md-offset-8">
+                                <a class="label" href="#" data-toggle="modal"><input type="button" value="Resumo" onclick="window.location='../Home/ResumoGerencial'" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
+                                <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
+                                <a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="col-md-offset-9">
+                                <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
+                                <a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="panel-body" style="background-color: #fff">

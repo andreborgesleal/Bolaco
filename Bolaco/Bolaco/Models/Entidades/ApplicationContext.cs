@@ -13,5 +13,7 @@ namespace DWM.Models.Entidades
         public DbSet<Selecao> Selecaos { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Parametro> Parametros { get; set; }
+
+        public DbSet<Ticket_Expurgo> Ticket_Expurgos { get; set; }
     }
 }

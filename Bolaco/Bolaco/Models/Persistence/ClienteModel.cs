@@ -36,6 +36,7 @@ namespace DWM.Models.Persistence
                 cpf = value.cpf.Replace(".","").Replace("-",""),
                 email = value.email,
                 telefone = value.telefone.Replace("-","").Replace(" ",""),
+                dt_cadastro = DateTime.Now.AddHours(-3),
                 usuarioId = value.usuarioId.Value
             };
 
