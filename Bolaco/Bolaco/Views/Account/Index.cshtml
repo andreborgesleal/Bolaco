@@ -181,10 +181,7 @@
                                                     @if (Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != "")
                                                     {
                                                         <li id="_Aba2" class="@_active3"><a href="#" onclick="MoveNext('2')">1º Prêmio (Brasil x Camarões)</a></li>
-                                                    }
-                                                    @if (Parametros.Where(info => info.paramId == 16).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 16).Select(info => info.valor).FirstOrDefault() != "")
-                                                    {
-                                                        <li id="_Aba3" class="@_active4"><a href="#" onclick="MoveNext('3')">2º Prêmio</a></li>
+                                                        <li id="_Aba3" class=""><a href="#" onclick="MoveNext('3')">2º Prêmio</a></li>
                                                     }                                                                                                            
                                                     @if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
                                                     {
@@ -281,7 +278,32 @@
                                                             </table>
                                                         </div>
                                                         <div class="item @_active4">
-                                                            <h4 style="font-family: Verdana">Ganhador que acertou os 3 jogos do Brasil</h4>
+                                                            <h4 style="font-family: Verdana">Clientes que acertaram 3 jogos do Brasil</h4>
+                                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                                <tr>
+                                                                    <td style="text-align: center;" colspan="3">NÃO HOUVE ACERTADOR</td>
+                                                                </tr>
+                                                            </table>
+                                                            <h4 style="font-family: Verdana">Clientes que acertaram 2 jogos do Brasil</h4>
+                                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                                <caption></caption>
+                                                                <thead style="background-color: #406546; color: #fff">
+                                                                    <tr>
+                                                                        <th style="text-align: center">Nome</th>
+                                                                        <th style="text-align: center">Nº da Sorte</th>
+                                                                        <th style="text-align: center">Data do Palpite</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -5))
+                                                                {
+                                                                    <tr>
+                                                                        <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                        <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                        <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                                    </tr>
+                                                                }
+                                                            </table>                                      
+                                                            <h4 style="font-family: Verdana">Ganhador do 2º Prêmio</h4>
                                                             <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
                                                                 <caption></caption>
                                                                 <thead style="background-color: #406546; color: #fff">
@@ -292,17 +314,17 @@
                                                                     </tr>
                                                                 </thead>
                                                                 @{
-
+                                                                    DWM.Models.Repositories.TicketViewModel ganhador2premio = Ganhadores.Where(info => info.score1Brasil == -5).FirstOrDefault();
                                                                 }
-                                                                @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -5))
-                                                                {
-                                                                    <tr>
-                                                                        <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
-                                                                        <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
-                                                                        <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
-                                                                    </tr>
-                                                                }
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>@ganhador2premio.clienteViewModel.nome</small></td>
+                                                                    <td style="text-align: center"><small>@ganhador2premio.ticketId.ToUpper()</small></td>
+                                                                    <td style="text-align: center"><small>@(ganhador2premio.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                                </tr>
                                                             </table>
+                                                            <small>Observação: @ganhador2premio.clienteViewModel.nome foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</small>
+                                                            <p>&nbsp;</p>
+                                                            <p>&nbsp;</p>
                                                         </div>
                                                         <div class="item @_active5">
                                                             <h4 style="font-family: Verdana">Ganhador que acertou a final da copa</h4>

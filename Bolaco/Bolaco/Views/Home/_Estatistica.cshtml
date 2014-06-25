@@ -20,8 +20,8 @@
                                     <ul id="myTab" class="nav nav-tabs">
                                         <li><a href="#BrasilXCroacia" data-toggle="tab">Primeiro jogo</a></li>
                                         <li><a href="#BrasilXMexico" data-toggle="tab">Segundo jogo</a></li>
-                                        <li class="active"><a href="#BrasilXCamaroes" data-toggle="tab">Terceiro jogo</a></li>
-                                        <li><a href="#Final" data-toggle="tab">Final da Copa</a></li>
+                                        <li><a href="#BrasilXCamaroes" data-toggle="tab">Terceiro jogo</a></li>
+                                        <li class="active"><a href="#Final" data-toggle="tab">Final da Copa</a></li>
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <div class="tab-pane fade" id="BrasilXCroacia">
@@ -74,7 +74,7 @@
                                                 </div>
                                             }
                                         </div>
-                                        <div class="tab-pane fade active in" id="BrasilXCamaroes">
+                                        <div class="tab-pane fade" id="BrasilXCamaroes">
                                             @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 3))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
@@ -99,7 +99,7 @@
                                                 </div>
                                             }
                                         </div>
-                                        <div class="tab-pane fade" id="Final">
+                                        <div class="tab-pane fade active in" id="Final">
                                             @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 4))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);

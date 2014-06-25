@@ -1,0 +1,110 @@
+﻿@model DWM.Models.Repositories.ResumoGerencialViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutPalpite.cshtml";
+    ViewBag.Title = "Bolaaaaço";
+}
+<div class="row" style="background-color: #fff; padding: 10px;">
+    
+    <ol class="breadcrumb">
+        <li><a href="../" style="color: #ffffff">Home</a></li>
+        <li><a href="Index" style="color: #ffffff">Palpite</a></li>
+        <li><a href="ResumoGerencial" style="color: #FAEC37">Resumo (Atualizar)</a></li>
+    </ol>
+    <div class="col-md-12 col-xs-12">
+        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+            <caption>
+            <h3 style="font-family: Verdana">Resumo de Palpites por Loja</h3></caption>
+            <thead style="background-color: #FAEC37">
+                <tr>
+                    <th style="text-align: left">Loja</th>
+                    <th style="text-align: center">Quantidade</th>
+                </tr>
+            </thead>
+            @foreach (DWM.Models.Repositories.ResumoGerencial1ViewModel r1 in Model.resumo1)
+            {
+                <tr>
+                    <td style="text-align: left">@r1.loja.ToUpper()</td>
+                    <td style="text-align: center">@r1.qte_palpites</td>
+                </tr>
+            }
+        </table>    
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+            <caption><h3 style="font-family: Verdana">Resumo de Cadastros por Loja</h3></caption>
+            <thead style="background-color: #FAEC37">
+                <tr>
+                    <th style="text-align: left">Loja</th>
+                    <th style="text-align: center">Quantidade</th>
+                </tr>
+            </thead>
+            @foreach (DWM.Models.Repositories.ResumoGerencial2ViewModel r2 in Model.resumo2)
+            {
+                <tr>
+                    <td style="text-align: left">@r2.loja.ToUpper()</td>
+                    <td style="text-align: center">@r2.qte_cadastros</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+            <caption><h3 style="font-family: Verdana">Clientes que não deram palpites (@Model.resumo3.Count() registros)</h3></caption>
+            <thead style="background-color: #FAEC37">
+                <tr>
+                    <th style="text-align: left">Nome</th>
+                    <th style="text-align: left">E-mail</th>
+                    <th style="text-align: center">Dt.Cadastro</th>
+                </tr>
+            </thead>
+            @foreach (DWM.Models.Repositories.ResumoGerencial3ViewModel r3 in Model.resumo3)
+            {
+                <tr>
+                    <td style="text-align: left">@r3.nome.ToUpper()</td>
+                    <td style="text-align: left">@r3.email.ToLower()</td>
+                    <td style="text-align: center">@r3.dt_cadastro.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+            <caption><h3 style="font-family: Verdana">Palpites por dia</h3></caption>
+            <thead style="background-color: #FAEC37">
+                <tr>
+                    <th style="text-align: center">Data</th>
+                    <th style="text-align: center">Quantidade</th>
+                </tr>
+            </thead>
+            @foreach (DWM.Models.Repositories.ResumoGerencial4ViewModel r4 in Model.resumo4.OrderByDescending(info => info.dt_palpite))
+            {
+                <tr>
+                    <td style="text-align: center">@r4.dt_palpite.ToString("dd/MM/yyyy")</td>
+                    <td style="text-align: center">@r4.qte_palpites</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+            <caption><h3 style="font-family: Verdana">Resumo Gerencial</h3></caption>
+            <thead style="background-color: #FAEC37">
+                <tr>
+                    <th style="text-align: center">Total de Dias</th>
+                    <th style="text-align: center">Total de Cadastros</th>
+                    <th style="text-align: center">Total de Palpites</th>
+                    <th style="text-align: center">Média Diária (palpites)</th>
+                </tr>
+            </thead>
+            <tr>
+                <td style="text-align: center">@Model.resumo5.total_dias</td>
+                <td style="text-align: center">@Model.resumo5.total_cadastros</td>
+                <td style="text-align: center">@Model.resumo5.total_palpites</td>
+                <td style="text-align: center">@Model.resumo5.media_diaria_palpite</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-12 col-xs-12">
+        <a class="label" href="#" data-toggle="modal"><input type="button" value="Voltar" onclick="history.go(-1)" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
+    </div>
+</div>

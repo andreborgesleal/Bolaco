@@ -709,10 +709,13 @@ namespace DWM.Models.Persistence
                                                     ).Union(
                                                     (from t in db.Tickets
                                                      join c in db.Clientes on t.clienteId equals c.clienteId
-                                                     where t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
-                                                           t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico &&
-                                                           t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes
-                                                     orderby c.nome
+                                                     where (t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
+                                                            t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico) ||
+                                                           (t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
+                                                            t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes) ||
+                                                           (t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico &&
+                                                            t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes) 
+                                                     orderby t.dt_inscricao
                                                      select new TicketViewModel()
                                                      {
                                                          clienteViewModel = new ClienteViewModel() { nome = c.nome },

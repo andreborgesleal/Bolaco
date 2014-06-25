@@ -1,5 +1,13 @@
-﻿use seguranca
+﻿use bolaco
 go
+
+select * From Parametro
+
+update Parametro set valor = '0' where paramId = 12
+update Parametro set valor = '0' where paramId = 13
+update Parametro set valor = '4' where paramId = 14
+update Parametro set valor = '1' where paramId = 15
+
 
 select * From usuario where login = 'marcelo.pirlimpimpim@uol.com.br'
 
