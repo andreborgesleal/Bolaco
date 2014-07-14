@@ -10,24 +10,24 @@
     string _active2 = "";
     string _active3 = "";
     string _active4 = "";
-    string _active5 = "";
+    string _active5 = "active";
                                                     
-    if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
-    {
-        _active5 = "active";
-    }
-    else if (Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != "")
-    {
-        _active3 = "active";
-    }
-    else if (Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != "")
-    {
-        _active2 = "active";
-    }
-    else
-    {
-        _active1 = "active";
-    }
+    //if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
+    //{
+    //    _active5 = "active";
+    //}
+    //else if (Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != "")
+    //{
+    //    _active3 = "active";
+    //}
+    //else if (Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != "")
+    //{
+    //    _active2 = "active";
+    //}
+    //else
+    //{
+    //    _active1 = "active";
+    //}
 }
 
 @*<div class="jumbotron">
@@ -183,10 +183,11 @@
                                                         <li id="_Aba2" class="@_active3"><a href="#" onclick="MoveNext('2')">1º Prêmio (Brasil x Camarões)</a></li>
                                                         <li id="_Aba3" class=""><a href="#" onclick="MoveNext('3')">2º Prêmio</a></li>
                                                     }                                                                                                            
-                                                    @if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
+                                                    @*@if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
                                                     {
-                                                        <li id="_Aba4" class="@_active5"><a href="#" onclick="MoveNext('4')">3º Prêmio (Final)</a></li>
-                                                    }
+                                                        
+                                                    }*@
+                                                    <li id="_Aba4" class="@_active5"><a href="#" onclick="MoveNext('4')">3º Prêmio (Final)</a></li>
                                                 </ul>
                                             </div><!-- /.navbar-collapse -->
                                         </div><!-- /.container-fluid -->
@@ -344,28 +345,180 @@
                                                             <p>&nbsp;</p>
                                                         </div>
                                                         <div class="item @_active5">
-                                                            <h4 style="font-family: Verdana">Ganhador que acertou a final da copa</h4>
+                                                            <h4 style="font-family: Verdana">Clientes que acertaram o Palpite da final da copa</h4>
                                                             <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
                                                                 <caption></caption>
-                                                                <thead style="background-color: #FAEC37">
+                                                                <thead style="background-color: #406546; color: #fff">
+                                                                    <tr>
+                                                                        <th style="text-align: center">Nome</th>
+                                                                        <th style="text-align: center">Nº da Sorte</th>
+                                                                        <th style="text-align: center">Alemanha</th>
+                                                                        <th style="text-align: center">Argentina</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tr style="background-color: #FAEC37">
+                                                                    <td style="text-align: left;"><small>SEBASTIAO RODRIGUES DA SILVA</small></td>
+                                                                    <td style="text-align: center"><small>BRFAQM </small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>ALTEMIR NEVES DE SOUZA</small></td>
+                                                                    <td style="text-align: center"><small>MTKALR</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>ALTEMIR NEVES DE SOUZA</small></td>
+                                                                    <td style="text-align: center"><small>MTKDRL</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>ANGELO ANTONIO PINTO</small></td>
+                                                                    <td style="text-align: center"><small>BREVW7</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>CLEVER DE BRITO NEVES</small></td>
+                                                                    <td style="text-align: center"><small>CTBYK1</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>CLEVER DE BRITO NEVES</small></td>
+                                                                    <td style="text-align: center"><small>CTBZY0</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                                    <td style="text-align: center"><small>MTJMNT</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                                    <td style="text-align: center"><small>MTJZPE</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                                    <td style="text-align: center"><small>MTKD44</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                                    <td style="text-align: center"><small>MTKDY6</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>ESMAELY JOSE DOS SANTOS LIMA</small></td>
+                                                                    <td style="text-align: center"><small>MTJVCJ</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>JÔNATAS COSTA DE CARVALHO</small></td>
+                                                                    <td style="text-align: center"><small>MTKCC1</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>JOSÉ HERBTH DE ALMEIDA LIMA</small></td>
+                                                                    <td style="text-align: center"><small>BRFB11</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>KLAYTON DA ROCHA NEVES</small></td>
+                                                                    <td style="text-align: center"><small>CTCCGT</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>NILTON PRANDO</small></td>
+                                                                    <td style="text-align: center"><small>CTCAB5</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>OLIVALDO DE SOUZA RODRIGUES</small></td>
+                                                                    <td style="text-align: center"><small>CTBZQQ</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                    <td style="text-align: center"><small>3</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>PETRESE HERMANN MACIEL VARELA</small></td>
+                                                                    <td style="text-align: center"><small>BREX14</small></td>
+                                                                    <td style="text-align: center"><small>3</small></td>
+                                                                    <td style="text-align: center"><small>2</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>SINVAL OLIVEIRA DA SILVA</small></td>
+                                                                    <td style="text-align: center"><small>MTJXGB</small></td>
+                                                                    <td style="text-align: center"><small>3</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>SONIA DE FATIMA S DIAS</small></td>
+                                                                    <td style="text-align: center"><small>MTJSUT</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                    <td style="text-align: center"><small>0</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>ZELITO DOS ANJOS DO NASCIMENTO</small></td>
+                                                                    <td style="text-align: center"><small>MTJUDU</small></td>
+                                                                    <td style="text-align: center"><small>1</small></td>
+                                                                    <td style="text-align: center"><small>3</small></td>
+                                                                </tr>
+                                                            </table>
+                                                            <p>&nbsp;</p>
+                                                            <h4 style="font-family: Verdana">Clientes que acertaram o Palpite e o placar Alemanha 1 x 0 Argentina</h4>
+                                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                                <caption></caption>
+                                                                <thead style="background-color: #406546; color: #fff">
                                                                     <tr>
                                                                         <th style="text-align: center">Nome</th>
                                                                         <th style="text-align: center">Nº da Sorte</th>
                                                                         <th style="text-align: center">Data do Palpite</th>
                                                                     </tr>
                                                                 </thead>
-                                                                @{
-
-                                                                }
-                                                                @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -6))
-                                                                {
-                                                                    <tr>
-                                                                        <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
-                                                                        <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
-                                                                        <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
-                                                                    </tr>
-                                                                }
+                                                                <tr style="background-color: #FAEC37">
+                                                                    <td style="text-align: left;"><small>SEBASTIAO RODRIGUES DA SILVA</small></td>
+                                                                    <td style="text-align: center"><small>BRFAQM </small></td>
+                                                                    <td style="text-align: center"><small>01/07/2014</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                                    <td style="text-align: center"><small>MTKDY6</small></td>
+                                                                    <td style="text-align: center"><small>04/07/2014</small></td>
+                                                                </tr>
                                                             </table>
+                                                            <p>&nbsp;</p>
+                                                            <h4 style="font-family: Verdana">Ganhador do 3º Prêmio</h4>
+                                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                                <caption></caption>
+                                                                <thead style="background-color: #406546; color: #fff">
+                                                                    <tr>
+                                                                        <th style="text-align: center">Nome</th>
+                                                                        <th style="text-align: center">Nº da Sorte</th>
+                                                                        <th style="text-align: center">Data do Palpite</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>SEBASTIAO RODRIGUES DA SILVA</small></td>
+                                                                    <td style="text-align: center"><small>BRFAQM </small></td>
+                                                                    <td style="text-align: center"><small>01/07/2014</small></td>
+                                                                </tr>
+                                                            </table>
+                                                            <small>Observação: <span style="background-color: #FAEC37">SEBASTIAO RODRIGUES DA SILVA foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</span> </small>
+                                                            <p>&nbsp;</p>
+                                                            <p>&nbsp;</p>
                                                         </div>
                                                     </div>
                                                     @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
