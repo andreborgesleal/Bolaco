@@ -37,13 +37,16 @@
 </div>*@
 
 <div class="row carousel-inner" style="margin-top: 10px">
+    <div class="col-md-3">
+        &nbsp;
+    </div>
     <div class="col-md-6 item active">
         <div class="row carousel-inner">
             <div class="col-md-12 item active">
                 <img src="~/Content/images/Bolaaaaco_identidade_visual2.jpg" />
             </div>
         </div>
-        <div class="row carousel-inner" style="margin-top: 15px; margin-bottom: -8px">
+        @*<div class="row carousel-inner" style="margin-top: 15px; margin-bottom: -8px">
             <div class="col-md-12 item active">
                 <div class="jumbotron" style="color: #faf7f7; padding: 15px">
                     <div style="line-height: 23px">
@@ -51,11 +54,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         @*-------- Regulamento -------*@
-        <div class="row clearfix carousel-inner" style="margin-top: -20px">
+        <div class="row clearfix carousel-inner" style="margin-top: 10px">
             <div class="col-md-12 item active">
-                <div class="alert alert-dismissable alert-warning" style="padding: 12px">
+                <div class="alert alert-dismissable alert-warning" style="padding: 9px">
                     <div class="row">
                         <div class="col-md-12" style="text-align: center">
                             <a class="label" href="#modal-container-964987b" data-toggle="modal"><span style="font-size: large; color: #3c3c3c">Entenda melhor o regulamento</span></a>
@@ -545,9 +548,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 item active">
-        @Html.Partial("_Register", Model)
+    <div class="col-md-3">
+        &nbsp;
     </div>
+    @*<div class="col-md-6 item active">
+        @Html.Partial("_Register", Model)
+    </div>*@
 </div>
 <div id="div-est"></div>
 
