@@ -88,7 +88,7 @@ namespace DWM.Models.Persistence
                 string Text = "<p>Confirmação de palpite</p>";
                 string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + value.clienteViewModel.nome + "</span></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu palpite. Seu palpite na promoção <b>Bolaaaaço da Norte Refrigeração</b> foi realizado com sucesso.</span></p>" +
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu palpite. Seu palpite foi incluído com sucesso e será validado pela administração conforme regras da campanha <b><a href=\"http://bolaco2018.azurewebsites.net/Account/_Regras\">Bolaaaço Norte Refrigeração 2018</a></b>.</span></p>" +
                               "<p></p>" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + value.ticketId.ToUpper() + "</b></span></p>" +
@@ -101,17 +101,23 @@ namespace DWM.Models.Persistence
                               "<tr>" +
                               "<td style=\"width: 55%\">" +
                               "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seus palpites:" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore1Brasil.ToString() + "</b> X <b>" + value.getScore1Croacia.ToString() + "</b> Croácia</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore1Brasil.ToString() + "</b> X <b>" + value.getScore1Croacia.ToString() + "</b> Suíça</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore2Brasil.ToString() + "</b> X <b>" + value.getScore2Mexico.ToString() + "</b> México</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore2Brasil.ToString() + "</b> X <b>" + value.getScore2Mexico.ToString() + "</b> Costa Rica</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore3Brasil.ToString() + "</b> X <b>" + value.getScore3Camaroes.ToString() + "</b> Camarões</span></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore3Brasil.ToString() + "</b> X <b>" + value.getScore3Camaroes.ToString() + "</b> Sérvia</span></p>" +
                               "<p></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Final da Copa Fifa 2014:" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore4Brasil.ToString() + "</b> X <b>" + value.getScore4OutraSelecao.ToString() + "</b> Seleção (8º de final)</span></p>" +
+                              "<p></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore5Brasil.ToString() + "</b> X <b>" + value.getScore5OutraSelecao.ToString() + "</b> Seleção (4º de final)</span></p>" +
+                              "<p></p>" +
+                              "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\">Brasil <b>" + value.getScore6Brasil.ToString() + "</b> X <b>" + value.getScore6OutraSelecao.ToString() + "</b> Seleção (Semifinal)</span></p>" +
+                              "<p></p>" +
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Final da Copa:" +
                               "<p></p>" +
                               "<p><span style=\"font-family: Verdana; padding-left: 35px; font-size: small; color: #000\"><b>" + value.nome_selecao1Final + "  " + value.score1_final.ToString() + "</b> X <b>" + value.score2_final.ToString() + " " + value.nome_selecao2Final + "</b></span></p>" +
                               "</td>" +
-                              "<td style=\"width: 45%; vertical-align: top; float: right; padding-right: 27px\"><img src=\"http://bolaco.azurewebsites.net/Content/images/selocircular.png\"></td>" +
+                              "<td style=\"width: 45%; vertical-align: top; float: right; padding-right: 27px\"><img src=\"http://bolaco2018.azurewebsites.net/Content/images/selocircular.png\"></td>" +
                               "</tr>" +
                               "</table>";
 
@@ -151,26 +157,47 @@ namespace DWM.Models.Persistence
                 score2Mexico = value.score2Mexico,
                 score3Brasil = value.score3Brasil,
                 score3Camaroes = value.score3Camaroes,
+                score4Brasil = value.score4Brasil,
+                score4OutraSelecao = value.score4OutraSelecao,
+                score5Brasil = value.score5Brasil,
+                score5OutraSelecao = value.score5OutraSelecao,
+                score6Brasil = value.score6Brasil,
+                score6OutraSelecao = value.score6OutraSelecao,
                 selecao1Id_Final = value.selecao1Id_Final,
                 selecao2Id_Final = value.selecao2Id_Final,
                 score1_final = value.score1_final,
                 score2_final = value.score2_final
             };
 
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2014-06-12 16:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-17 15:00"))
             {
                 t.score1Brasil = -1;
                 t.score1Croacia = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2014-06-17 15:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-22 09:00"))
             {
                 t.score2Brasil = -1;
                 t.score2Mexico = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2014-06-23 16:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-27 15:00"))
             {
                 t.score3Brasil = -1;
                 t.score3Camaroes = -1;
+            }
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-02 11:00"))
+            {
+                t.score4Brasil = -1;
+                t.score4OutraSelecao = -1;
+            }
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-06 15:00"))
+            {
+                t.score5Brasil = -1;
+                t.score5OutraSelecao = -1;
+            }
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-10 15:00"))
+            {
+                t.score6Brasil = -1;
+                t.score6OutraSelecao = -1;
             }
 
             return t;
@@ -225,7 +252,7 @@ namespace DWM.Models.Persistence
                                        }).FirstOrDefault();
 
             SelecaoViewModel croacia = (from sel in db.Selecaos
-                                        where sel.nome.ToUpper() == "CROÁCIA"
+                                        where sel.nome.ToUpper() == "SUÍÇA"
                                         select new SelecaoViewModel()
                                         {
                                             selecaoId = sel.selecaoId,
@@ -234,7 +261,7 @@ namespace DWM.Models.Persistence
                                         }).FirstOrDefault();
 
             SelecaoViewModel mexico = (from sel in db.Selecaos
-                                       where sel.nome.ToUpper() == "MÉXICO"
+                                       where sel.nome.ToUpper() == "COSTA RICA"
                                        select new SelecaoViewModel()
                                        {
                                            selecaoId = sel.selecaoId,
@@ -243,7 +270,7 @@ namespace DWM.Models.Persistence
                                        }).FirstOrDefault();
 
             SelecaoViewModel camaroes = (from sel in db.Selecaos
-                                         where sel.nome.ToUpper() == "CAMARÕES"
+                                         where sel.nome.ToUpper() == "SÉRVIA"
                                          select new SelecaoViewModel()
                                          {
                                              selecaoId = sel.selecaoId,
@@ -269,6 +296,12 @@ namespace DWM.Models.Persistence
                 score3Camaroes = entity.score3Camaroes.Value,
                 bandeira_camaroes = camaroes.bandeira,
                 selecao1Id_Final = entity.selecao1Id_Final.Value,
+                score4Brasil = entity.score4Brasil.Value,
+                score4OutraSelecao = entity.score4OutraSelecao.Value,
+                score5Brasil = entity.score5Brasil.Value,
+                score5OutraSelecao = entity.score5OutraSelecao.Value,
+                score6Brasil = entity.score6Brasil.Value,
+                score6OutraSelecao = entity.score6OutraSelecao.Value,
                 nome_selecao1Final = selecao1_final.nome,
                 bandeira_finalista1 = selecao1_final.bandeira,
                 score1_final = entity.score1_final.Value,
@@ -294,6 +327,12 @@ namespace DWM.Models.Persistence
                                 score3Brasil = pal.score3Brasil.Value,
                                 score3Camaroes = pal.score3Camaroes.Value,
                                 bandeira_camaroes = camaroes.bandeira,
+                                score4Brasil = pal.score4Brasil.Value,
+                                score4OutraSelecao = pal.score4OutraSelecao.Value,
+                                score5Brasil = pal.score5Brasil.Value,
+                                score5OutraSelecao = pal.score5OutraSelecao.Value,
+                                score6Brasil = pal.score6Brasil.Value,
+                                score6OutraSelecao = pal.score6OutraSelecao.Value,
                                 selecao1Id_Final = pal.selecao1Id_Final.Value,
                                 nome_selecao1Final = (from s1 in db.Selecaos where s1.selecaoId == pal.selecao1Id_Final select s1.nome).FirstOrDefault(),
                                 bandeira_finalista1 = (from s1 in db.Selecaos where s1.selecaoId == pal.selecao1Id_Final select s1.bandeira).FirstOrDefault(),
@@ -413,7 +452,7 @@ namespace DWM.Models.Persistence
                                            }).FirstOrDefault();
 
                 SelecaoViewModel croacia = (from sel in db.Selecaos
-                                            where sel.nome.ToUpper() == "CROÁCIA"
+                                            where sel.nome.ToUpper() == "SUÍÇA"
                                             select new SelecaoViewModel()
                                             {
                                                 selecaoId = sel.selecaoId,
@@ -422,7 +461,7 @@ namespace DWM.Models.Persistence
                                             }).FirstOrDefault();
 
                 SelecaoViewModel mexico = (from sel in db.Selecaos
-                                           where sel.nome.ToUpper() == "MÉXICO"
+                                           where sel.nome.ToUpper() == "COSTA RICA"
                                            select new SelecaoViewModel()
                                            {
                                                selecaoId = sel.selecaoId,
@@ -431,7 +470,7 @@ namespace DWM.Models.Persistence
                                            }).FirstOrDefault();
 
                 SelecaoViewModel camaroes = (from sel in db.Selecaos
-                                             where sel.nome.ToUpper() == "CAMARÕES"
+                                             where sel.nome.ToUpper() == "SÉRVIA"
                                              select new SelecaoViewModel()
                                              {
                                                  selecaoId = sel.selecaoId,
@@ -447,6 +486,12 @@ namespace DWM.Models.Persistence
                 int _score1Croacia = 0;
                 int _score2Mexico = 0;
                 int _score3Camaroes = 0;
+                int _score4Brasil = 0;
+                int _score4OutraSelecao = 0;
+                int _score5Brasil = 0;
+                int _score5OutraSelecao = 0;
+                int _score6Brasil = 0;
+                int _score6OutraSelecao = 0;
                 string _nome_selecao1Final = "";
                 string _nome_selecao2Final = "";
                 int _score1_final = 0;
@@ -479,6 +524,24 @@ namespace DWM.Models.Persistence
                     if (Request["score3Brasil"] != null && Request["score3Brasil"] != "")
                         _score3Brasil = int.Parse(Request["score3Brasil"]);
 
+                    if (Request["score4Brasil"] != null && Request["score4Brasil"] != "")
+                        _score4Brasil = int.Parse(Request["score4Brasil"]);
+
+                    if (Request["score4OutraSelecao"] != null && Request["score4OutraSelecao"] != "")
+                        _score4OutraSelecao = int.Parse(Request["score4OutraSelecao"]);
+
+                    if (Request["score5Brasil"] != null && Request["score5Brasil"] != "")
+                        _score5Brasil = int.Parse(Request["score5Brasil"]);
+
+                    if (Request["score5OutraSelecao"] != null && Request["score5OutraSelecao"] != "")
+                        _score5OutraSelecao = int.Parse(Request["score5OutraSelecao"]);
+
+                    if (Request["score6Brasil"] != null && Request["score6Brasil"] != "")
+                        _score6Brasil = int.Parse(Request["score6Brasil"]);
+
+                    if (Request["score6OutraSelecao"] != null && Request["score6OutraSelecao"] != "")
+                        _score6OutraSelecao = int.Parse(Request["score6OutraSelecao"]);
+
                     if (Request["score1_final"] != null && Request["score1_final"] != "")
                         _score1_final = int.Parse(Request["score1_final"]);
 
@@ -496,6 +559,12 @@ namespace DWM.Models.Persistence
                     score1Croacia = _score1Croacia,
                     score2Mexico = _score2Mexico,
                     score3Camaroes = _score3Camaroes,
+                    score4Brasil = _score4Brasil,
+                    score4OutraSelecao = _score4OutraSelecao,
+                    score5Brasil = _score5Brasil,
+                    score5OutraSelecao = _score5OutraSelecao,
+                    score6Brasil = _score6Brasil,
+                    score6OutraSelecao = _score6OutraSelecao,
                     nome_selecao1Final = _nome_selecao1Final,
                     nome_selecao2Final = _nome_selecao2Final,
                     score1_final = _score1_final,
@@ -524,6 +593,12 @@ namespace DWM.Models.Persistence
                                     score3Brasil = pal.score3Brasil.Value,
                                     score3Camaroes = pal.score3Camaroes.Value,
                                     bandeira_camaroes = camaroes.bandeira,
+                                    score4Brasil = pal.score4Brasil.Value,
+                                    score4OutraSelecao = pal.score4OutraSelecao.Value,
+                                    score5Brasil = pal.score5Brasil.Value,
+                                    score5OutraSelecao = pal.score5OutraSelecao.Value,
+                                    score6Brasil = pal.score6Brasil.Value,
+                                    score6OutraSelecao = pal.score6OutraSelecao.Value,
                                     selecao1Id_Final = pal.selecao1Id_Final.Value,
                                     nome_selecao1Final = (from s1 in db.Selecaos where s1.selecaoId == pal.selecao1Id_Final select s1.nome).FirstOrDefault(),
                                     bandeira_finalista1 = (from s1 in db.Selecaos where s1.selecaoId == pal.selecao1Id_Final select s1.bandeira).FirstOrDefault(),
@@ -564,7 +639,7 @@ namespace DWM.Models.Persistence
                                                          nome_selecao1 = "Brasil",
                                                          score_selecao1 = T.Key.score1Brasil.Value,
                                                          bandeira_selecao2 = _bandeira_croacia,
-                                                         nome_selecao2 = "Croácia",
+                                                         nome_selecao2 = "Suíça",
                                                          score_selecao2 = T.Key.score1Croacia.Value,
                                                          quantidade = T.Count(),
                                                          total = qte_tickets
@@ -580,7 +655,7 @@ namespace DWM.Models.Persistence
                                                          nome_selecao1 = "Brasil",
                                                          score_selecao1 = T.Key.score2Brasil.Value,
                                                          bandeira_selecao2 = _bandeira_mexico,
-                                                         nome_selecao2 = "México",
+                                                         nome_selecao2 = "Costa Rica",
                                                          score_selecao2 = T.Key.score2Mexico.Value,
                                                          quantidade = T.Count(),
                                                          total = qte_tickets
@@ -596,17 +671,65 @@ namespace DWM.Models.Persistence
                                                          nome_selecao1 = "Brasil",
                                                          score_selecao1 = T.Key.score3Brasil.Value,
                                                          bandeira_selecao2 = _bandeira_camaroes,
-                                                         nome_selecao2 = "Camarões",
+                                                         nome_selecao2 = "Sérvia",
                                                          score_selecao2 = T.Key.score3Camaroes.Value,
                                                          quantidade = T.Count(),
                                                          total = qte_tickets
                                                      };
 
             IEnumerable<EstatisticaViewModel> est4 = from t in db.Tickets
-                                                     group t by new { t.selecao1Id_Final, t.selecao2Id_Final } into T
+                                                     where t.score4Brasil >= 0
+                                                     group t by new { t.score4Brasil, t.score4OutraSelecao } into T
                                                      select new EstatisticaViewModel()
                                                      {
                                                          jogo = 4,
+                                                         bandeira_selecao1 = _bandeira_brasil,
+                                                         nome_selecao1 = "Brasil",
+                                                         score_selecao1 = T.Key.score4Brasil.Value,
+                                                         bandeira_selecao2 = "",
+                                                         nome_selecao2 = "Seleção 8ª final",
+                                                         score_selecao2 = T.Key.score4OutraSelecao.Value,
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
+
+            IEnumerable<EstatisticaViewModel> est5 = from t in db.Tickets
+                                                     where t.score5Brasil >= 0
+                                                     group t by new { t.score5Brasil, t.score5OutraSelecao } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 5,
+                                                         bandeira_selecao1 = _bandeira_brasil,
+                                                         nome_selecao1 = "Brasil",
+                                                         score_selecao1 = T.Key.score5Brasil.Value,
+                                                         bandeira_selecao2 = "",
+                                                         nome_selecao2 = "Seleção 4ª final",
+                                                         score_selecao2 = T.Key.score5OutraSelecao.Value,
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
+
+            IEnumerable<EstatisticaViewModel> est6 = from t in db.Tickets
+                                                     where t.score6Brasil >= 0
+                                                     group t by new { t.score6Brasil, t.score6OutraSelecao } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 6,
+                                                         bandeira_selecao1 = _bandeira_brasil,
+                                                         nome_selecao1 = "Brasil",
+                                                         score_selecao1 = T.Key.score6Brasil.Value,
+                                                         bandeira_selecao2 = "",
+                                                         nome_selecao2 = "Seleção semifinal",
+                                                         score_selecao2 = T.Key.score6OutraSelecao.Value,
+                                                         quantidade = T.Count(),
+                                                         total = qte_tickets
+                                                     };
+
+            IEnumerable<EstatisticaViewModel> est7 = from t in db.Tickets
+                                                     group t by new { t.selecao1Id_Final, t.selecao2Id_Final } into T
+                                                     select new EstatisticaViewModel()
+                                                     {
+                                                         jogo = 7,
                                                          bandeira_selecao1 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao1Id_Final select s.bandeira).FirstOrDefault(),
                                                          nome_selecao1 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao1Id_Final select s.nome).FirstOrDefault(),
                                                          bandeira_selecao2 = (from s in db.Selecaos where s.selecaoId == T.Key.selecao2Id_Final select s.bandeira).FirstOrDefault(),
@@ -615,7 +738,7 @@ namespace DWM.Models.Persistence
                                                          total = qte_tickets
                                                      };
 
-            return (est1.OrderByDescending(info => info.quantidade).ToList().Union(est2.OrderByDescending(info => info.quantidade).ToList()).Union(est3.OrderByDescending(info => info.quantidade).ToList()).Union(est4.OrderByDescending(info => info.quantidade).ToList())).ToList();
+            return (est1.OrderByDescending(info => info.quantidade).ToList().Union(est2.OrderByDescending(info => info.quantidade).ToList()).Union(est3.OrderByDescending(info => info.quantidade).ToList()).Union(est4.OrderByDescending(info => info.quantidade).ToList()).Union(est5.OrderByDescending(info => info.quantidade).ToList()).Union(est6.OrderByDescending(info => info.quantidade).ToList()).Union(est7.OrderByDescending(info => info.quantidade).ToList())).ToList();
         }
 
 
@@ -637,6 +760,12 @@ namespace DWM.Models.Persistence
             int _Score2Mexico = -2;
             int _Score3Brasil = -2;
             int _Score3Camaroes = -2;
+            int _Score4Brasil = -2;
+            int _Score4OutraSelecao = -2;
+            int _Score5Brasil = -2;
+            int _Score5OutraSelecao = -2;
+            int _Score6Brasil = -2;
+            int _Score6OutraSelecao = -2;
             int _Selecao1_final = -2;
             int _Selecao2_final = -2;
             int _Score1_final = -2;
@@ -660,6 +789,24 @@ namespace DWM.Models.Persistence
             if (db.Parametros.Find(15).valor != "")
                 _Score3Camaroes = int.Parse(db.Parametros.Find(15).valor);
 
+            if (db.Parametros.Find(20).valor != "")
+                _Score4Brasil = int.Parse(db.Parametros.Find(20).valor);
+
+            if (db.Parametros.Find(21).valor != "")
+                _Score4OutraSelecao = int.Parse(db.Parametros.Find(21).valor);
+
+            if (db.Parametros.Find(22).valor != "")
+                _Score5Brasil = int.Parse(db.Parametros.Find(22).valor);
+
+            if (db.Parametros.Find(23).valor != "")
+                _Score5OutraSelecao = int.Parse(db.Parametros.Find(23).valor);
+
+            if (db.Parametros.Find(24).valor != "")
+                _Score6Brasil = int.Parse(db.Parametros.Find(24).valor);
+
+            if (db.Parametros.Find(25).valor != "")
+                _Score6OutraSelecao = int.Parse(db.Parametros.Find(25).valor);
+
             if (db.Parametros.Find(16).valor != "")
                 _Score1_final = int.Parse(db.Parametros.Find(16).valor);
 
@@ -671,6 +818,9 @@ namespace DWM.Models.Persistence
 
             if (db.Parametros.Find(19).valor != "")
                 _Selecao2_final = int.Parse(db.Parametros.Find(19).valor);
+
+
+
 
             IEnumerable<TicketViewModel> result = (from t in db.Tickets
                                                    join c in db.Clientes on t.clienteId equals c.clienteId
@@ -724,6 +874,59 @@ namespace DWM.Models.Persistence
                                                          score1Brasil = -5
                                                      }).ToList()
                                                     ).Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where t.score4Brasil == _Score4Brasil && t.score4OutraSelecao == _Score4OutraSelecao
+                                                     orderby c.nome
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -6
+                                                     }).ToList()
+                                                    ).Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where t.score5Brasil == _Score5Brasil && t.score5OutraSelecao == _Score5OutraSelecao
+                                                     orderby c.nome
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -7
+                                                     }).ToList()
+                                                    ).Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where t.score6Brasil == _Score6Brasil && t.score6OutraSelecao == _Score6OutraSelecao
+                                                     orderby c.nome
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -8
+                                                     }).ToList()
+                                                    ).Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where (t.score4Brasil == _Score4Brasil && t.score4OutraSelecao == _Score4OutraSelecao &&
+                                                            t.score5Brasil == _Score5Brasil && t.score5OutraSelecao == _Score5OutraSelecao) ||
+                                                           (t.score4Brasil == _Score4Brasil && t.score4OutraSelecao == _Score4OutraSelecao &&
+                                                            t.score6Brasil == _Score6Brasil && t.score6OutraSelecao == _Score6OutraSelecao) ||
+                                                           (t.score5Brasil == _Score5Brasil && t.score5OutraSelecao == _Score5OutraSelecao &&
+                                                            t.score6Brasil == _Score6Brasil && t.score6OutraSelecao == _Score6OutraSelecao)
+                                                     orderby t.dt_inscricao
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -9
+                                                     }).ToList()
+                                                    ).Union(
                                                      (from t in db.Tickets
                                                       join c in db.Clientes on t.clienteId equals c.clienteId
                                                       where (t.selecao1Id_Final == _Selecao1_final  && t.selecao2Id_Final == _Selecao2_final) ||
@@ -734,7 +937,7 @@ namespace DWM.Models.Persistence
                                                           clienteViewModel = new ClienteViewModel() { nome = c.nome },
                                                           ticketId = t.ticketId,
                                                           dt_inscricao = t.dt_inscricao,
-                                                          score1Brasil = -6
+                                                          score1Brasil = -10
                                                       }).ToList()
                                                     ).ToList();
 

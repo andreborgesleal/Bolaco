@@ -1,0 +1,429 @@
+﻿@using DWM.Models.Repositories
+@{
+    Layout = null;
+    IEnumerable<ParametroViewModel> Parametros = ViewBag.Parametros;
+    IEnumerable<TicketViewModel> Ganhadores = ViewBag.Ganhadores;
+
+    string _active1 = "";
+    string _active2 = "";
+    string _active3 = "";
+    string _active4 = "";
+    string _active5 = "active";
+
+    if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
+    {
+        _active5 = "active";
+    }
+    else if (Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != "")
+    {
+        _active3 = "active";
+    }
+    else if (Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != "")
+    {
+        _active2 = "active";
+    }
+    else
+    {
+        _active1 = "active";
+    }
+}
+
+<div class="row carousel-inner" style="margin-top: -15px">
+    <div class="col-md-12 item active">
+        <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
+            <a class="label" href="#modal-container-964987j" data-toggle="modal" onclick="ShowVencedores();"><span style="font-size: large; color: #3c3c3c">Ganhadores</span></a>
+            @***********Formulário Modal VENCEDORES **************@
+            <div class="modal fade" id="modal-container-964987j" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="width: 55%">
+                    <div class="modal-content">
+                        <div class="modal-header" style="height: 80px">
+                            <nav class="navbar navbar-default" role="navigation">
+                                <div class="container-fluid">
+                                    <!-- Brand and toggle get grouped for better mobile display -->
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        @*<a class="navbar-brand" href="#" style="font-family: Verdana">Ganhadores do Bolaaaaço da Norte Refrigeração</a>*@
+                                    </div>
+                                    <!-- Collect the nav links, forms, and other content for toggling -->
+                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav navbar-nav">
+                                            <li id="_Aba0" class="@_active1" onclick="MoveNext('0')"><a href="#">1º Prêmio (Brasil x Croácia)</a></li>
+                                            @if (Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != "")
+                                            {
+                                                <li id="_Aba1" class="@_active2"><a href="#" onclick="MoveNext('1')">1º Prêmio (Brasil x México)</a></li>
+                                            }
+                                            @if (Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != "")
+                                            {
+                                                <li id="_Aba2" class="@_active3"><a href="#" onclick="MoveNext('2')">1º Prêmio (Brasil x Camarões)</a></li>
+                                                        <li id="_Aba3" class=""><a href="#" onclick="MoveNext('3')">2º Prêmio</a></li>
+                                            }
+                                            @*@if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
+                                                {
+
+                                                }*@
+                                            <li id="_Aba4" class="@_active5"><a href="#" onclick="MoveNext('4')">3º Prêmio (Final)</a></li>
+                                        </ul>
+                                    </div><!-- /.navbar-collapse -->
+                                </div><!-- /.container-fluid -->
+                            </nav>
+                        </div>
+                        <div class="modal-body" style="overflow-y: auto; height: 450px">
+                            <div class="row">
+                                <div class="col-md-12" style="overflow-x: auto; height: 394px">
+                                    <div class="bs-example">
+                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carousel-example-generic" data-slide-to="0" class="@_active1"></li>
+                                                <li data-target="#carousel-example-generic" data-slide-to="1" class="@_active2"></li>
+                                                <li data-target="#carousel-example-generic" data-slide-to="2" class="@_active3"></li>
+                                                <li data-target="#carousel-example-generic" data-slide-to="3" class="@_active4"></li>
+                                                <li data-target="#carousel-example-generic" data-slide-to="4" class="@_active5"></li>
+                                            </ol>
+                                            <div class="carousel-inner">
+                                                <div class="item @_active1">
+                                                    <h4 style="font-family: Verdana">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor Croácia</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #FAEC37">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @{
+
+                                                        }
+                                                        @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -2))
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                </div>
+                                                <div class="item @_active2">
+                                                    <h4 style="font-family: Verdana">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor México</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #406546; color: #fff">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @{
+
+                                                        }
+                                                        @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -3))
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                </div>
+                                                <div class="item @_active3">
+                                                    <h4 style="font-family: Verdana">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor Camarões</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #FAEC37">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @{
+
+                                                        }
+                                                        @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -4))
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                            </tr>
+                                                        }
+                                                    </table>
+                                                </div>
+                                                <div class="item @_active4">
+                                                    <h4 style="font-family: Verdana">Clientes que acertaram os Palpites dos 3 jogos do Brasil</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <tr>
+                                                            <td style="text-align: center;" colspan="3">NÃO HOUVE ACERTADOR</td>
+                                                        </tr>
+                                                    </table>
+                                                    <p>&nbsp;</p>
+                                                    <h4 style="font-family: Verdana">Clientes que acertaram os Palpites dos 2 jogos do Brasil</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #406546; color: #fff">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @{
+
+                                                        }
+                                                        @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -5))
+                                                        {
+                                                            if (t == Ganhadores.Where(info => info.score1Brasil == -5).FirstOrDefault())
+                                                            {
+                                                                <tr style="background-color: #FAEC37">
+                                                                    <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                    <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                    <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                                </tr>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                    <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                    <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </table>
+                                                    <p>&nbsp;</p>
+                                                    <h4 style="font-family: Verdana">Ganhador do 2º Prêmio</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #406546; color: #fff">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @{
+                                                            DWM.Models.Repositories.TicketViewModel ganhador2premio = Ganhadores.Where(info => info.score1Brasil == -5).FirstOrDefault();
+                                                        }
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>@ganhador2premio.clienteViewModel.nome</small></td>
+                                                            <td style="text-align: center"><small>@ganhador2premio.ticketId.ToUpper()</small></td>
+                                                            <td style="text-align: center"><small>@(ganhador2premio.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                        </tr>
+                                                    </table>
+                                                    <small>Observação: <span style="background-color: #FAEC37">@ganhador2premio.clienteViewModel.nome foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</span> </small>
+                                                    <p>&nbsp;</p>
+                                                    <p>&nbsp;</p>
+                                                </div>
+                                                <div class="item @_active5">
+                                                    <h4 style="font-family: Verdana">Clientes que acertaram o Palpite da final da copa</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #406546; color: #fff">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Alemanha</th>
+                                                                <th style="text-align: center">Argentina</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr style="background-color: #FAEC37">
+                                                            <td style="text-align: left;"><small>SEBASTIAO RODRIGUES DA SILVA</small></td>
+                                                            <td style="text-align: center"><small>BRFAQM </small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>ALTEMIR NEVES DE SOUZA</small></td>
+                                                            <td style="text-align: center"><small>MTKALR</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>ALTEMIR NEVES DE SOUZA</small></td>
+                                                            <td style="text-align: center"><small>MTKDRL</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>ANGELO ANTONIO PINTO</small></td>
+                                                            <td style="text-align: center"><small>BREVW7</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>CLEVER DE BRITO NEVES</small></td>
+                                                            <td style="text-align: center"><small>CTBYK1</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>CLEVER DE BRITO NEVES</small></td>
+                                                            <td style="text-align: center"><small>CTBZY0</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                            <td style="text-align: center"><small>MTJMNT</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                            <td style="text-align: center"><small>MTJZPE</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                            <td style="text-align: center"><small>MTKD44</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                            <td style="text-align: center"><small>MTKDY6</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>ESMAELY JOSE DOS SANTOS LIMA</small></td>
+                                                            <td style="text-align: center"><small>MTJVCJ</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>JÔNATAS COSTA DE CARVALHO</small></td>
+                                                            <td style="text-align: center"><small>MTKCC1</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>JOSÉ HERBTH DE ALMEIDA LIMA</small></td>
+                                                            <td style="text-align: center"><small>BRFB11</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>KLAYTON DA ROCHA NEVES</small></td>
+                                                            <td style="text-align: center"><small>CTCCGT</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>NILTON PRANDO</small></td>
+                                                            <td style="text-align: center"><small>CTCAB5</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>OLIVALDO DE SOUZA RODRIGUES</small></td>
+                                                            <td style="text-align: center"><small>CTBZQQ</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                            <td style="text-align: center"><small>3</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>PETRESE HERMANN MACIEL VARELA</small></td>
+                                                            <td style="text-align: center"><small>BREX14</small></td>
+                                                            <td style="text-align: center"><small>3</small></td>
+                                                            <td style="text-align: center"><small>2</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>SINVAL OLIVEIRA DA SILVA</small></td>
+                                                            <td style="text-align: center"><small>MTJXGB</small></td>
+                                                            <td style="text-align: center"><small>3</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>SONIA DE FATIMA S DIAS</small></td>
+                                                            <td style="text-align: center"><small>MTJSUT</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                            <td style="text-align: center"><small>0</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>ZELITO DOS ANJOS DO NASCIMENTO</small></td>
+                                                            <td style="text-align: center"><small>MTJUDU</small></td>
+                                                            <td style="text-align: center"><small>1</small></td>
+                                                            <td style="text-align: center"><small>3</small></td>
+                                                        </tr>
+                                                    </table>
+                                                    <p>&nbsp;</p>
+                                                    <h4 style="font-family: Verdana">Clientes que acertaram o Palpite e o placar Alemanha 1 x 0 Argentina</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #406546; color: #fff">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr style="background-color: #FAEC37">
+                                                            <td style="text-align: left;"><small>SEBASTIAO RODRIGUES DA SILVA</small></td>
+                                                            <td style="text-align: center"><small>BRFAQM </small></td>
+                                                            <td style="text-align: center"><small>01/07/2014</small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>EDNA MORAIS</small></td>
+                                                            <td style="text-align: center"><small>MTKDY6</small></td>
+                                                            <td style="text-align: center"><small>04/07/2014</small></td>
+                                                        </tr>
+                                                    </table>
+                                                    <p>&nbsp;</p>
+                                                    <h4 style="font-family: Verdana">Ganhador do 3º Prêmio</h4>
+                                                    <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                        <caption></caption>
+                                                        <thead style="background-color: #406546; color: #fff">
+                                                            <tr>
+                                                                <th style="text-align: center">Nome</th>
+                                                                <th style="text-align: center">Nº da Sorte</th>
+                                                                <th style="text-align: center">Data do Palpite</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr>
+                                                            <td style="text-align: left;"><small>SEBASTIAO RODRIGUES DA SILVA</small></td>
+                                                            <td style="text-align: center"><small>BRFAQM </small></td>
+                                                            <td style="text-align: center"><small>01/07/2014</small></td>
+                                                        </tr>
+                                                    </table>
+                                                    <small>Observação: <span style="background-color: #FAEC37">SEBASTIAO RODRIGUES DA SILVA foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</span> </small>
+                                                    <p>&nbsp;</p>
+                                                    <p>&nbsp;</p>
+                                                </div>
+                                            </div>
+                                            @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                                </a>
+                                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                                </a>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="padding: 10px">
+                            <div class="row">
+                                <div class="col-md-9"><h3 style="margin-top: 3px">Ganhadores do Bolaaaaço da Norte Refrigeração</h3></div>
+                                <div class="col-md-3"><button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

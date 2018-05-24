@@ -17,8 +17,8 @@
                         </div>
                         <div class="col-md-7">
                             <div class="row">
-                                <div class="col-md-7">@Html.ActionLink("Dê seu Palpite", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-success", @style = "font-weight: bold; font-size: large" })</div>
-                                <div class="col-md-5" style="padding-top: 4px"><a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Instruções</a>   </div>
+                                @*<div class="col-md-7">@Html.ActionLink("Dê seu Palpite", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-success", @style = "font-weight: bold; font-size: large" })</div>*@
+                                <div class="col-md-5 pull-right" style="padding-top: 4px"><a class="btn btn-default" href="#modal-container-964987a" data-toggle="modal">Instruções</a>   </div>
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
     $('#uf').mask('aa');
     $("#cpf").mask("999.999.999-99");
     $("#cep").mask("99999-999");
-    $("#telefone").mask("99 9999-9999");
+    $("#telefone").mask("99 99999-9999");
 
     if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
         $('.form-control').keypress(function (e) {

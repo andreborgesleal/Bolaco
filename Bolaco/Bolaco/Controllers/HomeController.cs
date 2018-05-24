@@ -8,7 +8,6 @@ using DWM.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Bolaco.Controllers
@@ -68,7 +67,7 @@ namespace Bolaco.Controllers
                         if (value.mensagem.Code > 0)
                             throw new App_DominioException(value.mensagem);
 
-                        Success("Registro incluído com sucesso. Foi enviado uma confirmação do palpite para o seu e-mail.");
+                        Attention("Seu palpite foi incluído com sucesso e será validado pela administração conforme regras da campanha. Uma notificação de confirmação do palpite foi enviada para o seu e-mail.");
                         return RedirectToAction("Index", "Home");
                     }
                     catch (App_DominioException ex)

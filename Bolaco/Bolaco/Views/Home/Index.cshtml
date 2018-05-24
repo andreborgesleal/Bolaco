@@ -27,7 +27,8 @@
                             <div class="col-md-offset-8">
                                 <a class="label" href="#" data-toggle="modal"><input type="button" value="Resumo" onclick="window.location='../Home/ResumoGerencial'" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
                                 <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
-                                <a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                                <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
+                                @*<a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>*@
                             </div>
 
                         }
@@ -35,7 +36,8 @@
                         {
                             <div class="col-md-offset-9">
                                 <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
-                                <a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                                @*<a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>*@
+                                <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
                             </div>
                         }
                     </div>
@@ -133,21 +135,23 @@
                                                             </div>
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
-                                                            <b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>
+                                                            @*<b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>*@
+                                                            <input type="text" id="score1Brasil" name="score1Brasil" value="" class="form-control input-sm text-center" />
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
                                                             X
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
-                                                            <b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>
+                                                            @*<b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>*@
+                                                            <input type="text" id="score1Croacia" name="score1Croacia" value="" class="form-control input-sm text-center" />
                                                         </td>
                                                         <td style="width: 21%; text-align: left">
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <b>Croácia</b>
+                                                                    <b>Suíça</b>
                                                                 </div>
                                                                 <div class="col-md-offset-3">
-                                                                    <img src="..\Content\images\bandeira-da-croacia.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">    
+                                                                    <img src="..\Content\images\bandeira_suica.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">    
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -168,9 +172,10 @@
                                                             </div>
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 15:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-22 09:00"))
                                                             {
-                                                                @Html.TextBoxFor(m => m.score2Brasil, new { @class = "form-control input-sm" })
+                                                                @*@Html.TextBoxFor(m => m.score2Brasil, new { @class = "form-control input-sm" })*@
+                                                                <input type="text" id="score2Brasil" name="score2Brasil" value="" class="form-control input-sm text-center" />
                                                             }
                                                             else
                                                             {
@@ -181,9 +186,10 @@
                                                             X
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-17 15:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-22 09:00"))
                                                             {
-                                                                @Html.TextBoxFor(m => m.score2Mexico, new { @class = "form-control input-sm" })
+                                                                @*@Html.TextBoxFor(m => m.score2Mexico, new { @class = "form-control input-sm" })*@
+                                                                <input type="text" id="score2Mexico" name="score2Mexico" value="" class="form-control input-sm text-center" />
                                                             }
                                                             else
                                                             {
@@ -193,10 +199,10 @@
                                                         <td style="width: 21%; text-align: left">
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <b>México</b>
+                                                                    <b>Costa Rica</b>
                                                                 </div>
                                                                 <div class="col-md-offset-3">
-                                                                    <img src="..\Content\images\bandeira-do-méxivo.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                    <img src="..\Content\images\bandeira_costa_rica.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -217,9 +223,10 @@
                                                             </div>
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 16:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-27 15:00"))
                                                             {
-                                                                @Html.TextBoxFor(m => m.score3Brasil, new { @class = "form-control input-sm" })
+                                                                @*@Html.TextBoxFor(m => m.score3Brasil, new { @class = "form-control input-sm" })*@
+                                                                <input type="text" id="score3Brasil" name="score3Brasil" value="" class="form-control input-sm text-center" />
                                                             }
                                                             else
                                                             {
@@ -230,9 +237,10 @@
                                                             X
                                                         </td>
                                                         <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-06-23 16:00"))
+                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-27 15:00"))
                                                             {
-                                                                @Html.TextBoxFor(m => m.score3Camaroes, new { @class = "form-control input-sm" })
+                                                                @*@Html.TextBoxFor(m => m.score3Camaroes, new { @class = "form-control input-sm" })*@
+                                                                <input type="text" id="score3Camaroes" name="score3Camaroes" value="" class="form-control input-sm text-center" />
                                                             }
                                                             else
                                                             {
@@ -242,16 +250,153 @@
                                                         <td style="width: 21%; text-align: left">
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                    <b>Camarões</b>
+                                                                    <b>Sérvia</b>
                                                                 </div>
                                                                 <div class="col-md-offset-3">
-                                                                    <img src="..\Content\images\bandeira-de-camaroes.png" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                    <img src="..\Content\images\bandeira_servia.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    <!-- Oitavas de final -->
                                                     <tr>
-                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-07-08 16:00"))
+                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-02 11:00"))
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                <b>Oitavas de Final</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                Brasil
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <input type="text" id="score4Brasil" name="score4Brasil" value="" class="form-control input-sm text-center" />
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <input type="text" id="score4OutraSelecao" name="score4OutraSelecao" value="" class="form-control input-sm text-center" />
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                Seleção (8ª de final)
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                Oitavas de Final
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                Brasil
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 20).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 21).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                Seleção (8ª de final)
+                                                            </td>
+                                                        }
+
+                                                    </tr>
+                                                    <!-- Quartas de final -->
+                                                    <tr>
+                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-06 15:00"))
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                <b>Quartas de Final</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                Brasil
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <input type="text" id="score5Brasil" name="score5Brasil" value="" class="form-control input-sm text-center" />
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <input type="text" id="score5OutraSelecao" name="score5OutraSelecao" value="" class="form-control input-sm text-center" />
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                Seleção (4ª de final)
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                Quartas de Final
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                Brasil
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 22).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 23).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                Seleção (4ª de final)
+                                                            </td>
+                                                        }
+
+                                                    </tr>
+                                                    <!-- Semifinal -->
+                                                    <tr>
+                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-10 15:00"))
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                <b>Semifinal</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                Brasil
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <input type="text" id="score6Brasil" name="score6Brasil" value="" class="form-control input-sm text-center" />
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <input type="text" id="score6OutraSelecao" name="score6OutraSelecao" value="" class="form-control input-sm text-center" />
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                Seleção (Semifinal)
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td style="width: 20%; text-align: center">
+                                                                Semifinal
+                                                            </td>
+                                                            <td style="width: 21%; text-align: right">
+                                                                <b>Brasil</b>
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 24).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                X
+                                                            </td>
+                                                            <td style="text-align: center; width: 5%">
+                                                                <b>@Model.Parametros.Where(info => info.paramId == 25).FirstOrDefault().valor</b>
+                                                            </td>
+                                                            <td style="width: 21%; text-align: left">
+                                                                <b>Seleção (Semifinal)</b>
+                                                            </td>
+                                                        }
+                                                    </tr>
+                                                    <tr>
+                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-15 12:00"))
                                                         {
                                                             <td style="width: 20%; text-align: center">
                                                                 <b>Final da Copa</b>
@@ -360,7 +505,7 @@
                                                         Detalhe do Palpite
                                                     </h2>
                                                 </div>
-                                                <div class="modal-body" style="overflow-y: auto; height: 450px">
+                                                <div class="modal-body" style="overflow-y: auto; height: 500px">
                                                     <div class="row clearfix">
                                                         <div class="col-md-4">
                                                             <div class="form-group" style="padding-right: 60px; padding-left: 15px">
@@ -426,10 +571,10 @@
                                                                     <td style="width: 21%; text-align: left">
                                                                         <div class="row">
                                                                             <div class="col-md-8">
-                                                                                <b>Croácia</b>
+                                                                                <b>Suíça</b>
                                                                             </div>
                                                                             <div class="col-md-offset-3">
-                                                                                <img src="..\Content\images\bandeira-da-croacia.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                                <img src="..\Content\images\bandeira_suica.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -460,10 +605,10 @@
                                                                     <td style="width: 21%; text-align: left">
                                                                         <div class="row">
                                                                             <div class="col-md-8">
-                                                                                <b>México</b>
+                                                                                <b>Costa Rica</b>
                                                                             </div>
                                                                             <div class="col-md-offset-3">
-                                                                                <img src="..\Content\images\bandeira-do-méxivo.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                                <img src="..\Content\images\bandeira_costa_rica.jpg" class="img-circle" style="height: 20px; width: 20px" alt="0">
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -494,10 +639,112 @@
                                                                     <td style="width: 21%; text-align: left">
                                                                         <div class="row">
                                                                             <div class="col-md-8">
-                                                                                <b>Camarões</b>
+                                                                                <b>Sérvia</b>
                                                                             </div>
                                                                             <div class="col-md-offset-3">
-                                                                                <img src="..\Content\images\bandeira-de-camaroes.png" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                                <img src="..\Content\images\bandeira_servia.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Oitavas de Final</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4" style="text-align: right; padding-right: 20px">
+                                                                                <b>Brasil</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score4Brasil" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score4OutraSelecao" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <b>Seleção (8ª de final)</b>
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                &nbsp;
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Quartas de Final</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4" style="text-align: right; padding-right: 20px">
+                                                                                <b>Brasil</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score5Brasil" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score5OutraSelecao" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <b>Seleção (4ª de final)</b>
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                &nbsp;
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 20%; text-align: center">
+                                                                        <b>Semifinal</b>
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                            </div>
+                                                                            <div class="col-md-offset-4" style="text-align: right; padding-right: 20px">
+                                                                                <b>Brasil</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score6Brasil" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="text-align: center; width: 5%">
+                                                                        X
+                                                                    </td>
+                                                                    <td style="text-align: left; width: 5%">
+                                                                        <input type="text" id="_score6OutraSelecao" style="text-align: center;" class="form-control input-sm" disabled="disabled" />
+                                                                    </td>
+                                                                    <td style="width: 21%; text-align: left">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <b>Seleção (Semifinal)</b>
+                                                                            </div>
+                                                                            <div class="col-md-offset-3">
+                                                                                &nbsp;
                                                                             </div>
                                                                         </div>
                                                                     </td>
@@ -656,15 +903,15 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <img src="../Content/images/bonecoPalpite.png" alt="0">
-                            <img src="../Content/images/selo.png" alt="0" style="margin-top: 10px">
+                            <img src="../../Content/images/logo_bolaco.png" class="img-responsive" style="width: 180px" alt="0">
+                            <img src="../Content/images/selo.png" class="img-responsive" alt="0" style="margin-top: 10px">
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
                     <div class="row">
                         <div class="col-md-offset-6" id="div-salvar">
-                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2014-07-08 16:00"))
+                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-15 12:00"))
                             {
                                 <input type="submit" value="Salvar" class="btn btn-warning" onclick="return Salvar()" />
                             }
@@ -691,13 +938,19 @@
     $('#score1Croacia').mask('9');
     $('#score2Mexico').mask('9');
     $('#score3Camaroes').mask('9');
+    $('#score4Brasil').mask('9');
+    $('#score4OutraSelecao').mask('9');
+    $('#score5Brasil').mask('9');
+    $('#score5OutraSelecao').mask('9');
+    $('#score6Brasil').mask('9');
+    $('#score6OutraSelecao').mask('9');
     $('#score1_final').mask('9');
     $('#score2_final').mask('9');
 
     $('#clienteViewModel_uf').mask('aa');
     $("#clienteViewModel_cpf").mask("999.999.999-99");
     $("#clienteViewModel_cep").mask("99999-999");
-    $("#clienteViewModel_telefone").mask("99 9999-9999");
+    $("#clienteViewModel_telefone").mask("99 99999-9999");
 
     if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
         $("#navegador_ie").css("height", "0px");
@@ -713,6 +966,23 @@
 
     function Salvar()
     {
+        if ($("#score1Brasil").val().trim() == '' ||
+            $("#score1Croacia").val().trim() == '' ||
+            $("#score2Brasil").val().trim() == '' ||
+            $("#score2Mexico").val().trim() == '' ||
+            $("#score3Brasil").val().trim() == '' ||
+            $("#score3Camaroes").val().trim() == '' ||
+            $("#score4Brasil").val().trim() == '' ||
+            $("#score4OutraSelecao").val().trim() == '' ||
+            $("#score5Brasil").val().trim() == '' ||
+            $("#score5OutraSelecao").val().trim() == '' ||
+            $("#score6Brasil").val().trim() == '' ||
+            $("#score6OutraSelecao").val().trim() == '')
+        {
+            ShowMessageAlert("Score/placar de todos os jogos precisam ser preenchidos antes de salvar o palpite.", "warning")
+            return false;
+        }
+
         if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) // chrome
         {
             if ($("#ticketId").val() != "" && $("#ticketId").val().length == 6 && $("#dt_compra").val() != "" && $("#selecao1Id_final").val() != "" && $("#selecao2Id_final").val() != "")
@@ -738,7 +1008,10 @@
                 ShowMessageAlert("Informe a data da compra para confirmar seu palpite","warning");
                 return false;
             }
-            else if ($("#ticketId").val() != "" && $("#ticketId").val().length == 6 && $("#dt_compra").val() != "" && $("#selecao1Id_final").val() != "" && $("#selecao2Id_final").val() != "")
+            else if ($("#ticketId").val() != "" 
+                     && $("#ticketId").val().length == 6 
+                     && $("#selecao1Id_final").val() != "" 
+                     && $("#selecao2Id_final").val() != "")
             {
                 if ($("#ticketId").val().substring(0,2).toUpperCase() != 'MT' && $("#ticketId").val().substring(0,2).toUpperCase() != 'CT' && $("#ticketId").val().substring(0,2).toUpperCase() != 'BR' )
                 {
@@ -829,6 +1102,37 @@
         {
             $("#_score3Brasil").val("-");
             $("#_score3Camaroes").val("-");
+        }
+
+        if (jsonObj[index].score4Brasil != "-1")
+        {
+            $("#_score4Brasil").val(jsonObj[index].score4Brasil);
+            $("#_score4OutraSelecao").val(jsonObj[index].score4OutraSelecao);
+        }
+        else
+        {
+            $("#_score4Brasil").val("-");
+            $("#_score4OutraSelecao").val("-");
+        }
+        if (jsonObj[index].score5Brasil != "-1")
+        {
+            $("#_score5Brasil").val(jsonObj[index].score5Brasil);
+            $("#_score5OutraSelecao").val(jsonObj[index].score5OutraSelecao);
+        }
+        else
+        {
+            $("#_score5Brasil").val("-");
+            $("#_score5OutraSelecao").val("-");
+        }
+        if (jsonObj[index].score6Brasil != "-1")
+        {
+            $("#_score6Brasil").val(jsonObj[index].score6Brasil);
+            $("#_score6OutraSelecao").val(jsonObj[index].score6OutraSelecao);
+        }
+        else
+        {
+            $("#_score6Brasil").val("-");
+            $("#_score6OutraSelecao").val("-");
         }
 
         $("#_selecao1_final").val(jsonObj[index].nome_selecao1Final);

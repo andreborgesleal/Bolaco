@@ -3,6 +3,12 @@
     Layout = "~/Views/Shared/_LayoutPalpite.cshtml";
     ViewBag.Title = "Bolaaaaço";
 }
+
+<script src="~/Content/RGraph/libraries/RGraph.common.core.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.drawing.background.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.line.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.bar.js"></script>
+
 <div class="row" style="background-color: #fff; padding: 10px;">
     
     <ol class="breadcrumb">
@@ -11,41 +17,88 @@
         <li><a href="ResumoGerencial" style="color: #FAEC37">Resumo (Atualizar)</a></li>
     </ol>
     <div class="col-md-12 col-xs-12">
-        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
-            <caption>
-            <h3 style="font-family: Verdana">Resumo de Palpites por Loja</h3></caption>
-            <thead style="background-color: #FAEC37">
-                <tr>
-                    <th style="text-align: left">Loja</th>
-                    <th style="text-align: center">Quantidade</th>
-                </tr>
-            </thead>
-            @foreach (DWM.Models.Repositories.ResumoGerencial1ViewModel r1 in Model.resumo1)
-            {
-                <tr>
-                    <td style="text-align: left">@r1.loja.ToUpper()</td>
-                    <td style="text-align: center">@r1.qte_palpites</td>
-                </tr>
-            }
-        </table>    
+        <div class="row">
+            <div class="col-md-6">
+                <div style="padding: 5px">
+                    <canvas id="cvs1" width="550" height="250">[No canvas support]</canvas>
+                </div>
+                @{
+                    string[] dataPag_1;
+                    string[] dataVal1_1;
+                    decimal[] dataVal_1;
+
+                    dataPag_1 = String.Join(",", (from obj in Model.resumo1 select obj.loja.ToUpper())).Split(',');
+                    dataVal1_1 = String.Join(",", (from obj in Model.resumo1 select obj.qte_palpites)).Split(',');
+
+                    dataVal_1 = new decimal[dataPag_1.Length];
+                    for (int i = 0; i <= dataVal1_1.Length - 1; i++)
+                    {
+                        dataVal_1[i] = decimal.Parse(dataVal1_1[i]);
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+                    <caption>
+                        <h3 style="font-family: Verdana">Resumo de Palpites por Loja</h3>
+                    </caption>
+                    <thead style="background-color: #2d7d34">
+                        <tr>
+                            <th style="text-align: left; color: #fff">Loja</th>
+                            <th style="text-align: center; color: #fff">Quantidade</th>
+                        </tr>
+                    </thead>
+                    @foreach (DWM.Models.Repositories.ResumoGerencial1ViewModel r1 in Model.resumo1)
+                    {
+                        <tr>
+                            <td style="text-align: left">@r1.loja.ToUpper()</td>
+                            <td style="text-align: center">@r1.qte_palpites</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
     </div>
     <div class="col-md-12 col-xs-12">
-        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
-            <caption><h3 style="font-family: Verdana">Resumo de Cadastros por Loja</h3></caption>
-            <thead style="background-color: #FAEC37">
-                <tr>
-                    <th style="text-align: left">Loja</th>
-                    <th style="text-align: center">Quantidade</th>
-                </tr>
-            </thead>
-            @foreach (DWM.Models.Repositories.ResumoGerencial2ViewModel r2 in Model.resumo2)
-            {
-                <tr>
-                    <td style="text-align: left">@r2.loja.ToUpper()</td>
-                    <td style="text-align: center">@r2.qte_cadastros</td>
-                </tr>
-            }
-        </table>
+        <div class="row">
+            <div class="col-md-6">
+                <div style="padding: 5px">
+                    <canvas id="cvs2" width="550" height="250">[No canvas support]</canvas>
+                </div>
+                @{
+                    string[] dataPag_2;
+                    string[] dataVal1_2;
+                    decimal[] dataVal_2;
+
+                    dataPag_2 = String.Join(",", (from obj in Model.resumo2 select obj.loja.ToUpper())).Split(',');
+                    dataVal1_2 = String.Join(",", (from obj in Model.resumo2 select obj.qte_cadastros)).Split(',');
+
+                    dataVal_2 = new decimal[dataPag_2.Length];
+                    for (int i = 0; i <= dataVal1_2.Length - 1; i++)
+                    {
+                        dataVal_2[i] = decimal.Parse(dataVal1_2[i]);
+                    }
+                }
+            </div>
+            <div class="col-md-6">
+                <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
+                    <caption><h3 style="font-family: Verdana">Resumo de Cadastros por Loja</h3></caption>
+                    <thead style="background-color: #FAEC37">
+                        <tr>
+                            <th style="text-align: left">Loja</th>
+                            <th style="text-align: center">Quantidade</th>
+                        </tr>
+                    </thead>
+                    @foreach (DWM.Models.Repositories.ResumoGerencial2ViewModel r2 in Model.resumo2)
+                    {
+                        <tr>
+                            <td style="text-align: left">@r2.loja.ToUpper()</td>
+                            <td style="text-align: center">@r2.qte_cadastros</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
     </div>
     <div class="col-md-12 col-xs-12">
         <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
@@ -67,21 +120,41 @@
             }
         </table>
     </div>
+    <p>&nbsp;</p>
     <div class="col-md-12 col-xs-12">
+        <canvas id="cvs" width="1024" height="250">
+            [No canvas support]
+        </canvas>
         <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
-            <caption><h3 style="font-family: Verdana">Palpites por dia</h3></caption>
+            @*<caption><h3 style="font-family: Verdana">Palpites por dia</h3></caption>*@
+            <caption>&nbsp;</caption>
             <thead style="background-color: #FAEC37">
                 <tr>
                     <th style="text-align: center">Data</th>
                     <th style="text-align: center">Quantidade</th>
                 </tr>
             </thead>
-            @foreach (DWM.Models.Repositories.ResumoGerencial4ViewModel r4 in Model.resumo4.OrderByDescending(info => info.dt_palpite))
-            {
-                <tr>
-                    <td style="text-align: center">@r4.dt_palpite.ToString("dd/MM/yyyy")</td>
-                    <td style="text-align: center">@r4.qte_palpites</td>
-                </tr>
+            @{
+                string[] dataPag;
+                string[] dataVal1;
+                decimal[] dataVal;
+                dataPag = String.Join(",", (from obj in Model.resumo4 select obj.dt_palpite.ToString("dd/MM"))).Split(',');
+                dataVal1 = String.Join(",", (from obj in Model.resumo4 select obj.qte_palpites)).Split(',');
+
+                dataVal = new decimal[dataPag.Length];
+                for (int i = 0; i <= dataVal1.Length - 1; i++)
+                {
+                    dataVal[i] = decimal.Parse(dataVal1[i]);
+                }
+
+
+                foreach (DWM.Models.Repositories.ResumoGerencial4ViewModel r4 in Model.resumo4.OrderByDescending(info => info.dt_palpite))
+                {
+                    <tr>
+                        <td style="text-align: center">@r4.dt_palpite.ToString("dd/MM/yyyy")</td>
+                        <td style="text-align: center">@r4.qte_palpites</td>
+                    </tr>
+                }
             }
         </table>
     </div>
@@ -108,3 +181,90 @@
         <a class="label" href="#" data-toggle="modal"><input type="button" value="Voltar" onclick="history.go(-1)" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
     </div>
 </div>
+
+@*Palpites por dia*@
+<script>
+    var aData = @Html.Raw(Json.Encode(dataVal.ToArray()));
+    var aXaxisLabels = @Html.Raw(Json.Encode(dataPag.ToArray()));
+
+    new RGraph.Drawing.Background({
+        id: 'cvs',
+        options: {
+            gutterLeft: 55,
+            gutterRight: 35,
+            gutterTop: 35,
+            gutterBottom: 35,
+            backgroundGridAutofitNumvlines:48,
+            backgroundGridAutofitNumhlines: 20,
+            backgroundGridColor: '#eee'
+        }
+    }).draw();
+
+    new RGraph.Line({
+        id: 'cvs',
+        data: aData,
+        options: {
+            labels: aXaxisLabels,
+            gutterLeft: 55,
+            gutterRight: 35,
+            gutterBottom: 35,
+            gutterTop: 35,
+            title: 'Palpites por dia',
+            backgroundGridColor: '#aaa',
+            backgroundGridDashed: true,
+            textAccessible: true,
+            scaleZerostart: true,
+            labelsOffsety: 5
+        }
+    }).draw();
+</script>
+
+@*Palpites por loja*@
+<script>
+    var aData_1 = @Html.Raw(Json.Encode(dataVal_1.ToArray()));
+    var aData1_1 = @Html.Raw(Json.Encode(dataVal1_1.ToArray()));
+    var aXaxisLabels_1 = @Html.Raw(Json.Encode(dataPag_1.ToArray()));
+
+    new RGraph.Bar({
+        id: 'cvs1',
+        data: aData_1, //[33, 25, 12, 10, 20, 33, 65, 12],
+        options: {
+            labels: aXaxisLabels_1, // ['Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça', 'Brasil 1 x 1 Suíça', 'Brasil 0 x 3 Suíça', 'Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça'],
+            unitsPost: ' ',
+            shadow: false,
+            colors: ['green'],
+            strokestyle: 'rgba(0,0,0,0)',
+            textSize: 9,
+            title: 'Palpites por Loja',
+            numyticks: 5,
+            noxaxis: true,
+            gutterLeft: 50
+        }
+    }).draw();
+</script>
+
+
+
+@*Cadastros por loja*@
+<script>
+    var aData_2 = @Html.Raw(Json.Encode(dataVal_2.ToArray()));
+    var aData1_2 = @Html.Raw(Json.Encode(dataVal1_2.ToArray()));
+    var aXaxisLabels_2 = @Html.Raw(Json.Encode(dataPag_2.ToArray()));
+
+    new RGraph.Bar({
+        id: 'cvs2',
+        data: aData_2, //[33, 25, 12, 10, 20, 33, 65, 12],
+        options: {
+            labels: aXaxisLabels_2, // ['Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça', 'Brasil 1 x 1 Suíça', 'Brasil 0 x 3 Suíça', 'Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça'],
+            unitsPost: ' ',
+            shadow: false,
+            colors: ['yellow'],
+            strokestyle: 'rgba(0,0,0,0)',
+            textSize: 9,
+            title: 'Cadastros por Loja',
+            numyticks: 5,
+            noxaxis: true,
+            gutterLeft: 50
+        }
+    }).draw();
+</script>

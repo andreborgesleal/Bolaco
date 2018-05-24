@@ -2,8 +2,15 @@
 @{
     Layout = null;
 }
-<div class="modal fade" id="modal-container-964987f" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+
+<script src="~/Content/RGraph/libraries/RGraph.common.core.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.bar.js"></script>
+
+<script src="~/Content/RGraph/libraries/RGraph.common.key.js"></script>
+<script src="~/Content/RGraph/libraries/RGraph.pie.js"></script>
+
+<div class="modal" id="modal-container-964987f" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -11,21 +18,70 @@
                     Estatísticas
                 </h2>
             </div>
-            <div class="modal-body" style="overflow-y: auto; height: 450px">
+            <div class="modal-body" style="overflow-y: auto;">
                 <div class="carousel slide">
                     <div class="carousel-inner">
                         <div class="item active">
                             <div id="div-est">
                                 <div class="bs-example bs-example-tabs" style="margin-top: 15px">
                                     <ul id="myTab" class="nav nav-tabs">
-                                        <li><a href="#BrasilXCroacia" data-toggle="tab">Primeiro jogo</a></li>
+                                        <li class="active"><a href="#BrasilXCroacia" data-toggle="tab">Primeiro jogo</a></li>
                                         <li><a href="#BrasilXMexico" data-toggle="tab">Segundo jogo</a></li>
                                         <li><a href="#BrasilXCamaroes" data-toggle="tab">Terceiro jogo</a></li>
-                                        <li class="active"><a href="#Final" data-toggle="tab">Final da Copa</a></li>
+                                        <li><a href="#Brasil4XOutraSelecao" data-toggle="tab">Oitavas de final</a></li>
+                                        <li><a href="#Brasil5XOutraSelecao" data-toggle="tab">Quartas de final</a></li>
+                                        <li><a href="#Brasil6XOutraSelecao" data-toggle="tab">Semifinal</a></li>
+                                        <li><a href="#Final" data-toggle="tab">Final da Copa</a></li>
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
-                                        <div class="tab-pane fade" id="BrasilXCroacia">
-                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 1))
+                                        <!-- Primeiro Jogo -->
+                                        <div class="tab-pane fade active in" id="BrasilXCroacia">
+                                            <div style="padding: 15px">
+                                                <canvas id="cvs" width="850" height="250">[No canvas support]</canvas>
+                                            </div>
+
+                                            <div id="container" style="display: inline-block; position: relative">
+                                                <canvas id="cvsPie" width="350" height="350">[No canvas support]</canvas>
+                                            </div>
+
+                                            @{ 
+                                                string[] dataPag;
+                                                string[] dataVal1;
+                                                decimal[] dataVal;
+                                                int QteTotal = (from obj in Model where obj.jogo == 1 select obj.quantidade).Take(8).Sum();
+
+                                                dataPag = String.Join(",", (from obj in Model where obj.jogo == 1 select obj.nome_selecao1 + " " + obj.score_selecao1.ToString() + " x " + obj.score_selecao2.ToString()  + " " + obj.nome_selecao2).Take(8)).Split(',');
+                                                dataVal1 = String.Join(",", (from obj in Model where obj.jogo == 1 select obj.quantidade).Take(8)).Split(',');
+
+                                                dataVal = new decimal[dataPag.Length];
+                                                for (int i = 0; i <= dataVal1.Length - 1; i++)
+                                                {
+                                                    dataVal[i] = (decimal.Parse(dataVal1[i])/(decimal)QteTotal)*100;
+                                                }
+                                            }
+
+                                        </div>
+                                        <!-- Segundo Jogo -->
+                                        <div class="tab-pane fade" id="BrasilXMexico">
+                                            @*<canvas id="cvs2" width="850" height="350">
+                                                [No canvas support]
+                                            </canvas>
+                                            @{
+                                                string[] dataPag2;
+                                                string[] dataVal12;
+                                                decimal[] dataVal2;
+                                                int QteTotal2 = (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(8).Sum();
+
+                                                dataPag2 = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.nome_selecao1 + " " + obj.score_selecao1.ToString() + " x " + obj.score_selecao2.ToString() + " " + obj.nome_selecao2).Take(8)).Split(',');
+                                                dataVal12 = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(8)).Split(',');
+
+                                                dataVal2 = new decimal[dataPag2.Length];
+                                                for (int i = 0; i <= dataVal12.Length - 1; i++)
+                                                {
+                                                    dataVal2[i] = (decimal.Parse(dataVal12[i]) / (decimal)QteTotal2) * 100;
+                                                }
+                                            }*@
+                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 2))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
                                                 string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
@@ -49,31 +105,7 @@
                                                 </div>
                                             }
                                         </div>
-                                        <div class="tab-pane fade" id="BrasilXMexico">
-                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 2))
-                                            {
-                                                decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
-                                                string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
-                                                string _valueNow = percent.ToString().Replace(",", ".");
-                                                <div class="row clearfix" style="margin-top: 2px">
-                                                    <div class="col-md-9">
-                                                        <div class="col-md-1"><img src="..\Content\images\@obj.bandeira_selecao1" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
-                                                        <div class="col-md-2">@obj.nome_selecao1</div>
-                                                        <div class="col-md-1">@obj.score_selecao1</div>
-                                                        <div class="col-md-1">X</div>
-                                                        <div class="col-md-1">@obj.score_selecao2</div>
-                                                        <div class="col-md-2">@obj.nome_selecao2</div>
-                                                        <div class="col-md-4"><img src="..\Content\images\@obj.bandeira_selecao2" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="progress" style="margin-top: 8px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="@_valueNow" aria-valuemin="0" aria-valuemax="100" style="@_style">
-                                                        @(App_Dominio.Models.Funcoes.FormataNumero(percent))%
-                                                    </div>
-
-                                                </div>
-                                            }
-                                        </div>
+                                        <!-- Terceiro Jogo -->
                                         <div class="tab-pane fade" id="BrasilXCamaroes">
                                             @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 3))
                                             {
@@ -99,8 +131,87 @@
                                                 </div>
                                             }
                                         </div>
-                                        <div class="tab-pane fade active in" id="Final">
+                                        <!-- Oitavas de final -->
+                                        <div class="tab-pane fade" id="Brasil4XOutraSelecao">
                                             @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 4))
+                                            {
+                                                decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
+                                                string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
+                                                string _valueNow = percent.ToString().Replace(",", ".");
+                                                <div class="row clearfix" style="margin-top: 22px">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-1"><img src="..\Content\images\@obj.bandeira_selecao1" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                                        <div class="col-md-2">@obj.nome_selecao1</div>
+                                                        <div class="col-md-1">@obj.score_selecao1</div>
+                                                        <div class="col-md-1">X</div>
+                                                        <div class="col-md-1">@obj.score_selecao2</div>
+                                                        <div class="col-md-4">@obj.nome_selecao2</div>
+                                                        <div class="col-md-2">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress" style="margin-top: 8px">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="@_valueNow" aria-valuemin="0" aria-valuemax="100" style="@_style">
+                                                        @(App_Dominio.Models.Funcoes.FormataNumero(percent))%
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        </div>
+                                        <!-- Quartas de final -->
+                                        <div class="tab-pane fade" id="Brasil5XOutraSelecao">
+                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 5))
+                                            {
+                                                decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
+                                                string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
+                                                string _valueNow = percent.ToString().Replace(",", ".");
+                                                <div class="row clearfix" style="margin-top: 22px">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-1"><img src="..\Content\images\@obj.bandeira_selecao1" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                                        <div class="col-md-2">@obj.nome_selecao1</div>
+                                                        <div class="col-md-1">@obj.score_selecao1</div>
+                                                        <div class="col-md-1">X</div>
+                                                        <div class="col-md-1">@obj.score_selecao2</div>
+                                                        <div class="col-md-4">@obj.nome_selecao2</div>
+                                                        <div class="col-md-2">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress" style="margin-top: 8px">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="@_valueNow" aria-valuemin="0" aria-valuemax="100" style="@_style">
+                                                        @(App_Dominio.Models.Funcoes.FormataNumero(percent))%
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        </div>
+                                        <!-- Semifinal -->
+                                        <div class="tab-pane fade" id="Brasil6XOutraSelecao">
+                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 6))
+                                            {
+                                                decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
+                                                string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
+                                                string _valueNow = percent.ToString().Replace(",", ".");
+                                                <div class="row clearfix" style="margin-top: 22px">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-1"><img src="..\Content\images\@obj.bandeira_selecao1" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                                        <div class="col-md-2">@obj.nome_selecao1</div>
+                                                        <div class="col-md-1">@obj.score_selecao1</div>
+                                                        <div class="col-md-1">X</div>
+                                                        <div class="col-md-1">@obj.score_selecao2</div>
+                                                        <div class="col-md-4">@obj.nome_selecao2</div>
+                                                        <div class="col-md-2">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress" style="margin-top: 8px">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="@_valueNow" aria-valuemin="0" aria-valuemax="100" style="@_style">
+                                                        @(App_Dominio.Models.Funcoes.FormataNumero(percent))%
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        </div>
+                                        <!-- Final -->
+                                        <div class="tab-pane fade" id="Final">
+                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 7))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
                                                 string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
@@ -143,4 +254,148 @@
     document.getElementById("tttt").click();
 </script>
 
+@***************@
+@*Primeiro Jogo*@
+@***************@
+<script>
+    var aData = @Html.Raw(Json.Encode(dataVal.ToArray()));
+    var aData1 = @Html.Raw(Json.Encode(dataVal1.ToArray()));
+    var aXaxisLabels = @Html.Raw(Json.Encode(dataPag.ToArray()));
 
+    new RGraph.Bar({
+        id: 'cvs',
+        data: aData, //[33, 25, 12, 10, 20, 33, 65, 12],
+        options: {
+            labels: aXaxisLabels, // ['Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça', 'Brasil 1 x 1 Suíça', 'Brasil 0 x 3 Suíça', 'Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça'],
+            unitsPost: ' %',
+            shadow: false,
+            colors: ['green'],
+            strokestyle: 'rgba(0,0,0,0)',
+            textSize: 9,
+            title: 'Brasil x Suíça (Top 8)',
+            numyticks: 5,
+            noxaxis: true,
+            gutterLeft: 50
+        }
+    }).draw();
+</script>
+
+<script>
+    var colors = ['red', 'yellow','blue','cyan','green','pink','white','#ddd'];
+
+    var key = RGraph.HTML.Key('container',
+    {
+        colors: colors,
+        labels:aXaxisLabels,
+        tableCss: {
+            position: 'absolute',
+            top: '50%',
+            right: '-100px',
+            transform: 'translateY(-50%)'
+        }
+    });
+
+    new RGraph.Pie({
+        id: 'cvsPie',
+        data: aData,
+        options: {
+            gutterLeft: 50,
+            gutterRight: 50,
+            linewidth: 0,
+            strokestyle: 'rgba(0,0,0,0)',
+            colors: colors,
+            variant: 'pie3d',
+            radius: 100,
+            radius: 80,
+            shadowOffsety: 5,
+            shadowColor: '#aaa',
+            exploded: [,,20]
+        }
+    }).draw();
+</script>
+
+@***************@
+@*Segundo Jogo *@
+@***************@
+@*<script>
+    var aData2 = @Html.Raw(Json.Encode(dataVal2.ToArray()));
+    var aData12 = @Html.Raw(Json.Encode(dataVal12.ToArray()));
+    var aXaxisLabels2 = @Html.Raw(Json.Encode(dataPag2.ToArray()));
+
+    new RGraph.HBar({
+        id: 'cvs2',
+        data: aData12,
+        options: {
+            labels: aXaxisLabels2,
+            gutterLeftAutosize: true,
+            scaleZerostart: true,
+            textAccessible: true
+        }
+    }).draw();
+</script>*@
+
+
+
+@*<script>
+    var aData2 = @Html.Raw(Json.Encode(dataVal2.ToArray()));
+    var aData12 = @Html.Raw(Json.Encode(dataVal12.ToArray()));
+    var aXaxisLabels2 = @Html.Raw(Json.Encode(dataPag2.ToArray()));
+
+    console.log(aData2);
+    console.log(aData12);
+    console.log(aXaxisLabels2);
+
+    RGraph.Reset(cvs2);
+    RGraph.Reset(container2);
+
+    new RGraph.Bar({
+        id: 'cvs2',
+        data: aData12, //[33, 25, 12, 10, 20, 33, 65, 12],
+        options: {
+            labels: aXaxisLabels2, // ['Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça', 'Brasil 1 x 1 Suíça', 'Brasil 0 x 3 Suíça', 'Brasil 3 x 0 Suíça', 'Brasil 3 x 1 Suíça', 'Brasil 1 x 0 Suíça'],
+            unitsPost: ' ',
+            shadow: false,
+            colors: ['green'],
+            strokestyle: 'rgba(0,0,0,0)',
+            textSize: 9,
+            title: 'Brasil x Costa Rica (Top 8)',
+            numyticks: 5,
+            noxaxis: true,
+            gutterLeft: 50
+        }
+    }).draw();
+</script>
+
+<script>
+    var colors2 = ['red', 'yellow','blue','cyan','green','pink','white','#ddd'];
+
+    var key2 = RGraph.HTML.Key('container2',
+    {
+        colors: colors,
+        labels:aXaxisLabels,
+        tableCss: {
+            position: 'absolute',
+            top: '50%',
+            right: '-100px',
+            transform: 'translateY(-50%)'
+        }
+    });
+
+    new RGraph.Pie({
+        id: 'cvsPie2',
+        data: aData2,
+        options: {
+            gutterLeft: 50,
+            gutterRight: 50,
+            linewidth: 0,
+            strokestyle: 'rgba(0,0,0,0)',
+            colors: colors2,
+            variant: 'pie3d',
+            radius: 100,
+            radius: 80,
+            shadowOffsety: 5,
+            shadowColor: '#aaa',
+            exploded: [,,20]
+        }
+    }).draw();
+</script>*@

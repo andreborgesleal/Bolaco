@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="1482138520" Data="20/05/2018 14:05:26">
+    <Sessao>wphiyaffutjove3lzbp44znj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Bad Request</Mensagem>
+    <NameSpace>App_Dominio.Component.SendEmail =&gt; </NameSpace>
+    <Context>enter="true",__RequestVerificationToken="CHN9qjVHsj7lO9EviLLxy7_iHsXLqliHJ3ypcwZSCQkuXYyJuJeemJCdeMrC_mwvFM2oIBVT8HmGzxrypT2tl0ptd0Yohm_saiCtAxZSPwA1",cpf="151.617.717-71",nome="Andréa santos borges leal",telefone="91 99985-1809",email="andrealeal@hotmail.com",confirmarEmail="andrealeal@hotmail.com",senha="123456",confirmacaoSenha="123456",endereco="Avenida Conselheiro Furtado 2312",complemento="OASIS 1304",cidade="BELÉM",uf="pa",cep="66040-105"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1131293521" Data="20/05/2018 15:21:56">
+    <Sessao>wphiyaffutjove3lzbp44znj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Bad Request</Mensagem>
+    <NameSpace>App_Dominio.Component.SendEmail =&gt; home</NameSpace>
+    <Context>enter="false",__RequestVerificationToken="hD88M-zMSxeboqCfyYV7NuGQb1qpZ1eVyLybOHYW0wOIzMBok2f9Mh7tsmuVdzPnAlx_A7JQ9RANNx8MaKfakY2NFvwxx2fZ4tYgqqhFN_I1",ticketId="CT3456",dt_compra="2018-05-19",dia="19",mes="05",ano="2018",Score1Brasil="2",Score1Croacia="0",score2Brasil="3",score2Mexico="0",score3Brasil="3",score3Camaroes="2",score4Brasil="1",score4OutraSelecao="0",score5Brasil="4",score5OutraSelecao="3",score6Brasil="2",score6OutraSelecao="0",selecao1Id_final="1",score1_final="4",score2_final="2",selecao2Id_final="2"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="1919341767" Data="20/05/2018 15:28:55">
+    <Sessao>wphiyaffutjove3lzbp44znj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Bad Request</Mensagem>
+    <NameSpace>App_Dominio.Component.SendEmail =&gt; home</NameSpace>
+    <Context>enter="false",__RequestVerificationToken="FEzTf7fywgkDp6RnN2FLS9yFoE3pvQao2LQWCEluoq5_in7CBDwR8GouvWkWZozTN5L8A4Grs191dmplaCFUiXevawR_lOIJVty8G7xDhR81",ticketId="CT3457",dt_compra="2018-05-19",dia="19",mes="05",ano="2018",Score1Brasil="3",Score1Croacia="1",score2Brasil="1",score2Mexico="0",score3Brasil="2",score3Camaroes="1",score4Brasil="1",score4OutraSelecao="0",score5Brasil="2",score5OutraSelecao="1",score6Brasil="1",score6OutraSelecao="2",selecao1Id_final="21",score1_final="1",score2_final="0",selecao2Id_final="2"</Context>
+    <StackTrace />
+  </LOG>
+  <LOG ID="283629201" Data="20/05/2018 15:48:42">
+    <Sessao>wphiyaffutjove3lzbp44znj</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Bad Request</Mensagem>
+    <NameSpace>App_Dominio.Component.SendEmail =&gt; home</NameSpace>
+    <Context>enter="false",__RequestVerificationToken="6e13ERJBQt5AOokPXsd1p7V2fvVIrRB4SpvSGr7dkuu6VWBolql5IU0d_3GlfHLMpDoRIingMY0rM6uDrZL2i_cWj6SWKpns8oViONQHp4k1",ticketId="CT6543",dt_compra="2018-05-19",dia="19",mes="05",ano="2018",score1Brasil="3",score1Croacia="1",score2Brasil="4",score2Mexico="0",score3Brasil="2",score3Camaroes="0",score4Brasil="1",score4OutraSelecao="0",score5Brasil="1",score5OutraSelecao="0",score6Brasil="2",score6OutraSelecao="0",selecao1Id_final="1",score1_final="2",score2_final="0",selecao2Id_final="2"</Context>
+    <StackTrace />
+  </LOG>
+</LOG>

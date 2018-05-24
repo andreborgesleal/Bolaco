@@ -40,7 +40,7 @@ namespace DWM.Models.Repositories
         }
 
 
-        [DisplayName("Brasil")]
+        [DisplayName("Brasil 1ª fase")]
         public int score1Brasil { get; set; }
 
         public string getScore1Brasil 
@@ -53,7 +53,7 @@ namespace DWM.Models.Repositories
 
         public string bandeira_brasil { get; set; }
 
-        [DisplayName("Croácia")]
+        [DisplayName("Suíça")]
         public int score1Croacia { get; set; }
 
         public string getScore1Croacia
@@ -66,7 +66,7 @@ namespace DWM.Models.Repositories
 
         public string bandeira_croacia { get; set; }
 
-        [DisplayName("Brasil")]
+        [DisplayName("Brasil 1ª fase")]
         public int score2Brasil { get; set; }
 
         public string getScore2Brasil
@@ -77,7 +77,7 @@ namespace DWM.Models.Repositories
             }
         }
 
-        [DisplayName("México")]
+        [DisplayName("Costa Rica")]
         public int score2Mexico { get; set; }
 
         public string getScore2Mexico
@@ -90,7 +90,7 @@ namespace DWM.Models.Repositories
 
         public string bandeira_mexico { get; set; }
 
-        [DisplayName("Brasil")]
+        [DisplayName("Brasil 1ª fase")]
         public int score3Brasil { get; set; }
 
         public string getScore3Brasil
@@ -101,7 +101,7 @@ namespace DWM.Models.Repositories
             }
         }
 
-        [DisplayName("Camarões")]
+        [DisplayName("Sérvia")]
         public int score3Camaroes { get; set; }
 
         public string getScore3Camaroes
@@ -113,6 +113,73 @@ namespace DWM.Models.Repositories
         }
 
         public string bandeira_camaroes { get; set; }
+
+
+        [DisplayName("Brasil 8ª de Final")]
+        public int score4Brasil { get; set; }
+
+        public string getScore4Brasil
+        {
+            get
+            {
+                return score4Brasil == -1 ? "-" : score4Brasil.ToString();
+            }
+        }
+
+        [DisplayName("Seleção 8ª de Final")]
+        public int score4OutraSelecao { get; set; }
+
+        public string getScore4OutraSelecao
+        {
+            get
+            {
+                return score4OutraSelecao == -1 ? "-" : score4OutraSelecao.ToString();
+            }
+        }
+
+        [DisplayName("Brasil 4ª de Final")]
+        public int score5Brasil { get; set; }
+
+        public string getScore5Brasil
+        {
+            get
+            {
+                return score5Brasil == -1 ? "-" : score5Brasil.ToString();
+            }
+        }
+
+        [DisplayName("Seleção 4ª de Final")]
+        public int score5OutraSelecao { get; set; }
+
+        public string getScore5OutraSelecao
+        {
+            get
+            {
+                return score5OutraSelecao == -1 ? "-" : score5OutraSelecao.ToString();
+            }
+        }
+
+        [DisplayName("Brasil Semifinal")]
+        public int score6Brasil { get; set; }
+
+        public string getScore6Brasil
+        {
+            get
+            {
+                return score6Brasil == -1 ? "-" : score6Brasil.ToString();
+            }
+        }
+
+        [DisplayName("Seleção Semifinal")]
+        public int score6OutraSelecao { get; set; }
+
+        public string getScore6OutraSelecao
+        {
+            get
+            {
+                return score6OutraSelecao == -1 ? "-" : score6OutraSelecao.ToString();
+            }
+        }
 
         [DisplayName("Seleção Finalista da Copa")]
         public int selecao1Id_Final { get; set; }

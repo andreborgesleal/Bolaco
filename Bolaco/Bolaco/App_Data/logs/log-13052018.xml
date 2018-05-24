@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LOG>
+  <LOG ID="949511418" Data="13/05/2018 09:03:08">
+    <Sessao>1sp5mgk1ifm02nmq4slvcrau</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>The provider did not return a ProviderManifestToken string. *** An error occurred while getting provider information from the database. This can be caused by Entity Framework using an incorrect connection string. Check the inner exceptions for details and ensure that the connection string is correct.</Mensagem>
+    <NameSpace>App_Dominio.Security.EmpresaSecurity`1[[App_Dominio.Entidades.App_DominioContext, App_Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] =&gt; </NameSpace>
+    <Context />
+    <StackTrace>   em System.Data.Entity.Utilities.DbProviderServicesExtensions.GetProviderManifestTokenChecked(DbProviderServices providerServices, DbConnection connection)
+   em System.Data.Entity.Infrastructure.DefaultManifestTokenResolver.&lt;&gt;c__DisplayClass1.&lt;ResolveManifestToken&gt;b__0(Tuple`3 k)
+   em System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   em System.Data.Entity.Infrastructure.DefaultManifestTokenResolver.ResolveManifestToken(DbConnection connection)
+   em System.Data.Entity.Utilities.DbConnectionExtensions.GetProviderInfo(DbConnection connection, DbProviderManifest&amp; providerManifest)
+   em System.Data.Entity.DbModelBuilder.Build(DbConnection providerConnection)
+   em System.Data.Entity.Internal.LazyInternalContext.CreateModel(LazyInternalContext internalContext)
+   em System.Data.Entity.Internal.RetryLazy`2.GetValue(TInput input)
+   em System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   em System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   em System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   em System.Data.Entity.Internal.Linq.InternalSet`1.Find(Object[] keyValues)
+   em System.Data.Entity.DbSet`1.Find(Object[] keyValues)
+   em App_Dominio.Security.EmpresaSecurity`1.EncerrarSessao(String sessionId) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Security\EmpresaSecurity.cs:linha 413</StackTrace>
+  </LOG>
+  <LOG ID="2024193284" Data="13/05/2018 11:03:45">
+    <Sessao>w4srb42doxoah0jc0yb24opd</Sessao>
+    <IP>::1</IP>
+    <HostName>DESKTOP-5TKHUUF\André</HostName>
+    <Mensagem>Referência de objeto não definida para uma instância de um objeto.</Mensagem>
+    <NameSpace>Bolaco.Controllers.AccountController =&gt; </NameSpace>
+    <Context>enter="true",__RequestVerificationToken="avj0VKWqIQ3EaFcaMq1M60FvFKRAHMya5si6tZKzDSOJAe0tDgzZGItTaqV-djm6ccchXPudJP2pPudcVbuPbaksURMncuSBiDwjF9Ae8jU1",cpf="911.334.958-93",nome="Yuri galvão de oliveira",telefone="91 99985-1806",email="yuri.galvao@uol2.com.br",confirmarEmail="yuri.galvao@uol2.com.br",senha="123456",confirmacaoSenha="123456",endereco="RUA 28 DE SETEMBRO 872",complemento="ESQUINA COM RUI BARBOSA",cidade="BELÉM",uf="pa",cep="66053-355"</Context>
+    <StackTrace>   em App_Dominio.Entidades.ProcessContext`3.SaveAll(R value, Crud operation) na C:\Sistemas\app_dominio\App_Dominio\App_Dominio\Entidades\Context.cs:linha 897
+   em Bolaco.Controllers.AccountController.Index(RegisterViewModel value, FormCollection collection) na C:\Sistemas\Bolaco\Bolaco\Bolaco\Controllers\AccountController.cs:linha 71</StackTrace>
+  </LOG>
+</LOG>

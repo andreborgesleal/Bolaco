@@ -39,6 +39,24 @@ namespace DWM.Models.Entidades
         [DisplayName("Score_Camaroes")]
         public System.Nullable<int> score3Camaroes { get; set; }
 
+        [DisplayName("Score_Brasil_Oitavas")]
+        public System.Nullable<int> score4Brasil{ get; set; }
+
+        [DisplayName("Score_OuraSelecao_Oitavas")]
+        public System.Nullable<int> score4OutraSelecao { get; set; }
+
+        [DisplayName("Score_Brasil_Quartas")]
+        public System.Nullable<int> score5Brasil { get; set; }
+
+        [DisplayName("Score_OuraSelecao_Quartas")]
+        public System.Nullable<int> score5OutraSelecao { get; set; }
+
+        [DisplayName("Score_Brasil_Semifinal")]
+        public System.Nullable<int> score6Brasil { get; set; }
+
+        [DisplayName("Score_OuraSelecao_Semifinal")]
+        public System.Nullable<int> score6OutraSelecao { get; set; }
+
         [DisplayName("Selecao1_Final")]
         public System.Nullable<int> selecao1Id_Final { get; set; }
 

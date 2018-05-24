@@ -35,17 +35,17 @@ namespace Bolaco.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            EmpresaSecurity<App_DominioContext> login = new EmpresaSecurity<App_DominioContext>();
-            if (System.Web.HttpContext.Current != null)
-                login.EncerrarSessao(System.Web.HttpContext.Current.Session.SessionID);
+            //EmpresaSecurity<App_DominioContext> login = new EmpresaSecurity<App_DominioContext>();
+            //if (System.Web.HttpContext.Current != null)
+            //    login.EncerrarSessao(System.Web.HttpContext.Current.Session.SessionID);
 
-            ListViewGanhadores list = new ListViewGanhadores();
-            IEnumerable<TicketViewModel> Ganhadores = (IEnumerable<TicketViewModel>)list.ListRepository(0, 200);
-            ViewBag.Ganhadores = Ganhadores;
+            //ListViewGanhadores list = new ListViewGanhadores();
+            //IEnumerable<TicketViewModel> Ganhadores = (IEnumerable<TicketViewModel>)list.ListRepository(0, 200);
+            //ViewBag.Ganhadores = Ganhadores;
 
-            ListViewParametros _parametros = new ListViewParametros();
-            IEnumerable<ParametroViewModel> Parametros = (IEnumerable<ParametroViewModel>)_parametros.ListRepository(0, 200);
-            ViewBag.Parametros = Parametros;
+            //ListViewParametros _parametros = new ListViewParametros();
+            //IEnumerable<ParametroViewModel> Parametros = (IEnumerable<ParametroViewModel>)_parametros.ListRepository(0, 200);
+            //ViewBag.Parametros = Parametros;
 
             return View();
         }
@@ -68,12 +68,39 @@ namespace Bolaco.Controllers
 
                     value.uri = "Account/Index"; // this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
 
+                    RegisterViewModel r = new RegisterViewModel()
+                    {
+                        email = value.email,
+                        senha = value.senha
+                    };
+
                     value = model.SaveAll(value, Crud.INCLUIR);
                     if (value.mensagem.Code > 0)
                         throw new App_DominioException(value.mensagem);
 
-                    Success("Cadastro incluído com sucesso. É preciso dar o seu palpite p/ concorrer à promoção. Só o cadastro não é suficiente. Informe seu e-mail e senha e dê o seu palpite.");
-                    return RedirectToAction("Login", "Account");
+                    EmpresaSecurity<App_DominioContext> security = new EmpresaSecurity<App_DominioContext>();
+
+                    security.EncerrarSessao(System.Web.HttpContext.Current.Session.SessionID);
+
+                    // verifica se é cliente ou se é membro da administração
+                    //ClienteModel clienteModel = new ClienteModel();
+                    //int? clienteId = clienteModel.getClienteByLogin(value.email, security);
+
+                    //if (clienteId.HasValue && clienteId.Value < 0)
+                    //    throw new DbEntityValidationException();
+
+                    #region Autorizar
+                    Validate result = security.Autorizar(r.email, r.senha, _sistema_id(), value.clienteId.ToString());
+                    if (result.Code > 0)
+                        throw new ArgumentException(result.Message);
+                    #endregion
+
+                    string sessaoId = result.Field;
+
+                    Success("Cadastro incluído com sucesso. É preciso dar o seu palpite p/ concorrer à promoção. Só o cadastro não é suficiente. Preencha o formulário abaixo e dê o seu palpite.");
+
+                    return RedirectToAction("index", "Home");
+                    //return RedirectToAction("Login", "Account");
                 }
                 catch (App_DominioException ex)
                 {
@@ -181,6 +208,12 @@ namespace Bolaco.Controllers
 
             return RedirectToAction("Login", "Account");
         }
-        
+
+        [AllowAnonymous]
+        public ActionResult _Regras()
+        {
+            return View();
+        }
+
     }
 }

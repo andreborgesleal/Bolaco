@@ -40,44 +40,79 @@ namespace DWM.Models.Persistence
             // verifica se já existe o usuário cadastrado
             UsuarioRepository u = empresaSecurity.getUsuarioByLogin(value.email, value.empresaId);
 
+            int _usuarioId = 0;
+
             if (u == null)
             {
-                #region Incluir o usuário
-                UsuarioRepository usuarioRepository = new UsuarioRepository()
+                //#region Incluir o usuário
+                //UsuarioRepository usuarioRepository = new UsuarioRepository()
+                //{
+                //    login = value.email.ToLower(),
+                //    nome = value.nome.Trim().Length <= 40 ? value.nome.ToUpper() : value.nome.Substring(0, 40).ToUpper(),
+                //    empresaId = _empresaId,
+                //    dt_cadastro = DateTime.Now,
+                //    situacao = "A",
+                //    isAdmin = "N",
+                //    senha = value.senha,
+                //    uri = value.uri,
+                //    confirmacaoSenha = value.confirmacaoSenha
+                //};
+
+                //usuarioRepository = empresaSecurity.SetUsuario(usuarioRepository);
+                //if (usuarioRepository.mensagem.Code > 0)
+                //    throw new App_DominioException(usuarioRepository.mensagem);
+
+                //u = usuarioRepository;
+                //#endregion
+
+                //#region Incluir o usuário no grupo de usuários
+                //int _grupoId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.GRUPO_USUARIO).valor);
+                //UsuarioGrupo usuarioGrupo = new UsuarioGrupo()
+                //{
+                //    usuarioId = usuarioRepository.usuarioId,
+                //    grupoId = _grupoId,
+                //    situacao = "A"
+                //};
+
+                //// ******** é aqui o erro
+                //if (usuarioGrupo.grupoId > 0)
+                //    seguranca_db.Set<UsuarioGrupo>().Add(usuarioGrupo);
+
+                ////seguranca_db.SaveChanges();
+                //#endregion
+
+                #region Usuario 
+                //EmpresaSecurity<SecurityContext> security = new EmpresaSecurity<SecurityContext>();
+
+                Usuario user = new Usuario()
                 {
-                    login = value.email.ToLower(),
                     nome = value.nome.Trim().Length <= 40 ? value.nome.ToUpper() : value.nome.Substring(0, 40).ToUpper(),
+                    login = value.email.ToLower(),
                     empresaId = _empresaId,
-                    dt_cadastro = DateTime.Now,
+                    dt_cadastro = Funcoes.Brasilia(),
                     situacao = "A",
                     isAdmin = "N",
-                    senha = value.senha,
-                    uri = value.uri,
-                    confirmacaoSenha = value.confirmacaoSenha
+                    senha = empresaSecurity.Criptografar(value.senha)
                 };
 
-                usuarioRepository = empresaSecurity.SetUsuario(usuarioRepository);
-                if (usuarioRepository.mensagem.Code > 0)
-                    throw new App_DominioException(usuarioRepository.mensagem);
-
-                u = usuarioRepository;
+                seguranca_db.Usuarios.Add(user);
                 #endregion
 
-                #region Incluir o usuário no grupo de usuários
+                #region UsuarioGrupo
                 int _grupoId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.GRUPO_USUARIO).valor);
-                UsuarioGrupo usuarioGrupo = new UsuarioGrupo()
+                UsuarioGrupo ug = new UsuarioGrupo()
                 {
-                    usuarioId = usuarioRepository.usuarioId,
+                    Usuario = user,
                     grupoId = _grupoId,
                     situacao = "A"
                 };
 
-                // ******** é aqui o erro
-                if (usuarioGrupo.grupoId > 0)
-                    seguranca_db.Set<UsuarioGrupo>().Add(usuarioGrupo);
-
-                //seguranca_db.SaveChanges();
+                seguranca_db.UsuarioGrupos.Add(ug);
                 #endregion
+
+                seguranca_db.SaveChanges();
+
+                _usuarioId = user.usuarioId;
             }
 
             #region incluir o cliente
@@ -85,7 +120,7 @@ namespace DWM.Models.Persistence
             string _url = value.uri;
 
             #region Mapear repository para entity
-            value.usuarioId = u.usuarioId;
+            value.usuarioId = _usuarioId;
             Cliente entity = clienteModel.MapToEntity(value);
             #endregion
 
@@ -123,7 +158,7 @@ namespace DWM.Models.Persistence
                 string Subject = "Confirmação de cadastro na " + empresa.nome;
                 string Text = "<p>Confirmação de cadastro</p>";
                 string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
-                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu cadastro. Seu cadastro na promoção <b>Bolaaaaço da Norte Refrigeração</b> foi realizado com sucesso.</span></p>" +
+                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de confirmação de seu cadastro. Seu cadastro na campanha <b>Bolaaaço Norte Refrigeração 2018</b> foi realizado com sucesso.</span></p>" +
                               "<table style=\"width: 95%; border: 0px solid #fff\">" +
                               "<tr>" +
                               "<td style=\"width: 55%\">" +
@@ -145,7 +180,7 @@ namespace DWM.Models.Persistence
                 }
 
                 Html += "</td>" +
-                        "<td style=\"width: 45%; vertical-align: top; float: right; padding-right: 27px\"><img src=\"http://bolaco.azurewebsites.net/Content/images/selocircular.png\"></td>" +
+                        "<td style=\"width: 45%; vertical-align: top; float: right; padding-right: 27px\"><img src=\"http://bolaco2018.azurewebsites.net/Content/images/selocircular.png\"></td>" +
                         "</tr>" +
                         "</table>";
 
@@ -155,12 +190,13 @@ namespace DWM.Models.Persistence
                         "<hr />";
 
                 Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora que o seu cadastro foi realizado, já é possível dar os seus palpites no resultado dos jogos do Brasil da primeira fase da copa e de quais seleções disputarão a grande final.</span></p>" +
-                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Acesse <a href=\"http://bolaco.azurewebsites.net/Account/Login\">Bolaaaaço da Norte Refrigeração</a> e dê os seus palpites.</span></p>" +
+                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Acesse <a href=\"http://bolaco2018.azurewebsites.net/Account/Login\">Bolaaaaço Norte Refrigeração 2018</a> e dê os seus palpites.</span></p>" +
                         "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Informe o seu login e senha para realizar o acesso na área de apostas e cadastrar os seus palpite. Nesta área você poderá:</span></p>" +
                         "<ul>"+
                         "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar os seus palpites para os jogos do Brasil na primeira fase.</span></li>" +
-                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar o seu palpite referente as seleções que farão a grande final da Copa 2014 e o placar do jogo.</span></li>" +
-                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Consultar as estatíticas dos palpites dados por todos os participantes da promoção.</span></li>" +
+                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar o seu palpite para o resultado dos jogos do Brasil nas OITAVAS DE FINA, QUARTAS DE FINAL e SEMIFINAL (caso seja classificado).</span></li>" +
+                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar o seu palpite referente as seleções que farão a grande final da Copa e o placar do jogo.</span></li>" +
+                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Consultar as estatíticas dos palpites dados por todos os participantes da campanha.</span></li>" +
                         "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Consultar todos os seus palpites. Quanto mais você comprar mais palpites poderá fazer.</span></li>" +
                         "</ul>"+
                         "<hr />" +
