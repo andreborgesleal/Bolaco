@@ -12,6 +12,11 @@ using System.Net.Mail;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity.SqlServer;
+//using Microsoft.Azure.WebJobs;
+//using Microsoft.Azure.WebJobs.Host;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Queue;
+using Newtonsoft.Json;
 
 namespace DWM.Models.Persistence
 {
@@ -139,6 +144,31 @@ namespace DWM.Models.Persistence
             }
             #endregion
 
+            #region Escreve Palpite na Fila de entrada (queue)
+            try
+            {
+                PalpiteViewModel palpite = new PalpiteViewModel()
+                {
+                    ticketId = value.ticketId,
+                    dt_compra = value.dt_compra.ToString("yyyy-MM-dd"),
+                    cpf = value.clienteViewModel.cpf,
+                    nome = value.clienteViewModel.nome,
+                    Situacao = "1",
+                    Justificativa = ""
+                };
+                string connectionString = "DefaultEndpointsProtocol=https;AccountName=dwmsistemas;AccountKey=mYOiPtcUPSPwtCUipbcm+iSX1kD1Uap7u34VbJlhT4o5Q8eO9lLHfIUX8Y/DfvoLpGhoGClOLYBhXchpwyvoeg==;EndpointSuffix=core.windows.net"; // AmbientConnectionStringProvider.Instance.GetConnectionString(ConnectionStringNames.Storage);
+                CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+                CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+                CloudQueue queue = queueClient.GetQueueReference("bolaaaco2018-in");
+                queue.CreateIfNotExists();
+                queue.AddMessage(new CloudQueueMessage(JsonConvert.SerializeObject(palpite)));
+            }
+            catch(Exception ex)
+            {
+                return new Validate() { Code = 55, Message = MensagemPadrao.Message(55).ToString(), MessageBase = ex.Message, MessageType = MsgType.ERROR };
+            }
+            #endregion
+
             return new Validate() { Code = 0, Message = MensagemPadrao.Message(0).ToString(), MessageType = MsgType.SUCCESS };
         }
 
@@ -147,7 +177,7 @@ namespace DWM.Models.Persistence
 
             Ticket t = new Ticket()
             {
-                ticketId = value.ticketId,
+                ticketId = value.ticketId.ToUpper(),
                 dt_compra = value.dt_compra,
                 clienteId = value.clienteViewModel.clienteId,
                 dt_inscricao = value.dt_inscricao,
