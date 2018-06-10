@@ -41,7 +41,7 @@
             <div class="col-md-6">
                 <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
                     <caption>
-                        <h3 style="font-family: Verdana">Resumo de Palpites por Loja</h3>
+                        <h3 style="font-family: Verdana">Resumo de Palpites por Loja</h3><span class="small">(pendentes e aprovados)</span>
                     </caption>
                     <thead style="background-color: #2d7d34">
                         <tr>
@@ -102,8 +102,9 @@
             </div>
         </div>
     </div>
+    <!-- Palpites por dia -->
     <div class="col-md-12 col-xs-12">
-        <canvas id="cvs" width="1024" height="250">
+        <canvas id="cvs" width="1124" height="350">
             [No canvas support]
         </canvas>
         <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
@@ -146,6 +147,9 @@
                 <tr>
                     <th style="text-align: center">Total de Dias</th>
                     <th style="text-align: center">Total de Cadastros</th>
+                    <th style="text-align: center">Total de Palpites Pendentes</th>
+                    <th style="text-align: center">Total de Palpites Aprovados</th>
+                    <th style="text-align: center">Total de Palpites Rejeitados</th>
                     <th style="text-align: center">Total de Palpites</th>
                     <th style="text-align: center">Média Diária (palpites)</th>
                 </tr>
@@ -153,12 +157,15 @@
             <tr>
                 <td style="text-align: center">@Model.resumo5.total_dias</td>
                 <td style="text-align: center">@Model.resumo5.total_cadastros</td>
+                <td style="text-align: center">@Model.resumo5.total_palpites_pendentes</td>
+                <td style="text-align: center">@Model.resumo5.total_palpites_aprovados</td>
+                <td style="text-align: center">@Model.resumo5.total_palpites_rejeitados</td>
                 <td style="text-align: center">@Model.resumo5.total_palpites</td>
                 <td style="text-align: center">@Model.resumo5.media_diaria_palpite</td>
             </tr>
         </table>
     </div>
-af    <div class="col-md-12 col-xs-12">
+    <div class="col-md-12 col-xs-12">
         <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding: 0px">
             <caption><h3 style="font-family: Verdana">Clientes que não deram palpites (@Model.resumo3.Count() registros)</h3></caption>
             <thead style="background-color: #FAEC37">
@@ -216,7 +223,8 @@ af    <div class="col-md-12 col-xs-12">
             backgroundGridDashed: true,
             textAccessible: true,
             scaleZerostart: true,
-            labelsOffsety: 5
+            labelsOffsety: 5,
+            fotSize: 8
         }
     }).draw();
 </script>

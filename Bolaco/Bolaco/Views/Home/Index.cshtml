@@ -462,6 +462,8 @@
                                                             <th style="text-align: center">Número da Sorte</th>
                                                             <th style="text-align: center">Data da Compra</th>
                                                             <th style="text-align: center">Data do Palpite</th>
+                                                            <th style="text-align: center">Situação</th>
+                                                            <th style="text-align: center">Justificativa</th>
                                                             <th style="text-align: center"></th>
                                                         </tr>
                                                     </thead>
@@ -479,6 +481,8 @@
                                                                 <td style="text-align: center">@t.ticketId.ToUpper()</td>
                                                                 <td style="text-align: center">@t.dt_compra.ToString("dd/MM/yyyy")</td>
                                                                 <td style="text-align: center">@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</td>
+                                                                <td style="text-align: center">@Html.Raw(t.GetSituacao())</td>
+                                                                <td class="small" style="text-align: center">@t.Justificativa</td>
                                                                 <td style="text-align: center">
                                                                     <a class="label" href="#modal-container-964987b" data-toggle="modal" style="text-decoration: none" onclick="Detail(@output, @index)"><span class="label label-success" style="font-size: 12px; color: #000">Detalhar</span></a>
                                                                 </td>

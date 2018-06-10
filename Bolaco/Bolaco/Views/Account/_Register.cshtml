@@ -32,173 +32,105 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-pills">
-                                <li><a href="#identificacao" data-toggle="tab" id="_identificacao" onclick="showBotaoSalvar(this)">Identificação</a></li>
-                                <li><a href="#endereco-panel" data-toggle="tab" id="_endereco" onclick="showBotaoSalvar(this)">Endereço</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                @* ******************** *@
-                                @* Identificação        *@
-                                @* ******************** *@
-                                <div class="tab-pane fade in active" id="identificacao" style="height: 353px">
-                                    <div class="row" style="margin-top: 15px">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.cpf, "CPF *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-4">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.cpf, new { @class = "form-control input-sm" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.nome, "Nome *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.nome, new { @class = "form-control input-sm", @Style = "width: 180%; text-transform: uppercase;", @maxlength = "50"})
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.telefone, "Telefone *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-3">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.telefone, new { @class = "form-control input-sm" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <small>(informar telefone com DDD)</small> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.email, "E-mail *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.email, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: lowercase;", @maxlength = "100" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.email, "Confirmação de E-mail *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.confirmarEmail, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: lowercase;", @maxlength = "100" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.senha, "Senha *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-3">
-                                                    <div class="input-group">
-                                                        @Html.PasswordFor(m => m.senha, new { @class = "form-control input-sm" })<br />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <small>(mínimo de 6 dígitos livres)</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.confirmacaoSenha, "Confirmação de Senha *", new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-3">
-                                                    <div class="input-group">
-                                                        @Html.PasswordFor(m => m.confirmacaoSenha, new { @class = "form-control input-sm" })
-                                                    </div>
+                            @* ******************** *@
+                            @* Identificação        *@
+                            @* ******************** *@
+                            <div class="tab-pane fade in active" id="identificacao" style="height: 353px">
+                                <div class="row" style="margin-top: 15px">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.cpf, "CPF *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(m => m.cpf, new { @class = "form-control input-sm" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                @* ******************** *@
-                                @* Endereço       *@
-                                @* ******************** *@
-                                <div class="tab-pane fade" id="endereco-panel" style="height: 353px">
-                                    <div class="row" style="margin-top: 15px">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.endereco, new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.endereco, new { @class = "form-control input-sm", @placeholder = "Endereço", @Style = "width: 180%; text-transform: uppercase;", @maxlength = "60" })
-                                                    </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.nome, "Nome *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(m => m.nome, new { @class = "form-control input-sm", @Style = "width: 180%; text-transform: uppercase;", @maxlength = "50" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.complemento, new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.complemento, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: uppercase;", @maxlength = "25" })
-                                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.telefone, "Telefone *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(m => m.telefone, new { @class = "form-control input-sm" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small>(informar telefone com DDD)</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.email, "E-mail *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(m => m.email, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: lowercase;", @maxlength = "100" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.cidade, new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        @Html.TextBoxFor(m => m.cidade, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: uppercase", @maxlength = "25" })
-                                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.email, "Confirmação de E-mail *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-8">
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(m => m.confirmarEmail, new { @class = "form-control input-sm", @style = "width: 180%; text-transform: lowercase;", @maxlength = "100" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.uf, new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-2">
-                                                    @Html.TextBoxFor(m => m.uf, new { @class = "form-control input-sm", @style = "text-transform: uppercase", @maxlength = "2" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.senha, "Senha *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.PasswordFor(m => m.senha, new { @class = "form-control input-sm" })<br />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small>(mínimo de 6 dígitos livres)</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.confirmacaoSenha, "Confirmação de Senha *", new { @class = "col-md-3 control-label" })
+                                            <div class="col-md-3">
+                                                <div class="input-group">
+                                                    @Html.PasswordFor(m => m.confirmacaoSenha, new { @class = "form-control input-sm" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.LabelFor(m => m.cep, new { @class = "col-md-3 control-label" })
-                                                <div class="col-md-3">
-                                                    @Html.TextBoxFor(m => m.cep, new { @class = "form-control input-sm" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <small><b>COMPROVAÇÃO DO CADASTRO:</b></small>
-                                            <small>O cliente receberá em seu e-mail uma mensagem de notificação confirmando seu cadastro.</small>
-                                            <small>Clicando no botão "Salvar" o cliente concorda em ter seu nome divulgado pela Norte Refrigeração para exibição dos palpiteiros, vencedores e receber em seu e-mail outras promoções que a empresa vier a publicar.</small>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <small><b>COMPROVAÇÃO DO CADASTRO:</b></small>
+                                        <small>O cliente receberá em seu e-mail uma mensagem de notificação confirmando seu cadastro.</small>
+                                        <small>Clicando no botão "Salvar" o cliente concorda em ter seu nome divulgado pela Norte Refrigeração para exibição dos palpiteiros, vencedores e receber em seu e-mail outras promoções que a empresa vier a publicar.</small>
                                     </div>
                                 </div>
                             </div>
@@ -207,13 +139,7 @@
                 </div>
                 <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
                     <div class="row">
-                        <div class="col-md-3">
-                            <a class="btn btn-default" onclick="nextButtom()"><span id="Next">Próximo</span></a>
-                        </div>
-                        <div class="col-md-7">
-                            <small style="color: #fff">( * ) - Campo de preenchimento obrigatório</small>
-                        </div>
-                        <div class="col-md-offset-2" id="div-salvar" style="visibility: hidden">
+                        <div class="col-md-4" id="div-salvar">
                             @Html.Partial("_defaultListButtons",
                                     new List<ButtonRepository>
                                     {
@@ -222,8 +148,12 @@
                                                                     controllerName = "",
                                                                     javaScriptFunction = "validaCliente()",
                                                                     buttonType = "submit"
-                                                                } 
+                                                                }
                                     })
+                        </div>
+
+                        <div class="col-md-7">
+                            <small style="color: #fff">( * ) - Campo de preenchimento obrigatório</small>
                         </div>
                     </div>
                 </div>
@@ -249,12 +179,13 @@
                                 <small>Informar o e-mail do cliente que será utilizado tanto para realizar o acesso quanto para receber as notificações e cadastrar os palpites.</small>
                                 <small>O e-mail do cliente deve ser um e-mail válido, de uso constante e deve ser único, ou seja, não pode haver e-mails repetidos no cadastro do @ViewBag.Title</small>
                                 <small>Informar o telefone residencial, comercial ou celular (com DDD).</small>
+                                <small>Ao final do preenchimento, clique no botão Salvar.</small>
                                 <p></p>
-                                <p>1.2. Endereço</p>
+                                @*<p>1.2. Endereço</p>
                                 <small>Para complementar o seu cadastro o cliente deve informar o endereço.</small>
                                 <small>O preenchimento desses campos servirão como uma recurso adicional para localização do vencedor em caso da Norte Refrigeração não conseguir encontrar o cliente por e-mail e (ou) telefone.</small>
                                 <small>Estas informações não são de preenchimento obritatório.</small>
-                                <small>Ao final do preenchimento, clique no botão Salvar.</small>
+                                <small>Ao final do preenchimento, clique no botão Salvar.</small>*@
                             </blockquote>
                             <p><b>COMPROVAÇÃO DO CADASTRO:</b></p>
                             <p>O cliente receberá em seu e-mail uma mensagem de notificação confirmando seu cadastro.</p>
@@ -282,11 +213,7 @@
 }
 
 <script type="text/javascript">
-    document.getElementById("_identificacao").click();
-
-    $('#uf').mask('aa');
     $("#cpf").mask("999.999.999-99");
-    $("#cep").mask("99999-999");
     $("#telefone").mask("99 99999-9999");
 
     if (/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) {
@@ -327,56 +254,56 @@
     //Leia mais em: Pular campos ao pressionar Enter, utilizando Jquery http://www.devmedia.com.br/pular-campos-ao-pressionar-enter-utilizando-jquery/21726#ixzz30l23WOoi
 
 
-    function showBotaoSalvar(obj) {
-        if ($(obj).attr('id') == "_endereco") {
-            $("#div-salvar").css("visibility", "visible");
-            $("#Next").text("Anterior");
-        }
-        else {
-            $("#div-salvar").css("visibility", "hidden");
-            $("#enter").val("false");
-            $("#Next").text("Próximo");
-        }
+    //function showBotaoSalvar(obj) {
+    //    if ($(obj).attr('id') == "_endereco") {
+    //        $("#div-salvar").css("visibility", "visible");
+    //        $("#Next").text("Anterior");
+    //    }
+    //    else {
+    //        $("#div-salvar").css("visibility", "hidden");
+    //        $("#enter").val("false");
+    //        $("#Next").text("Próximo");
+    //    }
 
-    }
+    //}
 
-    function validaCliente() {
-        if ($("#enter").val() == "true") {
-            CarregandoIn();
-            if ($("#endereco").val() != null && $("#endereco").val() != "") {
-                if ($("#complemento").val() == null || $("#complemento").val() == "")
-                    $("#complemento").val(" ");
-                if ($("#cidade").val() == null || $("#cidade").val() == "")
-                    $("#cidade").val(" ");
-                if ($("#uf").val() == null || $("#uf").val() == "")
-                    $("#uf").val("PA");
-                if ($("#cep").val() == null || $("#cep").val() == "" || $("#cep").val() == "_____-___")
-                    $("#cep").val("66000000");
-            }
+    //function validaCliente() {
+    //    if ($("#enter").val() == "true") {
+    //        CarregandoIn();
+    //        if ($("#endereco").val() != null && $("#endereco").val() != "") {
+    //            if ($("#complemento").val() == null || $("#complemento").val() == "")
+    //                $("#complemento").val(" ");
+    //            if ($("#cidade").val() == null || $("#cidade").val() == "")
+    //                $("#cidade").val(" ");
+    //            if ($("#uf").val() == null || $("#uf").val() == "")
+    //                $("#uf").val("PA");
+    //            if ($("#cep").val() == null || $("#cep").val() == "" || $("#cep").val() == "_____-___")
+    //                $("#cep").val("66000000");
+    //        }
 
-            return true;
-        }
-        else
-            return false;
-        //return $("#enter").val() == "true";
-    }
+    //        return true;
+    //    }
+    //    else
+    //        return false;
+    //    //return $("#enter").val() == "true";
+    //}
 
-    function habilita() {
-        $("#enter").val("true");
-    }
+    //function habilita() {
+    //    $("#enter").val("true");
+    //}
 
-    function nextButtom() {
-        if ($("#Next").text() == "Próximo")
-        {
-            document.getElementById("_endereco").click();
-            $("#Next").text("Anterior");
-        }
-        else
-        {
-            document.getElementById("_identificacao").click();
-            $("#Next").text("Próximo");
-        }
-    }
+    //function nextButtom() {
+    //    if ($("#Next").text() == "Próximo")
+    //    {
+    //        document.getElementById("_endereco").click();
+    //        $("#Next").text("Anterior");
+    //    }
+    //    else
+    //    {
+    //        document.getElementById("_identificacao").click();
+    //        $("#Next").text("Próximo");
+    //    }
+    //}
 </script>
 
 

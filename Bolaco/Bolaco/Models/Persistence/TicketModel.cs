@@ -615,6 +615,8 @@ namespace DWM.Models.Persistence
                                     ticketId = pal.ticketId,
                                     dt_inscricao = pal.dt_inscricao,
                                     dt_compra = pal.dt_compra,
+                                    Situacao = pal.Situacao,
+                                    Justificativa = pal.Justificativa,
                                     clienteViewModel = new ClienteViewModel() { clienteId = _clienteId, nome = clienteViewModel.nome },
                                     score1Brasil = pal.score1Brasil.Value,
                                     bandeira_brasil = brasil.bandeira,
@@ -663,7 +665,7 @@ namespace DWM.Models.Persistence
             string _bandeira_camaroes = db.Selecaos.Find(4).bandeira;
 
             IEnumerable<EstatisticaViewModel> est1 = from t in db.Tickets
-                                                     where t.score1Brasil >= 0 
+                                                     where t.score1Brasil >= 0 && "1|2".Contains(t.Situacao)
                                                      group t by new { t.score1Brasil, t.score1Croacia } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -679,7 +681,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est2 = from t in db.Tickets
-                                                     where t.score2Brasil >= 0 
+                                                     where t.score2Brasil >= 0 && "1|2".Contains(t.Situacao)
                                                      group t by new { t.score2Brasil, t.score2Mexico } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -695,7 +697,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est3 = from t in db.Tickets
-                                                     where t.score3Brasil >= 0 
+                                                     where t.score3Brasil >= 0 && "1|2".Contains(t.Situacao)
                                                      group t by new { t.score3Brasil, t.score3Camaroes } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -711,7 +713,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est4 = from t in db.Tickets
-                                                     where t.score4Brasil >= 0
+                                                     where t.score4Brasil >= 0 && "1|2".Contains(t.Situacao)
                                                      group t by new { t.score4Brasil, t.score4OutraSelecao } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -727,7 +729,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est5 = from t in db.Tickets
-                                                     where t.score5Brasil >= 0
+                                                     where t.score5Brasil >= 0 && "1|2".Contains(t.Situacao)
                                                      group t by new { t.score5Brasil, t.score5OutraSelecao } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -743,7 +745,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est6 = from t in db.Tickets
-                                                     where t.score6Brasil >= 0
+                                                     where t.score6Brasil >= 0 && "1|2".Contains(t.Situacao)
                                                      group t by new { t.score6Brasil, t.score6OutraSelecao } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -759,6 +761,7 @@ namespace DWM.Models.Persistence
                                                      };
 
             IEnumerable<EstatisticaViewModel> est7 = from t in db.Tickets
+                                                     where "1|2".Contains(t.Situacao)
                                                      group t by new { t.selecao1Id_Final, t.selecao2Id_Final } into T
                                                      select new EstatisticaViewModel()
                                                      {
@@ -771,7 +774,43 @@ namespace DWM.Models.Persistence
                                                          total = qte_tickets
                                                      };
 
-            return (est1.OrderByDescending(info => info.quantidade).ToList().Union(est2.OrderByDescending(info => info.quantidade).ToList()).Union(est3.OrderByDescending(info => info.quantidade).ToList()).Union(est4.OrderByDescending(info => info.quantidade).ToList()).Union(est5.OrderByDescending(info => info.quantidade).ToList()).Union(est6.OrderByDescending(info => info.quantidade).ToList()).Union(est7.OrderByDescending(info => info.quantidade).ToList())).ToList();
+            #region Se houver na final da copa Brasil x Alemana e Alemanha x Brasil , o algoritmo abaixo fazer a troca e contabiliza somente um
+            IList<EstatisticaViewModel> estTemp = new List<EstatisticaViewModel>();
+
+            for (int i=0; i <= est7.Count()-1; i++)
+            {
+                EstatisticaViewModel tmp = est7.ElementAt(i);
+
+                if ((from temp in estTemp
+                     where temp.nome_selecao2 == tmp.nome_selecao1 
+                            && temp.nome_selecao1 == tmp.nome_selecao2
+                     select tmp).Count() == 0)
+                {
+                    EstatisticaViewModel e = new EstatisticaViewModel()
+                    {
+                        jogo = 7,
+                        bandeira_selecao1 = tmp.bandeira_selecao1,
+                        nome_selecao1 = tmp.nome_selecao1,
+                        bandeira_selecao2 = tmp.bandeira_selecao2,
+                        nome_selecao2 = tmp.nome_selecao2,
+                        quantidade = tmp.quantidade,
+                        total = tmp.total
+                    };
+                    if ((from e7 in est7
+                         where e7.nome_selecao2 == tmp.nome_selecao1
+                                && e7.nome_selecao1 == tmp.nome_selecao2
+                         select e7).Count() > 0)
+                        e.quantidade += (from e7 in est7
+                                         where e7.nome_selecao2 == tmp.nome_selecao1
+                                                && e7.nome_selecao1 == tmp.nome_selecao2
+                                         select e7).FirstOrDefault().quantidade;
+
+                    estTemp.Add(e);
+                }
+            }
+            #endregion
+
+            return (est1.OrderByDescending(info => info.quantidade).ToList().Union(est2.OrderByDescending(info => info.quantidade).ToList()).Union(est3.OrderByDescending(info => info.quantidade).ToList()).Union(est4.OrderByDescending(info => info.quantidade).ToList()).Union(est5.OrderByDescending(info => info.quantidade).ToList()).Union(est6.OrderByDescending(info => info.quantidade).ToList()).Union(estTemp.OrderByDescending(info => info.quantidade).ToList())).ToList();
         }
 
 
@@ -990,13 +1029,14 @@ namespace DWM.Models.Persistence
         public override IEnumerable<ResumoGerencialViewModel> Bind(int? index, int pageSize = 50, params object[] param)
         {
             IEnumerable<ResumoGerencial1ViewModel> r1 = (from t in db.Tickets
-                                                        group t by t.ticketId.Substring(0, 2) into T
-                                                        orderby T.Count()
-                                                        select new ResumoGerencial1ViewModel()
-                                                        {
-                                                            loja = T.Key,
-                                                            qte_palpites = T.Count()
-                                                        }).ToList();
+                                                         where "1|2".Contains(t.Situacao)
+                                                         group t by t.ticketId.Substring(0, 2) into T
+                                                         orderby T.Count()
+                                                         select new ResumoGerencial1ViewModel()
+                                                         {
+                                                             loja = T.Key,
+                                                             qte_palpites = T.Count()
+                                                         }).ToList();
 
             IEnumerable<ResumoGerencial2ViewModel> r2 = (from t in
                                                             (from t1 in db.Tickets
@@ -1048,6 +1088,9 @@ namespace DWM.Models.Persistence
                 total_dias = r4.Count(), // (from t in db.Tickets group t by t.dt_inscricao into T select T.Key).Count(),
                 total_cadastros = db.Clientes.Count(),
                 total_palpites = db.Tickets.Count(),
+                total_palpites_aprovados = db.Tickets.Where(info => info.Situacao == "2").Count(),
+                total_palpites_rejeitados = db.Tickets.Where(info => info.Situacao == "3").Count(),
+                total_palpites_pendentes = db.Tickets.Where(info => info.Situacao == "1").Count(),
             };
 
             r5.media_diaria_palpite = r5.total_palpites / r5.total_dias;

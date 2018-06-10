@@ -209,6 +209,19 @@ namespace DWM.Models.Repositories
 
         public string Situacao { get; set; }
 
+        public string GetSituacao()
+        {
+            switch (Situacao)
+            {
+                case "3":
+                    return "<span class=\"strong text-danger\">Rejeitado</span>";
+                case "2":
+                    return "Aprovado";
+                default:
+                    return "Pendente";
+            }
+        }
+
         public string Justificativa { get; set; }
 
 
