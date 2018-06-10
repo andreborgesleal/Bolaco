@@ -207,6 +207,11 @@ namespace DWM.Models.Repositories
         [DisplayName("Remessa ID")]
         public string remessaId { get; set; }
 
+        public string Situacao { get; set; }
+
+        public string Justificativa { get; set; }
+
+
         [DisplayName("Palpites do cliente")]
         public IEnumerable<TicketViewModel> Palpites { get; set; }
 

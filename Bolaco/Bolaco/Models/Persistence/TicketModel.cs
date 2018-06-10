@@ -32,7 +32,7 @@ namespace DWM.Models.Persistence
 
             value.clienteViewModel = new ClienteViewModel();
             value.empresaId = _empresaId;
-            value.dt_inscricao = DateTime.Now.AddHours(_fuso);
+            value.dt_inscricao = Funcoes.Brasilia();//  DateTime.Now.AddHours(_fuso);
             value.clienteViewModel.clienteId = int.Parse(sessaoCorrente.value1);
 
             string _url = value.uri;
@@ -196,7 +196,9 @@ namespace DWM.Models.Persistence
                 selecao1Id_Final = value.selecao1Id_Final,
                 selecao2Id_Final = value.selecao2Id_Final,
                 score1_final = value.score1_final,
-                score2_final = value.score2_final
+                score2_final = value.score2_final,
+                Situacao = value.Situacao == null ? "1" : value.Situacao,
+                Justificativa = value.Justificativa
             };
 
             if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-17 15:00"))
@@ -604,6 +606,7 @@ namespace DWM.Models.Persistence
                     bandeira_croacia = croacia.bandeira,
                     bandeira_mexico = mexico.bandeira,
                     bandeira_camaroes = camaroes.bandeira,
+                    Situacao = "1",
                     Palpites = (from pal in db.Tickets
                                 where pal.clienteId == _clienteId
                                 orderby pal.dt_inscricao descending
@@ -1065,6 +1068,13 @@ namespace DWM.Models.Persistence
 
             return result;
         }
+
+        public IEnumerable<ResumoGerencialViewModel> Bind(ApplicationContext db, int? index, int pageSize = 50, params object[] param )
+        {
+            this.db = db;
+            return Bind(index, pageSize, param);
+        }
+
 
         public override Repository getRepository(Object id)
         {

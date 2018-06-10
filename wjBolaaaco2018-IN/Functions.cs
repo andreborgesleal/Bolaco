@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
-using Newtonsoft.Json;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Net.Http.Formatting;
 
 namespace wjBolaaaco2018_IN
 {
@@ -48,6 +48,46 @@ namespace wjBolaaaco2018_IN
             //GetBlobSasUri(container, "bolaaaco2018", blob);
 
             blob.UploadText(message);
+
+            // Salva arquivo .json na pasta "Enviados"
+            PalpiteViewModel value = JsonConvert.DeserializeObject<PalpiteViewModel>(message);
+            RunAsync(value, log).Wait();
+        }
+
+        static async Task RunAsync(PalpiteViewModel value, TextWriter log)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new System.Uri("http://bolaco2018.azurewebsites.net/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.GetAsync("api/PalpiteAPI/SaveFile");
+                //if (response.IsSuccessStatusCode)
+                //{  //GET
+                //    Produto produto = await response.Content.ReadAsAsync<Produto>();
+                //    Console.WriteLine("{0}\tR${1}\t{2}", produto.Nome, produto.Preco, produto.Categoria);
+                //    Console.WriteLine("Produto acessado e exibido.  Tecle algo para incluir um novo produto.");
+                //    Console.ReadKey();
+                //}
+                //POST
+                //var cha = new Produto() { Nome = "Chá Verde", Preco = 1.50M, Categoria = "Bebidas" };
+                response = await client.PostAsJsonAsync<PalpiteViewModel>("api/PalpiteAPI/SaveFile", value);
+                if (response.IsSuccessStatusCode)
+                    log.WriteLine("Palpite " + value.ticketId + " incluído.");
+
+                //if (response.IsSuccessStatusCode)
+                //{   //PUT
+                //    Uri chaUrl = response.Headers.Location;
+                //    response = await client.PutAsJsonAsync(chaUrl, value);
+                //    Console.WriteLine("Produto preço do atualizado. Tecle algo para excluir o produto");
+                //    Console.ReadKey();
+                //    //DELETE
+                //    response = await client.DeleteAsync(chaUrl);
+                //    Console.WriteLine("Produto deletado");
+                //    Console.ReadKey();
+                //}
+            }
         }
 
         private static string GetBlobSasUri(CloudBlobContainer container, string blobName, CloudBlockBlob blob, string policyName = null)

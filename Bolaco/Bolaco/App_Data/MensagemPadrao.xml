@@ -50,6 +50,7 @@
   <Context key="53" value="Quantidade de itens excede o limite permitido: {0}" type="Error"></Context>
   <Context key="54" value="Registro já existente. Existe algum campo prenchido no formulário que está violando a regra de chave única. Este campo já foi cadastrado anteriormente e não pode ser novamente incluído." type="Error"></Context>
   <Context key="55" value="Uma exceção foi gerada durante a inclusão do palpite no container de validação. Favor entrar em contato com a administração da campanha Bolaaaçao 2018 " type="Error"></Context>
+  <Context key="60" value="Erro no envio do SMS: {0}" type="Error"></Context>
   <Context key="200" value="Sessão não pode ser atualizada porque não existe ou já foi encerrada" type="Error"></Context>
   <Context key="201" value="Acesso não autorizado. A sessão já está em uso. Favor tentar novamente mais tarde." type="Error"></Context>
   <Context key="202" value="Acesso negado. Suas credenciais não estão autorizadas para executar essa operação." type="Error"></Context>

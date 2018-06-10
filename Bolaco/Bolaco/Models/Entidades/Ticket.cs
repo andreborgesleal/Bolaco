@@ -74,5 +74,9 @@ namespace DWM.Models.Entidades
 
         [DisplayName("RemessaId")]
         public string remessaId { get; set; }
+
+        public string Situacao { get; set; }
+
+        public string Justificativa { get; set; }
     }
 }

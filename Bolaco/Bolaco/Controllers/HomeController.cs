@@ -57,6 +57,7 @@ namespace Bolaco.Controllers
                         //value.uri = this.ControllerContext.Controller.GetType().Name.Replace("Controller", "") + "/" + this.ControllerContext.RouteData.Values["action"].ToString();
 
                         #region BeforeCreate
+                        value.Situacao = "1";
                         #endregion
 
                         TicketModel model = new TicketModel();
