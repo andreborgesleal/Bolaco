@@ -224,6 +224,8 @@ namespace DWM.Models.Repositories
 
         public string Justificativa { get; set; }
 
+        public string Consultor { get; set; }
+
 
         [DisplayName("Palpites do cliente")]
         public IEnumerable<TicketViewModel> Palpites { get; set; }

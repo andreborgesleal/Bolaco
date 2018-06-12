@@ -17,5 +17,6 @@ namespace DWM.Models.Repositories
         /// </summary>
         public string Situacao { get; set; }
         public string Justificativa { get; set; }
+        public string Consultor { get; set; }
     }
 }

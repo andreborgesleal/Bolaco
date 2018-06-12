@@ -31,6 +31,7 @@ namespace Bolaco.Controllers
         /// </summary>
         public string Situacao { get; set; }
         public string Justificativa { get; set; }
+        public string Consultor { get; set; }
     }
 
     public class PalpiteArquivoViewModel
@@ -209,14 +210,14 @@ namespace Bolaco.Controllers
                                     #region Atualiza o palpite
                                     entity.Situacao = value.Situacao;
                                     entity.Justificativa = value.Justificativa;
+                                    entity.Consultor = value.Consultor;
                                     db.Entry(entity).State = EntityState.Modified;
                                     db.SaveChanges();
                                     #endregion
 
                                     #region Move o arquivo para a pasta "Processados"
                                     FileInfo info = new FileInfo(file);
-                                    info.MoveTo(@"d:\home\site\wwwroot\Data\Processados\" + info.Name);
-                                    //info.MoveTo(@"C:\Sistemas\Bolaco\Bolaco\Bolaco\Data\Processados\" + info.Name);
+                                    info.MoveTo(@"d:\home\site\wwwroot\Data\Processados\" + info.Name + "." + System.DateTime.Now.Second.ToString() + System.DateTime.Now.Millisecond.ToString());
                                     #endregion
 
                                     #region Envia o SMS para os clientes que não foram validados (palpites rejeitados)
@@ -274,8 +275,9 @@ namespace Bolaco.Controllers
                             dt_compra = ticket.dt_compra.ToString("yyyy-MM-dd"),
                             cpf = db.Clientes.Find(ticket.clienteId).cpf,
                             nome = db.Clientes.Find(ticket.clienteId).nome,
-                            Situacao = ticket.Situacao,
-                            Justificativa = ticket.Justificativa == null ? "" : ticket.Justificativa.Trim()
+                            Situacao = "1",
+                            Justificativa = "", //ticket.Justificativa == null ? "" : ticket.Justificativa.Trim(),
+                            Consultor = "" // ticket.Consultor == null ? "" : ticket.Consultor.Trim()
                         };
 
                         string Filename = value.ticketId + ".json";

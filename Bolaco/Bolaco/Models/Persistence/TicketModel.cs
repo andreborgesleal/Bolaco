@@ -154,7 +154,8 @@ namespace DWM.Models.Persistence
                     cpf = value.clienteViewModel.cpf,
                     nome = value.clienteViewModel.nome,
                     Situacao = "1",
-                    Justificativa = ""
+                    Justificativa = "",
+                    Consultor = ""
                 };
                 string connectionString = "DefaultEndpointsProtocol=https;AccountName=dwmsistemas;AccountKey=mYOiPtcUPSPwtCUipbcm+iSX1kD1Uap7u34VbJlhT4o5Q8eO9lLHfIUX8Y/DfvoLpGhoGClOLYBhXchpwyvoeg==;EndpointSuffix=core.windows.net"; // AmbientConnectionStringProvider.Instance.GetConnectionString(ConnectionStringNames.Storage);
                 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
@@ -198,7 +199,8 @@ namespace DWM.Models.Persistence
                 score1_final = value.score1_final,
                 score2_final = value.score2_final,
                 Situacao = value.Situacao == null ? "1" : value.Situacao,
-                Justificativa = value.Justificativa
+                Justificativa = value.Justificativa,
+                Consultor = value.Consultor
             };
 
             if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-17 15:00"))
@@ -617,6 +619,7 @@ namespace DWM.Models.Persistence
                                     dt_compra = pal.dt_compra,
                                     Situacao = pal.Situacao,
                                     Justificativa = pal.Justificativa,
+                                    Consultor = pal.Consultor,
                                     clienteViewModel = new ClienteViewModel() { clienteId = _clienteId, nome = clienteViewModel.nome },
                                     score1Brasil = pal.score1Brasil.Value,
                                     bandeira_brasil = brasil.bandeira,
