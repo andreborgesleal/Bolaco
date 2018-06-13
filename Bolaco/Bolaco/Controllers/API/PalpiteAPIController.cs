@@ -221,24 +221,24 @@ namespace Bolaco.Controllers
                                     #endregion
 
                                     #region Envia o SMS para os clientes que não foram validados (palpites rejeitados)
-                                    if (value.Situacao == "3")
+                                    string _CHAVE_SMS = "0876f1a3-44db-48e8-8393-256c1cbd312a";
+                                    Cliente cliente = db.Clientes.Find(entity.clienteId);
+                                    string ret = "";
+                                    if (cliente.telefone != null && cliente.telefone.Trim().Length > 0)
                                     {
-                                        string _CHAVE_SMS = "0876f1a3-44db-48e8-8393-256c1cbd312a";
-                                        Cliente cliente = db.Clientes.Find(entity.clienteId);
-                                        string ret = "";
-                                        if (cliente.telefone != null && cliente.telefone.Trim().Length > 0)
-                                        {
+                                        if (value.Situacao == "3")
                                             ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", cliente.telefone, "[Bolaaaco 2018] Seu palpite com o numero da sorte [" + entity.ticketId + "] nao foi validado. Motivo [" + value.Justificativa.Trim() + "]. Favor entrar em contato com nossa loja.");
-                                            if (ret.Trim().Length > 0)
+                                        else
+                                            ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", cliente.telefone, "[Bolaaaco 2018] Parabens, seu palpite foi validado. Boa sorte!");
+                                        if (ret.Trim().Length > 0)
+                                        {
+                                            throw new App_DominioException(new Validate()
                                             {
-                                                throw new App_DominioException(new Validate()
-                                                {
-                                                    Code = 60,
-                                                    Message = MensagemPadrao.Message(60, ret).ToString(),
-                                                    MessageBase = ret,
-                                                    MessageType = MsgType.WARNING
-                                                });
-                                            }
+                                                Code = 60,
+                                                Message = MensagemPadrao.Message(60, ret).ToString(),
+                                                MessageBase = ret,
+                                                MessageType = MsgType.WARNING
+                                            });
                                         }
                                     }
                                     #endregion
