@@ -1,4 +1,5 @@
-﻿@using App_Dominio.Security;
+﻿@using App_Dominio.App_Start;
+@using App_Dominio.Security;
 @using App_Dominio.Entidades;
 @using App_Dominio.Repositories;
 @model DWM.Models.Repositories.TicketViewModel
@@ -134,24 +135,44 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            @*<b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>*@
-                                                            <input type="text" id="score1Brasil" name="score1Brasil" value="" class="form-control input-sm text-center" />
-                                                        </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            X
-                                                        </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            @*<b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>*@
-                                                            <input type="text" id="score1Croacia" name="score1Croacia" value="" class="form-control input-sm text-center" />
-                                                        </td>
+                                                        @{
+                                                            System.DateTime DataPrimeiroJogo = new DateTime(2018, 06, 17, 14, 0, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataPrimeiroJogo)
+                                                            {
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>
+                                                                    @*<input type="text" id="score1Brasil" name="score1Brasil" value="" class="form-control input-sm text-center" />*@
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>
+                                                                    @*<input type="text" id="score1Croacia" name="score1Croacia" value="" class="form-control input-sm text-center" />*@
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score1Brasil" name="score1Brasil" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score1Croacia" name="score1Croacia" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                            }
+                                                        }
                                                         <td style="width: 21%; text-align: left">
                                                             <div class="row">
                                                                 <div class="col-md-8">
                                                                     <b>Suíça</b>
                                                                 </div>
                                                                 <div class="col-md-offset-3">
-                                                                    <img src="..\Content\images\bandeira_suica.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">    
+                                                                    <img src="..\Content\images\bandeira_suica.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
                                                                 </div>
                                                             </div>
                                                         </td>

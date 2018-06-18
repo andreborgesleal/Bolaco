@@ -4,11 +4,11 @@
     IEnumerable<ParametroViewModel> Parametros = ViewBag.Parametros;
     IEnumerable<TicketViewModel> Ganhadores = ViewBag.Ganhadores;
 
-    string _active1 = "";
+    string _active1 = "active";
     string _active2 = "";
     string _active3 = "";
     string _active4 = "";
-    string _active5 = "active";
+    string _active5 = "";
 
     if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
     {
@@ -30,8 +30,8 @@
 
 <div class="row carousel-inner" style="margin-top: -15px">
     <div class="col-md-12 item active">
-        <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
-            <a class="label" href="#modal-container-964987j" data-toggle="modal" onclick="ShowVencedores();"><span style="font-size: large; color: #3c3c3c">Ganhadores</span></a>
+        <div class="alert alert-dismissable alert-success" style="text-align: center; padding: 8px">
+            <a class="label" href="#modal-container-964987j" data-toggle="modal" onclick="ShowVencedores();"><span style="font-size: large; color: #faf7f7">Ganhadores</span></a>
             @***********Formulário Modal VENCEDORES **************@
             <div class="modal fade" id="modal-container-964987j" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" style="width: 55%">
@@ -40,7 +40,7 @@
                             <nav class="navbar navbar-default" role="navigation">
                                 <div class="container-fluid">
                                     <!-- Brand and toggle get grouped for better mobile display -->
-                                    <div class="navbar-header">
+                                    @*<div class="navbar-header">
                                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                             <span class="sr-only">Toggle navigation</span>
                                             <span class="icon-bar"></span>
@@ -48,26 +48,25 @@
                                             <span class="icon-bar"></span>
                                             <span class="icon-bar"></span>
                                         </button>
-                                        @*<a class="navbar-brand" href="#" style="font-family: Verdana">Ganhadores do Bolaaaaço da Norte Refrigeração</a>*@
-                                    </div>
+                                    </div>*@
                                     <!-- Collect the nav links, forms, and other content for toggling -->
                                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                         <ul class="nav navbar-nav">
-                                            <li id="_Aba0" class="@_active1" onclick="MoveNext('0')"><a href="#">1º Prêmio (Brasil x Croácia)</a></li>
-                                            @if (Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != "")
+                                            <li id="_Aba0" class="@_active1" onclick="MoveNext('0')"><a href="#">1º Prêmio (Brasil x Suíça)</a></li>
+
+                                            @*@if (Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 12).Select(info => info.valor).FirstOrDefault() != "")
                                             {
-                                                <li id="_Aba1" class="@_active2"><a href="#" onclick="MoveNext('1')">1º Prêmio (Brasil x México)</a></li>
+                                                <li id="_Aba1" class="@_active2"><a href="#" onclick="MoveNext('1')">1º Prêmio (Brasil x Costa Rica)</a></li>
                                             }
                                             @if (Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 14).Select(info => info.valor).FirstOrDefault() != "")
                                             {
-                                                <li id="_Aba2" class="@_active3"><a href="#" onclick="MoveNext('2')">1º Prêmio (Brasil x Camarões)</a></li>
-                                                        <li id="_Aba3" class=""><a href="#" onclick="MoveNext('3')">2º Prêmio</a></li>
+                                                <li id="_Aba2" class="@_active3"><a href="#" onclick="MoveNext('2')">1º Prêmio (Brasil x Sérvia)</a></li>
+                                                <li id="_Aba3" class=""><a href="#" onclick="MoveNext('3')">2º Prêmio</a></li>
                                             }
-                                            @*@if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
-                                                {
-
-                                                }*@
-                                            <li id="_Aba4" class="@_active5"><a href="#" onclick="MoveNext('4')">3º Prêmio (Final)</a></li>
+                                            @if (Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != null && Parametros.Where(info => info.paramId == 18).Select(info => info.valor).FirstOrDefault() != "")
+                                            {
+                                                <li id="_Aba4" class="@_active5"><a href="#" onclick="MoveNext('4')">3º Prêmio (Final)</a></li>
+                                            }*@
                                         </ul>
                                     </div><!-- /.navbar-collapse -->
                                 </div><!-- /.container-fluid -->
@@ -80,14 +79,14 @@
                                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
                                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="@_active1"></li>
-                                                <li data-target="#carousel-example-generic" data-slide-to="1" class="@_active2"></li>
+                                                @*<li data-target="#carousel-example-generic" data-slide-to="1" class="@_active2"></li>
                                                 <li data-target="#carousel-example-generic" data-slide-to="2" class="@_active3"></li>
                                                 <li data-target="#carousel-example-generic" data-slide-to="3" class="@_active4"></li>
-                                                <li data-target="#carousel-example-generic" data-slide-to="4" class="@_active5"></li>
+                                                <li data-target="#carousel-example-generic" data-slide-to="4" class="@_active5"></li>*@
                                             </ol>
                                             <div class="carousel-inner">
                                                 <div class="item @_active1">
-                                                    <h4 style="font-family: Verdana">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor Croácia</h4>
+                                                    <h4 style="font-family: Verdana">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor Suíça</h4>
                                                     <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
                                                         <caption></caption>
                                                         <thead style="background-color: #FAEC37">
@@ -110,7 +109,7 @@
                                                         }
                                                     </table>
                                                 </div>
-                                                <div class="item @_active2">
+                                                @*<div class="item @_active2">
                                                     <h4 style="font-family: Verdana">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor México</h4>
                                                     <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
                                                         <caption></caption>
@@ -213,14 +212,20 @@
                                                         </thead>
                                                         @{
                                                             DWM.Models.Repositories.TicketViewModel ganhador2premio = Ganhadores.Where(info => info.score1Brasil == -5).FirstOrDefault();
+                                                            if (ganhador2premio != null)
+                                                            {
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>@ganhador2premio.clienteViewModel.nome</small></td>
+                                                                    <td style="text-align: center"><small>@ganhador2premio.ticketId.ToUpper()</small></td>
+                                                                    <td style="text-align: center"><small>@(ganhador2premio.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
+                                                                </tr>
+                                                            }
                                                         }
-                                                        <tr>
-                                                            <td style="text-align: left;"><small>@ganhador2premio.clienteViewModel.nome</small></td>
-                                                            <td style="text-align: center"><small>@ganhador2premio.ticketId.ToUpper()</small></td>
-                                                            <td style="text-align: center"><small>@(ganhador2premio.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))h.</small></td>
-                                                        </tr>
                                                     </table>
-                                                    <small>Observação: <span style="background-color: #FAEC37">@ganhador2premio.clienteViewModel.nome foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</span> </small>
+                                                    @if (ganhador2premio != null)
+                                                    {
+                                                        <small>Observação: <span style="background-color: #FAEC37">@ganhador2premio.clienteViewModel.nome foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</span> </small>
+                                                    }
                                                     <p>&nbsp;</p>
                                                     <p>&nbsp;</p>
                                                 </div>
@@ -399,7 +404,7 @@
                                                     <small>Observação: <span style="background-color: #FAEC37">SEBASTIAO RODRIGUES DA SILVA foi o ganhador pelo critério de desempate "DATA DO PALPITE MAIS ANTIGA"</span> </small>
                                                     <p>&nbsp;</p>
                                                     <p>&nbsp;</p>
-                                                </div>
+                                                </div>*@
                                             </div>
                                             @*<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                                     <span class="glyphicon glyphicon-chevron-left"></span>

@@ -298,6 +298,67 @@ namespace Bolaco.Controllers
             return message;
         }
 
+        [HttpPost]
+        public string SetBrasilResult(TicketViewModel value)
+        {
+            string Result = "Sucesso !!!";
+
+            try
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    // Brasil 1 jogo
+                    Parametro entity1 = db.Parametros.Find(10);
+                    entity1.valor = value.score1Brasil.ToString();
+                    db.Entry(entity1).State = EntityState.Modified;
+
+                    // Suíça 1 jogo
+                    Parametro entity2 = db.Parametros.Find(11);
+                    entity2.valor = value.score1Croacia.ToString();
+                    db.Entry(entity2).State = EntityState.Modified;
+
+                    db.SaveChanges();
+                }
+            }
+            catch (App_DominioException ex)
+            {
+                return ex.Result.Message;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+
+            return Result;
+        }
+
+        [HttpGet]
+        public IEnumerable<PalpiteViewModel> Ganhadores()
+        {
+            ListViewGanhadores ganhadores = new ListViewGanhadores();
+            IEnumerable<TicketViewModel> winner = new List<TicketViewModel>();
+            IList<PalpiteViewModel> palpites = new List<PalpiteViewModel>();
+            using (ApplicationContext db = new ApplicationContext())
+                winner = ganhadores.Bind(db, 0, 5000, null);
+
+            foreach (TicketViewModel value in winner)
+            {
+                PalpiteViewModel palpite = new PalpiteViewModel()
+                {
+                    ticketId = value.ticketId,
+                    dt_compra = value.dt_inscricao.ToString("dd/MM/yyyy HH:mm"),
+                    nome = value.clienteViewModel.nome,
+                    cpf = value.clienteViewModel.cpf,
+                    Consultor = value.Consultor
+                };
+
+                palpites.Add(palpite);
+            }
+
+            return palpites;
+        }
+
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
