@@ -1,0 +1,89 @@
+﻿@model DWM.Models.LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Log in";
+}
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        @using (Html.BeginForm("Forgot", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="panel panel-warning" style="margin-top: 20px">
+                <div class="panel-heading" style="height: 50px">
+                    <h2 class="panel-title col-md-12">
+                        Esqueci minha senha <small style="color: #000; font-family: Verdana; font-size: small">Informe seu email cadastrado no Bolaaaaço para receber a senha.</small>
+                    </h2>
+                </div>
+                <div class="panel-body" style="background-color: #fff;">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @*@Html.ValidationSummary(false)*@
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.UserName, "E-mail", new { @class = "col-md-2 control-label" })
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Seu e-mail" })<br />
+                                        <input type="hidden" name="Password" id="Password" value="123456" />
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+                                - Digite o e-mail informado em seu cadastro. 
+                            </p>
+                            <p>
+                                - Em seguida clique no botão <strong>"Enviar"</strong>
+                            </p>
+                            <p>
+                                - Uma nova senha será enviada para o seu e-mail
+                            </p>
+                            <p>
+                                &nbsp;
+                            </p>
+                            <p>
+                                @Html.ActionLink("Registre-se", "Index", null, htmlAttributes: new { @style = "font-weight: bold" }) caso não possua uma conta
+                            </p>
+                            <div class="col-md-12" style="height: 120px; padding-top: 50px; width: 120%">
+                                <h4>&nbsp;</h4>
+                            </div>
+                            <section id="loginForm"></section>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="../../Content/images/logo_bolaco.png" class="img-responsive" style="width: 281px" alt="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" style="background-color: #3c533f; padding-bottom: 10px">
+                    <div class="row">
+                        <div class="col-md-6" id="div-salvar">
+                            <input type="submit" value="Enviar" class="btn btn-default" onclick="validaLogin();" />&nbsp;
+                            <input type="button" value="Cancelar" class="btn btn-default" onclick="javascript: window.location = 'Login'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function validaLogin()
+    {
+        if ($("#UserName").val().trim() != "")
+            CarregandoIn();
+    }
+
+</script>
+
+
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+

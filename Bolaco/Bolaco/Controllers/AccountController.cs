@@ -12,6 +12,10 @@ using DWM.Models;
 using DWM.Models.Persistence;
 using System.Collections.Generic;
 using DWM.Models.Repositories;
+using DWM.Models.Entidades;
+using System.Data.Entity;
+using App_Dominio.Component;
+using System.Net.Mail;
 
 namespace Bolaco.Controllers
 {
@@ -128,6 +132,14 @@ namespace Bolaco.Controllers
                 Attention(value.mensagem.MessageBase);
             }
 
+            ListViewGanhadores list = new ListViewGanhadores();
+            IEnumerable<TicketViewModel> Ganhadores = (IEnumerable<TicketViewModel>)list.ListRepository(0, 200);
+            ViewBag.Ganhadores = Ganhadores;
+
+            ListViewParametros _parametros = new ListViewParametros();
+            IEnumerable<ParametroViewModel> Parametros = (IEnumerable<ParametroViewModel>)_parametros.ListRepository(0, 200);
+            ViewBag.Parametros = Parametros;
+
             return View(value);
         }
 
@@ -197,8 +209,132 @@ namespace Bolaco.Controllers
             return View(new RegisterViewModel());
         }
 
-        //
-        // POST: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Forgot(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Forgot(LoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                EmpresaSecurity<App_DominioContext> security = new EmpresaSecurity<App_DominioContext>();
+                try
+                {
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        using (SecurityContext seguranca = new SecurityContext())
+                        {
+                            #region grava a nova senha no cadastro do usuário
+                            Usuario usuario = seguranca.Usuarios.Where(info => info.empresaId == 4 && info.login == model.UserName).FirstOrDefault();
+                            if (usuario == null || usuario.login == null || usuario.login == "")
+                                throw new ArgumentException("E-mail não cadastrado");
+
+                            Usuario u = seguranca.Usuarios.Find(usuario.usuarioId);
+
+                            Random r = new Random(System.DateTime.Now.Millisecond);
+                            string senha = r.Next(100000, 999999).ToString();
+
+                            usuario.senha = security.Criptografar(senha);
+
+                            seguranca.Entry(usuario).State = EntityState.Modified;
+                            seguranca.SaveChanges();
+                            #endregion
+
+                            #region enviar a nova senha por e-mail
+                            if (db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.HABILITA_EMAIL).valor == "S")
+                            {
+                                SendEmail sendMail = new SendEmail();
+
+                                int _sistemaId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.SISTEMA).valor);
+                                string _email_admin = db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EMAIL_ADMIN).valor;
+
+                                Empresa empresa = seguranca.Empresas.Find(4);
+                                Sistema sistema = seguranca.Sistemas.Find(_sistemaId);
+
+                                MailAddress sender = new MailAddress(empresa.nome + " <" + empresa.email + ">");
+                                List<string> recipients = new List<string>();
+                                List<string> norte = new List<string>();
+
+                                recipients.Add(u.nome + "<" + u.login + ">");
+                                norte.Add(empresa.nome + " <" + empresa.email + ">");
+                                if (_email_admin != "")
+                                    norte.Add(_email_admin);
+
+                                string Subject = "[Bolaaaço 2018] Alteração de Senha ";
+                                string Text = "<p>[Bolaaaço 2018] Alteração de Senha</p>";
+                                string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
+                                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Essa é uma mensagem de alteração de senha. Seu cadastro na campanha <b>Bolaaaço Norte Refrigeração 2018</b> foi alterado para uma nova senha.</span></p>" +
+                                              "<table style=\"width: 95%; border: 0px solid #fff\">" +
+                                              "<tr>" +
+                                              "<td style=\"width: 55%\">" +
+                                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Seu Login de acesso para dar palpites é: </span><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + u.login + "</b></span></p>" +
+                                              "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">A nova senha gerada para o seu cadastro é: </span><span style=\"font-family: Verdana; font-size: large; margin-left: 20px; color: #3e5b33\"><b>" + senha + "</b></span></p>" +
+                                              "<p></p>";
+
+                                Html += "</td>" +
+                                        "<td style=\"width: 45%; vertical-align: top; float: right; padding-right: 27px\"><img src=\"http://bolaco2018.azurewebsites.net/Content/images/selocircular.png\"></td>" +
+                                        "</tr>" +
+                                        "</table>" +
+                                        "<hr />";
+
+                                Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Agora que a sua senha já foi atualizada, já é possível dar os seus palpites no resultado dos jogos do Brasil da primeira fase da copa e de quais seleções disputarão a grande final.</span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Acesse <a href=\"http://bolaco2018.azurewebsites.net/Account/Login\">Bolaaaaço Norte Refrigeração 2018</a> e dê os seus palpites.</span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Informe o seu login e a nova senha para realizar o acesso na área de apostas e cadastrar os seus palpite. Nesta área você poderá:</span></p>" +
+                                        "<ul>" +
+                                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar os seus palpites para os jogos do Brasil na primeira fase.</span></li>" +
+                                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar o seu palpite para o resultado dos jogos do Brasil nas OITAVAS DE FINA, QUARTAS DE FINAL e SEMIFINAL (caso seja classificado).</span></li>" +
+                                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Cadastrar o seu palpite referente as seleções que farão a grande final da Copa e o placar do jogo.</span></li>" +
+                                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Consultar as estatíticas dos palpites dados por todos os participantes da campanha.</span></li>" +
+                                        "<li><span style=\"font-family: Verdana; font-size: small; color: #000\">Consultar todos os seus palpites. Quanto mais você comprar mais palpites poderá fazer.</span></li>" +
+                                        "</ul>" +
+                                        "<hr />" +
+                                        "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\"><b>BOA SORTE !</b></span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
+                                        "</div>";
+
+                                Validate result1 = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
+                                if (result1.Code > 0)
+                                {
+                                    result1.MessageBase = "Sua senha foi atualizada com sucesso mas não foi possível enviar seu e-mail de confirmação. Favor aguardar alguns instantes e refaça a operação.";
+                                    throw new App_DominioException(result1);
+                                }
+
+                                Success("Uma nova senha foi gerada e enviada para o seu e-mail.");
+                            }
+                            #endregion
+                        }
+                    }
+                    return RedirectToAction("Login", "Account");
+                }
+                catch (ArgumentException ex)
+                {
+                    Error(ex.Message);
+                }
+                catch (App_DominioException ex)
+                {
+                    Error("Erro na alteração da senha. Favor entre em contato com o administrador do sistema");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    Error("Não foi possível alterar a sua senha. Favor entre em contato com o administrador do sistema");
+                }
+                catch (Exception ex)
+                {
+                    Error("Erro na geração da senha. Favor entre em contato com o administrador do sistema");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
 
         [AllowAnonymous]
         public ActionResult LogOff()
