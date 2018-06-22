@@ -1,5 +1,6 @@
 ﻿using App_Dominio.Component;
 using App_Dominio.Contratos;
+using App_Dominio.Entidades;
 using App_Dominio.Enumeracoes;
 using App_Dominio.Models;
 using App_Dominio.Security;
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Http;
 
@@ -303,76 +305,138 @@ namespace Bolaco.Controllers
         public string SetBrasilResult(TicketViewModel value)
         {
             string Result = "Sucesso !!!";
-
             try
             {
-                using (ApplicationContext db = new ApplicationContext())
+                using (SecurityContext seguranca_db = new SecurityContext())
                 {
-                    int flag = -1;
-                    #region grava o resultado da partida
-                    if (Funcoes.Brasilia().Date == new DateTime(2018,6,22))
+                    using (ApplicationContext db = new ApplicationContext())
                     {
-                        // Brasil 2 jogo
-                        Parametro entity1 = db.Parametros.Find(12);
-                        entity1.valor = value.score2Brasil.ToString();
-                        db.Entry(entity1).State = EntityState.Modified;
-
-                        // Costa Rica 2 jogo
-                        Parametro entity2 = db.Parametros.Find(13);
-                        entity2.valor = value.score2Mexico.ToString();
-                        db.Entry(entity2).State = EntityState.Modified;
-                        flag = -3;
-                    }
-
-                    if (Funcoes.Brasilia().Date == new DateTime(2018, 6, 27))
-                    {
-                        // Brasil 3 jogo
-                        Parametro entity3 = db.Parametros.Find(14);
-                        entity3.valor = value.score3Brasil.ToString();
-                        db.Entry(entity3).State = EntityState.Modified;
-
-                        // Suíça 3 jogo
-                        Parametro entity4 = db.Parametros.Find(15);
-                        entity4.valor = value.score3Camaroes.ToString();
-                        db.Entry(entity4).State = EntityState.Modified;
-                        flag = -4;
-                    }
-
-                    db.SaveChanges();
-                    #endregion
-
-                    #region Envia o SMS para os ganhadores
-                    string _CHAVE_SMS = "0876f1a3-44db-48e8-8393-256c1cbd312a";
-                    ListViewGanhadores ganhadores = new ListViewGanhadores();
-                    IEnumerable<TicketViewModel> winners = new List<TicketViewModel>();
-
-                    foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
-                    {
-                        string ret = "";
-                        if (t.clienteViewModel.telefone != null && t.clienteViewModel.telefone.Trim().Length > 0)
+                        int flag = -1;
+                        #region grava o resultado da partida
+                        if (Funcoes.Brasilia().Date == new DateTime(2018, 6, 22))
                         {
-                            if (flag==-3)
-                                ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
-                            else if (flag==-4)
-                                ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Servia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                            // Brasil 2 jogo
+                            Parametro entity1 = db.Parametros.Find(12);
+                            entity1.valor = value.score2Brasil.ToString();
+                            db.Entry(entity1).State = EntityState.Modified;
 
-                            if (ret.Trim().Length > 0)
+                            // Costa Rica 2 jogo
+                            Parametro entity2 = db.Parametros.Find(13);
+                            entity2.valor = value.score2Mexico.ToString();
+                            db.Entry(entity2).State = EntityState.Modified;
+                            flag = -3;
+                        }
+
+                        if (Funcoes.Brasilia().Date == new DateTime(2018, 6, 27))
+                        {
+                            // Brasil 3 jogo
+                            Parametro entity3 = db.Parametros.Find(14);
+                            entity3.valor = value.score3Brasil.ToString();
+                            db.Entry(entity3).State = EntityState.Modified;
+
+                            // Suíça 3 jogo
+                            Parametro entity4 = db.Parametros.Find(15);
+                            entity4.valor = value.score3Camaroes.ToString();
+                            db.Entry(entity4).State = EntityState.Modified;
+                            flag = -4;
+                        }
+
+                        db.SaveChanges();
+                        #endregion
+
+                        #region Envia o SMS para os ganhadores
+                        string _CHAVE_SMS = "0876f1a3-44db-48e8-8393-256c1cbd312a";
+                        ListViewGanhadores ganhadores = new ListViewGanhadores();
+                        IEnumerable<TicketViewModel> winners = new List<TicketViewModel>();
+                        winners = ganhadores.Bind(db, 0, 5000);
+                        foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
+                        {
+                            string ret = "";
+                            if (t.clienteViewModel.telefone != null && t.clienteViewModel.telefone.Trim().Length > 0)
                             {
-                                throw new App_DominioException(new Validate()
+                                if (flag == -3)
+                                    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                                else if (flag == -4)
+                                    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Servia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+
+                                if (ret.Trim().Length > 0)
                                 {
-                                    Code = 60,
-                                    Message = MensagemPadrao.Message(60, ret).ToString(),
-                                    MessageBase = ret,
-                                    MessageType = MsgType.WARNING
-                                });
+                                    throw new App_DominioException(new Validate()
+                                    {
+                                        Code = 60,
+                                        Message = MensagemPadrao.Message(60, ret).ToString(),
+                                        MessageBase = ret,
+                                        MessageType = MsgType.WARNING
+                                    });
+                                }
                             }
                         }
+
+                        #endregion
+
+                        #region Envia o e-mail para os ganhadores
+                        if (db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.HABILITA_EMAIL).valor == "S")
+                        {
+                            value.empresaId = 4;
+                            SendEmail sendMail = new SendEmail();
+
+                            int _sistemaId = int.Parse(db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.SISTEMA).valor);
+                            string _email_admin = db.Parametros.Find((int)DWM.Models.Enumeracoes.Enumeradores.Param.EMAIL_ADMIN).valor;
+
+                            Empresa empresa = seguranca_db.Empresas.Find(value.empresaId);
+                            Sistema sistema = seguranca_db.Sistemas.Find(_sistemaId);
+
+                            MailAddress sender = new MailAddress(empresa.nome + " <" + empresa.email + ">");
+                            
+                            List<string> norte = new List<string>();
+                            norte.Add(empresa.nome + " <" + empresa.email + ">");
+                            if (_email_admin != "")
+                                norte.Add(_email_admin);
+                            string Subject = "Premiação " + sistema.descricao;
+                            string Text = "<p>Premiação Bolaço 2018</p>";
+
+                            foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
+                            {
+                                List<string> recipients = new List<string>();
+                                recipients.Add(t.clienteViewModel.nome + "<" + t.clienteViewModel.email + ">");
+                                string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
+                                              "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + t.clienteViewModel.nome + "</span></p>";
+                                if (flag == -3)
+                                    Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!\"</span></p>";
+                                else if (flag == 4)
+                                    Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Sérvia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!\"</span></p>";
+
+                                Html += "<p></p>" +
+                                        "<p></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + t.ticketId.ToUpper() + "</b></span></p>" +
+                                        "<p></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Data e hora do palpite: <b>" + t.dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.</b></span></p>" +
+                                        "<hr />" +
+                                        "<table style=\"width: 95%; border: 0px solid #fff\">" +
+                                        "<tr>" +
+                                        "<td style=\"width: 55%\">" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Entre em contato com nossa loja para receber seu prêmio</span></p>" +
+                                        "</tr>" +
+                                        "</table>";
+
+                                Html += "<div style=\"width: 100%\"><p></p>" +
+                                        "<p></p>" +
+                                        "<p></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
+                                        "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
+                                        "</div>";
+
+                                Validate result = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
+                                if (result.Code > 0)
+                                {
+                                    result.MessageBase = "Seu palpite foi realizado com sucesso mas não foi possível enviar seu e-mail de confirmação. Vá em \"Todos os seus palpites\" para consultar sua aposta.";
+                                    throw new App_DominioException(result);
+                                }
+                            }
+                        }
+                        #endregion
                     }
-
-                    #endregion
-
-                    #region Envia o e-mail para os ganhadores
-                    #endregion
                 }
             }
             catch (App_DominioException ex)
@@ -383,7 +447,6 @@ namespace Bolaco.Controllers
             {
                 return ex.Message;
             }
-
 
             return Result;
         }

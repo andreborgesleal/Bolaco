@@ -208,12 +208,12 @@ namespace DWM.Models.Persistence
                 t.score1Brasil = -1;
                 t.score1Croacia = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-22 09:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-22 08:00"))
             {
                 t.score2Brasil = -1;
                 t.score2Mexico = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-27 15:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-27 14:00"))
             {
                 t.score3Brasil = -1;
                 t.score3Camaroes = -1;
@@ -223,12 +223,12 @@ namespace DWM.Models.Persistence
                 t.score4Brasil = -1;
                 t.score4OutraSelecao = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-06 15:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-06 14:00"))
             {
                 t.score5Brasil = -1;
                 t.score5OutraSelecao = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-10 15:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-10 14:00"))
             {
                 t.score6Brasil = -1;
                 t.score6OutraSelecao = -1;
@@ -904,7 +904,7 @@ namespace DWM.Models.Persistence
                                                    orderby c.nome
                                                    select new TicketViewModel()
                                                    {
-                                                       clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                       clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                        ticketId = t.ticketId,
                                                        dt_inscricao = t.dt_inscricao,
                                                        Consultor = t.Consultor,
@@ -917,7 +917,7 @@ namespace DWM.Models.Persistence
                                                      orderby c.nome
                                                      select new TicketViewModel()
                                                      {
-                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          Consultor = t.Consultor,
@@ -931,7 +931,7 @@ namespace DWM.Models.Persistence
                                                     orderby c.nome
                                                     select new TicketViewModel()
                                                     {
-                                                        clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                        clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                         ticketId = t.ticketId,
                                                         dt_inscricao = t.dt_inscricao,
                                                         score1Brasil = -4,
@@ -950,7 +950,7 @@ namespace DWM.Models.Persistence
                                                      orderby t.dt_inscricao
                                                      select new TicketViewModel()
                                                      {
-                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          score1Brasil = -5,
@@ -964,7 +964,7 @@ namespace DWM.Models.Persistence
                                                      orderby c.nome
                                                      select new TicketViewModel()
                                                      {
-                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          score1Brasil = -6,
@@ -978,7 +978,7 @@ namespace DWM.Models.Persistence
                                                      orderby c.nome
                                                      select new TicketViewModel()
                                                      {
-                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          score1Brasil = -7,
@@ -992,7 +992,7 @@ namespace DWM.Models.Persistence
                                                      orderby c.nome
                                                      select new TicketViewModel()
                                                      {
-                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          score1Brasil = -8,
@@ -1011,7 +1011,7 @@ namespace DWM.Models.Persistence
                                                      orderby t.dt_inscricao
                                                      select new TicketViewModel()
                                                      {
-                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          score1Brasil = -9,
@@ -1026,7 +1026,7 @@ namespace DWM.Models.Persistence
                                                       orderby t.dt_inscricao
                                                       select new TicketViewModel()
                                                       {
-                                                          clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone },
+                                                          clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                           ticketId = t.ticketId,
                                                           dt_inscricao = t.dt_inscricao,
                                                           score1Brasil = -10,

@@ -18,14 +18,14 @@
             <div class="panel panel-warning" style="margin-top: 20px">
                 <div class="panel-heading" style="height: 50px">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <h2 class="panel-title col-md-12">
                                 Palpite
                             </h2>
                         </div>
                         @if (menuList.Where(info => info.nomeCurto == "Resumo Gerencial").Count() > 0)
                         {
-                        <div class="col-md-offset-8">
+                        <div class="col-md-offset-7">
                             <a class="label" href="#" data-toggle="modal"><input type="button" value="Resumo" onclick="window.location='../Home/ResumoGerencial'" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
                             <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
                             <a class="label btn" href="https://www.google.com/search?q=tabela+da+copa+fifa+2018+atualizada&ie=utf-8&oe=utf-8&client=firefox-b#sie=lg;/m/06qjc4;2;/m/030q7;st;fp;1" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
@@ -35,7 +35,7 @@
                         }
                         else
                         {
-                        <div class="col-md-offset-9">
+                        <div class="col-md-offset-7">
                             <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
                             <a class="label btn" href="https://www.google.com/search?q=tabela+da+copa+fifa+2018+atualizada&ie=utf-8&oe=utf-8&client=firefox-b#sie=lg;/m/06qjc4;2;/m/030q7;st;fp;1" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
                             <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
