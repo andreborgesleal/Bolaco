@@ -25,21 +25,21 @@
                         </div>
                         @if (menuList.Where(info => info.nomeCurto == "Resumo Gerencial").Count() > 0)
                         {
-                            <div class="col-md-offset-8">
-                                <a class="label" href="#" data-toggle="modal"><input type="button" value="Resumo" onclick="window.location='../Home/ResumoGerencial'" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
-                                <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
-                                <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
-                                @*<a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>*@
-                            </div>
+                        <div class="col-md-offset-8">
+                            <a class="label" href="#" data-toggle="modal"><input type="button" value="Resumo" onclick="window.location='../Home/ResumoGerencial'" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Voltar à página dos palpites" /></a>
+                            <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
+                            <a class="label btn" href="https://www.google.com/search?q=tabela+da+copa+fifa+2018+atualizada&ie=utf-8&oe=utf-8&client=firefox-b#sie=lg;/m/06qjc4;2;/m/030q7;st;fp;1" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                            <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
+                        </div>
 
                         }
                         else
                         {
-                            <div class="col-md-offset-9">
-                                <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
-                                @*<a class="label btn" href="http://tabelaaaaco.herokuapp.com" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>*@
-                                <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
-                            </div>
+                        <div class="col-md-offset-9">
+                            <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><input type="button" id="btn3" value="Estatísticas" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Consulte as estatísticas dos palpites" /></a>
+                            <a class="label btn" href="https://www.google.com/search?q=tabela+da+copa+fifa+2018+atualizada&ie=utf-8&oe=utf-8&client=firefox-b#sie=lg;/m/06qjc4;2;/m/030q7;st;fp;1" target="_blank"><span class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Acompanhe os resultados dos jogos" />Tabelaaaaço</a>
+                            <a class="label" href="../"><input type="button" id="btn3_" value="Sair" class="btn btn-default" style="font-weight: bold; margin-top: -5px" data-toggle="tooltip" data-placement="bottom" title="Retorna ao formulário inicial do Bolaaaço" /></a>
+                        </div>
                         }
                     </div>
                 </div>
@@ -192,31 +192,37 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-22 09:00"))
+                                                        @{
+                                                            System.DateTime DataSegundoJogo = new DateTime(2018, 06, 22, 8, 0, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataSegundoJogo)
                                                             {
-                                                                @*@Html.TextBoxFor(m => m.score2Brasil, new { @class = "form-control input-sm" })*@
-                                                                <input type="text" id="score2Brasil" name="score2Brasil" value="" class="form-control input-sm text-center" />
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score2Brasil" name="score2Brasil" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score2Mexico" name="score2Mexico" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
                                                             }
                                                             else
                                                             {
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor</b>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score2Brasil" name="score2Brasil" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score2Mexico" name="score2Mexico" value="" class="form-control input-sm text-center" />
+                                                                </td>
                                                             }
-                                                        </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            X
-                                                        </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-22 09:00"))
-                                                            {
-                                                                @*@Html.TextBoxFor(m => m.score2Mexico, new { @class = "form-control input-sm" })*@
-                                                                <input type="text" id="score2Mexico" name="score2Mexico" value="" class="form-control input-sm text-center" />
-                                                            }
-                                                            else
-                                                            {
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor</b>
-                                                            }
-                                                        </td>
+                                                        }
                                                         <td style="width: 21%; text-align: left">
                                                             <div class="row">
                                                                 <div class="col-md-8">

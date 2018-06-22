@@ -96,10 +96,10 @@
                                                 string[] dataPag;
                                                 string[] dataVal1;
                                                 decimal[] dataVal;
-                                                int QteTotal = (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(8).Sum();
+                                                int QteTotal = (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(10).Sum();
 
-                                                dataPag = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.nome_selecao1 + " " + obj.score_selecao1.ToString() + " x " + obj.score_selecao2.ToString() + " C.Rica").Take(8)).Split(',');
-                                                dataVal1 = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(8)).Split(',');
+                                                dataPag = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.nome_selecao1.Substring(0,3) + " " + obj.score_selecao1.ToString() + " x " + obj.score_selecao2.ToString() + " Cos").Take(10)).Split(',');
+                                                dataVal1 = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(10)).Split(',');
 
                                                 dataVal = new decimal[dataPag.Length];
                                                 for (int i = 0; i <= dataVal1.Length - 1; i++)
@@ -275,7 +275,7 @@
             colors: ['green'],
             strokestyle: 'rgba(0,0,0,0)',
             textSize: 8,
-            title: 'Brasil x Costa Rica (Top 8)',
+            title: 'Brasil x Costa Rica (10 palpites mais votados)',
             numyticks: 5,
             noxaxis: true,
             gutterLeft: 50

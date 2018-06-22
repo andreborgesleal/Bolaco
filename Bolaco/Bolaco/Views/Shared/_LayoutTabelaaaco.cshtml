@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolaço da Norte Refrigeração</title>
+    <link rel="SHORTCUT ICON" href="/favicon3.png" />
+    <link href="@Styles.Url("~/content/css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/scripts/css")" rel="stylesheet" />
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery-{version}.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery-migrate-{version}.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/scripts/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate-fix.js"></script>
+    <script type="text/javascript" src="~/scripts/js/locales/bootstrap-datepicker.pt-BR.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="~/scripts/inputs-jquery-ui.js"></script>
+
+    <link href="@Styles.Url("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/body.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap-responsive.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/scripts/css/datepicker.css")" rel="stylesheet" />
+    <link href="@Styles.Url("~/Content/bootstrap-mvc-validation.css")" rel="stylesheet" />
+</head>
+<body style="background: url('../../Content/images/jogos-da-copa.png'); height: 3000px" >
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../" style="padding-top: 0px; margin-top: 0px">
+                <img src="../../Content/images/bonecobarra.png" alt="0">
+                <img src="../../Content/images/BRkZIL.gif" alt="0" style="margin-left: -11px">
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <div class="pull-right" style="margin-top: 3px;"><img src="../../Content/images/logobarra.png" alt="0"></div>
+            <ul class="nav navbar-nav"></ul>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/scripts")
+    @Scripts.Render("~/js")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+
+

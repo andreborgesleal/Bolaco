@@ -274,6 +274,7 @@
     <Content Include="Content\images\Bandeira_uruguai.png" />
     <Content Include="Content\images\Bandeitra_Belgica.gif" />
     <Content Include="Content\images\bandeura_ira.gif" />
+    <Content Include="Content\images\Banner_bolaco1.png" />
     <Content Include="Content\images\BOLAAAACO4.png" />
     <Content Include="Content\images\Bolaaaaco_identidade_visual2.jpg" />
     <Content Include="Content\images\bolaco1.jpg" />
@@ -508,6 +509,7 @@
     <None Include="Properties\PublishProfiles\Bolaco2018 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Bolaco2018 - Web Deploy.pubxml" />
     <Content Include="Views\Account\Forgot.cshtml" />
+    <Content Include="Views\Shared\_LayoutTabelaaaco.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

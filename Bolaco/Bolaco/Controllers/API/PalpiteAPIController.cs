@@ -1,6 +1,7 @@
 ﻿using App_Dominio.Component;
 using App_Dominio.Contratos;
 using App_Dominio.Enumeracoes;
+using App_Dominio.Models;
 using App_Dominio.Security;
 using DWM.Controllers.API;
 using DWM.Models.Entidades;
@@ -307,17 +308,71 @@ namespace Bolaco.Controllers
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    // Brasil 1 jogo
-                    Parametro entity1 = db.Parametros.Find(10);
-                    entity1.valor = value.score1Brasil.ToString();
-                    db.Entry(entity1).State = EntityState.Modified;
+                    int flag = -1;
+                    #region grava o resultado da partida
+                    if (Funcoes.Brasilia().Date == new DateTime(2018,6,22))
+                    {
+                        // Brasil 2 jogo
+                        Parametro entity1 = db.Parametros.Find(12);
+                        entity1.valor = value.score2Brasil.ToString();
+                        db.Entry(entity1).State = EntityState.Modified;
 
-                    // Suíça 1 jogo
-                    Parametro entity2 = db.Parametros.Find(11);
-                    entity2.valor = value.score1Croacia.ToString();
-                    db.Entry(entity2).State = EntityState.Modified;
+                        // Costa Rica 2 jogo
+                        Parametro entity2 = db.Parametros.Find(13);
+                        entity2.valor = value.score2Mexico.ToString();
+                        db.Entry(entity2).State = EntityState.Modified;
+                        flag = -3;
+                    }
+
+                    if (Funcoes.Brasilia().Date == new DateTime(2018, 6, 27))
+                    {
+                        // Brasil 3 jogo
+                        Parametro entity3 = db.Parametros.Find(14);
+                        entity3.valor = value.score3Brasil.ToString();
+                        db.Entry(entity3).State = EntityState.Modified;
+
+                        // Suíça 3 jogo
+                        Parametro entity4 = db.Parametros.Find(15);
+                        entity4.valor = value.score3Camaroes.ToString();
+                        db.Entry(entity4).State = EntityState.Modified;
+                        flag = -4;
+                    }
 
                     db.SaveChanges();
+                    #endregion
+
+                    #region Envia o SMS para os ganhadores
+                    string _CHAVE_SMS = "0876f1a3-44db-48e8-8393-256c1cbd312a";
+                    ListViewGanhadores ganhadores = new ListViewGanhadores();
+                    IEnumerable<TicketViewModel> winners = new List<TicketViewModel>();
+
+                    foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
+                    {
+                        string ret = "";
+                        if (t.clienteViewModel.telefone != null && t.clienteViewModel.telefone.Trim().Length > 0)
+                        {
+                            if (flag==-3)
+                                ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                            else if (flag==-4)
+                                ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Servia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+
+                            if (ret.Trim().Length > 0)
+                            {
+                                throw new App_DominioException(new Validate()
+                                {
+                                    Code = 60,
+                                    Message = MensagemPadrao.Message(60, ret).ToString(),
+                                    MessageBase = ret,
+                                    MessageType = MsgType.WARNING
+                                });
+                            }
+                        }
+                    }
+
+                    #endregion
+
+                    #region Envia o e-mail para os ganhadores
+                    #endregion
                 }
             }
             catch (App_DominioException ex)
@@ -350,7 +405,7 @@ namespace Bolaco.Controllers
                     dt_compra = value.dt_inscricao.ToString("dd/MM/yyyy HH:mm"),
                     nome = value.clienteViewModel.nome,
                     cpf = value.clienteViewModel.cpf,
-                    Consultor = value.Consultor
+                    Consultor = value.Consultor,                    
                 };
 
                 palpites.Add(palpite);
