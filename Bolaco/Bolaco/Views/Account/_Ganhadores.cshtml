@@ -14,117 +14,296 @@
                 <div class="modal-dialog" style="width: 85%">
                     <div class="modal-content">
                         <div class="modal-header" style="height: 80px">
-                            <span style="font-size: 20px"><strong>Gahadores Campanha Bolaaaço 2018</strong></span>
+                            <span style="font-size: 20px"><strong>Gahadores Campanha Bolaaaço 2018</strong></span><br />
+                            <small>(Clique no botão para exibir ou ocultar o referido prêmio)</small>
                         </div>
-                        <div class="modal-body" style="overflow-y: auto; height: 600px">
-                            <div class="row">
-                                <div class="col-md-4 column ui-sortable" style="">
-                                    <div class="box box-element">
-                                        <div class="view">
-                                            <h4 contenteditable="false">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor Suíça</h4>
-                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
-                                                <caption></caption>
-                                                <thead style="background-color: #FAEC37">
-                                                    <tr>
-                                                        <th style="text-align: center">Nome</th>
-                                                        <th style="text-align: center">Nº da Sorte</th>
-                                                        <th style="text-align: center">Data do Palpite</th>
-                                                    </tr>
-                                                </thead>
-                                                @{
+                        <div class="modal-body" style="overflow-y: auto">
+                            <div>
 
-                                                }
-                                                @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -2))
-                                                {
-                                                    <tr>
-                                                        <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
-                                                        <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
-                                                        <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
-                                                    </tr>
-                                                }
-                                            </table>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#premio1" aria-controls="premio1" role="tab" data-toggle="tab">1º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio2" aria-controls="premio2" role="tab" data-toggle="tab">2º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio3" aria-controls="premio3" role="tab" data-toggle="tab">3º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio4" aria-controls="premio4" role="tab" data-toggle="tab">4º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio5" aria-controls="premio5" role="tab" data-toggle="tab">5º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio6" aria-controls="premio6" role="tab" data-toggle="tab">6º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio7" aria-controls="premio7" role="tab" data-toggle="tab">7º Prêmio</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="premio1">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Primeiro Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra:</strong>
+                                            Serão entregues prêmios individuais para todos aqueles que acertarem o placar em qualquer um dos três jogos do Brasil na 1ª fase da Copa. Nesta fase não haverá empates e todos os acertos serão contemplados com o prêmio da Primeira fase.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <p>1 (Uma) Camisa da Campanha</p>
+                                        <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
+                                        <p>&nbsp;</p>
+                                        <div class="row">
+                                            <div class="col-md-4 column ui-sortable" style="">
+                                                <div class="box box-element">
+                                                    <div class="view">
+                                                        <h4 contenteditable="false">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor Suíça</h4>
+                                                        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                            <caption></caption>
+                                                            <thead style="background-color: #FAEC37">
+                                                                <tr>
+                                                                    <th style="text-align: center">Nome</th>
+                                                                    <th style="text-align: center">Nº da Sorte</th>
+                                                                    <th style="text-align: center">Data do Palpite</th>
+                                                                </tr>
+                                                            </thead>
+                                                            @{
+
+                                                            }
+                                                            @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -2))
+                                                            {
+                                                                <tr>
+                                                                    <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                    <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                    <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                                </tr>
+                                                            }
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 column ui-sortable">
+                                                <div class="box box-element">
+                                                    <div class="view">
+                                                        @{
+                                                            DateTime DataSegundoJogo = new DateTime(2018, 6, 22, 11, 0, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataSegundoJogo)
+                                                            {
+                                                                <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor Costa Rica</h4>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h4 contenteditable="true">Ganhadores de Brasil x Costa Rica</h4>
+                                                            }
+                                                        }
+                                                        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                            <caption></caption>
+                                                            <thead style="background-color: #FAEC37">
+                                                                <tr>
+                                                                    <th style="text-align: center">Nome</th>
+                                                                    <th style="text-align: center">Nº da Sorte</th>
+                                                                    <th style="text-align: center">Data do Palpite</th>
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -3))
+                                                            {
+                                                                if (App_Dominio.Models.Funcoes.Brasilia() > DataSegundoJogo)
+                                                                {
+                                                                    <tr>
+                                                                        <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                        <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                        <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 column ui-sortable">
+                                                <div class="box box-element">
+                                                    <div class="view">
+                                                        @{
+                                                            DateTime DataTerceiroJogo = new DateTime(2018, 6, 27, 17, 30, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataTerceiroJogo)
+                                                            {
+                                                                <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor Sérvia</h4>
+                                                            }
+                                                            {
+                                                                <h4 contenteditable="true">Ganhadores de Brasil x Sérvia</h4>
+                                                            }
+                                                        }
+                                                        <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                            <caption></caption>
+                                                            <thead style="background-color: #FAEC37">
+                                                                <tr>
+                                                                    <th style="text-align: center">Nome</th>
+                                                                    <th style="text-align: center">Nº da Sorte</th>
+                                                                    <th style="text-align: center">Data do Palpite</th>
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -4))
+                                                            {
+                                                                if (App_Dominio.Models.Funcoes.Brasilia() > DataTerceiroJogo)
+                                                                {
+                                                                    <tr>
+                                                                        <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                        <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                        <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 column ui-sortable">
-                                    <div class="box box-element">
-                                        <div class="view">
-                                            @{
-                                                DateTime DataSegundoJogo = new DateTime(2018, 6, 22, 11, 0, 0);
-                                                if (App_Dominio.Models.Funcoes.Brasilia() > DataSegundoJogo)
-                                                {
-                                                    <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 12).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 13).FirstOrDefault().valor Costa Rica</h4>
-                                                }
-                                                else
-                                                {
-                                                    <h4 contenteditable="true">Ganhadores de Brasil x Costa Rica</h4>
-                                                }
-                                            }
-                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
-                                                <caption></caption>
-                                                <thead style="background-color: #FAEC37">
-                                                    <tr>
-                                                        <th style="text-align: center">Nome</th>
-                                                        <th style="text-align: center">Nº da Sorte</th>
-                                                        <th style="text-align: center">Data do Palpite</th>
-                                                    </tr>
-                                                </thead>
-                                                @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -3))
-                                                {
-                                                    if (App_Dominio.Models.Funcoes.Brasilia() > DataSegundoJogo)
-                                                    {
-                                                        <tr>
-                                                            <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
-                                                            <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
-                                                            <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
-                                                        </tr>
-                                                    }
-                                                }
-                                            </table>
+                                    <div role="tabpanel" class="tab-pane fade" id="premio2">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Segundo Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra</strong>
+                                            Será entregue um único prêmio para aquele que acertar o placar dos 3 (três) jogos do Brasil na 1ª fase. Para o segundo prêmio haverá critérios de desempate.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <p>1 (Uma) Chopeira em alumínio Eletrogrill 5 lts </p>
+                                        <img src="..\Content\images\chopeira_em_aluminio_eletrogrill_5lt_mod_b4bh5l.png" class="img-responsive center-block" style="height: 200px" />
+                                        <p>&nbsp;</p>
+                                        <div class="box box-element">
+                                            <div class="view">
+
+                                                <div class="row">
+                                                    <div class="col-md-3"></div>
+                                                    <div class="col-md-6">
+                                                        @if (App_Dominio.Models.Funcoes.Brasilia() > new DateTime(2018, 06, 27, 17, 0, 0))
+                                                        {
+                                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                                <caption><h4 contenteditable="false">Ganhador do 2º prêmio</h4></caption>
+                                                                <thead style="background-color: #FAEC37">
+                                                                    <tr>
+                                                                        <th style="text-align: center">Nome</th>
+                                                                        <th style="text-align: center">Nº da Sorte</th>
+                                                                        <th style="text-align: center">Data do Palpite</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                @{
+                                                                    if (Ganhadores.Where(info => info.score1Brasil == -51).Count() == 1)
+                                                                    {
+                                                                        foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -51))
+                                                                        {
+                                                                            <tr>
+                                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                    else if (Ganhadores.Where(info => info.score1Brasil == -5).Count() == 1)
+                                                                    {
+                                                                        foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -5))
+                                                                        {
+                                                                            <tr>
+                                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <tr>
+                                                                            <td style="text-align: center" colspan="3"><strong>NÃO HOUVE GANHADOR</strong></td>
+                                                                        </tr>
+                                                                    }
+                                                                }
+                                                            </table>
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-3"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 column ui-sortable" >
-                                    <div class="box box-element">
-                                        <div class="view">
-                                            @{
-                                                DateTime DataTerceiroJogo = new DateTime(2018, 6, 27, 17, 30, 0);
-                                                if (App_Dominio.Models.Funcoes.Brasilia() > DataTerceiroJogo)
-                                                {
-                                                    <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor Sérvia</h4>
-                                                }
-                                                {
-                                                    <h4 contenteditable="true">Ganhadores de Brasil x Sérvia</h4>
-                                                }
-                                            }
-                                            <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
-                                                <caption></caption>
-                                                <thead style="background-color: #FAEC37">
-                                                    <tr>
-                                                        <th style="text-align: center">Nome</th>
-                                                        <th style="text-align: center">Nº da Sorte</th>
-                                                        <th style="text-align: center">Data do Palpite</th>
-                                                    </tr>
-                                                </thead>
-                                                @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -4))
-                                                {
-                                                    if (App_Dominio.Models.Funcoes.Brasilia() > DataTerceiroJogo)
-                                                    {
-                                                        <tr>
-                                                            <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
-                                                            <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
-                                                            <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
-                                                        </tr>
-                                                    }
-                                                }
-                                            </table>
+                                    <div role="tabpanel" class="tab-pane fade" id="premio3">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Terceiro Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra:</strong>
+                                            Serão entregues prêmios individuais para todos aqueles que acertarem o placar do jogo entre o Brasil e a respectiva seleção adversária nas oitavas de final, desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site. Para o terceiro prêmio não haverá critérios de desempates e todos os acertos serão contemplados com o terceiro prêmio.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <div class="row">
+                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                                <p>1 (Uma) Camisa da Campanha </p>
+                                                <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
+                                            </div>
+                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                                <p>1 (Um) Caneco da Campanha </p>
+                                                <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 200px">
+                                            </div>
                                         </div>
+                                        <p>&nbsp;</p>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="premio4">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Quarto Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra:</strong>
+                                            Serão entregues prêmios individuais para todos aqueles que acertarem o placar do jogo entre o Brasil e a respectiva seleção adversária nas quartas de final, desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site. Para o quarto prêmio não haverá critérios de desempates e todos os acertos serão contemplados com o quarto prêmio.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <div class="row">
+                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                                <p>1 (Uma) Camisa da Campanha </p>
+                                                <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
+                                            </div>
+                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                                <p>1 (Um) Caneco da Campanha </p>
+                                                <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 200px">
+                                            </div>
+                                        </div>
+                                        <p>&nbsp;</p>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="premio5">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Quinto Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra:</strong>
+                                            Serão entregues prêmios individuais para todos aqueles que acertarem o placar do jogo entre o Brasil e a respectiva seleção adversária na semifinal, desde que a numeração e a data da compra impressas no ticket estejam cadastrados corretamente no site. Para o quinto prêmio não haverá critérios de desempates e todos os acertos serão contemplados com o quinto prêmio.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <div class="row">
+                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                                <p>1 (Uma) Camisa da Campanha </p>
+                                                <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
+                                            </div>
+                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                                <p>1 (Um) Caneco da Campanha </p>
+                                                <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 200px">
+                                            </div>
+                                        </div>
+                                        <p>&nbsp;</p>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="premio6">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Sexto Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra:</strong>
+                                            Será entregue um único prêmio para aquele que acertar o placar dos 3 (três) jogos do Brasil nas fases OITAVAS, QUARTAS E SEMIFINAL. Para o sexto prêmio haverá critérios de desempate.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <p> 1 (Uma) Churrasqueira Arke elétrica c/ três espetos giratórios</p>
+                                        <img src="..\Content\images\Churrasqueira_eletrica.png" class="img-responsive center-block" style="height: 200px">
+                                        <p>&nbsp;</p>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="premio7">
+                                        <p>&nbsp;</p>
+                                        <p><span style="font-size: 20px"><strong>Sétimo Prêmio</strong></span></p>
+                                        <p>
+                                            <strong>Regra:</strong>
+                                            Esta fase independe da presença do Brasil. Será entregue um único prêmio para aquele que acertar as duas seleções que farão a final da Copa. Para este prêmio há critérios de desempate.
+                                        </p>
+                                        <p>Consulte o regulamento</p>
+                                        <p>1 (Um) Split Agratto 9.000 BTUS</p>
+                                        <img src="..\Content\images\Split_Agratto_9mil_BTUS.png" class="img-responsive center-block" style="height: 200px">
+                                        <p>&nbsp;</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer" style="padding: 10px">
-                            <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Fechar</button>
+                            <div class="modal-footer" style="padding: 10px">
+                                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Fechar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

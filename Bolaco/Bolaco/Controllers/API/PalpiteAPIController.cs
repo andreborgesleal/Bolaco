@@ -334,7 +334,7 @@ namespace Bolaco.Controllers
                             entity3.valor = value.score3Brasil.ToString();
                             db.Entry(entity3).State = EntityState.Modified;
 
-                            // Suíça 3 jogo
+                            // sérvia 3 jogo
                             Parametro entity4 = db.Parametros.Find(15);
                             entity4.valor = value.score3Camaroes.ToString();
                             db.Entry(entity4).State = EntityState.Modified;
@@ -452,7 +452,7 @@ namespace Bolaco.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<PalpiteViewModel> Ganhadores()
+        public IEnumerable<PalpiteViewModel> Ganhadores(int jogo)
         {
             ListViewGanhadores ganhadores = new ListViewGanhadores();
             IEnumerable<TicketViewModel> winner = new List<TicketViewModel>();
@@ -460,7 +460,7 @@ namespace Bolaco.Controllers
             using (ApplicationContext db = new ApplicationContext())
                 winner = ganhadores.Bind(db, 0, 5000, null);
 
-            foreach (TicketViewModel value in winner)
+            foreach (TicketViewModel value in winner.Where(info => info.score1Brasil == jogo))
             {
                 PalpiteViewModel palpite = new PalpiteViewModel()
                 {
@@ -475,6 +475,17 @@ namespace Bolaco.Controllers
             }
 
             return palpites;
+        }
+
+        [HttpGet]
+        public IEnumerable<EstatisticaViewModel> Estatistica(int jogo, int score1, int score2)
+        {
+            ListViewEstatistica estatistica = new ListViewEstatistica();
+            IEnumerable<EstatisticaViewModel> estatisticas = new List<EstatisticaViewModel>();
+            using (ApplicationContext db = new ApplicationContext())
+                estatisticas = estatistica.Bind(db, 0, 5000, null);
+
+            return estatisticas.Where(info => info.jogo == jogo && info.score_selecao1 == score1 && info.score_selecao2 == score2).ToList();    
         }
 
         // GET api/<controller>

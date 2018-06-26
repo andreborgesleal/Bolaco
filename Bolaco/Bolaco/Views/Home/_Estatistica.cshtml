@@ -26,8 +26,8 @@
                                 <div class="bs-example bs-example-tabs" style="margin-top: 15px">
                                     <ul id="myTab" class="nav nav-tabs">
                                         @*<li><a href="#BrasilXCroacia" data-toggle="tab">Primeiro jogo</a></li>*@
-                                        <li class="active"><a href="#BrasilXMexico" data-toggle="tab">Segundo jogo</a></li>
-                                        <li><a href="#BrasilXCamaroes" data-toggle="tab">Terceiro jogo</a></li>
+                                        @*<li class="active"><a href="#BrasilXMexico" data-toggle="tab">Segundo jogo</a></li>*@
+                                        <li class="active"><a href="#BrasilXCamaroes" data-toggle="tab">Terceiro jogo</a></li>
                                         <li><a href="#Brasil4XOutraSelecao" data-toggle="tab">Oitavas de final</a></li>
                                         <li><a href="#Brasil5XOutraSelecao" data-toggle="tab">Quartas de final</a></li>
                                         <li><a href="#Brasil6XOutraSelecao" data-toggle="tab">Semifinal</a></li>
@@ -61,8 +61,57 @@
                                             }
                                         </div>*@
                                         <!-- Segundo Jogo -->
-                                        <div class="tab-pane fade active in" id="BrasilXMexico">
-                                            @*@foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 2))
+                                        @*<div class="tab-pane fade active in" id="BrasilXMexico">
+                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 2))
+                                            {
+                                                decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
+                                                string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
+                                                string _valueNow = percent.ToString().Replace(",", ".");
+                                                <div class="row clearfix" style="margin-top: 22px">
+                                                    <div class="col-md-9">
+                                                        <div class="col-md-1"><img src="..\Content\images\@obj.bandeira_selecao1" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                                        <div class="col-md-2">@obj.nome_selecao1</div>
+                                                        <div class="col-md-1">@obj.score_selecao1</div>
+                                                        <div class="col-md-1">X</div>
+                                                        <div class="col-md-1">@obj.score_selecao2</div>
+                                                        <div class="col-md-2">@obj.nome_selecao2</div>
+                                                        <div class="col-md-4"><img src="..\Content\images\@obj.bandeira_selecao2" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="progress" style="margin-top: 8px">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="@_valueNow" aria-valuemin="0" aria-valuemax="100" style="@_style">
+                                                        @(App_Dominio.Models.Funcoes.FormataNumero(percent))%
+                                                    </div>
+
+                                                </div>
+                                            }
+
+                                        </div>*@
+                                        <!-- Terceiro Jogo -->
+                                        <div class="tab-pane fade active in" id="BrasilXCamaroes">
+                                            <div style="padding: 15px">
+                                                <canvas id="cvs" width="850" height="250">[No canvas support]</canvas>
+                                            </div>
+                                            <div id="container" style="display: inline-block; position: relative">
+                                                <canvas id="cvsPie" width="350" height="350">[No canvas support]</canvas>
+                                            </div>
+                                            @{
+                                                string[] dataPag;
+                                                string[] dataVal1;
+                                                decimal[] dataVal;
+                                                int QteTotal = (from obj in Model where obj.jogo == 3 select obj.quantidade).Take(10).Sum();
+
+                                                dataPag = String.Join(",", (from obj in Model where obj.jogo == 3 select obj.nome_selecao1.Substring(0, 3) + " " + obj.score_selecao1.ToString() + " x " + obj.score_selecao2.ToString() + " Ser").Take(10)).Split(',');
+                                                dataVal1 = String.Join(",", (from obj in Model where obj.jogo == 3 select obj.quantidade).Take(10)).Split(',');
+
+                                                dataVal = new decimal[dataPag.Length];
+                                                for (int i = 0; i <= dataVal1.Length - 1; i++)
+                                                {
+                                                    dataVal[i] = (decimal.Parse(dataVal1[i]) / (decimal)QteTotal) * 100;
+                                                }
+                                            }
+
+                                            @*@foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 3))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
                                                 string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
@@ -85,54 +134,6 @@
 
                                                 </div>
                                             }*@
-
-                                            <div style="padding: 15px">
-                                                <canvas id="cvs" width="850" height="250">[No canvas support]</canvas>
-                                            </div>
-                                            <div id="container" style="display: inline-block; position: relative">
-                                                <canvas id="cvsPie" width="350" height="350">[No canvas support]</canvas>
-                                            </div>
-                                            @{
-                                                string[] dataPag;
-                                                string[] dataVal1;
-                                                decimal[] dataVal;
-                                                int QteTotal = (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(10).Sum();
-
-                                                dataPag = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.nome_selecao1.Substring(0,3) + " " + obj.score_selecao1.ToString() + " x " + obj.score_selecao2.ToString() + " Cos").Take(10)).Split(',');
-                                                dataVal1 = String.Join(",", (from obj in Model where obj.jogo == 2 select obj.quantidade).Take(10)).Split(',');
-
-                                                dataVal = new decimal[dataPag.Length];
-                                                for (int i = 0; i <= dataVal1.Length - 1; i++)
-                                                {
-                                                    dataVal[i] = (decimal.Parse(dataVal1[i]) / (decimal)QteTotal) * 100;
-                                                }
-                                            }
-                                        </div>
-                                        <!-- Terceiro Jogo -->
-                                        <div class="tab-pane fade" id="BrasilXCamaroes">
-                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 3))
-                                            {
-                                                decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
-                                                string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
-                                                string _valueNow = percent.ToString().Replace(",", ".");
-                                                <div class="row clearfix" style="margin-top: 22px">
-                                                    <div class="col-md-9">
-                                                        <div class="col-md-1"><img src="..\Content\images\@obj.bandeira_selecao1" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
-                                                        <div class="col-md-2">@obj.nome_selecao1</div>
-                                                        <div class="col-md-1">@obj.score_selecao1</div>
-                                                        <div class="col-md-1">X</div>
-                                                        <div class="col-md-1">@obj.score_selecao2</div>
-                                                        <div class="col-md-2">@obj.nome_selecao2</div>
-                                                        <div class="col-md-4"><img src="..\Content\images\@obj.bandeira_selecao2" class="img-circle" style="height: 20px; width: 20px" alt="0"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="progress" style="margin-top: 8px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="@_valueNow" aria-valuemin="0" aria-valuemax="100" style="@_style">
-                                                        @(App_Dominio.Models.Funcoes.FormataNumero(percent))%
-                                                    </div>
-
-                                                </div>
-                                            }
                                         </div>
                                         <!-- Oitavas de final -->
                                         <div class="tab-pane fade" id="Brasil4XOutraSelecao">
@@ -275,7 +276,7 @@
             colors: ['green'],
             strokestyle: 'rgba(0,0,0,0)',
             textSize: 8,
-            title: 'Brasil x Costa Rica (10 palpites mais votados)',
+            title: 'Brasil x Sérvia (10 palpites mais votados)',
             numyticks: 5,
             noxaxis: true,
             gutterLeft: 50

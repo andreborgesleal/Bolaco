@@ -816,6 +816,11 @@ namespace DWM.Models.Persistence
             return (est1.OrderByDescending(info => info.quantidade).ToList().Union(est2.OrderByDescending(info => info.quantidade).ToList()).Union(est3.OrderByDescending(info => info.quantidade).ToList()).Union(est4.OrderByDescending(info => info.quantidade).ToList()).Union(est5.OrderByDescending(info => info.quantidade).ToList()).Union(est6.OrderByDescending(info => info.quantidade).ToList()).Union(estTemp.OrderByDescending(info => info.quantidade).ToList())).ToList();
         }
 
+        public IEnumerable<EstatisticaViewModel> Bind(ApplicationContext db, int? index, int pageSize = 50, params object[] param)
+        {
+            this.db = db;
+            return Bind(index, pageSize, param);
+        }
 
         public override Repository getRepository(Object id)
         {
@@ -894,9 +899,6 @@ namespace DWM.Models.Persistence
             if (db.Parametros.Find(19).valor != "")
                 _Selecao2_final = int.Parse(db.Parametros.Find(19).valor);
 
-
-
-
             IEnumerable<TicketViewModel> result = (from t in db.Tickets
                                                    join c in db.Clientes on t.clienteId equals c.clienteId
                                                    where t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia
@@ -940,6 +942,22 @@ namespace DWM.Models.Persistence
                                                     ).Union(
                                                     (from t in db.Tickets
                                                      join c in db.Clientes on t.clienteId equals c.clienteId
+                                                     where t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
+                                                            t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico &&
+                                                            t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes &&
+                                                            t.Situacao == "2"
+                                                     orderby t.dt_inscricao
+                                                     select new TicketViewModel()
+                                                     {
+                                                         clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
+                                                         ticketId = t.ticketId,
+                                                         dt_inscricao = t.dt_inscricao,
+                                                         score1Brasil = -51,
+                                                         Consultor = t.Consultor,
+                                                     }).Take(1).ToList()
+                                                    ).Union(
+                                                    (from t in db.Tickets
+                                                     join c in db.Clientes on t.clienteId equals c.clienteId
                                                      where ((t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
                                                             t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico) ||
                                                            (t.score1Brasil == _Score1Brasil && t.score1Croacia == _Score1Croacia &&
@@ -947,15 +965,15 @@ namespace DWM.Models.Persistence
                                                            (t.score2Brasil == _Score2Brasil && t.score2Mexico == _Score2Mexico &&
                                                             t.score3Brasil == _Score3Brasil && t.score3Camaroes == _Score3Camaroes))
                                                             && t.Situacao == "2"
-                                                     orderby t.dt_inscricao
+                                                     orderby  t.dt_inscricao 
                                                      select new TicketViewModel()
                                                      {
                                                          clienteViewModel = new ClienteViewModel() { nome = c.nome, cpf = c.cpf, telefone = c.telefone, email = c.email },
                                                          ticketId = t.ticketId,
                                                          dt_inscricao = t.dt_inscricao,
                                                          score1Brasil = -5,
-                                                         Consultor = t.Consultor
-                                                     }).ToList()
+                                                         Consultor = t.Consultor, 
+                                                     }).Take(1).ToList()
                                                     ).Union(
                                                     (from t in db.Tickets
                                                      join c in db.Clientes on t.clienteId equals c.clienteId
