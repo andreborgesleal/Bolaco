@@ -372,6 +372,57 @@ namespace Bolaco.Controllers
                             }
                         }
 
+                        ///***************
+                        // Segundo prênio
+                        //****************
+                        if (flag == -4)
+                        {
+                            if (winners.Where(info => info.score1Brasil == -51).Count() == 1) // acertou os três palpites
+                            {
+                                foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == -51))
+                                {
+                                    string ret = "";
+                                    if (t.clienteViewModel.telefone != null && t.clienteViewModel.telefone.Trim().Length > 0)
+                                    {
+                                        ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, voce foi o ganhador do 2o premio Norte Refrigeracao com o Numero da Sorte [" + t.ticketId + "]. Entre em contato com nossa loja.");
+
+                                        if (ret.Trim().Length > 0)
+                                        {
+                                            throw new App_DominioException(new Validate()
+                                            {
+                                                Code = 60,
+                                                Message = MensagemPadrao.Message(60, ret).ToString(),
+                                                MessageBase = ret,
+                                                MessageType = MsgType.WARNING
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                            else if(winners.Where(info => info.score1Brasil == -5).Count() == 1) // acertou dois palpites
+                            {
+                                foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == -5))
+                                {
+                                    string ret = "";
+                                    if (t.clienteViewModel.telefone != null && t.clienteViewModel.telefone.Trim().Length > 0)
+                                    {
+                                        ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, voce foi o ganhador do 2o premio Norte Refrigeracao com o Numero da Sorte [" + t.ticketId + "]. Entre em contato com nossa loja.");
+
+                                        if (ret.Trim().Length > 0)
+                                        {
+                                            throw new App_DominioException(new Validate()
+                                            {
+                                                Code = 60,
+                                                Message = MensagemPadrao.Message(60, ret).ToString(),
+                                                MessageBase = ret,
+                                                MessageType = MsgType.WARNING
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
                         #endregion
 
                         #region Envia o e-mail para os ganhadores
@@ -395,44 +446,129 @@ namespace Bolaco.Controllers
                             string Subject = "Premiação " + sistema.descricao;
                             string Text = "<p>Premiação Bolaço 2018</p>";
 
-                            foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
+                            if (flag == -4)
                             {
-                                List<string> recipients = new List<string>();
-                                recipients.Add(t.clienteViewModel.nome + "<" + t.clienteViewModel.email + ">");
-                                string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
-                                              "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + t.clienteViewModel.nome + "</span></p>";
-                                if (flag == -3)
-                                    Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!\"</span></p>";
-                                else if (flag == 4)
+                                foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
+                                {
+                                    List<string> recipients = new List<string>();
+                                    recipients.Add(t.clienteViewModel.nome + "<" + t.clienteViewModel.email + ">");
+                                    string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
+                                                  "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + t.clienteViewModel.nome + "</span></p>";
+
                                     Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Sérvia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!\"</span></p>";
 
-                                Html += "<p></p>" +
-                                        "<p></p>" +
-                                        "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + t.ticketId.ToUpper() + "</b></span></p>" +
-                                        "<p></p>" +
-                                        "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Data e hora do palpite: <b>" + t.dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.</b></span></p>" +
-                                        "<hr />" +
-                                        "<table style=\"width: 95%; border: 0px solid #fff\">" +
-                                        "<tr>" +
-                                        "<td style=\"width: 55%\">" +
-                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Entre em contato com nossa loja para receber seu prêmio</span></p>" +
-                                        "</tr>" +
-                                        "</table>";
+                                    Html += "<p></p>" +
+                                            "<p></p>" +
+                                            "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + t.ticketId.ToUpper() + "</b></span></p>" +
+                                            "<p></p>" +
+                                            "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Data e hora do palpite: <b>" + t.dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.</b></span></p>" +
+                                            "<hr />" +
+                                            "<table style=\"width: 95%; border: 0px solid #fff\">" +
+                                            "<tr>" +
+                                            "<td style=\"width: 55%\">" +
+                                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Entre em contato com nossa loja para receber seu prêmio</span></p>" +
+                                            "</tr>" +
+                                            "</table>";
 
-                                Html += "<div style=\"width: 100%\"><p></p>" +
-                                        "<p></p>" +
-                                        "<p></p>" +
-                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
-                                        "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
-                                        "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
-                                        "</div>";
+                                    Html += "<div style=\"width: 100%\"><p></p>" +
+                                            "<p></p>" +
+                                            "<p></p>" +
+                                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
+                                            "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
+                                            "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
+                                            "</div>";
 
-                                Validate result = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
-                                if (result.Code > 0)
-                                {
-                                    result.MessageBase = "Seu palpite foi realizado com sucesso mas não foi possível enviar seu e-mail de confirmação. Vá em \"Todos os seus palpites\" para consultar sua aposta.";
-                                    throw new App_DominioException(result);
+                                    Validate result = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
+                                    if (result.Code > 0)
+                                    {
+                                        result.MessageBase = "Seu palpite foi realizado com sucesso mas não foi possível enviar seu e-mail de confirmação. Vá em \"Todos os seus palpites\" para consultar sua aposta.";
+                                        throw new App_DominioException(result);
+                                    }
                                 }
+
+                                #region segundo prêmio
+                                Subject = "Premiação (2o prêmio) " + sistema.descricao;
+                                if (winners.Where(info => info.score1Brasil == -51).Count() == 1) // acertou os três palpites
+                                {
+                                    foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == -51))
+                                    {
+                                        List<string> recipients = new List<string>();
+                                        recipients.Add(t.clienteViewModel.nome + "<" + t.clienteViewModel.email + ">");
+                                        string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
+                                                      "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + t.clienteViewModel.nome + "</span></p>";
+
+                                        Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seus palpites do jogo Brasil na primeira fase da copa foi contemplado com o segundo prêmio da Campanha Bolaaaço 2018 da Norte Refrigeração</span></p>";
+                                        Html += "<p></p>" +
+                                                "<p></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + t.ticketId.ToUpper() + "</b></span></p>" +
+                                                "<p></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Data e hora do palpite: <b>" + t.dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.</b></span></p>" +
+                                                "<hr />" +
+                                                "<table style=\"width: 95%; border: 0px solid #fff\">" +
+                                                "<tr>" +
+                                                "<td style=\"width: 55%\">" +
+                                                "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Entre em contato com nossa loja para receber seu prêmio</span></p>" +
+                                                "</tr>" +
+                                                "</table>";
+
+                                        Html += "<div style=\"width: 100%\"><p></p>" +
+                                                "<p></p>" +
+                                                "<p></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
+                                                "</div>";
+
+                                        Validate result = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
+                                        if (result.Code > 0)
+                                        {
+                                            result.MessageBase = "Seu palpite foi realizado com sucesso mas não foi possível enviar seu e-mail de confirmação. Vá em \"Todos os seus palpites\" para consultar sua aposta.";
+                                            throw new App_DominioException(result);
+                                        }
+                                    }
+                                }
+                                else if (winners.Where(info => info.score1Brasil == -5).Count() == 1) // acertou dois palpites
+                                {
+                                    foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == -5))
+                                    {
+                                        List<string> recipients = new List<string>();
+                                        recipients.Add(t.clienteViewModel.nome + "<" + t.clienteViewModel.email + ">");
+                                        string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
+                                                      "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + t.clienteViewModel.nome + "</span></p>";
+
+                                        Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seus palpites do jogo Brasil na primeira fase da copa foi contemplado com o segundo prêmio da Campanha Bolaaaço 2018 da Norte Refrigeração</span></p>";
+                                        Html += "<p></p>" +
+                                                "<p></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Número da Sorte: <b>" + t.ticketId.ToUpper() + "</b></span></p>" +
+                                                "<p></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: large; color: #000\">Data e hora do palpite: <b>" + t.dt_inscricao.ToString("dd/MM/yyyy HH:mm") + " h.</b></span></p>" +
+                                                "<hr />" +
+                                                "<table style=\"width: 95%; border: 0px solid #fff\">" +
+                                                "<tr>" +
+                                                "<td style=\"width: 55%\">" +
+                                                "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Entre em contato com nossa loja para receber seu prêmio</span></p>" +
+                                                "</tr>" +
+                                                "</table>";
+
+                                        Html += "<div style=\"width: 100%\"><p></p>" +
+                                                "<p></p>" +
+                                                "<p></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Cordialmente,</span></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Administração " + empresa.nome + "</span></p>" +
+                                                "<p><span style=\"font-family: Verdana; font-size: x-small; color: #333333\">Este é um e-mail automático. Por favor não responda, pois ele não será lido.</span></p>" +
+                                                "</div>";
+
+                                        Validate result = sendMail.Send(sender, recipients, Html, Subject, Text, norte);
+                                        if (result.Code > 0)
+                                        {
+                                            result.MessageBase = "Seu palpite foi realizado com sucesso mas não foi possível enviar seu e-mail de confirmação. Vá em \"Todos os seus palpites\" para consultar sua aposta.";
+                                            throw new App_DominioException(result);
+                                        }
+                                    }
+
+                                }
+
+                                #endregion
                             }
                         }
                         #endregion

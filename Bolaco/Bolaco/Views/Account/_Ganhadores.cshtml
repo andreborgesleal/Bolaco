@@ -114,11 +114,12 @@
                                                 <div class="box box-element">
                                                     <div class="view">
                                                         @{
-                                                            DateTime DataTerceiroJogo = new DateTime(2018, 6, 27, 17, 30, 0);
+                                                            DateTime DataTerceiroJogo = new DateTime(2018, 6, 27, 17, 0, 0);
                                                             if (App_Dominio.Models.Funcoes.Brasilia() > DataTerceiroJogo)
                                                             {
                                                                 <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor Sérvia</h4>
                                                             }
+                                                            else
                                                             {
                                                                 <h4 contenteditable="true">Ganhadores de Brasil x Sérvia</h4>
                                                             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using App_Dominio.Contratos;
 using App_Dominio.Entidades;
 using DWM.Models.Repositories;
@@ -213,7 +214,7 @@ namespace DWM.Models.Persistence
                 t.score2Brasil = -1;
                 t.score2Mexico = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-27 14:00"))
+            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-06-27 15:00"))
             {
                 t.score3Brasil = -1;
                 t.score3Camaroes = -1;

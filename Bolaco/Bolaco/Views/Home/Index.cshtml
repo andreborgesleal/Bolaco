@@ -249,31 +249,37 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-27 15:00"))
+                                                        @{
+                                                            System.DateTime DataTerceiroJogo = new DateTime(2018, 06, 27, 14, 0, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataTerceiroJogo)
                                                             {
-                                                                @*@Html.TextBoxFor(m => m.score3Brasil, new { @class = "form-control input-sm" })*@
-                                                                <input type="text" id="score3Brasil" name="score3Brasil" value="" class="form-control input-sm text-center" />
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score3Brasil" name="score3Brasil" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score3Camaroes" name="score3Camaroes" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
                                                             }
                                                             else
                                                             {
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 14).FirstOrDefault().valor</b>
-                                                            }                                                            
-                                                        </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            X
-                                                        </td>
-                                                        <td style="text-align: center; width: 5%">
-                                                            @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-06-27 15:00"))
-                                                            {
-                                                                @*@Html.TextBoxFor(m => m.score3Camaroes, new { @class = "form-control input-sm" })*@
-                                                                <input type="text" id="score3Camaroes" name="score3Camaroes" value="" class="form-control input-sm text-center" />
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score3Brasil" name="score3Brasil" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score3Camaroes" name="score3Camaroes" value="" class="form-control input-sm text-center" />
+                                                                </td>
                                                             }
-                                                            else
-                                                            {
-                                                              <b>@Model.Parametros.Where(info => info.paramId == 15).FirstOrDefault().valor</b>
-                                                            }
-                                                        </td>
+                                                        }
                                                         <td style="width: 21%; text-align: left">
                                                             <div class="row">
                                                                 <div class="col-md-8">
@@ -287,7 +293,7 @@
                                                     </tr>
                                                     <!-- Oitavas de final -->
                                                     <tr>
-                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-02 11:00"))
+                                                        @if (DateTime.Now.AddHours(-1) <= DateTime.Parse("2018-07-02 11:00"))
                                                         {
                                                             <td style="width: 20%; text-align: center">
                                                                 <b>Oitavas de Final</b>
@@ -305,7 +311,7 @@
                                                                 <input type="text" id="score4OutraSelecao" name="score4OutraSelecao" value="" class="form-control input-sm text-center" />
                                                             </td>
                                                             <td style="width: 21%; text-align: left">
-                                                                Seleção (8ª de final)
+                                                                México
                                                             </td>
                                                         }
                                                         else
@@ -326,7 +332,7 @@
                                                                 <b>@Model.Parametros.Where(info => info.paramId == 21).FirstOrDefault().valor</b>
                                                             </td>
                                                             <td style="width: 21%; text-align: left">
-                                                                Seleção (8ª de final)
+                                                                México
                                                             </td>
                                                         }
 
