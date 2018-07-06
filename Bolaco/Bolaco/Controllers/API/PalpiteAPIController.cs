@@ -355,6 +355,20 @@ namespace Bolaco.Controllers
                             flag = -6;
                         }
 
+                        if (Funcoes.Brasilia().Date == new DateTime(2018, 7, 6))
+                        {
+                            // Brasil 5 jogo
+                            Parametro entity7 = db.Parametros.Find(22);
+                            entity7.valor = value.score5Brasil.ToString();
+                            db.Entry(entity7).State = EntityState.Modified;
+
+                            // bélgica 5 jogo
+                            Parametro entity8 = db.Parametros.Find(23);
+                            entity8.valor = value.score5OutraSelecao.ToString();
+                            db.Entry(entity8).State = EntityState.Modified;
+                            flag = -7;
+                        }
+
                         db.SaveChanges();
                         #endregion
 
@@ -368,12 +382,15 @@ namespace Bolaco.Controllers
                             string ret = "";
                             if (t.clienteViewModel.telefone != null && t.clienteViewModel.telefone.Trim().Length > 0)
                             {
-                                if (flag == -3)
-                                    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
-                                else if (flag == -4)
-                                    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Servia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
-                                else if (flag == -6)
-                                    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score4Brasil.ToString() + " x " + value.score4OutraSelecao.ToString() + " Mexico com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                                //if (flag == -3)
+                                //    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score2Brasil.ToString() + " x " + value.score2Mexico.ToString() + " Costa Rica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                                //else if (flag == -4)
+                                //    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score3Brasil.ToString() + " x " + value.score3Camaroes.ToString() + " Servia com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                                //else if (flag == -6)
+                                //    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score4Brasil.ToString() + " x " + value.score4OutraSelecao.ToString() + " Mexico com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
+                                
+                                if (flag == -7)
+                                    ret = Torpedo.EnviarSMS(_CHAVE_SMS, "Norte Refrigeracao", t.clienteViewModel.telefone, "[Bolaaaco 2018] Parabens, seu palpite do jogo Brasil " + value.score5Brasil.ToString() + " x " + value.score5OutraSelecao.ToString() + " Belgica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!");
 
                                 if (ret.Trim().Length > 0)
                                 {
@@ -462,7 +479,7 @@ namespace Bolaco.Controllers
                             string Subject = "Premiação " + sistema.descricao;
                             string Text = "<p>Premiação Bolaço 2018</p>";
 
-                            if (flag == -6)
+                            if (flag == -7)
                             {
                                 foreach (DWM.Models.Repositories.TicketViewModel t in winners.Where(info => info.score1Brasil == flag))
                                 {
@@ -471,7 +488,7 @@ namespace Bolaco.Controllers
                                     string Html = "<p><span style=\"font-family: Verdana; font-size: x-large; font-weight: bold; color: #3e5b33\">" + sistema.descricao + "</span></p>" +
                                                   "<p><span style=\"font-family: Verdana; font-size: large; color: #3e5b33\">" + t.clienteViewModel.nome + "</span></p>";
 
-                                    Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seu palpite do jogo Brasil " + value.score4Brasil.ToString() + " x " + value.score4OutraSelecao.ToString() + " México com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!\"</span></p>";
+                                    Html += "<p><span style=\"font-family: Verdana; font-size: small; color: #000\">Parabéns! Seu palpite do jogo Brasil " + value.score5Brasil.ToString() + " x " + value.score5OutraSelecao.ToString() + " Bélgica com o Numero da Sorte [" + t.ticketId + "] foi o vencedor!\"</span></p>";
 
                                     Html += "<p></p>" +
                                             "<p></p>" +

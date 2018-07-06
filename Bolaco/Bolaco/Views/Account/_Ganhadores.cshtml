@@ -22,10 +22,10 @@
 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#premio1" aria-controls="premio1" role="tab" data-toggle="tab">1º Prêmio</a></li>
+                                    <li role="presentation"><a href="#premio1" aria-controls="premio1" role="tab" data-toggle="tab">1º Prêmio</a></li>
                                     <li role="presentation"><a href="#premio2" aria-controls="premio2" role="tab" data-toggle="tab">2º Prêmio</a></li>
                                     <li role="presentation"><a href="#premio3" aria-controls="premio3" role="tab" data-toggle="tab">3º Prêmio</a></li>
-                                    <li role="presentation"><a href="#premio4" aria-controls="premio4" role="tab" data-toggle="tab">4º Prêmio</a></li>
+                                    <li role="presentation" class="active"><a href="#premio4" aria-controls="premio4" role="tab" data-toggle="tab">4º Prêmio</a></li>
                                     <li role="presentation"><a href="#premio5" aria-controls="premio5" role="tab" data-toggle="tab">5º Prêmio</a></li>
                                     <li role="presentation"><a href="#premio6" aria-controls="premio6" role="tab" data-toggle="tab">6º Prêmio</a></li>
                                     <li role="presentation"><a href="#premio7" aria-controls="premio7" role="tab" data-toggle="tab">7º Prêmio</a></li>
@@ -234,7 +234,7 @@
                                                 <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
                                             </div>
                                             <div class="col-md-1">
-                                                <h2>OU</h2>
+                                                <h2><strong>OU</strong></h2>
                                             </div>
                                             <div class="col-md-5 col-xs-12 col-lg-5">
                                                 <p>1 (Um) Caneco da Campanha </p>
@@ -279,7 +279,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane fade" id="premio4">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="premio4">
                                         <p>&nbsp;</p>
                                         <p><span style="font-size: 20px"><strong>Quarto Prêmio</strong></span></p>
                                         <p>
@@ -288,16 +288,55 @@
                                         </p>
                                         <p>Consulte o regulamento</p>
                                         <div class="row">
-                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                            <div class="col-md-5 col-xs-12 col-lg-5">
                                                 <p>1 (Uma) Camisa da Campanha </p>
                                                 <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
                                             </div>
-                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                            <div class="col-md-1">
+                                                <h2><strong>OU</strong></h2>
+                                            </div>
+                                            <div class="col-md-5 col-xs-12 col-lg-5">
                                                 <p>1 (Um) Caneco da Campanha </p>
                                                 <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 200px">
                                             </div>
                                         </div>
                                         <p>&nbsp;</p>
+                                        <div class="box box-element">
+                                            <div class="view">
+                                                @{
+                                                    DateTime DataQuintoJogo = new DateTime(2018, 7, 6, 18, 0, 0);
+                                                    if (App_Dominio.Models.Funcoes.Brasilia() > DataQuintoJogo)
+                                                    {
+                                                        <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 22).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 23).FirstOrDefault().valor Bélgica</h4>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h4 contenteditable="true">Ganhadores de Brasil x Bélgica</h4>
+                                                    }
+                                                }
+                                                <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                    <caption></caption>
+                                                    <thead style="background-color: #FAEC37">
+                                                        <tr>
+                                                            <th style="text-align: center">Nome</th>
+                                                            <th style="text-align: center">Nº da Sorte</th>
+                                                            <th style="text-align: center">Data do Palpite</th>
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -7))
+                                                    {
+                                                        if (App_Dominio.Models.Funcoes.Brasilia() > DataQuintoJogo)
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="premio5">
                                         <p>&nbsp;</p>
