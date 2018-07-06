@@ -45,6 +45,7 @@
                                         <p>&nbsp;</p>
                                         <div class="row">
                                             <div class="col-md-4 column ui-sortable" style="">
+                                                <img src="..\Content\images\Ganhadores-Bolaaaço-02.jpg" class="img-responsive center-block" style="height: 400px">
                                                 <div class="box box-element">
                                                     <div class="view">
                                                         <h4 contenteditable="false">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor Suíça</h4>
@@ -74,6 +75,7 @@
                                             </div>
                                             <div class="col-md-4 column ui-sortable">
                                                 <div class="box box-element">
+                                                    <img src="..\Content\images\Ganhadores-Bolaaaço-03.jpg" class="img-responsive center-block" style="height: 400px">
                                                     <div class="view">
                                                         @{
                                                             DateTime DataSegundoJogo = new DateTime(2018, 6, 22, 11, 0, 0);
@@ -111,6 +113,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4 column ui-sortable">
+                                                <img src="..\Content\images\Ganhadores-Bolaaaço-04.jpg" class="img-responsive center-block" style="height: 400px">
                                                 <div class="box box-element">
                                                     <div class="view">
                                                         @{
@@ -161,6 +164,7 @@
                                         <p>1 (Uma) Chopeira em alumínio Eletrogrill 5 lts </p>
                                         <img src="..\Content\images\chopeira_em_aluminio_eletrogrill_5lt_mod_b4bh5l.png" class="img-responsive center-block" style="height: 200px" />
                                         <p>&nbsp;</p>
+                                        <img src="..\Content\images\Ganhadores-Bolaaaço-05.jpg" class="img-responsive center-block" style="height: 400px" />
                                         <div class="box box-element">
                                             <div class="view">
 
@@ -225,16 +229,55 @@
                                         </p>
                                         <p>Consulte o regulamento</p>
                                         <div class="row">
-                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                            <div class="col-md-5 col-xs-12 col-lg-5">
                                                 <p>1 (Uma) Camisa da Campanha </p>
                                                 <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 200px">
                                             </div>
-                                            <div class="col-md-6 col-xs-12 col-lg-6">
+                                            <div class="col-md-1">
+                                                <h2>OU</h2>
+                                            </div>
+                                            <div class="col-md-5 col-xs-12 col-lg-5">
                                                 <p>1 (Um) Caneco da Campanha </p>
                                                 <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 200px">
                                             </div>
                                         </div>
                                         <p>&nbsp;</p>
+                                        <div class="box box-element">
+                                            <div class="view">
+                                                @{
+                                                    DateTime DataQuartoJogo = new DateTime(2018, 7, 2, 12, 0, 0);
+                                                    if (App_Dominio.Models.Funcoes.Brasilia() > DataQuartoJogo)
+                                                    {
+                                                        <h4 contenteditable="true">Ganhadores de Brasil @Parametros.Where(info => info.paramId == 20).FirstOrDefault().valor x @Parametros.Where(info => info.paramId == 21).FirstOrDefault().valor México</h4>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h4 contenteditable="true">Ganhadores de Brasil x México</h4>
+                                                    }
+                                                }
+                                                <table class="table table-hover table-bordered table-condensed" style="cursor: pointer; padding-right: 7px;">
+                                                    <caption></caption>
+                                                    <thead style="background-color: #FAEC37">
+                                                        <tr>
+                                                            <th style="text-align: center">Nome</th>
+                                                            <th style="text-align: center">Nº da Sorte</th>
+                                                            <th style="text-align: center">Data do Palpite</th>
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach (DWM.Models.Repositories.TicketViewModel t in Ganhadores.Where(info => info.score1Brasil == -6))
+                                                    {
+                                                        if (App_Dominio.Models.Funcoes.Brasilia() > DataQuartoJogo)
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align: left;"><small>@t.clienteViewModel.nome</small></td>
+                                                                <td style="text-align: center"><small>@t.ticketId.ToUpper()</small></td>
+                                                                <td style="text-align: center"><small>@(t.dt_inscricao.ToString("dd/MM/yyyy HH:mm"))</small></td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="premio4">
                                         <p>&nbsp;</p>

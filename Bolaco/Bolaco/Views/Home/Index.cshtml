@@ -293,95 +293,103 @@
                                                     </tr>
                                                     <!-- Oitavas de final -->
                                                     <tr>
-                                                        @if (DateTime.Now.AddHours(-1) <= DateTime.Parse("2018-07-02 11:00"))
-                                                        {
-                                                            <td style="width: 20%; text-align: center">
-                                                                <b>Oitavas de Final</b>
-                                                            </td>
-                                                            <td style="width: 21%; text-align: right">
-                                                                Brasil
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <input type="text" id="score4Brasil" name="score4Brasil" value="" class="form-control input-sm text-center" />
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                X
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <input type="text" id="score4OutraSelecao" name="score4OutraSelecao" value="" class="form-control input-sm text-center" />
-                                                            </td>
-                                                            <td style="width: 21%; text-align: left">
-                                                                México
-                                                            </td>
+                                                        <td style="width: 20%; text-align: center">
+                                                            <b>Oitavas de Final</b>
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-6">
+                                                                    <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <b>Brasil</b>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        @{
+                                                            System.DateTime DataQuartoJogo = new DateTime(2018, 07, 2, 10, 30, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataQuartoJogo)
+                                                            {
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 20).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score4Brasil" name="score4Brasil" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 21).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score4OutraSelecao" name="score4OutraSelecao" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 10).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score4Brasil" name="score4Brasil" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    @*<b>@Model.Parametros.Where(info => info.paramId == 11).FirstOrDefault().valor</b>*@
+                                                                    <input type="text" id="score4OutraSelecao" name="score4OutraSelecao" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            <td style="width: 20%; text-align: center">
-                                                                Oitavas de Final
-                                                            </td>
-                                                            <td style="width: 21%; text-align: right">
-                                                                Brasil
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 20).FirstOrDefault().valor</b>
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                X
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 21).FirstOrDefault().valor</b>
-                                                            </td>
-                                                            <td style="width: 21%; text-align: left">
-                                                                México
-                                                            </td>
-                                                        }
-
+                                                        <td style="width: 21%; text-align: left">
+                                                            México
+                                                        </td>
                                                     </tr>
                                                     <!-- Quartas de final -->
                                                     <tr>
-                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-06 15:00"))
-                                                        {
-                                                            <td style="width: 20%; text-align: center">
-                                                                <b>Quartas de Final</b>
-                                                            </td>
-                                                            <td style="width: 21%; text-align: right">
-                                                                Brasil
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <input type="text" id="score5Brasil" name="score5Brasil" value="" class="form-control input-sm text-center" />
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                X
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <input type="text" id="score5OutraSelecao" name="score5OutraSelecao" value="" class="form-control input-sm text-center" />
-                                                            </td>
-                                                            <td style="width: 21%; text-align: left">
-                                                                Seleção (4ª de final)
-                                                            </td>
+                                                        <td style="width: 20%; text-align: center">
+                                                            <b>Quartas de Final</b>
+                                                        </td>
+                                                        <td style="width: 21%; text-align: left">
+                                                            <div class="row">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-6">
+                                                                    <img src="..\Content\images\bandeira-do-brasil.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <b>Brasil</b>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        @{
+                                                            System.DateTime DataQuintoJogo = new DateTime(2018, 07, 6, 14, 0, 0);
+                                                            if (App_Dominio.Models.Funcoes.Brasilia() > DataQuintoJogo)
+                                                            {
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 22).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score5Brasil" name="score5Brasil" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <b>@Model.Parametros.Where(info => info.paramId == 23).FirstOrDefault().valor</b>
+                                                                    <input type="hidden" id="score5OutraSelecao" name="score5OutraSelecao" value="-1" class="form-control input-sm text-center" />
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <input type="text" id="score5Brasil" name="score5Brasil" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    X
+                                                                </td>
+                                                                <td style="text-align: center; width: 5%">
+                                                                    <input type="text" id="score5OutraSelecao" name="score5OutraSelecao" value="" class="form-control input-sm text-center" />
+                                                                </td>
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            <td style="width: 20%; text-align: center">
-                                                                Quartas de Final
-                                                            </td>
-                                                            <td style="width: 21%; text-align: right">
-                                                                Brasil
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 22).FirstOrDefault().valor</b>
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                X
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 23).FirstOrDefault().valor</b>
-                                                            </td>
-                                                            <td style="width: 21%; text-align: left">
-                                                                Seleção (4ª de final)
-                                                            </td>
-                                                        }
-
+                                                        <td style="width: 21%; text-align: left">
+                                                            Bélgica
+                                                        </td>
                                                     </tr>
                                                     <!-- Semifinal -->
                                                     <tr>

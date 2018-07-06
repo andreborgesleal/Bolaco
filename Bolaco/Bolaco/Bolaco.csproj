@@ -308,6 +308,10 @@
     <Content Include="Content\images\fundo5.png" />
     <Content Include="Content\images\fundo_campo.png" />
     <Content Include="Content\images\fundo_duplo.jpg" />
+    <Content Include="Content\images\Ganhadores-Bolaaaço-02.jpg" />
+    <Content Include="Content\images\Ganhadores-Bolaaaço-03.jpg" />
+    <Content Include="Content\images\Ganhadores-Bolaaaço-04.jpg" />
+    <Content Include="Content\images\Ganhadores-Bolaaaço-05.jpg" />
     <Content Include="Content\images\loader.gif" />
     <Content Include="Content\images\login2.png" />
     <Content Include="Content\images\login3.png" />
