@@ -339,7 +339,14 @@
                                                             }
                                                         }
                                                         <td style="width: 21%; text-align: left">
-                                                            México
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <b>México</b>
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <img src="..\Content\images\bandeira_mexico.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                     <!-- Quartas de final -->
@@ -365,6 +372,7 @@
                                                                 <td style="text-align: center; width: 5%">
                                                                     <b>@Model.Parametros.Where(info => info.paramId == 22).FirstOrDefault().valor</b>
                                                                     <input type="hidden" id="score5Brasil" name="score5Brasil" value="-1" class="form-control input-sm text-center" />
+                                                                    <input type="hidden" id="score6Brasil" name="score6Brasil" value="-1" class="form-control input-sm text-center" />
                                                                 </td>
                                                                 <td style="text-align: center; width: 5%">
                                                                     X
@@ -372,6 +380,7 @@
                                                                 <td style="text-align: center; width: 5%">
                                                                     <b>@Model.Parametros.Where(info => info.paramId == 23).FirstOrDefault().valor</b>
                                                                     <input type="hidden" id="score5OutraSelecao" name="score5OutraSelecao" value="-1" class="form-control input-sm text-center" />
+                                                                    <input type="hidden" id="score6OutraSelecao" name="score6OutraSelecao" value="-1" class="form-control input-sm text-center" />
                                                                 </td>
                                                             }
                                                             else
@@ -388,56 +397,22 @@
                                                             }
                                                         }
                                                         <td style="width: 21%; text-align: left">
-                                                            Bélgica
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <b>Bélgica</b>
+                                                                </div>
+                                                                <div class="col-md-offset-3">
+                                                                    <img src="..\Content\images\Bandeitra_Belgica.gif" class="img-circle" style="height: 20px; width: 20px" alt="0">
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
-                                                    <!-- Semifinal -->
+                                                    <!-- Final -->
                                                     <tr>
-                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-10 15:00"))
-                                                        {
-                                                            <td style="width: 20%; text-align: center">
-                                                                <b>Semifinal</b>
-                                                            </td>
-                                                            <td style="width: 21%; text-align: right">
-                                                                Brasil
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <input type="text" id="score6Brasil" name="score6Brasil" value="" class="form-control input-sm text-center" />
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                X
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <input type="text" id="score6OutraSelecao" name="score6OutraSelecao" value="" class="form-control input-sm text-center" />
-                                                            </td>
-                                                            <td style="width: 21%; text-align: left">
-                                                                Seleção (Semifinal)
-                                                            </td>
+                                                        @{ 
+                                                            System.DateTime DataFinal = new DateTime(2018, 07, 10, 14, 0, 0);
                                                         }
-                                                        else
-                                                        {
-                                                            <td style="width: 20%; text-align: center">
-                                                                Semifinal
-                                                            </td>
-                                                            <td style="width: 21%; text-align: right">
-                                                                <b>Brasil</b>
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 24).FirstOrDefault().valor</b>
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                X
-                                                            </td>
-                                                            <td style="text-align: center; width: 5%">
-                                                                <b>@Model.Parametros.Where(info => info.paramId == 25).FirstOrDefault().valor</b>
-                                                            </td>
-                                                            <td style="width: 21%; text-align: left">
-                                                                <b>Seleção (Semifinal)</b>
-                                                            </td>
-                                                        }
-                                                    </tr>
-                                                    <tr>
-                                                        @if (DateTime.Now.AddHours(-3) <= DateTime.Parse("2018-07-15 12:00"))
+                                                        @if (App_Dominio.Models.Funcoes.Brasilia() < DataFinal)
                                                         {
                                                             <td style="width: 20%; text-align: center">
                                                                 <b>Final da Copa</b>

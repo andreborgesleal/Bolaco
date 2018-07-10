@@ -229,12 +229,18 @@ namespace DWM.Models.Persistence
                 t.score5Brasil = -1;
                 t.score5OutraSelecao = -1;
             }
-            if (DateTime.Now.AddHours(-3) > DateTime.Parse("2018-07-10 14:00"))
+            if (DateTime.Now > DateTime.Parse("2018-07-06 14:00"))
             {
                 t.score6Brasil = -1;
                 t.score6OutraSelecao = -1;
             }
-
+            if (DateTime.Now > DateTime.Parse("2018-07-10 14:00"))
+            {
+                t.selecao1Id_Final = -1;
+                t.selecao2Id_Final = -1;
+                t.score1_final = -1;
+                t.score2_final = -1;
+            }
             return t;
         }
 

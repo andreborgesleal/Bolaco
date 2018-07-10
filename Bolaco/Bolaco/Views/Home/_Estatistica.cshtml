@@ -29,9 +29,9 @@
                                         @*<li class="active"><a href="#BrasilXMexico" data-toggle="tab">Segundo jogo</a></li>*@
                                         @*<li class="active"><a href="#BrasilXCamaroes" data-toggle="tab">Terceiro jogo</a></li>*@
                                         @*<li class="active"><a href="#Brasil4XOutraSelecao" data-toggle="tab">Oitavas de final</a></li>*@
-                                        <li class="active"><a href="#Brasil5XOutraSelecao" data-toggle="tab">Quartas de final</a></li>
-                                        <li><a href="#Brasil6XOutraSelecao" data-toggle="tab">Semifinal</a></li>
-                                        <li><a href="#Final" data-toggle="tab">Final da Copa</a></li>
+                                        @*<li class="active"><a href="#Brasil5XOutraSelecao" data-toggle="tab">Quartas de final</a></li>
+                                        <li><a href="#Brasil6XOutraSelecao" data-toggle="tab">Semifinal</a></li>*@
+                                        <li class="active"><a href="#Final" data-toggle="tab">Final da Copa</a></li>
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <!-- Primeiro Jogo -->
@@ -183,7 +183,7 @@
                                             }
                                         </div>*@
                                         <!-- Quartas de final -->
-                                        <div class="tab-pane fade active in" id="Brasil5XOutraSelecao">
+                                        @*<div class="tab-pane fade active in" id="Brasil5XOutraSelecao">
                                             <div style="padding: 15px">
                                                 <canvas id="cvs" width="850" height="250">[No canvas support]</canvas>
                                             </div>
@@ -206,7 +206,7 @@
                                                 }
                                             }
 
-                                            @*@foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 5))
+                                            @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 5))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
                                                 string _style = "width: " + percent.ToString().Replace(",", ".") + "%";
@@ -228,10 +228,10 @@
                                                     </div>
 
                                                 </div>
-                                            }*@
-                                        </div>
+                                            }
+                                        </div>*@
                                         <!-- Semifinal -->
-                                        <div class="tab-pane fade" id="Brasil6XOutraSelecao">
+                                        @*<div class="tab-pane fade" id="Brasil6XOutraSelecao">
                                             @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 6))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
@@ -255,9 +255,9 @@
 
                                                 </div>
                                             }
-                                        </div>
+                                        </div>*@
                                         <!-- Final -->
-                                        <div class="tab-pane fade" id="Final">
+                                        <div class="tab-pane fade active in" id="Final">
                                             @foreach (DWM.Models.Repositories.EstatisticaViewModel obj in Model.Where(info => info.jogo == 7))
                                             {
                                                 decimal percent = (((decimal)obj.quantidade / (decimal)obj.total) * 100);
@@ -304,7 +304,7 @@
 @***************@
 @*Primeiro Jogo*@
 @***************@
-<script>
+@*<script>
     var aData = @Html.Raw(Json.Encode(dataVal.ToArray()));
     var aData1 = @Html.Raw(Json.Encode(dataVal1.ToArray()));
     var aXaxisLabels = @Html.Raw(Json.Encode(dataPag.ToArray()));
@@ -359,7 +359,7 @@
             exploded: [,,20]
         }
     }).draw();
-</script>
+</script>*@
 
 @***************@
 @*Segundo Jogo *@
