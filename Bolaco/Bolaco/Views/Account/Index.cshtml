@@ -8,135 +8,138 @@
 @*<div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p> 
 </div>*@
 
 <div class="row carousel-inner" style="margin-top: 10px">
     @*<div class="col-md-3">
-        &nbsp;
-    </div>*@
-    <div class="col-md-6 item active">
+            &nbsp;
+        </div>*@
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md-8 item active">
         <div class="row carousel-inner">
             <div class="col-md-12 item active">
-                <img src="~/Content/images/logo_bolaco.png" class="img-responsive center-block"/>
+                <img src="~/Content/images/logo_bolaco.png" class="img-responsive center-block" />
             </div>
         </div>
         @*-------- Regulamento -------*@
-        <div class="row clearfix carousel-inner" style="margin-top: 20px">
-            <div class="col-md-12 item active">
-                <div class="alert alert-dismissable alert-warning" style="padding: 9px">
-                    <div class="row">
-                        <div class="col-md-12" style="text-align: center">
-                            <a class="label" href="#modal-container-964987b" data-toggle="modal"><span style="font-size: large; color: #3c3c3c">Entenda melhor o regulamento</span></a>
-                        </div>
-                    </div>
-                    @***********Formulário Modal REGULAMENTO **************@
-                    <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" style="width: 80%">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h2 class="modal-title" id="myModalLabel">
-                                        Regulamento da promoção
-                                    </h2>
-                                </div>
-                                <div class="modal-body" style="overflow-y: auto; height: 450px">
-                                    <div class="carousel slide">
-                                        <div class="carousel-inner">
-                                            <div class="item active">
-                                                @Html.Partial("_Regras")
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <!--
+         <div class="row clearfix carousel-inner" style="margin-top: 20px">
+             <div class="col-md-12 item active">
+                 <div class="alert alert-dismissable alert-warning" style="padding: 9px">
+                     <div class="row">
+                         <div class="col-md-12" style="text-align: center">
+                             <a class="label" href="#modal-container-964987b" data-toggle="modal"><span style="font-size: large; color: #3c3c3c">Entenda melhor o regulamento</span></a>
+                         </div>
+                     </div>
+                     @***********Formulário Modal REGULAMENTO **************@
+                     <div class="modal fade" id="modal-container-964987b" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         <div class="modal-dialog" style="width: 80%">
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                     <h2 class="modal-title" id="myModalLabel">
+                                         Regulamento da promoção
+                                     </h2>
+                                 </div>
+                                 <div class="modal-body" style="overflow-y: auto; height: 450px">
+                                     <div class="carousel slide">
+                                         <div class="carousel-inner">
+                                             <div class="item active">
+                                                 Html.Partial("_Regras")
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+        -->
         @*-------- Prêmios -------*@
-        <div class="row carousel-inner" style="margin-top: -10px">
-            <div class="col-md-12 item active">
-                <div class="jumbotron" style="color: #faf7f7; padding: 13px">
-                    <div style="line-height: 15px; text-align: center">
-                        <a class="label" href="#modal-container-964987K" data-toggle="modal"><span style="font-size: large; color: #faf7f7">Confira os prêmios</span></a>
-                        @***********Formulário Modal PRÊMIOS **************@
-                        <div class="modal fade" id="modal-container-964987K" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" style="width: 55%">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h2 class="modal-title" id="myModalLabel">
-                                            Prêmios 
-                                        </h2>
-                                        <span style="font-size: 16px">Leia o regulamento e entenda a ordem das premiações</span>
-                                    </div>
-                                    <div class="modal-body" style="overflow-y: auto; height: 450px">
-                                        <div class="carousel slide">
-                                            <div class="carousel-inner">
-                                                <div class="item active">
-                                                    <h2>Primeiro Prêmio</h2>
-                                                    <p>1 (Uma) Camisa da Campanha</p>
-                                                    <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
-                                                    <h2>Segundo Prêmio</h2>
-                                                    <p>1 (Uma) Chopeira em alumínio Eletrogrill 5 lts </p>
-                                                    <img src="..\Content\images\chopeira_em_aluminio_eletrogrill_5lt_mod_b4bh5l.png" class="img-responsive center-block" style="height: 400px" />
-                                                    <h2>Terceiro Prêmio</h2>
-                                                    <p>1 (Uma) Camisa da Campanha </p>
-                                                    <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
-                                                    <p>&nbsp;</p>
-                                                    <p>1 (Um) Caneco da Campanha </p>
-                                                    <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 300px">
-                                                    <h2>Quarto Prêmio</h2>
-                                                    <p>1 (Uma) Camisa da Campanha </p>
-                                                    <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
-                                                    <p>&nbsp;</p>
-                                                    <p>1 (Um) Caneco da Campanha </p>
-                                                    <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 300px">
-                                                    <h2>Quinto Prêmio</h2>
-                                                    <p>1 (Uma) Camisa da Campanha </p>
-                                                    <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
-                                                    <p>&nbsp;</p>
-                                                    <p>1 (Um) Caneco da Campanha </p>
-                                                    <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 300px">
-                                                    <h2>Sexto Prêmio</h2>
-                                                    <p> 1 (Uma) Churrasqueira Arke elétrica c/ três espetos giratórios</p>
-                                                    <img src="..\Content\images\Churrasqueira_eletrica.png" class="img-responsive center-block" style="height: 400px">
-                                                    <h2>Sétimo Prêmio</h2>
-                                                    <p>1 (Um) Split Agratto 9.000 BTUS</p>
-                                                    <img src="..\Content\images\Split_Agratto_9mil_BTUS.png" class="img-responsive center-block" style="height: 400px">
+        <!--
+            <div class="row carousel-inner" style="margin-top: -10px">
+                <div class="col-md-12 item active">
+                    <div class="jumbotron" style="color: #faf7f7; padding: 13px">
+                        <div style="line-height: 15px; text-align: center">
+                            <a class="label" href="#modal-container-964987K" data-toggle="modal"><span style="font-size: large; color: #faf7f7">Confira os prêmios</span></a>
+                            @***********Formulário Modal PRÊMIOS **************@
+                            <div class="modal fade" id="modal-container-964987K" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" style="width: 55%">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h2 class="modal-title" id="myModalLabel">
+                                                Prêmios
+                                            </h2>
+                                            <span style="font-size: 16px">Leia o regulamento e entenda a ordem das premiações</span>
+                                        </div>
+                                        <div class="modal-body" style="overflow-y: auto; height: 450px">
+                                            <div class="carousel slide">
+                                                <div class="carousel-inner">
+                                                    <div class="item active">
+                                                        <h2>Primeiro Prêmio</h2>
+                                                        <p>1 (Uma) Camisa da Campanha</p>
+                                                        <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
+                                                        <h2>Segundo Prêmio</h2>
+                                                        <p>1 (Uma) Chopeira em alumínio Eletrogrill 5 lts </p>
+                                                        <img src="..\Content\images\chopeira_em_aluminio_eletrogrill_5lt_mod_b4bh5l.png" class="img-responsive center-block" style="height: 400px" />
+                                                        <h2>Terceiro Prêmio</h2>
+                                                        <p>1 (Uma) Camisa da Campanha </p>
+                                                        <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
+                                                        <p>&nbsp;</p>
+                                                        <p>1 (Um) Caneco da Campanha </p>
+                                                        <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 300px">
+                                                        <h2>Quarto Prêmio</h2>
+                                                        <p>1 (Uma) Camisa da Campanha </p>
+                                                        <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
+                                                        <p>&nbsp;</p>
+                                                        <p>1 (Um) Caneco da Campanha </p>
+                                                        <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 300px">
+                                                        <h2>Quinto Prêmio</h2>
+                                                        <p>1 (Uma) Camisa da Campanha </p>
+                                                        <img src="..\Content\images\camisa_bolaco.png" class="img-responsive center-block" style="height: 300px">
+                                                        <p>&nbsp;</p>
+                                                        <p>1 (Um) Caneco da Campanha </p>
+                                                        <img src="..\Content\images\canecao.png" class="img-responsive center-block" style="height: 300px">
+                                                        <h2>Sexto Prêmio</h2>
+                                                        <p> 1 (Uma) Churrasqueira Arke elétrica c/ três espetos giratórios</p>
+                                                        <img src="..\Content\images\Churrasqueira_eletrica.png" class="img-responsive center-block" style="height: 400px">
+                                                        <h2>Sétimo Prêmio</h2>
+                                                        <p>1 (Um) Split Agratto 9.000 BTUS</p>
+                                                        <img src="..\Content\images\Split_Agratto_9mil_BTUS.png" class="img-responsive center-block" style="height: 400px">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
+        -->
         @*-------- Estatísticas -------*@
-        <div class="row carousel-inner" style="margin-top: -15px">
-            <div class="col-md-12 item active">
-                <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
-                    <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><span style="font-size: large; color: #3c3c3c">Estatística dos palpites</span></a>
+        @*<div class="row carousel-inner" style="margin-top: -15px"> 
+                <div class="col-md-12 item active">
+                    <div class="alert alert-dismissable alert-warning" style="text-align: center; padding: 8px">
+                        <a class="label" href="#" data-toggle="modal" onclick="ShowEstatistica();"><span style="font-size: large; color: #3c3c3c">Estatística dos palpites</span></a>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>*@
 
-        @*-------- Tablaaaaço -------*@
-        <div class="row carousel-inner" style="margin-top: 0Spx">
+        @*-------- Tablaaaaço -------*@ 
+        <div class="row carousel-inner" style="margin-top: 30px">
             <div class="col-md-12 item active">
                 <div class="jumbotron" style="color: #faf7f7; padding: 13px">
                     <div style="line-height: 15px; text-align: center">
@@ -148,12 +151,12 @@
 
         @*-------- Ganhadores -------*@
         @Html.Partial("_Ganhadores")
-        
+
     </div>
     @*<div class="col-md-3">
-        &nbsp;
-    </div>*@
-
+            &nbsp;
+        </div>*@
+    <!--
     <div class="col-md-6 item active">
         <div class="alert alert-warning">
             <div class="row">
@@ -163,14 +166,15 @@
                     </h2>
                 </div>
                 <div class="col-md-4 pull-right">
-                    @Html.ActionLink("Dê seu Palpite", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-success", @style = "font-weight: bold; font-size: large" })
-                    
+                    Html.ActionLink("Dê seu Palpite", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", class = "btn btn-success", style = "font-weight: bold; font-size: large" })
+
                 </div>
             </div>
         </div>
-        
-        @Html.Partial("_Register", Model)
+
+        Html.Partial("_Register", Model)
     </div>
+    -->
 </div>
 <div id="div-est"></div>
 
