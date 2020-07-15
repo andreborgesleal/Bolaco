@@ -16,7 +16,7 @@ Cada palpite informado e salvo, o sistema grava em uma **fila armazenada em clou
 
 Devido às limitações do ERP que impedem que a atualização ocorra de forma **reativa**, a Norte Refrigeração desenvolveu um JOB que roda de 30 em 30 minutos. Este JOB consome uma API do "Bolaco" que faz a leitura dos cupons armazenados na **fila em cloud no Azure**. O objeto é serializado em formato JSon para ser tratado pelo JOB.
 
-O JOB então valida no ERP os dados e retorna um JSon com o resultado da validação. O JOB consome novamente a API que desserializa o JSon e muda a situação do palpite para confirmado ou cancelado conforme JSon recebido.
+O JOB então valida no ERP os dados e retorna um JSon com o resultado da validação. O JOB consome novamente a API que desserializa o JSon, salva na **fila** o resultado e muda a situação do palpite para confirmado ou cancelado conforme JSon recebido. O sistema mantém um backup da fila em um **storage** armazena em **cloud no Azure**
 
 Durante os dias que atencedem o jogo do Brasil, o diretor da Norte, com uma senha previlegiada de administrador, pode acompanhar de forma gráfica a evoluação das apostas com os quantitativos de cadastros, quantitativos dos resutados do jogos considerando vitória, empate ou derrota do Brasil.
 
